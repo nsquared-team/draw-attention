@@ -1,0 +1,192 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drag & Drop Featured Image v2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-11-17 16:49:31+0000\n"
+"Last-Translator: jonathan <contact@jonathanlundstrom.me>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: index.php:175
+#@ dgdfi
+msgid "Options for Drag & Drop Featured Image"
+msgstr "Inställningar för Drag & Drop Featured Image"
+
+#: assets/views/options.php:73
+#@ dgdfi
+msgid "Available options:"
+msgstr "Tillgängliga alternativ:"
+
+#: index.php:115
+#: index.php:175
+#@ default
+#@ dgdfi
+msgid "Featured Image"
+msgstr "Utvald bild"
+
+#: index.php:210
+#@ default
+msgid "Remove featured image"
+msgstr ""
+
+#: index.php:222
+#@ default
+msgid "Drop files here"
+msgstr ""
+
+#: index.php:223
+#@ default
+msgctxt "Uploader: Drop files here - or - Select Files"
+msgid "or"
+msgstr ""
+
+#: index.php:224
+#@ default
+msgid "Select Files"
+msgstr ""
+
+#: index.php:265
+#@ dgdfi
+msgid "Allowed Files"
+msgstr "Tillåtna filtyper"
+
+#: index.php:315
+#@ dgdfi
+msgid "You may only upload one image at a time!"
+msgstr "Du kan endast ladda upp en bild i taget!"
+
+#: index.php:330
+#@ dgdfi
+msgid "The file you selected exceeds the maximum filesize limit."
+msgstr "Filen du valde överstiger den maximala filstorleken."
+
+#: index.php:225
+#@ dgdfi
+msgid "from"
+msgstr "från"
+
+#: index.php:234
+#: index.php:238
+#@ dgdfi
+msgid "Media Library"
+msgstr "Mediabiblioteket"
+
+#: index.php:502
+#@ dgdfi
+msgid "Drag & Drop Feaured image: An error occured, please reload page!"
+msgstr "Drag & Drop Featured image: Ett fel uppstod, vänligen ladda om sidan!"
+
+#: assets/views/options.php:36
+#@ dgdfi
+msgid "Success:"
+msgstr "Succe:"
+
+#: assets/views/options.php:36
+#@ dgdfi
+msgid "The plugin options have been successfully updated!"
+msgstr "Inställningarna har nu uppdaterats!"
+
+#: assets/views/options.php:41
+#@ dgdfi
+msgid "Please make sure you filled in all the required fields before submitting. At least <em><strong>one post type</strong></em> and <em><strong>one extension</strong></em> must be selected!"
+msgstr "Vänligen se till att du fyllt i alla obligatoriska fält innan du sparar. Åtminstone <em><strong>en posttyp</strong></em> och <em><strong>ett bildformat</strong></em> måste vara valt!"
+
+#: assets/views/options.php:54
+#@ dgdfi
+msgid "Contact me"
+msgstr "Kontakta mig"
+
+#: assets/views/options.php:56
+#@ dgdfi
+msgid "If you have any questions regarding this plugin or have ideas on how to improve it then please dont hesitate to"
+msgstr "Om du har några frågor angående denna plugin eller har ideér på hur jag kan förbättra den, tveka isåfall inte utan "
+
+#: assets/views/options.php:56
+#@ dgdfi
+msgid "contact me"
+msgstr "kontakta mig"
+
+#: assets/views/options.php:58
+#@ dgdfi
+msgid "Send me an email"
+msgstr "Skicka ett e-post till mig"
+
+#: assets/views/options.php:59
+#@ dgdfi
+msgid "Find me on Facebook"
+msgstr "Hitta mig på Facebook"
+
+#: assets/views/options.php:60
+#@ dgdfi
+msgid "Find me on Twitter"
+msgstr "Hitta mig på Twitter"
+
+#: assets/views/options.php:61
+#@ dgdfi
+msgid "Find me on Google+"
+msgstr "Hitta mig på Google+"
+
+#: assets/views/options.php:78
+#@ dgdfi
+msgid "Which post types do you want the meta box to display at?"
+msgstr "Vilka inläggstyper vill du att metaboxen ska visas på?"
+
+#: assets/views/options.php:97
+#@ dgdfi
+msgid "Which of the following file types should be supported?"
+msgstr "Vilka av följande filtyper ska stödjas?"
+
+#: assets/views/options.php:115
+#@ dgdfi
+msgid "Change the capability required to customize the plugin settings"
+msgstr "Ändra vilken förmåga som krävs för att ändra plugin-inställningarna"
+
+#: assets/views/options.php:116
+#@ dgdfi
+msgid "The default capability is <code>manage_options</code> and applies to administrators."
+msgstr "Förvald förmåga är <code>manage_options</code> och appliceras på administratörer."
+
+#: assets/views/options.php:118
+#@ dgdfi
+msgid "User roles &amp; capabilities"
+msgstr "Roller &amp; förmågor"
+
+#: assets/views/options.php:136
+#@ dgdfi
+msgid "Update settings"
+msgstr "Uppdatera inställningar"
+
+#: assets/views/options.php:123
+#@ dgdfi
+msgid "Publish / update post after successful image upload?"
+msgstr "Publicera / uppdatera inlägg efter att du valt en utvald bild"
+
+#: assets/views/options.php:124
+#@ dgdfi
+msgid "If you like some users upload the featured image as the last step when publishing a post, this option is for you."
+msgstr "Om du som vissa användare laddar upp den utvalda bilden som sista steg när du skriver ett inlägg, då är detta för dig."
+
+#: index.php:146
+#: index.php:147
+#@ default
+msgid "Set featured image"
+msgstr ""
+
+#: index.php:479
+#@ dgdfi
+msgid "Drag & Drop Feaured image: Unknown post och attachment ID, please try again!"
+msgstr "Drag & Drop Featured image: Okänt inläggs eller bilagsid, vänligen försök igen!"
+

@@ -1,0 +1,160 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+/* Hide the post slug editor */
+/* line 18, ../sass/admin.scss */
+.post-type-hotspot #edit-slug-box,
+.post-type-hotspot #slugdiv,
+.post-type-hotspot #screen-meta label[for=slugdiv-hide] {
+  display: none;
+}
+
+/* Hide the coordinates input */
+/* line 25, ../sass/admin.scss */
+input[name$='[coordinates]'] {
+  display: none;
+  /* Contain big images */
+}
+/* line 28, ../sass/admin.scss */
+input[name$='[coordinates]'] + div {
+  overflow: auto;
+}
+
+/* line 33, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox,
+#cmb2-metabox-moreinfo_metabox {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+/* line 37, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row,
+#cmb2-metabox-moreinfo_metabox .cmb-row {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-bottom: 0 none;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0.5em;
+}
+/* line 42, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row:after,
+#cmb2-metabox-moreinfo_metabox .cmb-row:after {
+  width: auto;
+}
+/* line 46, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-th,
+#cmb2-metabox-moreinfo_metabox .cmb-th {
+  border: 1px solid #e9e9e9;
+  border-right: 0 none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: none;
+  padding: 1em 0 1em 1em;
+  width: 45%;
+}
+/* line 57, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-td,
+#cmb2-metabox-moreinfo_metabox .cmb-td {
+  border: 1px solid #e9e9e9;
+  border-left: 0 none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: none;
+  padding: 1em 1em 1em 0;
+  width: 55%;
+}
+/* line 68, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-color,
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 68, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
+    width: 50%;
+  }
+}
+/* line 76, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 76, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 1100px) {
+  /* line 76, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
+    width: 33%;
+  }
+}
+/* line 88, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
+#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
+#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 88, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 1100px) {
+  /* line 88, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
+    width: 33%;
+  }
+}
+
+/* line 102, ../sass/admin.scss */
+.wp-picker-container {
+  white-space: nowrap;
+}

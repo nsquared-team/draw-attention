@@ -1,0 +1,61 @@
+div#contact-me.postbox div.inside {
+	margin-bottom: 0px !important;
+}
+
+div#manage-plugin-options.postbox h3.hndle {
+	cursor: default !important;
+	margin-top: 0px !important;
+}
+
+div#manage-plugin-options.postbox div.inside {
+	margin: 0px 0px 0px 0px !important;
+	padding: 0px 0px 0px 0px !important;
+}
+
+div.metaBoxRow {
+	padding: 15px 15px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+div.metaBoxRow.last {
+	border-bottom: 0px;
+}
+
+div.objectRow {
+	overflow: hidden;
+	padding-top: 5px;
+	margin-bottom: -10px;
+}
+
+div.toggleObject {
+	float: left;
+	width: auto;
+	height: auto;
+	margin: 0px 20px 0px 0px;
+	
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.toggleObject p { margin-top: -14px; }
+
+input.filesizeLimit {
+	width: 260px;
+	padding: 6px 6px;
+	margin-top: 10px;
+}
+
+div.blobContainer {
+	overflow: hidden;
+	text-align: center;
+}
+div.blobContainer img {
+	width: 23%;
+	margin: 0px 1px;
+	display: inline-block;
+	filter: alpha(opacity=70);
+	-khtml-opacity: 0.7;
+	-moz-opacity: 0.7;
+	opacity: 0.7;
+}

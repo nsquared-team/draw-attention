@@ -1,0 +1,203 @@
+/* This stylesheet is used to style the public-facing components of the plugin. */
+
+@import "compass";
+
+.hotspots-interaction {
+	margin: 1em 0;
+}
+
+.hotspots-placeholder {
+	padding: 1em;
+	position: relative;
+	&.loading:before {
+		border: 20px solid rgba(white,0.5);
+		border-left-color: rgba(black,0.5);
+		border-bottom-color: rgba(black,0.5);
+		@include border-radius(50%);
+		@include animation-name(spin);
+		@include animation-duration(2000ms);
+		@include animation-iteration-count(infinite);
+		@include animation-timing-function(linear);
+		content: '';
+		height: 40px;
+		left: 50%;
+		margin-left: -40px;
+		position: absolute;
+		top: 20%;
+		width: 40px;
+	}
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.hotspots-image-container {
+	& > div {
+		margin: 0 auto;
+	}
+	img {
+		@include border-radius(0);
+		@include box-shadow(none);
+		display: block;
+		height: auto;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+}
+
+.entry-content {
+	.hotspot-title {
+		text-align: center;
+		margin-top: 0;
+		padding-top: 0;
+	}
+	.hotspot-content {
+		p {
+			color: inherit;
+		}
+	}
+}
+
+.hotspot-content {
+	p {
+		color: inherit;
+	}
+}
+
+
+.hotspot-thumb {
+	text-align: center;
+}
+
+@media (min-width: 600px) {
+	.left .hotspots-interaction,
+	.right .hotspots-interaction {
+		display: table;
+		table-layout: fixed;
+		width: 100%;
+	}
+	.left .hotspots-image-container,
+	.right .hotspots-image-container {
+		display: table-cell;
+		vertical-align: top;
+		width: 66%;
+	}
+	.left .hotspots-placeholder,
+	.right .hotspots-placeholder {
+		display: table-cell;
+		vertical-align: top;
+	}
+}
+
+@media (min-width: 900px) {
+	.left .hotspots-image-container,
+	.right .hotspots-image-container {
+		width: 75%;
+	}
+}
+
+
+/* ------------------------------------------- */
+/* Light Box
+/* ------------------------------------------- */
+
+.lightbox .hotspots-placeholder {
+	display: none;
+}
+
+.featherlight {
+	background: #333;
+	bottom: 0;
+	cursor: pointer;
+	display: none;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+	left: 0;
+	white-space: nowrap;
+	z-index: 2;
+	&:last-of-type {
+		background: rgba(0, 0, 0, 0.8);
+	}
+	&:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		margin-right: -0.25em;
+		vertical-align: middle;
+	}
+	.featherlight-content {
+		background: #fff;
+		border-bottom: 25px solid transparent;
+		cursor: auto;
+		display: inline-block;
+		overflow: auto;
+		margin-left: 5%;
+		margin-right: 5%;
+		max-height: 95%;
+		min-width:  30%;
+		padding: 25px 25px 0;
+		position: relative;
+		text-align: left;
+		vertical-align: middle;
+		white-space: normal;
+	}
+	.featherlight-inner {
+		display: block;
+	}
+	.featherlight-close-icon {
+		background: #fff;
+		background: rgba(255, 255, 255, 0.3);
+		color: #000;
+		cursor: pointer;
+		font: Arial, sans-serif;
+		line-height: 25px;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 0;
+		width: 25px;
+		z-index: 9999;
+	}
+	.featherlight-image {
+		width: 100%;
+	}
+	iframe {
+		border: none;
+	}
+	.hotspot-title {
+		font-size: 1.2em;
+		margin-bottom: 0.4em;
+	}
+	.hotspot-content {
+		p {
+			margin: 1em 0;
+		}
+	}
+}
+
+.featherlight-iframe .featherlight-content {
+	border-bottom: 0;
+	padding: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+	.featherlight .featherlight-content {
+		border-bottom: 10px solid transparent;
+		margin-left: 10px;
+		margin-right: 10px;
+		max-height: 98%;
+		padding: 10px 10px 0;
+	}
+}

@@ -1,0 +1,192 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Drag & Drop Featured Image v2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-11-17 16:51:06+0000\n"
+"Last-Translator: jonathan <contact@jonathanlundstrom.me>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: index.php:175
+#@ dgdfi
+msgid "Options for Drag & Drop Featured Image"
+msgstr "Options for Drag & Drop Featured Image"
+
+#: assets/views/options.php:73
+#@ dgdfi
+msgid "Available options:"
+msgstr "Available options:"
+
+#: index.php:115
+#: index.php:175
+#@ default
+#@ dgdfi
+msgid "Featured Image"
+msgstr "Featured Image"
+
+#: index.php:210
+#@ default
+msgid "Remove featured image"
+msgstr ""
+
+#: index.php:222
+#@ default
+msgid "Drop files here"
+msgstr ""
+
+#: index.php:223
+#@ default
+msgctxt "Uploader: Drop files here - or - Select Files"
+msgid "or"
+msgstr ""
+
+#: index.php:224
+#@ default
+msgid "Select Files"
+msgstr ""
+
+#: index.php:265
+#@ dgdfi
+msgid "Allowed Files"
+msgstr "Allowed filetypes"
+
+#: index.php:315
+#@ dgdfi
+msgid "You may only upload one image at a time!"
+msgstr "You may only upload one image at a time!"
+
+#: index.php:330
+#@ dgdfi
+msgid "The file you selected exceeds the maximum filesize limit."
+msgstr "The file you selected exceeds the maximum filesize limit."
+
+#: index.php:225
+#@ dgdfi
+msgid "from"
+msgstr "from"
+
+#: index.php:234
+#: index.php:238
+#@ dgdfi
+msgid "Media Library"
+msgstr "Media Library"
+
+#: index.php:502
+#@ dgdfi
+msgid "Drag & Drop Feaured image: An error occured, please reload page!"
+msgstr "Drag & Drop Featured image: An error occured, please reload page!"
+
+#: assets/views/options.php:36
+#@ dgdfi
+msgid "Success:"
+msgstr "Success:"
+
+#: assets/views/options.php:36
+#@ dgdfi
+msgid "The plugin options have been successfully updated!"
+msgstr "The plugin options have been successfully updated!"
+
+#: assets/views/options.php:41
+#@ dgdfi
+msgid "Please make sure you filled in all the required fields before submitting. At least <em><strong>one post type</strong></em> and <em><strong>one extension</strong></em> must be selected!"
+msgstr "Please make sure you filled in all the required fields before submitting. At least <em><strong>one post type</strong></em> and <em><strong>one extension</strong></em> must be selected!"
+
+#: assets/views/options.php:54
+#@ dgdfi
+msgid "Contact me"
+msgstr "Contact me"
+
+#: assets/views/options.php:56
+#@ dgdfi
+msgid "If you have any questions regarding this plugin or have ideas on how to improve it then please dont hesitate to"
+msgstr "If you have any questions regarding this plugin or have ideas on how to improve it then please dont hesitate to"
+
+#: assets/views/options.php:56
+#@ dgdfi
+msgid "contact me"
+msgstr "contact me"
+
+#: assets/views/options.php:58
+#@ dgdfi
+msgid "Send me an email"
+msgstr "Send me an email"
+
+#: assets/views/options.php:59
+#@ dgdfi
+msgid "Find me on Facebook"
+msgstr "Find me on Facebook"
+
+#: assets/views/options.php:60
+#@ dgdfi
+msgid "Find me on Twitter"
+msgstr "Find me on Twitter"
+
+#: assets/views/options.php:61
+#@ dgdfi
+msgid "Find me on Google+"
+msgstr "Find me on Google+"
+
+#: assets/views/options.php:78
+#@ dgdfi
+msgid "Which post types do you want the meta box to display at?"
+msgstr "Which post types do you want the meta box to display at?"
+
+#: assets/views/options.php:97
+#@ dgdfi
+msgid "Which of the following file types should be supported?"
+msgstr "Which of the following file types should be supported?"
+
+#: assets/views/options.php:115
+#@ dgdfi
+msgid "Change the capability required to customize the plugin settings"
+msgstr "Change the capability required to customize the plugin settings"
+
+#: assets/views/options.php:116
+#@ dgdfi
+msgid "The default capability is <code>manage_options</code> and applies to administrators."
+msgstr "The default capability is <code>manage_options</code> and applies to administrators."
+
+#: assets/views/options.php:118
+#@ dgdfi
+msgid "User roles &amp; capabilities"
+msgstr "User roles &amp; capabilities"
+
+#: assets/views/options.php:136
+#@ dgdfi
+msgid "Update settings"
+msgstr "Update settings"
+
+#: assets/views/options.php:123
+#@ dgdfi
+msgid "Publish / update post after successful image upload?"
+msgstr "Publish / update post after selecting a featured image"
+
+#: assets/views/options.php:124
+#@ dgdfi
+msgid "If you like some users upload the featured image as the last step when publishing a post, this option is for you."
+msgstr "If you like some users upload the featured image as the last step when publishing a post, this option is for you."
+
+#: index.php:146
+#: index.php:147
+#@ default
+msgid "Set featured image"
+msgstr ""
+
+#: index.php:479
+#@ dgdfi
+msgid "Drag & Drop Feaured image: Unknown post och attachment ID, please try again!"
+msgstr "Drag & Drop Featured image: Unknown post och attachment ID, please try again!"
+

@@ -1,0 +1,1 @@
+!function($){"use strict";$(function(){$(".hotspot-area-form-container input[type='submit'").on("click",function(t){t.preventDefault();var n=$(this).parent().find(":input").serializeArray();n.push({name:"action",value:"hotspot_update_custom_fields"});var a=$.ajax({type:"POST",url:hotspotAdminVars.ajaxURL,data:n}).done(function(){}).fail(function(){})})})}(jQuery);

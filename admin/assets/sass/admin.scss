@@ -1,0 +1,104 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+
+@import "compass";
+
+@mixin bp($point) {
+  @if $point == m {
+    @media screen and (min-width: 600px) { @content; }
+  }
+  @else if $point == l {
+  	@media screen and (min-width: 1100px) { @content; }
+  }
+  @else if #point == xl {
+  	@media screen and (min-width: 1280px) { @content; }
+  }
+}
+
+/* Hide the post slug editor */
+.post-type-hotspot #edit-slug-box,
+.post-type-hotspot #slugdiv,
+.post-type-hotspot #screen-meta label[for=slugdiv-hide] {
+	display: none;
+}
+
+/* Hide the coordinates input */
+input[name$='[coordinates]'] {
+	display: none;
+	/* Contain big images */
+	& + div {
+		overflow: auto;
+	}
+}
+
+#cmb2-metabox-highlight_styling_metabox,
+#cmb2-metabox-moreinfo_metabox {
+	@include display-flex;
+	@include flex-wrap(wrap);
+	.cmb-row {
+		@include box-sizing(border-box);
+		border-bottom: 0 none;
+		@include display-flex;
+		padding: 0.5em;
+		&:after {
+			width: auto;
+		}
+	}
+	.cmb-th {
+		border: 1px solid #e9e9e9;
+		border-right: 0 none;
+		@include box-sizing(border-box);
+		float: none;
+		padding: 1em 0 1em 1em;
+		width: 45%;
+		@include bp(xl) {
+			width: 30%;
+		}
+	}
+	.cmb-td {
+		border: 1px solid #e9e9e9;
+		border-left: 0 none;
+		@include box-sizing(border-box);
+		float: none;
+		padding: 1em 1em 1em 0;
+		width: 55%;
+		@include bp(xl) {
+			width: 70%;
+		}
+	}
+	.cmb2-id--hotspot-map-highlight-color,
+	.cmb2-id--hotspot-map-highlight-opacity {
+		@include box-sizing(border-box);
+		width: 100%;
+		@include bp(m) {
+			width: 50%;
+		}
+	}
+	.cmb2-id--hotspot-map-border-color,
+	.cmb2-id--hotspot-map-border-opacity,
+	.cmb2-id--hotspot-map-border-width {
+		@include box-sizing(border-box);
+		width: 100%;
+		@include bp(m) {
+			width: 50%;
+		}
+		@include bp(l) {
+			width: 33%;
+		}
+	}
+	.cmb2-id--hotspot-map-title-color,
+	.cmb2-id--hotspot-map-text-color,
+	.cmb2-id--hotspot-map-background-color {
+		@include box-sizing(border-box);
+		width: 100%;
+		@include bp(m) {
+			width: 50%;
+		}
+		@include bp(l) {
+			width: 33%;
+		}
+	}
+}
+
+.wp-picker-container {
+	white-space: nowrap;
+}
