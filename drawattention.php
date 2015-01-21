@@ -12,7 +12,7 @@
  * @copyright 2014 Tyler Digital
  *
  * @wordpress-plugin
- * Plugin Name:       Draw Attention
+ * Plugin Name:       Draw Attention Pro
  * Plugin URI:        http://wpdrawattention.com
  * Description:       Create interactive images in WordPress
  * Version:           1.0.0

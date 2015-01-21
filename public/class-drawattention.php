@@ -32,7 +32,7 @@ class DrawAttention {
 	 */
 	const VERSION = '1.0.0';
 	const file = __FILE__;
-
+	const name = 'Draw Attention';
 	/**
 	 * @TODO - Rename "hotspots" to the name of your plugin
 	 *
@@ -47,7 +47,6 @@ class DrawAttention {
 	 *
 	 * @var      string
 	 */
-	const plugin_slug = 'drawattention';
 	public $plugin_slug = 'drawattention';
 
 	/**
@@ -104,6 +103,12 @@ class DrawAttention {
 
 		include_once( 'includes/themes.php' );
 		$this->themes = new DrawAttention_Themes( $this );
+
+		include_once( 'includes/pro/pro.php' );
+		$this->pro = new DrawAttention_Pro( $this );
+
+		include_once( 'includes/pro/updater.php' );
+		$this->pro = new DrawAttention_Updater( $this );
 
 	}
 

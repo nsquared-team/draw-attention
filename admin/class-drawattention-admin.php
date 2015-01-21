@@ -23,8 +23,6 @@
  */
 class DrawAttention_Admin {
 
-	public $upsell;
-
 	/**
 	 * Instance of this class.
 	 *
@@ -74,19 +72,6 @@ class DrawAttention_Admin {
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
-
-		// Add the options page and menu item.
-		// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
-		// Add an action link pointing to the options page.
-		// $plugin_basename = 'draw-attention/' . DrawAttention::plugin_slug . '.php';
-		// add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
-
-		include 'upsell-admin.php';
-		$this->upsell = new DrawAttention_Upsell( $this );
 	}
 
 	/**
@@ -218,46 +203,5 @@ class DrawAttention_Admin {
 		);
 
 	}
-
-	public function admin_menu() {
-		global $submenu;
-
-		remove_submenu_page( 'edit.php?post_type=da_image', 'post-new.php?post_type=da_image'  );
-		remove_submenu_page( 'edit.php?post_type=da_image', 'edit.php?post_type=da_image'  );
-		add_submenu_page( 'edit.php?post_type=da_image', 'Edit Image', 'Edit Image', 'edit_posts', 'edit.php?post_type=da_image' );
-	}
-
-	public function admin_init() {
-		global $pagenow;
-		if (
-			$pagenow == 'edit.php' && $_GET['post_type'] == $this->instance->cpt->post_type
-			|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->instance->cpt->post_type
-		) {
-			$image_args = array(
-				'post_status' => 'any',
-				'post_type' => $this->instance->cpt->post_type,
-				'posts_per_page' => 1,
-				);
-			$image = new WP_Query($image_args);
-			if ($image->have_posts() ) {
-				$image->the_post();
-				$imageID = get_the_ID();
-			}
-			wp_reset_query();
-
-			if ( empty( $imageID ) ) {
-				$imageID = wp_insert_post( array(
-					'post_type' => 'da_image',
-					'post_status' => 'publish',
-					'post_title' => '',
-				) );
-			}
-			if ( empty( $imageID ) ) die( 'An error occurred setting up DrawAttention, please contact support@tylerdigital.com');
-
-			wp_redirect( get_edit_post_link( $imageID, 'raw' ) );
-			exit();
-		}
-	}
-
 
 }

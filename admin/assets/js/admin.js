@@ -1,8 +1,6 @@
 ;(function ( $, hotspotAdmin, undefined ) {
 	"use strict";
 
-	var hotspots = 20;
-
 	/* Enable drawing hotspots on the full-size image */
 	var canvasDraw = function() {
 		$('input[data-image-url]').canvasAreaDraw();
@@ -93,39 +91,6 @@
 		});
 	}
 
-	var areaLimit = function(){
-		var repeatGroup = $('.cmb-repeatable-group'),
-			cmb = window.CMB2,
-			$metabox = cmb.metabox();
-
-		console.log($metabox);
-
-		/* Adding a row */
-		repeatGroup.on('cmb2_add_group_row_start', function(){
-			var areaCount = repeatGroup.children('.postbox.cmb-row').length + 1;
-			if (areaCount >= hotspots) {
-				$metabox.off( 'click', '.cmb-add-group-row', cmb.addGroupRow );
-				$metabox.on( 'click', '.cmb-add-group-row', function(e){
-					e.preventDefault();
-					var confirmed = confirm('Upgrade to Draw Attention Pro to add unlimited clickable areas to your images!');
-					if ( confirmed ) {
-						window.open('http://wpdrawattention.com', '_blank');
-					} else {
-						return;
-					}
-				});
-			}
-		});
-
-		/* Removing a row */
-		repeatGroup.on('cmb2_remove_row', function(){
-			var areaCount = repeatGroup.children('.postbox.cmb-row').length;
-			if (areaCount < hotspots) {
-				$metabox.on( 'click', '.cmb-add-group-row', cmb.addGroupRow );
-			}
-		});
-	}
-
 	hotspotAdmin.init = function() {
 		canvasDraw();
 		accordion();
@@ -133,7 +98,6 @@
 		hotspotCloning();
 		themeSelect();
 		opacityLabelSync();
-		areaLimit();
 	}
 
 	/* Reset the drawable canvas areas */
