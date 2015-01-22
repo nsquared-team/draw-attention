@@ -170,12 +170,17 @@
 .featherlight .featherlight-content {
   background: #fff;
   border-bottom: 25px solid transparent;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   cursor: auto;
   display: inline-block;
   overflow: auto;
   margin-left: 5%;
   margin-right: 5%;
   max-height: 95%;
+  max-width: 95%;
+  min-height: 3%;
   min-width: 30%;
   padding: 25px 25px 0;
   position: relative;
@@ -183,11 +188,11 @@
   vertical-align: middle;
   white-space: normal;
 }
-/* line 156, ../sass/public.scss */
+/* line 159, ../sass/public.scss */
 .featherlight .featherlight-inner {
   display: block;
 }
-/* line 159, ../sass/public.scss */
+/* line 162, ../sass/public.scss */
 .featherlight .featherlight-close-icon {
   background: #fff;
   background: rgba(255, 255, 255, 0.3);
@@ -202,32 +207,37 @@
   width: 25px;
   z-index: 9999;
 }
-/* line 173, ../sass/public.scss */
+/* line 176, ../sass/public.scss */
 .featherlight .featherlight-image {
   width: 100%;
 }
-/* line 176, ../sass/public.scss */
+/* line 179, ../sass/public.scss */
 .featherlight iframe {
   border: none;
 }
-/* line 179, ../sass/public.scss */
+/* line 182, ../sass/public.scss */
 .featherlight .hotspot-title {
   font-size: 1.2em;
   margin-bottom: 0.4em;
 }
-/* line 184, ../sass/public.scss */
+/* line 187, ../sass/public.scss */
 .featherlight .hotspot-content p {
   margin: 1em 0;
 }
+/* line 191, ../sass/public.scss */
+.featherlight img {
+  height: auto;
+  max-width: 100%;
+}
 
-/* line 190, ../sass/public.scss */
+/* line 197, ../sass/public.scss */
 .featherlight-iframe .featherlight-content {
   border-bottom: 0;
   padding: 0;
 }
 
 @media only screen and (max-width: 1024px) {
-  /* line 196, ../sass/public.scss */
+  /* line 203, ../sass/public.scss */
   .featherlight .featherlight-content {
     border-bottom: 10px solid transparent;
     margin-left: 10px;

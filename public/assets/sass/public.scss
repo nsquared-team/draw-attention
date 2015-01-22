@@ -140,12 +140,15 @@
 	.featherlight-content {
 		background: #fff;
 		border-bottom: 25px solid transparent;
+		@include box-sizing(border-box);
 		cursor: auto;
 		display: inline-block;
 		overflow: auto;
 		margin-left: 5%;
 		margin-right: 5%;
 		max-height: 95%;
+		max-width: 95%;
+		min-height: 3%;
 		min-width:  30%;
 		padding: 25px 25px 0;
 		position: relative;
@@ -184,6 +187,10 @@
 		p {
 			margin: 1em 0;
 		}
+	}
+	img {
+		height: auto;
+		max-width: 100%;
 	}
 }
 
