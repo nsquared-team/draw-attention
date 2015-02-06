@@ -430,4 +430,6 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 	}
+} elseif ( function_exists( 'da_deactivate_free_version' ) ) {
+	add_action( 'init', 'da_deactivate_free_version' );
 }
