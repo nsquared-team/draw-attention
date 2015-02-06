@@ -28,7 +28,7 @@ class DrawAttention_Updater {
 
 		return array_merge(
 			array(
-				'license' => '<a href="'.admin_url( 'edit.php' ).'">' . __( 'Enter License Key', 'drawattention' ) . '</a>'
+				'license' => '<a href="'.admin_url( 'edit.php?post_type=da_image&page=da_license' ).'">' . __( 'Enter License Key', 'drawattention' ) . '</a>'
 			),
 			$links
 		);
