@@ -207,4 +207,6 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		}
 
 	}
+} else {
+	add_action( 'init', 'da_deactivate_free_version' );
 }
