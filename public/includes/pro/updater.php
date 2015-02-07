@@ -68,7 +68,7 @@ class DrawAttention_Updater {
 
 	function plugin_updater() {
 		$license_key = trim( get_option( 'da_license_key' ) );
-		$edd_updater = new TD_DA_EDD_SL_Plugin_Updater( self::edd_store_url, DrawAttention::file, array( 
+		$edd_updater = new TD_DA_EDD_SL_Plugin_Updater( self::edd_store_url, dirname ( dirname( DrawAttention::file ) ).'/drawattention.php', array( 
 				'version' 	=> DrawAttention::VERSION, 				// current version number
 				'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
 				'item_name' => DrawAttention::name, 	// name of this plugin
