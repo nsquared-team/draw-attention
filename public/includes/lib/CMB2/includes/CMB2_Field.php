@@ -784,7 +784,7 @@ class CMB2_Field {
 		if ( in_array( $args['type'], $option_types, true ) ) {
 
 			$args['show_option_none'] = isset( $args['show_option_none'] ) ? $args['show_option_none'] : __( 'None', 'cmb2' );
-			$args['show_option_all']  = isset( $args['show_option_all'] ) ? $args['show_option_all'] : __( 'All', 'cmb2' ); // @todo: implementation
+			$args['show_option_all']  = isset( $args['show_option_all'] ) ? $args['show_option_all'] : __( 'All', 'cmb2' );
 
 		}
 

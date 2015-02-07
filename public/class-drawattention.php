@@ -16,7 +16,6 @@
  * If you're interested in introducing administrative or dashboard
  * functionality, then refer to `class-drawattention-admin.php`
  *
- * @TODO: Rename this class to a proper name for your plugin.
  *
  * @package DrawAttention
  * @author  Nathan Tyler <support@tylerdigital.com>
