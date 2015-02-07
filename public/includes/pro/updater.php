@@ -25,6 +25,8 @@ class DrawAttention_Updater {
 	}
 
 	public function add_action_links( $links ) {
+		$license_key_status = get_option( 'da_license_key_status' );
+		if ( $license_key_status == 'valid' ) { return $links; }
 
 		return array_merge(
 			array(
