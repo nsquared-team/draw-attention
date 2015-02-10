@@ -113,7 +113,7 @@
         function(){ mapOut($this); }
       )
       .on('click', function(){
-        mapClick($(this));
+        mapClick($(this), img);
       });
     });
   };
@@ -277,6 +277,8 @@
     }
 
     $canvas.stop(true, true).fadeIn('fast');
+    var href = area.attr('href');
+    img.trigger('showHighlight', [href]);
   };
 
   mapOut = function(area) {
@@ -290,7 +292,7 @@
     }
   };
 
-  mapClick = function(area) {
+  mapClick = function(area, img) {
     var id = area.attr('id'),
       stickyCanvas = $('#canvas-' + id);
 
@@ -301,6 +303,8 @@
       $(this).remove();
     });
     area.siblings('area').data('stickyCanvas', false);
+    var href = area.attr('href');
+    img.trigger('activateHighlight', [href]);
   };
 
   resizeDelay = (function() {

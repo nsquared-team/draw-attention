@@ -6,6 +6,7 @@
 		$('img.hotspots-image').responsilight();
 	};
 
+
 	/* Private: set up the information update when clicking on a map area */
 	var infoUpdate = function() {
 		$('.hotspot-info').hide();
