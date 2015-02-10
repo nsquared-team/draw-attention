@@ -25,10 +25,12 @@ class DrawAttention_Updater {
 	}
 
 	public function add_action_links( $links ) {
+		$license_key_status = get_option( 'da_license_key_status' );
+		if ( $license_key_status == 'valid' ) { return $links; }
 
 		return array_merge(
 			array(
-				'license' => '<a href="'.admin_url( 'edit.php' ).'">' . __( 'Enter License Key', 'drawattention' ) . '</a>'
+				'license' => '<a href="'.admin_url( 'edit.php?post_type=da_image&page=da_license' ).'">' . __( 'Enter License Key', 'drawattention' ) . '</a>'
 			),
 			$links
 		);
@@ -68,7 +70,7 @@ class DrawAttention_Updater {
 
 	function plugin_updater() {
 		$license_key = trim( get_option( 'da_license_key' ) );
-		$edd_updater = new TD_DA_EDD_SL_Plugin_Updater( self::edd_store_url, DrawAttention::file, array( 
+		$edd_updater = new TD_DA_EDD_SL_Plugin_Updater( self::edd_store_url, dirname ( dirname( DrawAttention::file ) ).'/drawattention.php', array( 
 				'version' 	=> DrawAttention::VERSION, 				// current version number
 				'license' 	=> $license_key, 		// license key (used get_option above to retrieve from DB)
 				'item_name' => DrawAttention::name, 	// name of this plugin

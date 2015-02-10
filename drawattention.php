@@ -15,7 +15,7 @@
  * Plugin Name:       Draw Attention Pro
  * Plugin URI:        http://wpdrawattention.com
  * Description:       Create interactive images in WordPress
- * Version:           1.0.0
+ * Version:           1.0.3
  * Author:            Tyler Digital & Purple Pen Productions
  * Author URI:        http://wpdrawattention.com
  * Text Domain:       drawattention
@@ -28,6 +28,13 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
+}
+
+function da_deactivate_free_version() {
+	if ( !function_exists( 'deactivate_plugins' ) ) {
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	}
+	deactivate_plugins( 'draw-attention/drawattention.php' );
 }
 
 /*----------------------------------------------------------------------------*
