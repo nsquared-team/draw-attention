@@ -1,9 +1,8 @@
 === Draw Attention ===
-Contributors: (this should be a list of wordpress.org userids)
-Donate link: http://example.com/
-Tags: comments, spam
-Requires at least: 3.5.1
-Tested up to: 3.6
+Contributors: tylerdigital, nataliemac, croixhaug
+Tags: interactive images, image maps, highlightable areas, call to action, product images, trade shows, floor plans, virtual tour
+Requires at least: 4.1
+Tested up to: 4.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
