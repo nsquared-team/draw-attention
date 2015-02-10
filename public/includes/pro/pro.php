@@ -222,7 +222,7 @@ class DrawAttention_Pro {
 				'slug' => 'midnight',
 				'name' => 'Midnight',
 				'values' => array(
-					'map_highlight_color' => '#003366',
+					'map_highlight_color' => '#002244',
 					'map_highlight_opacity' => 0.7,
 
 					'map_border_color' => '#000D1A',
@@ -231,7 +231,7 @@ class DrawAttention_Pro {
 
 					'map_title_color' => '#ffffff',
 					'map_text_color' => '#A2BEDA',
-					'map_background_color' => '#003366',
+					'map_background_color' => '#002244',
 				),
 			),
 			'blacktie' => array(
