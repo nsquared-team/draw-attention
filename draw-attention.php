@@ -1,29 +1,23 @@
 <?php
-/**
- * The WordPress Plugin Boilerplate.
- *
- * A foundation off of which to build well-documented WordPress plugins that
- * also follow WordPress Coding Standards and PHP best practices.
- *
- * @package   DrawAttention
- * @author    Nathan Tyler <support@tylerdigital.com>
- * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Tyler Digital
- *
- * @wordpress-plugin
- * Plugin Name:       Draw Attention
- * Plugin URI:        http://wpdrawattention.com
- * Description:       Create interactive images in WordPress
- * Version:           1.0.0
- * Author:            Tyler Digital & Purple Pen Productions
- * Author URI:        http://wpdrawattention.com
- * Text Domain:       drawattention
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path:       /languages
- * GitHub Plugin URI: https://github.com/tylerdigital/drawattention/
- */
+/*
+@package   DrawAttention
+@author    Nathan Tyler <support@tylerdigital.com>
+@license   GPL-2.0+
+@link      http://example.com
+@copyright 2014 Tyler Digital
+@wordpress-plugin
+Plugin Name:       Draw Attention
+Plugin URI:        http://wpdrawattention.com
+Description:       Create interactive images in WordPress
+Version:           1.0.0
+Author:            Tyler Digital & Purple Pen Productions
+Author URI:        http://wpdrawattention.com
+Text Domain:       drawattention
+License:           GPL-2.0+
+License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+Domain Path:       /languages
+GitHub Plugin URI: https://github.com/tylerdigital/drawattention/
+*/
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
