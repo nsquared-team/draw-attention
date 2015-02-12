@@ -37,7 +37,7 @@ When a highlighted map area is clicked, show more information.
 
 [vimeo https://vimeo.com/118974102]
 
-[Upgrade to Draw Attention Pro](http://tylerdigital.com/products/draw-attention/) to get more features and customization.
+[Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization.
 
 == Installation ==
 
