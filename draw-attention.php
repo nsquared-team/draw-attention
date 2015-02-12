@@ -34,7 +34,7 @@ function da_deactivate_free_version() {
 	if ( !function_exists( 'deactivate_plugins' ) ) {
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	}
-	deactivate_plugins( 'draw-attention/drawattention.php' );
+	deactivate_plugins( 'draw-attention/draw-attention.php' );
 }
 
 /*----------------------------------------------------------------------------*
