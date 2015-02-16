@@ -204,7 +204,7 @@ class DrawAttention_CustomFields {
 	}
 
 	function hotspot_area_group_details_metabox( array $metaboxes ) {
-		if ( empty( $_REQUEST['post'] ) ) { return $metaboxes; }
+		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
 
 		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( esc_attr( $_REQUEST['post'] ) ), 'full' );
 
