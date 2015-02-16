@@ -74,6 +74,9 @@ The Pro version includes:
 
 == Changelog ==
 
+= 1.0.2 =
+Fix issue with saving data
+
 = 1.0 =
 * Initial Release
 
