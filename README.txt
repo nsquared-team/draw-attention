@@ -36,7 +36,7 @@ When a highlighted map area is clicked, show more information.
 
 [Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization:
 
-### Have Multiple Interactive Images ###
+### Have Multiple Interactive Images (Pro only) ###
 Need more than one interactive image on your site? The Pro version allows unlimited interactive images
 
 ### Layout Options (Pro only) ###
