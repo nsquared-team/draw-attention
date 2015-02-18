@@ -20,11 +20,8 @@ Map info is accessible to everyone who visits your site, regardless of device or
 ### Progressively Enhanced ###
 Your content is accessible even to users who have JavaScript disabled - SEO friendly too!
 
-### Layout Options ###
-Show more info about highlighted map areas in a variety of different layouts or in a lightbox.
-
 ### Customizable Colors ###
-Choose from one of 20 pre-defined color palettes or use your own custom color scheme
+Choose your own custom color scheme to match your site
 
 ### Highlight on Hover ###
 Highlight different areas of your image when you site visitors moves their mouse over the image
@@ -37,13 +34,18 @@ When a highlighted map area is clicked, show more information.
 
 [vimeo https://vimeo.com/118974102]
 
-[Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization.
+[Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization:
+
+### Have Multiple Interactive Images ###
+Need more than one interactive image on your site? The Pro version allows unlimited interactive images
+
+### Layout Options (Pro only) ###
+Show more info about highlighted map areas in a variety of different layouts or in a lightbox
+
+### 20 Pre-Defined Color Palettes (Pro only) ###
+Choose from one of 20 pre-defined color palettes or use your own custom color scheme
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
 
 = Using The WordPress Dashboard =
 
