@@ -21,11 +21,22 @@
 			if (container.hasClass( 'lightbox' ) ) { /* If the lightbox layout is selected */
 				$.featherlight(newInfo, {
 					afterContent: function(){
-						$('.hotspot-info.featherlight-inner').show();
-						var mapId = container.attr('id'),
+						var content = $('.hotspot-info.featherlight-inner'),
+							lb = $('.featherlight-content'),
+							mapId = container.attr('id'),
 							mapNo = mapId.match(/\d+/)[0];
 
-						$('.featherlight-content').addClass('lightbox' + mapNo);
+						content.show();
+						lb.addClass('lightbox' + mapNo);
+
+						var img = content.find('img'),
+							imgHeight = img.height(),
+							lbHeight = lb.height(),
+							maxImgHeight = lbHeight * 0.8;
+
+						if ( imgHeight > maxImgHeight ) {
+							img.height(maxImgHeight);
+						}
 					}
 				});
 

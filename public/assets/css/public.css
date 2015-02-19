@@ -152,7 +152,7 @@
   top: 0;
   left: 0;
   white-space: nowrap;
-  z-index: 2;
+  z-index: 99999;
 }
 /* line 130, ../sass/public.scss */
 .featherlight:last-of-type {
@@ -216,28 +216,29 @@
   border: none;
 }
 /* line 182, ../sass/public.scss */
-.featherlight .hotspot-title {
+.featherlight h2.hotspot-title {
   font-size: 1.2em;
-  margin-bottom: 0.4em;
+  margin: 0 0 0.4em 0;
+  padding: 0;
 }
-/* line 187, ../sass/public.scss */
+/* line 188, ../sass/public.scss */
 .featherlight .hotspot-content p {
   margin: 1em 0;
 }
-/* line 191, ../sass/public.scss */
+/* line 192, ../sass/public.scss */
 .featherlight img {
   height: auto;
   max-width: 100%;
 }
 
-/* line 197, ../sass/public.scss */
+/* line 198, ../sass/public.scss */
 .featherlight-iframe .featherlight-content {
   border-bottom: 0;
   padding: 0;
 }
 
 @media only screen and (max-width: 1024px) {
-  /* line 203, ../sass/public.scss */
+  /* line 204, ../sass/public.scss */
   .featherlight .featherlight-content {
     border-bottom: 10px solid transparent;
     margin-left: 10px;

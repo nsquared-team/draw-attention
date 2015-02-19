@@ -126,7 +126,7 @@
 	top: 0;
 	left: 0;
 	white-space: nowrap;
-	z-index: 2;
+	z-index: 99999;
 	&:last-of-type {
 		background: rgba(0, 0, 0, 0.8);
 	}
@@ -179,9 +179,10 @@
 	iframe {
 		border: none;
 	}
-	.hotspot-title {
+	h2.hotspot-title {
 		font-size: 1.2em;
-		margin-bottom: 0.4em;
+		margin: 0 0 0.4em 0;
+		padding: 0;
 	}
 	.hotspot-content {
 		p {
