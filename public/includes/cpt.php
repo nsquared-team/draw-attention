@@ -50,7 +50,7 @@ class DrawAttention_CPT {
 				'show_ui' => true,
 				'query_var' => true,
 				'menu_position' => 8, /* this is what order you want it to appear in on the left hand side menu */
-				// 'menu_icon' => get_stylesheet_directory_uri() . '/library/images/custom-post-icon.png', /* the icon for the custom post type menu */
+				'menu_icon' => 'dashicons-images-alt2', /* the icon for the custom post type menu */
 				'rewrite'	=> false,
 				'has_archive' => $this->post_type.'s', /* you can rename the slug here */
 				// 'capabilities' => array(
