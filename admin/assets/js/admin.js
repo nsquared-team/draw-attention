@@ -65,6 +65,7 @@
 		});
 	}
 
+	/* Select a new color scheme to be applied to the current Draw Attention */
 	var themeSelect = function() {
 		$('#da-theme-pack-select').on('change', function() {
 			var confirmed = confirm('Applying a new theme will overwrite the current styling you have selected');
@@ -76,6 +77,7 @@
 		});
 	}
 
+	/* Apply the selected theme */
 	var themeApply = function(themeSlug) {
 		var themeProperties = Object.keys(daThemes.themes[themeSlug].values);
 		$.each( themeProperties, function() {
@@ -84,6 +86,7 @@
 		} );
 	}
 
+	/* Fix weird opacity value bug */
 	var opacityLabelSync = function() {
 		$('.cmb-type-opacity input').on('change', function() {
 			var displayedValue = ($(this).val()-0.01)*100;
@@ -91,6 +94,20 @@
 		});
 	}
 
+	/* Confirm before deleting a hotspot */
+	var confirmDelete = function(){
+		$('.cmb2-wrap > .cmb2-metabox').on('click', '.cmb-remove-group-row', function(e){
+			var confirmed = confirm('You\'re deleting a hotspot. There is no undo');
+			if (confirmed) {
+				return true;
+			} else {
+				e.stopImmediatePropagation();
+				e.preventDefault();
+			}
+		});		
+	};
+
+	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
 		canvasDraw();
 		accordion();
@@ -98,6 +115,7 @@
 		hotspotCloning();
 		themeSelect();
 		opacityLabelSync();
+		confirmDelete();
 	}
 
 	/* Reset the drawable canvas areas */
