@@ -82,6 +82,9 @@ The Pro version includes:
 
 == Changelog ==
 
+= 1.1 =
+Change Draw Attention CPT icon in dashboard
+
 = 1.0.2 =
 Fix issue with saving data
 
