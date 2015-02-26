@@ -298,6 +298,10 @@
       isSticky = area.data('stickyCanvas'),
       href = area.attr('href');
 
+    if (stickyCanvas.length == 0) {
+      mapOver(area, img);
+    }
+
     if (isSticky) {
       area.data('stickyCanvas', false);
       area.trigger('stickyHighlight', [false]);
