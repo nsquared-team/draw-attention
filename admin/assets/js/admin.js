@@ -116,6 +116,10 @@
 		themeSelect();
 		opacityLabelSync();
 		confirmDelete();
+
+		if ( typenow=='da_image' && adminpage=='post-new-php' ) {
+			themeApply('drawattention');
+		}
 	}
 
 	/* Reset the drawable canvas areas */
