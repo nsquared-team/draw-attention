@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 4.1
 Tested up to: 4.1.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,7 +82,7 @@ The Pro version includes:
 
 == Changelog ==
 
-= 1.1 =
+= 1.1.1 =
 * New: Add ability "click off" highlighted areas
 * New: Add confirmation alert before deleting highlightable area in the dashboard
 * New: Draw Attention CPT icon in dashboard
