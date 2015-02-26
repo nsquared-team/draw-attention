@@ -80,28 +80,24 @@
 }
 
 @media (min-width: 600px) {
-	.left .hotspots-interaction,
-	.right .hotspots-interaction {
+	.hotspots-interaction {
 		display: table;
 		table-layout: fixed;
 		width: 100%;
 	}
-	.left .hotspots-image-container,
-	.right .hotspots-image-container {
+	.hotspots-image-container {
 		display: table-cell;
 		vertical-align: top;
 		width: 66%;
 	}
-	.left .hotspots-placeholder,
-	.right .hotspots-placeholder {
+	.hotspots-placeholder {
 		display: table-cell;
 		vertical-align: top;
 	}
 }
 
 @media (min-width: 900px) {
-	.left .hotspots-image-container,
-	.right .hotspots-image-container {
+	.hotspots-image-container {
 		width: 75%;
 	}
 }

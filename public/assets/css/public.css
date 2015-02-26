@@ -103,44 +103,40 @@
 
 @media (min-width: 600px) {
   /* line 83, ../sass/public.scss */
-  .left .hotspots-interaction,
-  .right .hotspots-interaction {
+  .hotspots-interaction {
     display: table;
     table-layout: fixed;
     width: 100%;
   }
 
-  /* line 89, ../sass/public.scss */
-  .left .hotspots-image-container,
-  .right .hotspots-image-container {
+  /* line 88, ../sass/public.scss */
+  .hotspots-image-container {
     display: table-cell;
     vertical-align: top;
     width: 66%;
   }
 
-  /* line 95, ../sass/public.scss */
-  .left .hotspots-placeholder,
-  .right .hotspots-placeholder {
+  /* line 93, ../sass/public.scss */
+  .hotspots-placeholder {
     display: table-cell;
     vertical-align: top;
   }
 }
 @media (min-width: 900px) {
-  /* line 103, ../sass/public.scss */
-  .left .hotspots-image-container,
-  .right .hotspots-image-container {
+  /* line 100, ../sass/public.scss */
+  .hotspots-image-container {
     width: 75%;
   }
 }
 /* ------------------------------------------- */
 /* Light Box
 /* ------------------------------------------- */
-/* line 114, ../sass/public.scss */
+/* line 110, ../sass/public.scss */
 .lightbox .hotspots-placeholder {
   display: none;
 }
 
-/* line 118, ../sass/public.scss */
+/* line 114, ../sass/public.scss */
 .featherlight {
   background: #333;
   bottom: 0;
@@ -154,11 +150,11 @@
   white-space: nowrap;
   z-index: 2;
 }
-/* line 130, ../sass/public.scss */
+/* line 126, ../sass/public.scss */
 .featherlight:last-of-type {
   background: rgba(0, 0, 0, 0.8);
 }
-/* line 133, ../sass/public.scss */
+/* line 129, ../sass/public.scss */
 .featherlight:before {
   content: '';
   display: inline-block;
@@ -166,7 +162,7 @@
   margin-right: -0.25em;
   vertical-align: middle;
 }
-/* line 140, ../sass/public.scss */
+/* line 136, ../sass/public.scss */
 .featherlight .featherlight-content {
   background: #fff;
   border-bottom: 25px solid transparent;
@@ -183,11 +179,11 @@
   vertical-align: middle;
   white-space: normal;
 }
-/* line 156, ../sass/public.scss */
+/* line 152, ../sass/public.scss */
 .featherlight .featherlight-inner {
   display: block;
 }
-/* line 159, ../sass/public.scss */
+/* line 155, ../sass/public.scss */
 .featherlight .featherlight-close-icon {
   background: #fff;
   background: rgba(255, 255, 255, 0.3);
@@ -202,32 +198,32 @@
   width: 25px;
   z-index: 9999;
 }
-/* line 173, ../sass/public.scss */
+/* line 169, ../sass/public.scss */
 .featherlight .featherlight-image {
   width: 100%;
 }
-/* line 176, ../sass/public.scss */
+/* line 172, ../sass/public.scss */
 .featherlight iframe {
   border: none;
 }
-/* line 179, ../sass/public.scss */
+/* line 175, ../sass/public.scss */
 .featherlight .hotspot-title {
   font-size: 1.2em;
   margin-bottom: 0.4em;
 }
-/* line 184, ../sass/public.scss */
+/* line 180, ../sass/public.scss */
 .featherlight .hotspot-content p {
   margin: 1em 0;
 }
 
-/* line 190, ../sass/public.scss */
+/* line 186, ../sass/public.scss */
 .featherlight-iframe .featherlight-content {
   border-bottom: 0;
   padding: 0;
 }
 
 @media only screen and (max-width: 1024px) {
-  /* line 196, ../sass/public.scss */
+  /* line 192, ../sass/public.scss */
   .featherlight .featherlight-content {
     border-bottom: 10px solid transparent;
     margin-left: 10px;
