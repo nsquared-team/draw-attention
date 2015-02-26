@@ -65,6 +65,23 @@ class DrawAttention_Themes {
 					'map_background_color' => '#000000',
 				),
 			),
+			'drawattention' => array(
+				'slug' => 'drawattention',
+				'name' => 'Draw Attention',
+				'values' => array(
+					'map_highlight_color' => '#3CA2A2',
+					'map_highlight_opacity' => 0.7,
+
+					'map_border_color' => '#235B6E',
+					'map_border_opacity' => 1,
+					'map_border_width' => 2,
+
+					'map_title_color' => '#93C7A4',
+					'map_text_color' => '#DFEBE5',
+					'map_background_color' => '#2E2D29',
+				),
+			),
+
 		);
 
 		return apply_filters( 'da_themes', $themes );
