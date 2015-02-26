@@ -333,7 +333,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			$hotspots = get_post_meta( $imageID, $this->custom_fields->prefix.'hotspots', true );
 			$html = '';
 
-			if ( empty( $hotspots['0']['coordinates'] ) ) {
+			if ( empty( $hotspots ) || empty( $hotspots['0']['coordinates'] ) ) {
 				_e( 'You need to define some clickable areas for your image.', 'drawattention' );
 				echo ' ';
 				echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $imageID );
@@ -342,7 +342,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$img_post = get_post( $imageID );
 
 				$settings = get_metadata( 'post', $imageID, '', false );
-				$layout = $settings['_hotspot_map_layout'][0];
+				$layout = ( !empty( $settings[$this->custom_fields->prefix.'map_layout'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_layout'][0] : 'left';
 
 
 				$spot_id = 'hotspot-' . $imageID;
@@ -368,14 +368,15 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$image_html = '';
 				$image_html .=    '<div class="hotspots-image-container">';
-				$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-highlight-color="' . $settings[_hotspot_map_highlight_color][0] . '" data-highlight-opacity="' . $settings[_hotspot_map_highlight_opacity][0] . '" data-highlight-border-color="' . $settings[_hotspot_map_border_color][0] . '" data-highlight-border-width="' . $settings[_hotspot_map_border_width][0] . '" data-highlight-border-opacity="' . $settings[_hotspot_map_border_opacity][0] . '"/>';
+				$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
 				$image_html .=    '</div>';
 
 				$info_html = '';
 				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
 				$info_html .=      '<div class="hotspot-initial">';
 				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-				$info_html .=        '<div class="hostspot-content">' . wpautop($settings[_hotspot_map_more_info][0]) . '</div>';
+				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop($settings[$this->custom_fields->prefix.'map_more_info'][0]) : '';
+				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
 
@@ -390,6 +391,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
 				foreach ($hotspots as $key => $hotspot) {
+					if ( empty( $hotspot['coordinates'] ) ) { continue; }
+
 					$coords = $hotspot['coordinates'];
 					$html .= '<area shape="poly" coords="' . $coords . '" href="#hotspot-' . $key . '">';
 				}
@@ -398,13 +401,16 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				foreach ($hotspots as $key => $hotspot) {
 					$html .=  '<div class="hotspot-info" id="hotspot-' . $key . '">';
-					$html .=    '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>';
+					if ( !empty( $hotspot['title'] ) ) {
+						$html .=    '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>';
+					}
 					if ( !empty( $hotspot['detail_image'] ) ) {
 						$html .=  '<div class="hotspot-thumb">';
 						$html .=    '<img src="'.$hotspot['detail_image'].'" />';
 						$html .=  '</div>';
 					}
-					$html .=    '<div class="hotspot-content">' . wpautop( $hotspot['description'] ) . '</div>';
+					$description_html = ( !empty( $hotspot['description'] ) ) ? wpautop( $hotspot['description'] ) : '';
+					$html .=    '<div class="hotspot-content">' . $description_html . '</div>';
 					$html .=  '</div>';
 				}
 
