@@ -206,7 +206,9 @@ class DrawAttention_CustomFields {
 	function hotspot_area_group_details_metabox( array $metaboxes ) {
 		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
 
-		$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( esc_attr( $_REQUEST['post'] ) ), 'full' );
+		if ( !empty( $_REQUEST['post'] ) ) {
+			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( esc_attr( $_REQUEST['post'] ) ), 'full' );
+		}
 
 		$metaboxes['field_group'] = array(
 			'id'           => 'field_group',
@@ -230,7 +232,7 @@ class DrawAttention_CustomFields {
 							'id'   => 'coordinates',
 							'type' => 'text',
 							'attributes' => array(
-								'data-image-url' => $thumbnail_src[0],
+								'data-image-url' => ( !empty( $thumbnail_src[0] ) ) ? $thumbnail_src[0] : '',
 							),
 						),
 						array(
