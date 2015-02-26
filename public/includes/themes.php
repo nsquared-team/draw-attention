@@ -24,14 +24,23 @@ class DrawAttention_Themes {
 		<?php
 	}
 
-	function pass_themes_to_admin_js() {
+	public function pass_themes_to_admin_js() {
 		wp_localize_script( $this->parent->plugin_slug . '-admin-script', 'daThemes', array(
 			'cfPrefix' => $this->parent->custom_fields->prefix,
 			'themes' => $this->get_themes(),
 		) );
 	}
 
-	function get_themes() {
+	public static function apply_theme( $post_id, $theme_slug ) {
+		$themes = $this->get_themes();
+		if ( empty( $themes[$theme_slug]['values'] ) ) { return false; }
+
+		foreach ($themes[$theme_slug]['values'] as $key => $meta_value) {
+			update_post_meta( $post_id, $this->parent->custom_fields->prefix.$key, $meta_value );
+		}
+	}
+
+	public static function get_themes() {
 		$themes = array(
 			'light' => array(
 				'slug' => 'light',
