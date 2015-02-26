@@ -10,12 +10,20 @@ class DrawAttention_Upsell {
 		// Add an action link pointing to the upgrade page.
 		$plugin_basename = 'draw-attention/' . $this->admin->instance->plugin_slug . '.php';
 		add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
+		add_action( 'admin_init', array( $this, 'redirect_pro_link' ), 9 );
 
 		// add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 	}
 
 	public function admin_menu() {
 		add_submenu_page( 'edit.php?post_type=da_image', 'Upgrade to Pro', 'Upgrade to Pro', 'edit_posts', 'da_upgrade_to_pro', array( $this, 'display_plugin_admin_page' ) );
+	}
+
+	function redirect_pro_link() {
+		if ( $_GET['page'] == 'da_upgrade_to_pro' ) {
+			wp_redirect( 'http://wpdrawattention.com' );
+			exit();
+		}
 	}
 
 	public function add_action_links( $links ) {
