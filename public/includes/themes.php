@@ -32,11 +32,12 @@ class DrawAttention_Themes {
 	}
 
 	public static function apply_theme( $post_id, $theme_slug ) {
-		$themes = $this->get_themes();
+		$themes = self::get_themes();
 		if ( empty( $themes[$theme_slug]['values'] ) ) { return false; }
 
 		foreach ($themes[$theme_slug]['values'] as $key => $meta_value) {
-			update_post_meta( $post_id, $this->parent->custom_fields->prefix.$key, $meta_value );
+			update_post_meta( $post_id, '_da_'.$key, $meta_value );
+			// TODO: Make prefix dynamic
 		}
 	}
 

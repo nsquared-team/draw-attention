@@ -254,6 +254,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 					) );
 				}
 				if ( empty( $imageID ) ) die( 'An error occurred setting up DrawAttention, please contact support@tylerdigital.com');
+				DrawAttention_Themes::apply_theme( $imageID, 'drawattention' );
 
 				wp_redirect( get_edit_post_link( $imageID, 'raw' ) );
 				exit();
