@@ -294,17 +294,27 @@
 
   mapClick = function(area, img) {
     var id = area.attr('id'),
-      stickyCanvas = $('#canvas-' + id);
+      stickyCanvas = $('#canvas-' + id),
+      isSticky = area.data('stickyCanvas'),
+      href = area.attr('href');
 
-    area.data('stickyCanvas', true);
-    stickyCanvas.addClass('sticky');
+    if (isSticky) {
+      area.data('stickyCanvas', false);
+      area.trigger('stickyHighlight', [false]);
+      stickyCanvas.stop(true, true).fadeOut('fast', function(){
+        $(this).remove();
+      });
+    } else {
+      area.data('stickyCanvas', true);
+      stickyCanvas.addClass('sticky');
+      img.trigger('activateHighlight', [href]);
+      area.trigger('stickyHighlight', [true]);
+      stickyCanvas.siblings('canvas.sticky').stop(true, true).fadeOut('fast', function(){
+        $(this).remove();
+      });
+      area.siblings('area').data('stickyCanvas', false);
+    }
 
-    stickyCanvas.siblings('canvas.sticky').stop(true, true).fadeOut('fast', function(){
-      $(this).remove();
-    });
-    area.siblings('area').data('stickyCanvas', false);
-    var href = area.attr('href');
-    img.trigger('activateHighlight', [href]);
   };
 
   resizeDelay = (function() {

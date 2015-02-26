@@ -13,33 +13,36 @@
 
 		$('area').on('click', function(e){
 			e.preventDefault();
+		});
 
+		$('area').on('stickyHighlight', function(e, isSticky){
 			var $this = $(this),
-				newInfo = $($this.attr('href')),
-				container = $this.parents('.hotspots-container');
+				container = $this.parents('.hotspots-container'),
+				newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
 
 			if (container.hasClass( 'lightbox' ) ) { /* If the lightbox layout is selected */
-				$.featherlight(newInfo, {
-					afterContent: function(){
-						var content = $('.hotspot-info.featherlight-inner'),
-							lb = $('.featherlight-content'),
-							mapId = container.attr('id'),
-							mapNo = mapId.match(/\d+/)[0];
+				if (isSticky) {
+					$.featherlight(newInfo, {
+						afterContent: function(){
+							var content = $('.hotspot-info.featherlight-inner'),
+								lb = $('.featherlight-content'),
+								mapId = container.attr('id'),
+								mapNo = mapId.match(/\d+/)[0];
 
-						content.show();
-						lb.addClass('lightbox' + mapNo);
+							content.show();
+							lb.addClass('lightbox' + mapNo);
 
-						var img = content.find('img'),
-							imgHeight = img.height(),
-							lbHeight = lb.height(),
-							maxImgHeight = lbHeight * 0.8;
+							var img = content.find('img'),
+								imgHeight = img.height(),
+								lbHeight = lb.height(),
+								maxImgHeight = lbHeight * 0.8;
 
-						if ( imgHeight > maxImgHeight ) {
-							img.height(maxImgHeight);
+							if ( imgHeight > maxImgHeight ) {
+								img.height(maxImgHeight);
+							}
 						}
-					}
-				});
-
+					});
+				}
 			} else { /* If some other layout is selected */
 				var infoContainer = container.find('.hotspots-placeholder'),
 					infoContent = infoContainer.find('.hotspots-content');
@@ -57,6 +60,7 @@
 					infoContent.fadeIn('fast');
 				});
 			}
+
 
 		});
 	};
