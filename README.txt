@@ -85,11 +85,10 @@ The Pro version includes:
 = 1.1.1 =
 * New: Add ability "click off" highlighted areas
 * New: Add confirmation alert before deleting highlightable area in the dashboard
-* New: Draw Attention CPT icon in dashboard
+* New: CPT icon in dashboard
 * New: Set a default color scheme when activating Draw Attention
 * Fix: default layout to show More Info on Left rather than on top
 * Fix: PHP Warnings visible with WP_Debug
-* Fix: issues with lightbox sizing
 * Fix: issues with selected highlight color not always displaying properly
 
 = 1.0.2 =
