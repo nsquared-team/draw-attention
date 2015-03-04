@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.1.1';
+		const VERSION = '1.1.2';
 		const file = __FILE__;
 
 		/**
