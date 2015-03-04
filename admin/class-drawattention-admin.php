@@ -34,6 +34,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		 * @var      object
 		 */
 		static $instance = null;
+		public $da;
 
 		/**
 		 * Slug of the plugin screen.
@@ -69,8 +70,8 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			 * - Rename "DrawAttention" to the name of your initial plugin class
 			 *
 			 */
-			$this->instance = DrawAttention::get_instance();
-			$this->plugin_slug = $this->instance->get_plugin_slug();
+			$this->da = DrawAttention::get_instance();
+			$this->plugin_slug = $this->da->get_plugin_slug();
 
 			// Load admin style sheet and JavaScript.
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -129,7 +130,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		 */
 		public function enqueue_admin_styles() {
 			$screen = get_current_screen();
-			if ( $this->instance->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
+			if ( $this->da->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
 				wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), DrawAttention::VERSION );
 			}
 
@@ -149,7 +150,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		public function enqueue_admin_scripts() {
 
 			$screen = get_current_screen();
-			if ( $this->instance->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
+			if ( $this->da->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
 				wp_register_script( $this->plugin_slug . '-canvasareadraw', plugins_url( 'assets/js/jquery.canvasAreaDraw.js', __FILE__ ), array( 'jquery' ), DrawAttention::VERSION );
 				wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-canvasareadraw' ), DrawAttention::VERSION );
 				do_action( 'da_register_admin_script' );
@@ -231,12 +232,12 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		public function admin_init() {
 			global $pagenow;
 			if (
-				$pagenow == 'edit.php' && $_GET['post_type'] == $this->instance->cpt->post_type
-				|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->instance->cpt->post_type
+				$pagenow == 'edit.php' && $_GET['post_type'] == $this->da->cpt->post_type
+				|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->da->cpt->post_type
 			) {
 				$image_args = array(
 					'post_status' => 'any',
-					'post_type' => $this->instance->cpt->post_type,
+					'post_type' => $this->da->cpt->post_type,
 					'posts_per_page' => 1,
 					);
 				$image = new WP_Query($image_args);
