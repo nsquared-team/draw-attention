@@ -97,6 +97,9 @@ class DrawAttention_Pro {
 			}
 
 			$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
+			if ( empty( $event_trigger ) ) {
+				$event_trigger = 'click';
+			}
 
 			$spot_id = 'hotspot-' . $imageID;
 			$bg_color = $settings[$this->parent->custom_fields->prefix.'map_background_color'][0];
