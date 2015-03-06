@@ -107,6 +107,16 @@
 		});		
 	};
 
+
+	var saveAlert = function(){
+		$(window).on( 'beforeunload.edit-post', function() {
+			if ($(body).hasClass('post-type-da_image')) {
+				return postL10n.saveAlert;
+			}
+		})
+	};
+
+
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
 		canvasDraw();
@@ -116,10 +126,7 @@
 		themeSelect();
 		opacityLabelSync();
 		confirmDelete();
-
-		if ( typenow=='da_image' && adminpage=='post-new-php' ) {
-			themeApply('drawattention');
-		}
+		saveAlert();
 	}
 
 	/* Reset the drawable canvas areas */
