@@ -36,6 +36,18 @@ class DrawAttention_Pro {
 					'default' => 'left',
 				),
 
+				array(
+					'name'    => __( 'Show more info on', 'drawattention' ),
+					'desc'    => __( '', 'drawattention' ),
+					'id'      => $this->parent->custom_fields->prefix . 'event_trigger',
+					'type'    => 'select',
+					'options' => array(
+						'click' => 'Click',
+						'hover' => 'Hover',
+					),
+					'default' => 'click',
+				),
+
 			),
 		);
 
@@ -84,6 +96,8 @@ class DrawAttention_Pro {
 				wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
 			}
 
+			$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
+
 			$spot_id = 'hotspot-' . $imageID;
 			$bg_color = $settings[$this->parent->custom_fields->prefix.'map_background_color'][0];
 			$text_color = $settings[$this->parent->custom_fields->prefix.'map_text_color'][0];
@@ -107,7 +121,7 @@ class DrawAttention_Pro {
 
 			$image_html = '';
 			$image_html .=    '<div class="hotspots-image-container">';
-			$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-highlight-color="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->parent->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->parent->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
+			$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="'. $event_trigger . '" data-highlight-color="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->parent->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->parent->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
 			$image_html .=    '</div>';
 
 			$info_html = '';
@@ -119,7 +133,7 @@ class DrawAttention_Pro {
 			$info_html .=    '</div>';
 
 
-			$html .=  '<div class="hotspots-container ' . $layout . '" id="' . $spot_id . '">';
+			$html .=  '<div class="hotspots-container ' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
 			$html .=		'<div class="hotspots-interaction">';
 
 			if ( $layout == 'left' ) {
