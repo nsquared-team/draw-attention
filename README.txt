@@ -92,8 +92,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 * New: Add confirmation alert before deleting highlightable area in the dashboard
 * New: CPT icon in dashboard
 * New: Set a default color scheme for new images
-* Fix: PHP Warnings visible with WP_Debug
-* Fix: PHP Warnings when PHP is in Strict Standards mode
+* Improved: Large images are handled better in lightbox mode
+* Fixed: PHP Warnings visible with WP_Debug
+* Fixed: PHP Warnings when PHP is in Strict Standards mode
 
 = 1.0 =
 * A change since the previous version.
