@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: comments, spam
 Requires at least: 3.5.1
 Tested up to: 3.6
-Stable tag: 1.0.5
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,15 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 1.1 =
+* New: Add option to choose "Click" (default) or "Hover" event to display more info
+* New: Add ability "click off" highlighted areas
+* New: Add confirmation alert before deleting highlightable area in the dashboard
+* New: CPT icon in dashboard
+* New: Set a default color scheme for new images
+* Fix: PHP Warnings visible with WP_Debug
+* Fix: PHP Warnings when PHP is in Strict Standards mode
 
 = 1.0 =
 * A change since the previous version.
