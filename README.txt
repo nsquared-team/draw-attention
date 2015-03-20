@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 4.1
 Tested up to: 4.1.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,9 @@ The Pro version includes:
 
 
 == Changelog ==
+
+= 1.1.3 =
+* Fix: Default color scheme always applying when re-editing an existing image
 
 = 1.1.2 =
 * Fix: PHP Warnings when PHP is in Strict Standards mode
