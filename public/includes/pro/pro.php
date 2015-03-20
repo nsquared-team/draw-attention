@@ -31,6 +31,7 @@ class DrawAttention_Pro {
 						'left' => 'Left',
 						'right' => 'Right',
 						'bottom' => 'Bottom',
+						'top'		=> 'Top',
 						'lightbox' => 'Lightbox',
 					),
 					'default' => 'left',
@@ -139,7 +140,7 @@ class DrawAttention_Pro {
 			$html .=  '<div class="hotspots-container ' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
 			$html .=		'<div class="hotspots-interaction">';
 
-			if ( $layout == 'left' ) {
+			if ( $layout == 'left' || $layout == 'top' ) {
 				$html .= $info_html;
 				$html .= $image_html;
 			} else {
