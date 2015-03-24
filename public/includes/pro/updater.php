@@ -21,7 +21,7 @@ class DrawAttention_Updater {
 	public function admin_menu() {
 		global $submenu;
 
-		add_submenu_page( 'edit.php?post_type=da_image', 'License & Updates', 'License & Updates', 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
+		add_submenu_page( 'edit.php?post_type=da_image', __( 'License & Support' ), __( 'License & Support' ), 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
 	}
 
 	public function add_action_links( $links ) {
