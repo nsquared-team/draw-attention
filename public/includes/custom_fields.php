@@ -51,7 +51,7 @@ class DrawAttention_CustomFields {
 
 	public function add_hotspot_area_details_table_metabox() {
 		add_meta_box( 'hotspot_area_details_table',
-			'Hotspot Areas',
+			__('Hotspot Areas', 'drawattention'),
 			array( $this, 'hotspot_area_details_table_metabox_callback' ),
 			$page,
 			'normal',
@@ -212,23 +212,23 @@ class DrawAttention_CustomFields {
 
 		$metaboxes['field_group'] = array(
 			'id'           => 'field_group',
-			'title'        => __( 'Hotspot Areas', 'cmb2' ),
+			'title'        => __( 'Hotspot Areas', 'drawattention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'fields'       => array(
 				array(
 					'id'          => $this->prefix . 'hotspots',
 					'type'        => 'group',
-					'description' => __( 'Draw the clickable areas of your image', 'cmb2' ),
+					'description' => __( 'Draw the clickable areas of your image', 'drawattention' ),
 					'options'     => array(
-						'group_title'   => __( 'Clickable Area #{#}', 'cmb2' ), // {#} gets replaced by row number
-						'add_button'    => __( 'Add Another Area', 'cmb2' ),
-						'remove_button' => __( 'Remove Area', 'cmb2' ),
+						'group_title'   => __( 'Clickable Area #{#}', 'drawattention' ), // {#} gets replaced by row number
+						'add_button'    => __( 'Add Another Area', 'drawattention' ),
+						'remove_button' => __( 'Remove Area', 'drawattention' ),
 						'sortable'      => false, // beta
 					),
 					// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
 					'fields'      => array(
 						array(
-							'name' => 'Coordinates',
+							'name' => __( 'Coordinates', 'drawattention' ),
 							'id'   => 'coordinates',
 							'type' => 'text',
 							'attributes' => array(
@@ -236,12 +236,12 @@ class DrawAttention_CustomFields {
 							),
 						),
 						array(
-							'name' => 'Title',
+							'name' => __('Title', 'drawattention' ),
 							'id'   => 'title',
 							'type' => 'text',
 						),
 						array(
-							'name' => 'Description',
+							'name' => __('Description', 'drawattention' ),
 							'description' => '',
 							'id'   => 'description',
 							'type' => 'textarea_small',
@@ -261,8 +261,8 @@ class DrawAttention_CustomFields {
 							// ),
 						),
 						array(
-							'name' => __( 'Detail Image' ),
-							'desc' => __( 'Upload an image or enter a URL to show in the more info box', 'cmb2' ),
+							'name' => __( 'Detail Image', 'drawattention' ),
+							'desc' => __( 'Upload an image or enter a URL to show in the more info box', 'drawattention' ),
 							'id'   => 'detail_image',
 							'type' => 'file',
 						),
