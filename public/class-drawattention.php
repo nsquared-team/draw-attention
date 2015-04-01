@@ -423,7 +423,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 		function add_shortcode_metabox() {
-			add_meta_box( 'da_shortcode', __('Copy Shortcode'), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low');
+			add_meta_box( 'da_shortcode', __('Copy Shortcode', 'drawattention'), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low');
 		}
 
 		function display_shortcode_metabox() {

@@ -10,13 +10,13 @@ class DrawAttention_Themes {
 	}
 
 	function add_theme_pack_metabox() {
-		add_meta_box( 'da_theme_pack', __('Apply Color Scheme'), array( $this, 'display_theme_pack_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
+		add_meta_box( 'da_theme_pack', __( 'Apply Color Scheme', 'drawattention' ), array( $this, 'display_theme_pack_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
 	}
 	
 	function display_theme_pack_metabox() {
-		echo '<p>'.__( 'Quickly apply a theme (you can adjust each color afterwards).' ).'</p>'; ?>
+		echo '<p>'.__( 'Quickly apply a theme (you can adjust each color afterwards).', 'drawattention' ).'</p>'; ?>
 		<select id="da-theme-pack-select">
-			<option value="">Select a theme...</option>
+			<option value=""><?php  _e( 'Select a theme...', 'drawattention' ) ?></option>
 			<?php foreach ( $this->get_themes() as $key => $theme ) : ?>
 			<option value="<?php echo $theme['slug']; ?>"><?php echo $theme['name']; ?></option>
 			<?php endforeach; ?>
