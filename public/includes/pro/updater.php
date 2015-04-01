@@ -21,7 +21,7 @@ class DrawAttention_Updater {
 	public function admin_menu() {
 		global $submenu;
 
-		add_submenu_page( 'edit.php?post_type=da_image', __( 'License & Support' ), __( 'License & Support' ), 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
+		add_submenu_page( 'edit.php?post_type=da_image', __( 'License & Support', 'drawattention' ), __( 'License & Support', 'drawattention' ), 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
 	}
 
 	public function add_action_links( $links ) {
@@ -38,22 +38,22 @@ class DrawAttention_Updater {
 	}
 
 	function output_license_page() {
-		echo '<h2>Draw Attention Pro - License & Updates</h2>';
+		echo '<h2>'.__('Draw Attention Pro - License & Updates', 'drawattention' ).'.</h2>';
 		echo $this->license_key_html();
 	}
 
 	function license_key_html() {
 		$license_key_status = get_option( 'da_license_key_status' );
 		if ( empty( $license_key_status ) ) {
-			$license_key_status_html = '<p class="notice-yellow">Please enter your license key to receive support & updates. <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">Click here to purchase or renew a license</a></p>';
+			$license_key_status_html = '<p class="notice-yellow">'.__( 'Please enter your license key to receive support & updates', 'drawattention' ).'. <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">'.__( 'Click here to purchase or renew a license', 'drawattention' ).'</a></p>';
 		} elseif ( $license_key_status == 'valid' ) {
-			$license_key_status_html = '<p class="notice-green">Valid license</p>';
+			$license_key_status_html = '<p class="notice-green">'.__( 'Valid license', 'drawattention' ).'</p>';
 		} elseif ( $license_key_status == 'invalid' ) {
-			$license_key_status_html = '<p class="notice-red">Invalid license. Please verify the license key, you may need to <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>';
+			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'drawattention');
 		}
 
 		$html  = '<form>';
-		$html .= '<label for="da_license_key">License Key</label><br />';
+		$html .= '<label for="da_license_key">'.__( 'License Key', 'drawattention' ).'</label><br />';
 		$html .= '<input type="hidden" name="post_type" value="da_image" />';
 		$html .= '<input type="hidden" name="page" value="da_license" />';
 		if ( $license_key = get_option( 'da_license_key' ) ) {
@@ -62,7 +62,7 @@ class DrawAttention_Updater {
 			$html .= '<input type="text" name="da_license_key" id="da_license_key" size="32" />';
 		}
 		$html .= $license_key_status_html;
-		$html .= '<input type="submit" value="Update" />';
+		$html .= '<input type="submit" value="'.__( 'Update', 'drawattention' ).'" />';
 		$html .= '</form>';
 
 		return $html;

@@ -28,11 +28,11 @@ class DrawAttention_Pro {
 					'id'      => $this->parent->custom_fields->prefix . 'map_layout',
 					'type'    => 'radio',
 					'options' => array(
-						'left' => 'Left',
-						'right' => 'Right',
-						'bottom' => 'Bottom',
-						'top'		=> 'Top',
-						'lightbox' => 'Lightbox',
+						'left' => __('Left', 'drawattention'),
+						'right' => __('Right', 'drawattention'),
+						'bottom' => __('Bottom', 'drawattention'),
+						'top'		=> __('Top', 'drawattention'),
+						'lightbox' => __('Lightbox', 'drawattention'),
 					),
 					'default' => 'left',
 				),
@@ -43,8 +43,8 @@ class DrawAttention_Pro {
 					'id'      => $this->parent->custom_fields->prefix . 'event_trigger',
 					'type'    => 'select',
 					'options' => array(
-						'click' => 'Click',
-						'hover' => 'Hover',
+						'click' => __('Click', 'drawattention'),
+						'hover' => __('Hover', 'drawattention'),
 					),
 					'default' => 'click',
 				),
@@ -179,7 +179,7 @@ class DrawAttention_Pro {
 
 	function add_shortcode_metabox() {
 		remove_meta_box( 'da_shortcode', $this->parent->cpt->post_type, 'side', 'low' );
-		add_meta_box( 'da_shortcode_pro', __('Copy Shortcode'), array( $this, 'display_shortcode_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
+		add_meta_box( 'da_shortcode_pro', __('Copy Shortcode', 'drawattention'), array( $this, 'display_shortcode_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
 	}
 
 	function display_shortcode_metabox() {
