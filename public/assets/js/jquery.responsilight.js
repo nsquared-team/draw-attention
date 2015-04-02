@@ -110,11 +110,15 @@
 
       $this.hover(
         function(){ mapOver($this, img); },
-        function(){ mapOut($this); }
-      )
-      .on('click', function(){
-        mapClick($(this), img);
-      });
+        function(){ mapOut($this, img); }
+      );
+
+      if (opts.eventTrigger == 'click') {
+        $this.off('click').on('click', function(e){
+          e.preventDefault();
+          mapClick($(this), img);
+        });
+      }
     });
   };
 
@@ -171,6 +175,11 @@
 
     if (img.data('highlight-border-opacity') !== '') {
       Object.defineProperty(dataOpts, 'highlightBorderOpacity', {value : img.data('highlight-border-opacity')});
+    }
+
+    console.log(img.data('event-trigger'));
+    if (img.data('event-trigger') !== '') {
+      Object.defineProperty(dataOpts, 'eventTrigger', {value : img.data('event-trigger')});
     }
 
     opts = $.extend(dataOpts, $.fn.responsilight.defaults);
@@ -266,8 +275,6 @@
       }
     }
 
-    drawOptions(img);
-
     if(shape == 'poly') {
       drawPoly(context, xCoords, yCoords);
     } else if(shape == 'circle') {
@@ -281,7 +288,7 @@
     img.trigger('showHighlight', [href]);
   };
 
-  mapOut = function(area) {
+  mapOut = function(area, img) {
     var id = area.attr('id'),
       canvas = $('#canvas-' + id);
 
@@ -290,6 +297,8 @@
         canvas.remove();
       });
     }
+    img.trigger('removeHighlight');
+
   };
 
   mapClick = function(area, img) {
@@ -344,7 +353,7 @@
         var $this = $(this),
           $mapName = $this.attr('usemap').replace('#', ''),
           $map = $('map[name="' + $mapName + '"]');
-
+        drawOptions($this);
         resizeImageMap($(this), $map);
       });
     }
@@ -363,7 +372,8 @@
     highlightOpacity: '0.5',
     highlightBorderColor: '#000000',
     highlightBorderWidth: 1,
-    highlightBorderOpacity: '1'
+    highlightBorderOpacity: '1',
+    eventTrigger: 'click'
   }
 
 }(jQuery, window, document));
