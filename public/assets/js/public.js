@@ -11,7 +11,7 @@
 	};
 
 	/* Private: show lightbox */
-	var showLightbox = function(container, isSticky, info) {
+	var showLightbox = function(container, isSticky, info, area) {
 		var mapId, mapNo;
 		if (isSticky) {
 			$.featherlight(info, {
@@ -34,6 +34,7 @@
 					}
 				},
 				afterClose: function() {
+					area.data('stickyCanvas', false);
 					$('#' + mapId).find('canvas').fadeOut('slow', function(){
 						$(this).remove();
 					});
@@ -71,7 +72,7 @@
 				container = $this.parents('.hotspots-container'),
 				newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
 
-			showLightbox(container, isSticky, newInfo);
+			showLightbox(container, isSticky, newInfo, $this);
 		});
 
 		/* Non-lightbox Layout */
