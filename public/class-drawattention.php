@@ -365,7 +365,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$image_html = '';
 				$image_html .=    '<div class="hotspots-image-container">';
-				$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
+				$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="click" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
 				$image_html .=    '</div>';
 
 				$info_html = '';
