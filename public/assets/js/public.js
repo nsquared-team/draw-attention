@@ -12,16 +12,17 @@
 
 	/* Private: show lightbox */
 	var showLightbox = function(container, isSticky, info) {
+		var mapId, mapNo;
 		if (isSticky) {
 			$.featherlight(info, {
 				afterContent: function(){
 					var content = $('.hotspot-info.featherlight-inner'),
-						lb = $('.featherlight-content'),
-						mapId = container.attr('id'),
-						mapNo = mapId.match(/\d+/)[0];
+						lb = $('.featherlight-content');
+					mapId = container.attr('id');
+					mapNo = mapId.match(/\d+/)[0];
 
 					content.show();
-					lb.addClass('lightbox' + mapNo);
+					lb.addClass('lightbox-' + mapNo);
 
 					var img = content.find('img'),
 						imgHeight = img.height(),
@@ -31,6 +32,11 @@
 					if ( imgHeight > maxImgHeight ) {
 						img.height(maxImgHeight);
 					}
+				},
+				afterClose: function() {
+					$('#' + mapId).find('canvas').fadeOut('slow', function(){
+						$(this).remove();
+					});
 				}
 			});
 		}
