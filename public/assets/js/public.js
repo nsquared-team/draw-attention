@@ -4,10 +4,6 @@
 	/* Private: get settings and set up each map */
 	var mapSetup  = function() {
 		$('img.hotspots-image').responsilight();
-
-		$('.hotspots-map area').on('click', function(e){
-			e.preventDefault();
-		});
 	};
 
 	/* Private: show lightbox */
