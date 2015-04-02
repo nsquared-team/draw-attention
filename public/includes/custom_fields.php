@@ -12,7 +12,7 @@ class DrawAttention_CustomFields {
 				require_once  __DIR__ .'/lib/CMB2/init.php';
 			}
 		}
-		if ( !class_exists( 'cmb2_bootstrap_200beta', false ) ) return;
+		if ( !class_exists( 'cmb2_bootstrap_205', false ) ) return;
 
 		add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
 		add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
