@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: comments, spam
 Requires at least: 3.5.1
 Tested up to: 3.6
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,15 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 1.2 =
+* New: Improve internationalization
+* New: Add Portuguese translation
+* New: Add layout option to display more info on top
+* Improved: Optimize detail image size (don't load full size image for smaller areas)
+* Improved: Fade out highlighted area after closing lightbox (lightbox layout only)
+* Improved: Handle JS conflicts with other plugins better
+* Fixed: More info content not updating in some situations
 
 = 1.1 =
 * New: Add option to choose "Click" (default) or "Hover" event to display more info
