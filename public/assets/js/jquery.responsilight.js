@@ -114,7 +114,8 @@
 			);
 
 			if (opts.eventTrigger == 'click') {
-				$this.on('click', function(){
+				$this.off('click').on('click', function(e){
+					e.preventDefault();
 					mapClick($(this), img);
 				});
 			}
