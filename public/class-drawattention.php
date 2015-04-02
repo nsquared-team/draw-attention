@@ -378,7 +378,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$info_html .=    '</div>';
 
 
-				$html .=  '<div class="hotspots-container ' . $layout . '" id="' . $spot_id . '">';
+				$html .=  '<div class="hotspots-container ' . $layout . ' event-click' .'" id="' . $spot_id . '">';
 				$html .=		'<div class="hotspots-interaction">';
 
 				$html .= $info_html;
