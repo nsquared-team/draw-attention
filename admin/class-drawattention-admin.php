@@ -226,7 +226,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			remove_submenu_page( 'edit.php?post_type=da_image', 'post-new.php?post_type=da_image'  );
 			remove_submenu_page( 'edit.php?post_type=da_image', 'edit.php?post_type=da_image'  );
-			add_submenu_page( 'edit.php?post_type=da_image', 'Edit Image', 'Edit Image', 'edit_posts', 'edit.php?post_type=da_image' );
+			add_submenu_page( 'edit.php?post_type=da_image', __('Edit Image', 'drawattention'), __('Edit Image', 'drawattention'), 'edit_posts', 'edit.php?post_type=da_image' );
 		}
 
 		public function admin_init() {
