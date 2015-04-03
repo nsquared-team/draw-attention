@@ -31,10 +31,10 @@ class DrawAttention_CPT {
 			array('labels' => array(
 				'name' => __('Draw Attention', $this->post_type.' general name', 'drawattention'), /* This is the Title of the Group */
 				'singular_name' => __('Image', $this->post_type.' singular name', 'drawattention'), /* This is the individual type */
-				'all_items' => __('All Images', 'drawattention'), /* the all items menu item */
-				'add_new' => __('Add New', 'custom '.$this->post_type.' item', 'drawattention'), /* The add new menu item */
+				'all_items' => __( 'All Images', 'drawattention' ), /* the all items menu item */
+				'add_new' => __('Add New', 'drawattention'), /* The add new menu item */
 				'add_new_item' => __('Add New Image', 'drawattention'), /* Add New Display Title */
-				'edit' => __( 'Edit' ), /* Edit Dialog */
+				'edit' => __( 'Edit', 'drawattention' ), /* Edit Dialog */
 				'edit_item' => __('Edit Image', 'drawattention'), /* Edit Display Title */
 				'new_item' => __('New Image', 'drawattention'), /* New Display Title */
 				'view_item' => __('View Image', 'drawattention'), /* View Display Title */
