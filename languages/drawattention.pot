@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Draw Attention Pro\n"
-"POT-Creation-Date: 2015-04-01 16:09-0800\n"
-"PO-Revision-Date: 2015-04-01 16:09-0800\n"
+"Project-Id-Version: Draw Attention\n"
+"POT-Creation-Date: 2015-04-02 17:56-0800\n"
+"PO-Revision-Date: 2015-04-02 17:56-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -19,25 +19,28 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/class-drawattention-admin.php:172
-#: admin/class-drawattention-admin.php:173
+#: admin/class-drawattention-admin.php:187
+#: admin/class-drawattention-admin.php:188
 msgid "DrawAttention"
 msgstr ""
 
-#: admin/class-drawattention-admin.php:202
+#: admin/class-drawattention-admin.php:217
 msgid "Settings"
 msgstr ""
 
-#: public/class-drawattention.php:337 public/includes/pro/pro.php:86
+#: admin/upsell-admin.php:19 admin/upsell-admin.php:34
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: public/class-drawattention.php:334
 msgid "You need to define some clickable areas for your image."
 msgstr ""
 
-#: public/class-drawattention.php:339 public/includes/cpt.php:38
-#: public/includes/pro/pro.php:88
+#: public/class-drawattention.php:336 public/includes/cpt.php:38
 msgid "Edit Image"
 msgstr ""
 
-#: public/class-drawattention.php:426 public/includes/pro/pro.php:182
+#: public/class-drawattention.php:423
 msgid "Copy Shortcode"
 msgstr ""
 
@@ -213,6 +216,7 @@ msgid "Title"
 msgstr ""
 
 #: public/includes/custom_fields.php:182 public/includes/custom_fields.php:244
+#: public/includes/lib/CMB2/example-functions.php:416
 msgid "Description"
 msgstr ""
 
@@ -244,278 +248,294 @@ msgstr ""
 msgid "Upload an image or enter a URL to show in the more info box"
 msgstr ""
 
-#: public/includes/lib/CMB2/CMB2.php:100
-msgid "Metabox configuration is required to have an ID parameter"
-msgstr ""
-
-#: public/includes/lib/CMB2/CMB2.php:287
-msgid "Click to toggle"
-msgstr ""
-
-#: public/includes/lib/CMB2/example-functions.php:53
+#: public/includes/lib/CMB2/example-functions.php:67
 msgid "Test Metabox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:61
-#: public/includes/lib/CMB2/example-functions.php:295
+#: public/includes/lib/CMB2/example-functions.php:77
+#: public/includes/lib/CMB2/example-functions.php:363
 msgid "Test Text"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:62
-#: public/includes/lib/CMB2/example-functions.php:73
-#: public/includes/lib/CMB2/example-functions.php:80
-#: public/includes/lib/CMB2/example-functions.php:87
-#: public/includes/lib/CMB2/example-functions.php:95
-#: public/includes/lib/CMB2/example-functions.php:102
-#: public/includes/lib/CMB2/example-functions.php:114
-#: public/includes/lib/CMB2/example-functions.php:120
-#: public/includes/lib/CMB2/example-functions.php:127
-#: public/includes/lib/CMB2/example-functions.php:142
-#: public/includes/lib/CMB2/example-functions.php:150
-#: public/includes/lib/CMB2/example-functions.php:157
-#: public/includes/lib/CMB2/example-functions.php:163
+#: public/includes/lib/CMB2/example-functions.php:78
+#: public/includes/lib/CMB2/example-functions.php:90
+#: public/includes/lib/CMB2/example-functions.php:98
+#: public/includes/lib/CMB2/example-functions.php:106
+#: public/includes/lib/CMB2/example-functions.php:115
+#: public/includes/lib/CMB2/example-functions.php:123
+#: public/includes/lib/CMB2/example-functions.php:137
+#: public/includes/lib/CMB2/example-functions.php:144
+#: public/includes/lib/CMB2/example-functions.php:152
 #: public/includes/lib/CMB2/example-functions.php:169
-#: public/includes/lib/CMB2/example-functions.php:181
-#: public/includes/lib/CMB2/example-functions.php:192
-#: public/includes/lib/CMB2/example-functions.php:203
+#: public/includes/lib/CMB2/example-functions.php:178
+#: public/includes/lib/CMB2/example-functions.php:186
+#: public/includes/lib/CMB2/example-functions.php:193
+#: public/includes/lib/CMB2/example-functions.php:200
 #: public/includes/lib/CMB2/example-functions.php:214
-#: public/includes/lib/CMB2/example-functions.php:222
-#: public/includes/lib/CMB2/example-functions.php:229
-#: public/includes/lib/CMB2/example-functions.php:237
-#: public/includes/lib/CMB2/example-functions.php:243
-#: public/includes/lib/CMB2/example-functions.php:255
-#: public/includes/lib/CMB2/example-functions.php:296
-#: public/includes/lib/CMB2/example-functions.php:362
-#: public/includes/lib/CMB2/example-functions.php:369
-#: public/includes/lib/CMB2/example-functions.php:375
-#: public/includes/lib/CMB2/example-functions.php:381
-#: public/includes/lib/CMB2/example-functions.php:387
-#: public/includes/lib/CMB2/example-functions.php:393
-#: public/includes/lib/CMB2/example-functions.php:399
-#: public/includes/lib/CMB2/example-functions.php:417
+#: public/includes/lib/CMB2/example-functions.php:227
+#: public/includes/lib/CMB2/example-functions.php:240
+#: public/includes/lib/CMB2/example-functions.php:252
+#: public/includes/lib/CMB2/example-functions.php:261
+#: public/includes/lib/CMB2/example-functions.php:269
+#: public/includes/lib/CMB2/example-functions.php:278
+#: public/includes/lib/CMB2/example-functions.php:285
+#: public/includes/lib/CMB2/example-functions.php:298
+#: public/includes/lib/CMB2/example-functions.php:364
+#: public/includes/lib/CMB2/example-functions.php:458
+#: public/includes/lib/CMB2/example-functions.php:466
+#: public/includes/lib/CMB2/example-functions.php:473
+#: public/includes/lib/CMB2/example-functions.php:480
+#: public/includes/lib/CMB2/example-functions.php:487
+#: public/includes/lib/CMB2/example-functions.php:494
+#: public/includes/lib/CMB2/example-functions.php:501
+#: public/includes/lib/CMB2/example-functions.php:539
 msgid "field description (optional)"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:72
+#: public/includes/lib/CMB2/example-functions.php:89
 msgid "Test Text Small"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:79
+#: public/includes/lib/CMB2/example-functions.php:97
 msgid "Test Text Medium"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:86
+#: public/includes/lib/CMB2/example-functions.php:105
 msgid "Website URL"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:94
+#: public/includes/lib/CMB2/example-functions.php:114
 msgid "Test Text Email"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:101
+#: public/includes/lib/CMB2/example-functions.php:122
 msgid "Test Time"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:107
-#: public/includes/lib/CMB2/example-functions.php:108
+#: public/includes/lib/CMB2/example-functions.php:129
+#: public/includes/lib/CMB2/example-functions.php:130
 msgid "Time zone"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:113
+#: public/includes/lib/CMB2/example-functions.php:136
 msgid "Test Date Picker"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:119
+#: public/includes/lib/CMB2/example-functions.php:143
 msgid "Test Date Picker (UNIX timestamp)"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:126
+#: public/includes/lib/CMB2/example-functions.php:151
 msgid "Test Date/Time Picker Combo (UNIX timestamp)"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:141
+#: public/includes/lib/CMB2/example-functions.php:168
 msgid "Test Money"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:149
+#: public/includes/lib/CMB2/example-functions.php:177
 msgid "Test Color Picker"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:156
+#: public/includes/lib/CMB2/example-functions.php:185
 msgid "Test Text Area"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:162
+#: public/includes/lib/CMB2/example-functions.php:192
 msgid "Test Text Area Small"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:168
+#: public/includes/lib/CMB2/example-functions.php:199
 msgid "Test Text Area for Code"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:174
+#: public/includes/lib/CMB2/example-functions.php:206
 msgid "Test Title Weeeee"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:175
+#: public/includes/lib/CMB2/example-functions.php:207
 msgid "This is a title description"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:180
+#: public/includes/lib/CMB2/example-functions.php:213
 msgid "Test Select"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:185
-#: public/includes/lib/CMB2/example-functions.php:196
-#: public/includes/lib/CMB2/example-functions.php:207
+#: public/includes/lib/CMB2/example-functions.php:219
+#: public/includes/lib/CMB2/example-functions.php:232
+#: public/includes/lib/CMB2/example-functions.php:244
 msgid "Option One"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:186
-#: public/includes/lib/CMB2/example-functions.php:197
-#: public/includes/lib/CMB2/example-functions.php:208
+#: public/includes/lib/CMB2/example-functions.php:220
+#: public/includes/lib/CMB2/example-functions.php:233
+#: public/includes/lib/CMB2/example-functions.php:245
 msgid "Option Two"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:187
-#: public/includes/lib/CMB2/example-functions.php:198
-#: public/includes/lib/CMB2/example-functions.php:209
+#: public/includes/lib/CMB2/example-functions.php:221
+#: public/includes/lib/CMB2/example-functions.php:234
+#: public/includes/lib/CMB2/example-functions.php:246
 msgid "Option Three"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:191
+#: public/includes/lib/CMB2/example-functions.php:226
 msgid "Test Radio inline"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:202
+#: public/includes/lib/CMB2/example-functions.php:239
 msgid "Test Radio"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:213
+#: public/includes/lib/CMB2/example-functions.php:251
 msgid "Test Taxonomy Radio"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:221
+#: public/includes/lib/CMB2/example-functions.php:260
 msgid "Test Taxonomy Select"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:228
+#: public/includes/lib/CMB2/example-functions.php:268
 msgid "Test Taxonomy Multi Checkbox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:236
+#: public/includes/lib/CMB2/example-functions.php:277
 msgid "Test Checkbox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:242
+#: public/includes/lib/CMB2/example-functions.php:284
 msgid "Test Multi Checkbox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:247
+#: public/includes/lib/CMB2/example-functions.php:289
 msgid "Check One"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:248
+#: public/includes/lib/CMB2/example-functions.php:290
 msgid "Check Two"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:249
+#: public/includes/lib/CMB2/example-functions.php:291
 msgid "Check Three"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:254
+#: public/includes/lib/CMB2/example-functions.php:297
 msgid "Test wysiwyg"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:261
+#: public/includes/lib/CMB2/example-functions.php:305
 msgid "Test Image"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:262
+#: public/includes/lib/CMB2/example-functions.php:306
 msgid "Upload an image or enter a URL."
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:267
+#: public/includes/lib/CMB2/example-functions.php:312
 msgid "Multiple Files"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:268
+#: public/includes/lib/CMB2/example-functions.php:313
 msgid "Upload or add multiple images/attachments."
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:274
+#: public/includes/lib/CMB2/example-functions.php:320
 msgid "oEmbed"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:275
+#: public/includes/lib/CMB2/example-functions.php:321
 msgid ""
 "Enter a youtube, twitter, or instagram URL. Supports services listed at <a "
 "href=\"http://codex.wordpress.org/Embeds\">http://codex.wordpress.org/"
 "Embeds</a>."
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:287
+#: public/includes/lib/CMB2/example-functions.php:354
 msgid "About Page Metabox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:308
+#: public/includes/lib/CMB2/example-functions.php:385
 msgid "Repeating Field Group"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:314
+#: public/includes/lib/CMB2/example-functions.php:393
 msgid "Generates reusable form entries"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:316
+#: public/includes/lib/CMB2/example-functions.php:395
 msgid "Entry {#}"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:317
+#: public/includes/lib/CMB2/example-functions.php:396
 msgid "Add Another Entry"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:318
+#: public/includes/lib/CMB2/example-functions.php:397
 msgid "Remove Entry"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:355
+#: public/includes/lib/CMB2/example-functions.php:409
+msgid "Entry Title"
+msgstr ""
+
+#: public/includes/lib/CMB2/example-functions.php:417
+msgid "Write a short description for this entry"
+msgstr ""
+
+#: public/includes/lib/CMB2/example-functions.php:423
+msgid "Entry Image"
+msgstr ""
+
+#: public/includes/lib/CMB2/example-functions.php:429
+msgid "Image Caption"
+msgstr ""
+
+#: public/includes/lib/CMB2/example-functions.php:450
 msgid "User Profile Metabox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:361
+#: public/includes/lib/CMB2/example-functions.php:457
 msgid "Extra Info"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:368
+#: public/includes/lib/CMB2/example-functions.php:465
 msgid "Avatar"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:374
+#: public/includes/lib/CMB2/example-functions.php:472
 msgid "Facebook URL"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:380
+#: public/includes/lib/CMB2/example-functions.php:479
 msgid "Twitter URL"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:386
+#: public/includes/lib/CMB2/example-functions.php:486
 msgid "Google+ URL"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:392
+#: public/includes/lib/CMB2/example-functions.php:493
 msgid "Linkedin URL"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:398
+#: public/includes/lib/CMB2/example-functions.php:500
 msgid "User Field"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:412
+#: public/includes/lib/CMB2/example-functions.php:523
 msgid "Theme Options Metabox"
 msgstr ""
 
-#: public/includes/lib/CMB2/example-functions.php:416
+#: public/includes/lib/CMB2/example-functions.php:538
 msgid "Site Background Color"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2.php:112
+msgid "Metabox configuration is required to have an ID parameter"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2.php:302
+msgid "Click to toggle"
 msgstr ""
 
 #: public/includes/lib/CMB2/includes/CMB2_Ajax.php:37
@@ -523,150 +543,177 @@ msgid "Please Try Again"
 msgstr ""
 
 #: public/includes/lib/CMB2/includes/CMB2_Ajax.php:133
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:734
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:766
 msgid "Remove Embed"
 msgstr ""
 
 #: public/includes/lib/CMB2/includes/CMB2_Ajax.php:137
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:767
 #, php-format
 msgid "No oEmbed Results Found for %s. View more info at"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Field.php:764
+#: public/includes/lib/CMB2/includes/CMB2_Field.php:885
 msgid "Add Group"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Field.php:765
+#: public/includes/lib/CMB2/includes/CMB2_Field.php:886
 msgid "Remove Group"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Field.php:786
+#: public/includes/lib/CMB2/includes/CMB2_Field.php:908
+#: public/includes/lib/CMB2/includes/CMB2_Field.php:912
+#: public/includes/lib/CMB2/tests/test-cmb-field.php:170
 msgid "None"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Field.php:787
-msgid "All"
-msgstr ""
-
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:290
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:294
 msgid "Add Row"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:349
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:805
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:882
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:173
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:353
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:986
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:183
 #: public/includes/lib/CMB2/tests/test-cmb-types.php:147
 #: public/includes/lib/CMB2/tests/test-cmb-types.php:155
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:683
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:708
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:715
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:740
 msgid "Remove"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:683
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:731
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:722
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:770
 msgid "No terms"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:775
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:830
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:659
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:685
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:695
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:710
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:835
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:691
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:717
+msgid "Add or Upload Files"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:893
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:727
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:742
 msgid "Add or Upload File"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:796
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:877
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:172
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:967
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:182
 msgid "Remove Image"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:805
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:882
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:174
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:684
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:709
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:981
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:184
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:716
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:741
 msgid "File:"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:805
-#: public/includes/lib/CMB2/includes/CMB2_Types.php:882
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:175
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:682
-#: public/includes/lib/CMB2/tests/test-cmb-types.php:707
+#: public/includes/lib/CMB2/includes/CMB2_Types.php:984
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:185
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:714
+#: public/includes/lib/CMB2/tests/test-cmb-types.php:739
 msgid "Download"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:123
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:160
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:128
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:165
 msgid "Clear"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:124
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:129
 msgid "Default"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:125
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:130
 msgid "Select Color"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:126
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:131
 msgid "Current Color"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:150
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:155
 msgid "mm/dd/yy"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:151
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:156
 msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:152
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:157
 msgid "Su, Mo, Tu, We, Th, Fr, Sa"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:153
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:158
 msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:154
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:159
 msgid ""
 "January, February, March, April, May, June, July, August, September, "
 "October, November, December"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:155
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:160
 msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:156
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:161
 msgid "Next"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:157
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:162
 msgid "Prev"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:158
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:163
 msgid "Today"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:159
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:164
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:174
 msgid "Done"
 msgstr ""
 
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:168
+msgid "Choose Time"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:169
+msgid "Time"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:170
+msgid "Hour"
+msgstr ""
+
 #: public/includes/lib/CMB2/includes/CMB2_hookup.php:171
+msgid "Minute"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:172
+msgid "Second"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:173
+msgid "Now"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:175
+msgid "hh:mm TT"
+msgstr ""
+
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:181
 msgid "Use this file"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/CMB2_hookup.php:176
+#: public/includes/lib/CMB2/includes/CMB2_hookup.php:186
 msgid "Select / Deselect All"
 msgstr ""
 
-#: public/includes/lib/CMB2/includes/helper-functions.php:243
+#: public/includes/lib/CMB2/includes/helper-functions.php:254
 msgid "Save"
 msgstr ""
 
@@ -801,82 +848,6 @@ msgstr ""
 
 #: public/includes/lib/drag-drop-featured-image/index.php:537
 msgid "Drag & Drop Feaured image: An error occured, please reload page!"
-msgstr ""
-
-#: public/includes/pro/pro.php:19
-msgid "Layout"
-msgstr ""
-
-#: public/includes/pro/pro.php:31
-msgid "Left"
-msgstr ""
-
-#: public/includes/pro/pro.php:32
-msgid "Right"
-msgstr ""
-
-#: public/includes/pro/pro.php:33
-msgid "Bottom"
-msgstr ""
-
-#: public/includes/pro/pro.php:34
-msgid "Top"
-msgstr ""
-
-#: public/includes/pro/pro.php:35
-msgid "Lightbox"
-msgstr ""
-
-#: public/includes/pro/pro.php:41
-msgid "Show more info on"
-msgstr ""
-
-#: public/includes/pro/pro.php:46
-msgid "Click"
-msgstr ""
-
-#: public/includes/pro/pro.php:47
-msgid "Hover"
-msgstr ""
-
-#: public/includes/pro/updater.php:24
-msgid "License & Support"
-msgstr ""
-
-#: public/includes/pro/updater.php:33
-msgid "Enter License Key"
-msgstr ""
-
-#: public/includes/pro/updater.php:41
-msgid "Draw Attention Pro - License & Updates"
-msgstr ""
-
-#: public/includes/pro/updater.php:48
-msgid "Please enter your license key to receive support & updates"
-msgstr ""
-
-#: public/includes/pro/updater.php:48
-msgid "Click here to purchase or renew a license"
-msgstr ""
-
-#: public/includes/pro/updater.php:50
-msgid "Valid license"
-msgstr ""
-
-#: public/includes/pro/updater.php:52
-msgid ""
-"Invalid license. Please verify the license key, you may need to <a href="
-"\"http://tylerdigital.com/products/draw-attention/\" target=\"_blank\">renew "
-"your license</a> or <a href=\"mailto:support@tylerdigital.com\">contact "
-"support</a></p>"
-msgstr ""
-
-#: public/includes/pro/updater.php:56
-msgid "License Key"
-msgstr ""
-
-#: public/includes/pro/updater.php:65
-msgid "Update"
 msgstr ""
 
 #: public/includes/themes.php:13

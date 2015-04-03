@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: Draw Attention\n"
 "POT-Creation-Date: 2015-04-01 16:09-0800\n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: João Alexandre <jpaportugal@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.6.9\n"
 
 #: admin/class-drawattention-admin.php:172
 #: admin/class-drawattention-admin.php:173
@@ -44,7 +44,7 @@ msgstr "Imagem"
 
 #: public/includes/cpt.php:34
 msgid "All Images"
-msgstr ""
+msgstr "Todas as Imagens"
 
 #: public/includes/cpt.php:35
 msgid "Add New"
@@ -52,7 +52,7 @@ msgstr "Adicionar Novo"
 
 #: public/includes/cpt.php:36
 msgid "Add New Image"
-msgstr ""
+msgstr "Adicionar Nova Imagem"
 
 #: public/includes/cpt.php:37
 msgid "Edit"
@@ -60,15 +60,15 @@ msgstr "Editar"
 
 #: public/includes/cpt.php:39
 msgid "New Image"
-msgstr ""
+msgstr "Nova Imagem"
 
 #: public/includes/cpt.php:40
 msgid "View Image"
-msgstr ""
+msgstr "Ver Imagem"
 
 #: public/includes/cpt.php:41
 msgid "Search Images"
-msgstr ""
+msgstr "Pesquisar imagens"
 
 #: public/includes/cpt.php:42
 msgid "Nothing found in the Database."
@@ -820,23 +820,23 @@ msgstr "Layout"
 
 #: public/includes/pro/pro.php:31
 msgid "Left"
-msgstr ""
+msgstr "Esquerda"
 
 #: public/includes/pro/pro.php:32
 msgid "Right"
-msgstr ""
+msgstr "Direita"
 
 #: public/includes/pro/pro.php:33
 msgid "Bottom"
-msgstr ""
+msgstr "Fundo"
 
 #: public/includes/pro/pro.php:34
 msgid "Top"
-msgstr ""
+msgstr "Topo"
 
 #: public/includes/pro/pro.php:35
 msgid "Lightbox"
-msgstr ""
+msgstr "Caixa de luz"
 
 #: public/includes/pro/pro.php:41
 msgid "Show more info on"
@@ -844,15 +844,15 @@ msgstr "Mostrar mais informação em "
 
 #: public/includes/pro/pro.php:46
 msgid "Click"
-msgstr ""
+msgstr "Clique"
 
 #: public/includes/pro/pro.php:47
 msgid "Hover"
-msgstr ""
+msgstr "Hover"
 
 #: public/includes/pro/updater.php:24
 msgid "License & Support"
-msgstr ""
+msgstr "Licensa & Suporte"
 
 #: public/includes/pro/updater.php:33
 msgid "Enter License Key"
@@ -860,19 +860,20 @@ msgstr "Escreva Chave de Licença"
 
 #: public/includes/pro/updater.php:41
 msgid "Draw Attention Pro - License & Updates"
-msgstr ""
+msgstr "Draw Attention Pro - Licença & Atualizações"
 
 #: public/includes/pro/updater.php:48
 msgid "Please enter your license key to receive support & updates"
 msgstr ""
+"Por favor entre sua chave de acesso para receber suporte & atualizações"
 
 #: public/includes/pro/updater.php:48
 msgid "Click here to purchase or renew a license"
-msgstr ""
+msgstr "Clique aqui para comprar ou renovar licença"
 
 #: public/includes/pro/updater.php:50
 msgid "Valid license"
-msgstr ""
+msgstr "Licença válida"
 
 #: public/includes/pro/updater.php:52
 msgid ""
@@ -881,14 +882,18 @@ msgid ""
 "your license</a> or <a href=\"mailto:support@tylerdigital.com\">contact "
 "support</a></p>"
 msgstr ""
+"Licença inválida. Por favor verifique a chave de licença, pode requerer <a "
+"href=\"http://tylerdigital.com/products/draw-attention/\" target=\"_blank"
+"\">renovar sua licença</a> ou <a href=\"mailto:support@tylerdigital.com"
+"\">contactar o suporte</a></p>"
 
 #: public/includes/pro/updater.php:56
 msgid "License Key"
-msgstr ""
+msgstr "Chave de Licença"
 
 #: public/includes/pro/updater.php:65
 msgid "Update"
-msgstr ""
+msgstr "Atualizar"
 
 #: public/includes/themes.php:13
 msgid "Apply Color Scheme"
@@ -900,7 +905,7 @@ msgstr "Aplicar rapidamente um tema (pode ajustar cor depois)"
 
 #: public/includes/themes.php:19
 msgid "Select a theme..."
-msgstr ""
+msgstr "Selecione um tema..."
 
 #~ msgid "All "
 #~ msgstr "Todos"
