@@ -119,6 +119,12 @@
 					mapClick($(this), img);
 				});
 			}
+
+			if ($this.data('stickyCanvas')) {
+				mapOver($this, img);
+				img.siblings('canvas').addClass('sticky-canvas');
+			}
+
 		});
 	};
 
@@ -225,8 +231,8 @@
 				}
 				$this.attr(c, coordsPercent.toString());
 			});
+			drawIt(img, map);
 		}).attr('src', $image.attr('src'));
-		drawIt(img, map);
 	};
 
 	mapOver = function(area, img) {
