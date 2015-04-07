@@ -319,10 +319,10 @@
       });
     } else {
       area.data('stickyCanvas', true);
-      stickyCanvas.addClass('sticky');
+      stickyCanvas.addClass('sticky-canvas');
       img.trigger('activateHighlight', [href]);
       area.trigger('stickyHighlight', [true]);
-      stickyCanvas.siblings('canvas.sticky').stop(true, true).fadeOut('fast', function(){
+      stickyCanvas.siblings('canvas.sticky-canvas').stop(true, true).fadeOut('fast', function(){
         $(this).remove();
       });
       area.siblings('area').data('stickyCanvas', false);
