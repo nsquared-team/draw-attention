@@ -399,7 +399,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 					}
 					if ( !empty( $hotspot['detail_image'] ) ) {
 						$html .=  '<div class="hotspot-thumb">';
-						$html .=    '<img src="'.$hotspot['detail_image'].'" />';
+						$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'medium', $hotspot, $img_post, $settings ) );
 						$html .=  '</div>';
 					}
 					$description_html = ( !empty( $hotspot['description'] ) ) ? wpautop( $hotspot['description'] ) : '';
