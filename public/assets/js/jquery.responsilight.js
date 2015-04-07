@@ -308,7 +308,9 @@
 
 		if (stickyCanvas.length == 0) {
 			mapOver(area, img);
+			stickyCanvas = $('#canvas-' + id);
 		}
+
 
 		if (isSticky) {
 			area.data('stickyCanvas', false);
