@@ -124,7 +124,31 @@
 				$metabox.on( 'click', '.cmb-add-group-row', cmb.addGroupRow );
 			}
 		});
-	}
+	};
+
+	var saveAlert = function(){
+		var isDirty = false;
+		$('.cmb2-wrap > .cmb2-metabox').on('change', ':input', function(){
+			console.log('Form is dirty?: ' + isDirty);
+			isDirty = true;
+		});
+
+		$(window).on( 'beforeunload.edit-post', function(e) {
+			/* Show message only when editing our post type */
+			if ($('body').hasClass('post-type-da_image')) {
+				var confirmationMessage = 'You\'ve made some changes to your Draw Attention data.';
+				confirmationMessage += 'If you leave before saving, your changes will be lost.';
+
+				if (!isDirty) {
+					return undefined;
+				} else {
+					(e || window.event).returnValue = confirmationMessage;
+					return confirmationMessage;
+				}
+			}
+		})
+	};
+
 
 	hotspotAdmin.init = function() {
 		canvasDraw();
@@ -134,6 +158,7 @@
 		themeSelect();
 		opacityLabelSync();
 		areaLimit();
+		saveAlert();
 	}
 
 	/* Reset the drawable canvas areas */
