@@ -353,10 +353,6 @@ if ( !class_exists( 'DrawAttention' ) ) {
 						color: {$text_color};
 					}
 
-					#{$spot_id} .hotspots-image-container {
-						background: #efefef;
-					}
-
 					#{$spot_id} .hotspot-title,
 					.featherlight .featherlight-content.lightbox{$imageID} .hotspot-title {
 						color: {$title_color};
