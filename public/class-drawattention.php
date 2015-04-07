@@ -90,6 +90,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			// Shortcode for displaying the image map
 			add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
 
+			add_action( 'admin_notices', array( $this, 'php_52_notice' ) );
+
 			add_action( 'add_meta_boxes', array( $this, 'add_shortcode_metabox' ) );
 
 		/**
@@ -305,6 +307,33 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
+		}
+
+		function php_52_notice() {
+			global $pagenow;
+			if ( $pagenow != 'post.php' ) return;
+			if ( get_post_type() != 'da_image' ) return;
+
+			if ( version_compare( phpversion(), '5.2.99') <= 0 ) {
+				$class = "error";
+				$message = "<p>
+				<h3>Your server is out of date</h3>
+				Draw Attention (and many other WP plugins) <strong>requires PHP version 5.3 or higher</strong>. PHP 5.2 was released back in 2006 and support was officially terminated in 2011.
+				</p>
+				<p>
+
+				<h3>Please contact your hosting company and ask to be upgraded to PHP 5.3 or higher</h3>
+				<p>Most hosts run PHP 5.5+, there shouldn't be any charge for this upgrade. If your host won't upgrade your PHP version, it's worth considering another host since there are
+				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@tylerdigital.com'>support@tylerdigital.com</a> we'll be happy to provide
+				you with a list of hosts who run PHP 5.3+ and will help you migrate your site from your current hosting provider.</p>
+				<h4>Additional info:</h4>
+				<ul> 
+					<li><a href='http://w3techs.com/technologies/details/pl-php/5/all'>http://w3techs.com/technologies/details/pl-php/5/all</a></li>
+					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
+				</ul>
+				</p>";
+				echo"<div class=\"$class\"> <p>$message</p></div>";
+			}
 		}
 
 		/**
