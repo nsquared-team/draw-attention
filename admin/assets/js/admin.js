@@ -104,18 +104,31 @@
 				e.stopImmediatePropagation();
 				e.preventDefault();
 			}
-		});		
+		});
 	};
 
-
 	var saveAlert = function(){
-		$(window).on( 'beforeunload.edit-post', function() {
-			if ($(body).hasClass('post-type-da_image')) {
-				return postL10n.saveAlert;
+		var isDirty = false;
+		$('.cmb2-wrap > .cmb2-metabox').on('change', ':input', function(){
+			console.log('Form is dirty?: ' + isDirty);
+			isDirty = true;
+		});
+
+		$(window).on( 'beforeunload.edit-post', function(e) {
+			/* Show message only when editing our post type */
+			if ($('body').hasClass('post-type-da_image')) {
+				var confirmationMessage = 'You\'ve made some changes to your Draw Attention data.';
+				confirmationMessage += 'If you leave before saving, your changes will be lost.';
+
+				if (!isDirty) {
+					return undefined;
+				} else {
+					(e || window.event).returnValue = confirmationMessage;
+					return confirmationMessage;
+				}
 			}
 		})
 	};
-
 
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
