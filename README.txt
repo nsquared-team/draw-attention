@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 4.1
 Tested up to: 4.1.1
-Stable tag: 1.1.3
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,16 @@ The Pro version includes:
 
 
 == Changelog ==
+
+= 1.2 =
+* New: Improve internationalization
+* New: Add Portuguese translation
+* Improved: Optimize detail image size (don't load full size image for more info box)
+* Improved: Handle JS conflicts with other plugins better
+* Improved: Add warning message for old servers running PHP 5.2 (Draw Attention requires PHP 5.3+)
+* Improved: Better handling of window resizing after interactive image is loaded
+* Fixed: More info content not updating in some situations
+* Fixed: Conflict with some themes causing highlighted areas to "jump" when clicked
 
 = 1.1.3 =
 * Fix: Default color scheme always applying when re-editing an existing image
