@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: comments, spam
 Requires at least: 3.5.1
 Tested up to: 3.6
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,9 +86,14 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.2.1 =
+* New: Add Portuguese translation
+* Improved: Better handling of window resizing after interactive image is loaded
+* Improved: Add warning message for old servers running PHP 5.2 (Draw Attention requires PHP 5.3+)
+* Fixed: Conflict with some themes causing highlighted areas to "jump" when clicked
+
 = 1.2 =
 * New: Improve internationalization
-* New: Add Portuguese translation
 * New: Add layout option to display more info on top
 * Improved: Optimize detail image size (don't load full size image for smaller areas)
 * Improved: Fade out highlighted area after closing lightbox (lightbox layout only)

@@ -30,7 +30,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.2';
+		const VERSION = '1.2.1';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		/**
