@@ -3,8 +3,8 @@
 @package   DrawAttention
 @author    Nathan Tyler <support@tylerdigital.com>
 @license   GPL-2.0+
-@link      http://example.com
-@copyright 2014 Tyler Digital
+@link      http://wpdrawattention.com
+@copyright 2015 Tyler Digital
 @wordpress-plugin
 Plugin Name:       Draw Attention
 Plugin URI:        http://wpdrawattention.com
