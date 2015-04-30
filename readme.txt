@@ -86,4 +86,3 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = 1.0 =
 * Initial Release
-* 
