@@ -66,7 +66,8 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = What's added in Draw Attention Pro? =
 
-The Pro version includes:
+**The Pro version includes:**
+
 - Ability to create more than 1 interactive image
 - Unlimited number of highlightable areas for each image
 - 20 preset color schemes
