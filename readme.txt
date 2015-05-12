@@ -7,7 +7,7 @@ Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
+Create interactive images in WordPress. Perfect for floor plans, trade shows, group photos, product features, and annotated image tutorials.
 
 == Description ==
 
@@ -81,6 +81,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 5. 
 
 == Changelog ==
+
+= Beta =
+* Improved: Better handling of mobile device changing orientation after interactive image is loaded
+* Fixed: Interactive features not working in older versions of Internet Explorer
 
 = 1.2 =
 * New: Improve internationalization
