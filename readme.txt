@@ -61,6 +61,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = Beta =
+* New: Easily preview your interactive image using "Preview Changes" or "View Post" in the dashboard
 * Improved: Better handling of mobile device changing orientation after interactive image is loaded
 * Fixed: Interactive features not working in older versions of Internet Explorer
 * Fixed: Image distortion in lightbox layout (for portrait/vertical images)
