@@ -27,6 +27,7 @@
 
 					if ( imgHeight > maxImgHeight ) {
 						img.height(maxImgHeight);
+						img.css({'width': 'auto'});
 					}
 				},
 				afterClose: function() {
