@@ -372,7 +372,7 @@
       });
     }
 
-    $(window).resize(function() {
+    $(window).on('resize orientationchange', function() {
       resizeDelay(function() {
         responsilight_init();
       }, 300, 'responsilight');
