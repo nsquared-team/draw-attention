@@ -1,10 +1,7 @@
 <?php
 /**
- * The Template for displaying all single posts.
- *
- * @package WordPress
- * @subpackage Twenty_Twelve
- * @since Twenty Twelve 1.0
+ * The template for displaying a preview of the interactive image.
+ * Copy this file into your theme to customize it for your specific project
  */
 
 get_header(); ?>
