@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.2
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,7 +82,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= Beta =
+= 1.3 =
 * New: Easily preview your interactive image using "Preview Changes" or "View Post" in the dashboard
 * Improved: Better handling of mobile device changing orientation after interactive image is loaded
 * Fixed: Interactive features not working in older versions of Internet Explorer
