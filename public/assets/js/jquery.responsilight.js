@@ -62,7 +62,7 @@
 			drawCanvas(img, map);
 		} else {
 			map.find('area')
-				.on('click', function(e){
+				.on('tapstart', function(e){
 					var area = $(this);
 					e.preventDefault();
 					area.trigger('stickyHighlight', [true]);
@@ -121,7 +121,7 @@
 			);
 
 			if (opts.eventTrigger == 'click') {
-				$this.off('click').on('click', function(e){
+				$this.off('tapstart').on('tapstart', function(e){
 					e.preventDefault();
 					mapClick($(this), img);
 				});

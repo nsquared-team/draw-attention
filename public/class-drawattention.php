@@ -312,6 +312,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public function enqueue_scripts() {
 			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
+			wp_register_script( $this->plugin_slug . '-mobile-events', plugins_url( 'assets/js/jquery.mobile-events.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
 		}
 
@@ -333,7 +334,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@tylerdigital.com'>support@tylerdigital.com</a> we'll be happy to provide
 				you with a list of hosts who run PHP 5.3+ and will help you migrate your site from your current hosting provider.</p>
 				<h4>Additional info:</h4>
-				<ul> 
+				<ul>
 					<li><a href='http://w3techs.com/technologies/details/pl-php/5/all'>http://w3techs.com/technologies/details/pl-php/5/all</a></li>
 					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
 				</ul>

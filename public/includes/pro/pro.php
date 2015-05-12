@@ -76,6 +76,7 @@ class DrawAttention_Pro {
 		$imageID = $a['id'];
 
 		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
+		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
 		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
 
 
