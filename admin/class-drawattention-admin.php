@@ -84,7 +84,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
 			// Add an action link pointing to the options page.
-			// $plugin_basename = 'draw-attention/' . DrawAttention::plugin_slug . '.php';
+			// $plugin_basename = 'draw-attention/' . DrawAttention::slug . '.php';
 			// add_filter( 'plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ) );
 
 			include 'upsell-admin.php';

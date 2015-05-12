@@ -49,7 +49,6 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var      string
 		 */
-		const plugin_slug = 'drawattention';
 		public $plugin_slug = 'drawattention';
 
 		/**
