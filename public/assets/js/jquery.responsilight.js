@@ -128,7 +128,8 @@
 		});
 	};
 
-	drawPoly = function(context, xCoords, yCoords) {
+	drawPoly = function(context, xCoords, yCoords, img) {
+		drawOptions(img);
 		context.beginPath();
 		context.moveTo(xCoords[0], yCoords[0]);
 		for(var j=1; j<xCoords.length; j++) {
@@ -143,6 +144,7 @@
 	};
 
 	drawCircle = function(context, xCoords, yCoords) {
+		drawOptions(img);
 		context.beginPath();
 		context.arc(xCoords[0], yCoords[0], xCoords[1], 0, Math.PI*2, true);
 		context.fillStyle = convertToRgba(opts.highlightColor, opts.highlightOpacity);
@@ -153,6 +155,7 @@
 	}
 
 	drawRect = function(context, xCoords, yCoords) {
+		drawOptions(img);
 		context.fillStyle = convertToRgba(opts.highlightColor, opts.highlightOpacity);
 		context.lineWidth = opts.highlightBorderWidth;;
 		context.strokeStyle = convertToRgba(opts.highlightBorderColor, opts.highlightBorderOpacity);
@@ -281,11 +284,11 @@
 		}
 
 		if(shape == 'poly') {
-			drawPoly(context, xCoords, yCoords);
+			drawPoly(context, xCoords, yCoords, img);
 		} else if(shape == 'circle') {
-			drawCircle(context, xCoords, yCoords);
+			drawCircle(context, xCoords, yCoords, img);
 		} else if(shape == 'rect') {
-			drawRect(context, xCoords, yCoords);
+			drawRect(context, xCoords, yCoords, img);
 		}
 
 		$canvas.stop(true, true).fadeIn('fast');
