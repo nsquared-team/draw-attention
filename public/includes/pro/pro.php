@@ -163,13 +163,13 @@ class DrawAttention_Pro {
 			$html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
 			foreach ($hotspots as $key => $hotspot) {
 				$coords = $hotspot['coordinates'];
-				$html .= '<area shape="poly" coords="' . $coords . '" href="#hotspot-' . $key . '">';
+				$html .= '<area shape="poly" coords="' . $coords . '" href="#hotspot-' . $spot_id . '-' . $key . '">';
 			}
 
 			$html .=    '</map>';
 
 			foreach ($hotspots as $key => $hotspot) {
-				$html .=  '<div class="hotspot-info" id="hotspot-' . $key . '">';
+				$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
 				$html .=    '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>';
 				if ( !empty( $hotspot['detail_image'] ) ) {
 					$html .=  '<div class="hotspot-thumb">';
