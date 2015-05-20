@@ -6,7 +6,6 @@ class DrawAttention_CPT {
 	function __construct( $parent ) {
 
 		add_action( 'init' , array( $this, 'register_cpt' ) );
-		// add_action( 'init' , array( $this, 'register_taxonomies' ) );
 		// add_filter( 'manage_edit-' . $this->post_type . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
 		// add_action( 'manage_' . $this->post_type .'_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
 
@@ -68,42 +67,6 @@ class DrawAttention_CPT {
 				'supports' => array( 'title', 'thumbnail' ),
 		 	) /* end of options */
 		); /* end of register post type */
-	}
-
-	function register_taxonomies() {
-
-		$labels = array(
-			'name'					=> _x( 'Hotspot Images', 'Taxonomy plural name', 'text-domain' ),
-			'singular_name'			=> _x( 'Hotspot Image', 'Taxonomy singular name', 'text-domain' ),
-			'search_items'			=> __( 'Search Hotspot Images', 'text-domain' ),
-			'popular_items'			=> __( 'Popular Hotspot Images', 'text-domain' ),
-			'all_items'				=> __( 'All Hotspot Images', 'text-domain' ),
-			'parent_item'			=> __( 'Parent Hotspot Image', 'text-domain' ),
-			'parent_item_colon'		=> __( 'Parent Hotspot Image', 'text-domain' ),
-			'edit_item'				=> __( 'Edit Hotspot Image', 'text-domain' ),
-			'update_item'			=> __( 'Update Hotspot Image', 'text-domain' ),
-			'add_new_item'			=> __( 'Add New Hotspot Image', 'text-domain' ),
-			'new_item_name'			=> __( 'New Hotspot Image Name', 'text-domain' ),
-			'add_or_remove_items'	=> __( 'Add or remove Hotspot Images', 'text-domain' ),
-			'choose_from_most_used'	=> __( 'Choose from most used Hotspot Images', 'text-domain' ),
-			'menu_name'				=> __( 'Hotspot Image', 'text-domain' ),
-		);
-
-		$args = array(
-			'labels'            => $labels,
-			'public'            => true,
-			'show_in_nav_menus' => true,
-			'show_admin_column' => false,
-			'hierarchical'      => false,
-			'show_tagcloud'     => true,
-			'show_ui'           => true,
-			'query_var'         => true,
-			'rewrite'           => true,
-			'query_var'         => true,
-			'capabilities'      => array(),
-		);
-
-		register_taxonomy( 'hotspot_image', array( $this->post_type ), $args );
 	}
 
 	function get_image ( $id, $size = 'projects-thumbnail' ) {
