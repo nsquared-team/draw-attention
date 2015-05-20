@@ -44,7 +44,7 @@ class DrawAttention_CPT {
 				'parent_item_colon' => ''
 				), /* end of arrays */
 				'description' => __( 'Stores '.$this->post_type.'s in the database', 'drawattention' ), /* CPT_SINGULAR_NAME Description */
-				'public' => false,
+				'public' => true,
 				'publicly_queryable' => true,
 				'exclude_from_search' => true,
 				'show_ui' => true,
