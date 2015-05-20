@@ -112,6 +112,10 @@
 			index++;
 			$this.attr('id', mapName + '-area-' + index);
 
+			$this.on('click', function(e){
+				e.preventDefault();
+			});
+
 			$this.off('mouseenter');
 			$this.off('mouseleave');
 
@@ -123,7 +127,7 @@
 			if (opts.eventTrigger == 'click') {
 				$this.off('tapstart').on('tapstart', function(e){
 					e.preventDefault();
-					mapClick($(this), img);
+					mapClick($this, img);
 				});
 			}
 
@@ -131,6 +135,18 @@
 				mapOver($this, img);
 				img.siblings('canvas').addClass('sticky-canvas');
 			}
+
+			$this.on('focus', function(){
+				mapOver($this, img);
+				$this.on('click', function(){
+					mapClick($this, img);
+				});
+			});
+
+			$this.on('blur', function(){
+				mapOut($this, img);
+				$this.off('click');
+			});
 
 		});
 	};
@@ -326,6 +342,8 @@
 			mapOver(area, img);
 			stickyCanvas = $('#canvas-' + id);
 		}
+
+		console.log(id);
 
 
 		if (isSticky) {
