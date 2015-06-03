@@ -34,6 +34,7 @@ class DrawAttention_Pro {
 						'bottom' => __('Bottom', 'drawattention'),
 						'top'		=> __('Top', 'drawattention'),
 						'lightbox' => __('Lightbox', 'drawattention'),
+						'tooltip' => __('Tooltip', 'drawattention'),
 					),
 					'default' => 'left',
 				),
