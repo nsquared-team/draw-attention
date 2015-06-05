@@ -408,7 +408,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
 				$info_html .=      '<div class="hotspot-initial">';
 				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop($settings[$this->custom_fields->prefix.'map_more_info'][0]) : '';
+				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? ( apply_filters( 'the_content', $settings[$this->custom_fields->prefix.'map_more_info'][0] ) ) : '';
 				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
@@ -442,7 +442,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 						$html .=    '<img src="'.$hotspot['detail_image'].'" />';
 						$html .=  '</div>';
 					}
-					$description_html = ( !empty( $hotspot['description'] ) ) ? wpautop( $hotspot['description'] ) : '';
+					$description_html = ( !empty( $hotspot['description'] ) ) ? apply_filters( 'the_content', ( $hotspot['description'] ) ) : '';
 					$html .=    '<div class="hotspot-content">' . $description_html . '</div>';
 					$html .=  '</div>';
 				}
