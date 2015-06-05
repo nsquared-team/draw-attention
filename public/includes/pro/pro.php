@@ -143,7 +143,7 @@ class DrawAttention_Pro {
 			$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
 			$info_html .=      '<div class="hotspot-initial">';
 			$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-			$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop($settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) : '';
+			$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? apply_filters( 'the_content', ($settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) : '';
 			$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
 			$info_html .=      '</div>';
 			$info_html .=    '</div>';
@@ -178,7 +178,7 @@ class DrawAttention_Pro {
 					$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $img_post, $settings ) );
 					$html .=  '</div>';
 				}
-				$html .=    '<div class="hotspot-content">' . wpautop( $hotspot['description'] ) . '</div>';
+				$html .=    '<div class="hotspot-content">' . apply_filters( 'the_content', ( $hotspot['description'] ) ) . '</div>';
 				$html .=  '</div>';
 			}
 
