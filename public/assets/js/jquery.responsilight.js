@@ -136,17 +136,17 @@
 				img.siblings('canvas').addClass('sticky-canvas');
 			}
 
-			// $this.on('focus', function(){
-			// 	mapOver($this, img);
-			// 	$this.on('click', function(){
-			// 		mapClick($this, img);
-			// 	});
-			// });
+			$this.on('focus', function(){
+				mapOver($this, img);
+				$this.on('click', function(){
+					mapClick($this, img);
+				});
+			});
 
-			// $this.on('blur', function(){
-			// 	mapOut($this, img);
-			// 	$this.off('click');
-			// });
+			$this.on('blur', function(){
+				mapOut($this, img);
+				$this.off('click');
+			});
 
 		});
 	};
