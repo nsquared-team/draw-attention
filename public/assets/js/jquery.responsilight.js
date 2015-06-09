@@ -145,7 +145,7 @@
 			$this.on('focus', function(e){
 				e.preventDefault();
 				mapOver($this, img);
-				$this.on('click', function(e){
+				$this.on('keypress', function(e){
 					e.preventDefault();
 					mapClick($this, img);
 				});
