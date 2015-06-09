@@ -63,6 +63,7 @@
 			drawCanvas(img, map);
 		} else {
 			map.find('area')
+				.off()
 				.on('tapend', function(e){
 					var area = $(this);
 					e.preventDefault();
@@ -113,7 +114,7 @@
 			index++;
 			$this.attr('id', mapName + '-area-' + index);
 
-			$this.on('click', function(e){
+			$this.off('click').on('click', function(e){
 				e.preventDefault();
 			});
 
@@ -143,10 +144,10 @@
 				img.siblings('canvas').addClass('sticky-canvas');
 			}
 
-			$this.on('focus', function(e){
+			$this.off('focus').on('focus', function(e){
 				e.preventDefault();
 				mapOver($this, img);
-				$this.on('keypress', function(e){
+				$this.off('keypress').on('keypress', function(e){
 					if (e.which == 13) {
 						e.preventDefault();
 						mapClick($this, img);
@@ -154,7 +155,7 @@
 				});
 			});
 
-			$this.on('blur', function(e){
+			$this.off('blur').on('blur', function(e){
 				e.preventDefault();
 				mapOut($this, img);
 				$this.off('click');
@@ -299,7 +300,7 @@
 		$canvas = $('#canvas-' + id);
 
 		/* Fix for bug on iOS where touch event doesn't register on the area */
-		$canvas.on('touchstart', function(e){
+		$canvas.off('touchstart').on('touchstart', function(e){
 			e.preventDefault();
 		});
 
