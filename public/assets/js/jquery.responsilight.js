@@ -35,7 +35,8 @@
 
 	var opts, /* Define this here so the options are available to all functions */
 		convertHexToDecimal,
-		convertToRgba;
+		convertToRgba,
+		lastMapClick;
 
 	convertHexToDecimal = function(hex) {
 		return Math.max(0, Math.min(parseInt(hex, 16), 255));
@@ -120,8 +121,14 @@
 			$this.off('mouseleave');
 
 			$this.hover(
-				function(){ mapOver($this, img); },
-				function(){ mapOut($this, img); }
+				function(e){
+					e.preventDefault();
+					mapOver($this, img);
+				},
+				function(e){
+					e.preventDefault();
+					mapOut($this, img);
+				}
 			);
 
 			if (opts.eventTrigger == 'click') {
@@ -136,14 +143,19 @@
 				img.siblings('canvas').addClass('sticky-canvas');
 			}
 
-			$this.on('focus', function(){
+			$this.on('focus', function(e){
+				e.preventDefault();
 				mapOver($this, img);
-				$this.on('click', function(){
-					mapClick($this, img);
+				$this.on('keypress', function(e){
+					if (e.which == 13) {
+						e.preventDefault();
+						mapClick($this, img);
+					}
 				});
 			});
 
-			$this.on('blur', function(){
+			$this.on('blur', function(e){
+				e.preventDefault();
 				mapOut($this, img);
 				$this.off('click');
 			});
@@ -317,6 +329,7 @@
 		$canvas.stop(true, true).fadeIn('fast');
 		var href = area.attr('href');
 		img.trigger('showHighlight', [href]);
+		area.trigger('showHighlight', [href]);
 	};
 
 	mapOut = function(area, img) {
@@ -329,10 +342,17 @@
 			});
 		}
 		img.trigger('removeHighlight');
-
+		area.trigger('removeHighlight');
 	};
 
 	mapClick = function(area, img) {
+		now = Date.now();
+		if (lastMapClick && lastMapClick > (now-100)) {
+			lastMapClick = now;
+			return;
+		}
+		lastMapClick = now;
+
 		var id = area.attr('id'),
 			stickyCanvas = $('#canvas-' + id),
 			isSticky = area.data('stickyCanvas'),
@@ -346,9 +366,11 @@
 		if (isSticky) {
 			area.data('stickyCanvas', false);
 			area.trigger('stickyHighlight', [false]);
+			area.trigger('unStickyHighlight');
 			stickyCanvas.stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
+			area.trigger('removeHighlight');
 		} else {
 			area.data('stickyCanvas', true);
 			stickyCanvas.addClass('sticky-canvas');
@@ -357,7 +379,7 @@
 			stickyCanvas.siblings('canvas.sticky-canvas').stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
-			area.siblings('area').data('stickyCanvas', false);
+			area.siblings('area').data('stickyCanvas', false).trigger('removeHighlight');
 		}
 
 	};
