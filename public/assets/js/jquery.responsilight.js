@@ -146,8 +146,10 @@
 				e.preventDefault();
 				mapOver($this, img);
 				$this.on('keypress', function(e){
-					e.preventDefault();
-					mapClick($this, img);
+					if (e.which == 13) {
+						e.preventDefault();
+						mapClick($this, img);
+					}
 				});
 			});
 
