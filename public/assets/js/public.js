@@ -40,6 +40,11 @@
 		}
 	};
 
+	/* Private: show tooltip */
+	var showTooltip = function(){
+
+	};
+
 	/* Private: show info area */
 	var showNewInfo = function(container, isSticky, info) {
 		var infoContainer = container.find('.hotspots-placeholder'),
@@ -72,8 +77,11 @@
 			showLightbox(container, isSticky, newInfo, $this);
 		});
 
+		/* Tooltip Layout */
+
+
 		/* Non-lightbox Layout */
-		$('.hotspots-container.event-click').not('.lightbox').on('stickyHighlight', 'area', function(e, isSticky) {
+		$('.hotspots-container.event-click').not('.lightbox, .tooltip').on('stickyHighlight', 'area', function(e, isSticky) {
 			var $this = $(this),
 				container = $this.parents('.hotspots-container'),
 				newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');

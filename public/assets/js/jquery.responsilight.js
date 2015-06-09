@@ -342,10 +342,7 @@
 			mapOver(area, img);
 			stickyCanvas = $('#canvas-' + id);
 		}
-
-		console.log(id);
-
-
+`
 		if (isSticky) {
 			area.data('stickyCanvas', false);
 			area.trigger('stickyHighlight', [false]);
