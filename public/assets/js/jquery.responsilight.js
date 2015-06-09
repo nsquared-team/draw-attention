@@ -35,7 +35,8 @@
 
 	var opts, /* Define this here so the options are available to all functions */
 		convertHexToDecimal,
-		convertToRgba;
+		convertToRgba,
+		lastMapClick;
 
 	convertHexToDecimal = function(hex) {
 		return Math.max(0, Math.min(parseInt(hex, 16), 255));
@@ -345,6 +346,13 @@
 	};
 
 	mapClick = function(area, img) {
+		now = Date.now();
+		if (lastMapClick && lastMapClick > (now-100)) {
+			lastMapClick = now;
+			return;
+		}
+		lastMapClick = now;
+
 		var id = area.attr('id'),
 			stickyCanvas = $('#canvas-' + id),
 			isSticky = area.data('stickyCanvas'),
