@@ -62,7 +62,7 @@ class DrawAttention_Pro {
 
 		if ( in_array( $layout, array( 'top', 'bottom', 'lightbox' ) ) ) {
 			$size = 'large';
-		} elseif ( in_array( $layout, array( 'left', 'right' ) ) ) {
+		} elseif ( in_array( $layout, array( 'left', 'right', 'tooltip' ) ) ) {
 			$size = 'medium';
 		}
 
@@ -110,6 +110,11 @@ class DrawAttention_Pro {
 
 			if ( $layout == 'lightbox' ) {
 				wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
+			}
+
+			if ( $layout == 'tooltip' ) {
+				wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
+				wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
 			}
 
 			$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];

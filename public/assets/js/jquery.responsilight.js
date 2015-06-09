@@ -120,8 +120,14 @@
 			$this.off('mouseleave');
 
 			$this.hover(
-				function(){ mapOver($this, img); },
-				function(){ mapOut($this, img); }
+				function(e){
+					e.preventDefault();
+					mapOver($this, img);
+				},
+				function(e){
+					e.preventDefault();
+					mapOut($this, img);
+				}
 			);
 
 			if (opts.eventTrigger == 'click') {
@@ -136,14 +142,17 @@
 				img.siblings('canvas').addClass('sticky-canvas');
 			}
 
-			$this.on('focus', function(){
+			$this.on('focus', function(e){
+				e.preventDefault();
 				mapOver($this, img);
-				$this.on('click', function(){
+				$this.on('click', function(e){
+					e.preventDefault();
 					mapClick($this, img);
 				});
 			});
 
-			$this.on('blur', function(){
+			$this.on('blur', function(e){
+				e.preventDefault();
 				mapOut($this, img);
 				$this.off('click');
 			});
@@ -317,6 +326,7 @@
 		$canvas.stop(true, true).fadeIn('fast');
 		var href = area.attr('href');
 		img.trigger('showHighlight', [href]);
+		area.trigger('showHighlight', [href]);
 	};
 
 	mapOut = function(area, img) {
@@ -329,7 +339,7 @@
 			});
 		}
 		img.trigger('removeHighlight');
-
+		area.trigger('removeHighlight');
 	};
 
 	mapClick = function(area, img) {
@@ -346,9 +356,11 @@
 		if (isSticky) {
 			area.data('stickyCanvas', false);
 			area.trigger('stickyHighlight', [false]);
+			area.trigger('unStickyHighlight');
 			stickyCanvas.stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
+			area.trigger('removeHighlight');
 		} else {
 			area.data('stickyCanvas', true);
 			stickyCanvas.addClass('sticky-canvas');
@@ -357,7 +369,7 @@
 			stickyCanvas.siblings('canvas.sticky-canvas').stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
-			area.siblings('area').data('stickyCanvas', false);
+			area.siblings('area').data('stickyCanvas', false).trigger('removeHighlight');
 		}
 
 	};

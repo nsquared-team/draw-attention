@@ -259,111 +259,160 @@
 /* ------------------------------------------- */
 /* Tooltip
 /* ------------------------------------------- */
-/* PowerTip Plugin */
-/* line 223, ../sass/public.scss */
-#powerTip {
-  cursor: default;
-  background-color: #333;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 6px;
-  color: #fff;
+/* line 222, ../sass/public.scss */
+.tooltip .hotspots-placeholder {
   display: none;
-  padding: 10px;
+}
+
+/* line 226, ../sass/public.scss */
+.qtip {
+  box-shadow: none;
+  direction: ltr;
+  display: none;
+  font-size: 10.5px;
+  left: -28000px;
+  line-height: 12px;
+  max-width: 280px;
+  min-width: 50px;
+  padding: 0;
   position: absolute;
-  white-space: nowrap;
-  z-index: 2147483647;
+  top: -28000px;
 }
-/* line 234, ../sass/public.scss */
-#powerTip:before {
-  content: "";
-  position: absolute;
+
+/* line 240, ../sass/public.scss */
+.qtip-content {
+  overflow: hidden;
+  padding: 5px 9px;
+  position: relative;
+  text-align: left;
+  word-wrap: break-word;
 }
-/* line 238, ../sass/public.scss */
-#powerTip.n:before, #powerTip.s:before {
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-  left: 50%;
-  margin-left: -5px;
+
+/* line 248, ../sass/public.scss */
+.qtip-titlebar {
+  border-width: 0 0 1px;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 5px 35px 5px 10px;
+  position: relative;
 }
-/* line 245, ../sass/public.scss */
-#powerTip.e:before, #powerTip.w:before {
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid transparent;
-  margin-top: -5px;
-  top: 50%;
-}
-/* line 252, ../sass/public.scss */
-#powerTip.n:before {
-  border-top: 10px solid #333;
-  border-top: 10px solid rgba(0, 0, 0, 0.8);
-  bottom: -10px;
+/* line 254, ../sass/public.scss */
+.qtip-titlebar + .qtip-content {
+  border-top-width: 0 !important;
 }
 /* line 257, ../sass/public.scss */
-#powerTip.e:before {
-  border-right: 10px solid #333;
-  border-right: 10px solid rgba(0, 0, 0, 0.8);
-  left: -10px;
+.qtip-titlebar .qtip-close {
+  right: 4px;
+  top: 50%;
+  margin-top: -9px;
 }
-/* line 262, ../sass/public.scss */
-#powerTip.s:before {
-  border-bottom: 10px solid #333;
-  border-bottom: 10px solid rgba(0, 0, 0, 0.8);
-  top: -10px;
+
+/* line 263, ../sass/public.scss */
+.qtip-close {
+  border: 1px solid transparent;
+  cursor: pointer;
+  outline: medium none;
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  z-index: 11;
 }
-/* line 267, ../sass/public.scss */
-#powerTip.w:before {
-  border-left: 10px solid #333;
-  border-left: 10px solid rgba(0, 0, 0, 0.8);
-  right: -10px;
-}
+
 /* line 272, ../sass/public.scss */
-#powerTip.ne:before, #powerTip.se:before {
-  border-right: 10px solid transparent;
-  border-left: 0;
-  left: 10px;
+* html .qtip-titlebar .qtip-close {
+  top: 16px;
+  /* IE fix */
 }
-/* line 278, ../sass/public.scss */
-#powerTip.nw:before, #powerTip.sw:before {
-  border-left: 10px solid transparent;
-  border-right: 0;
-  right: 10px;
+
+/* line 276, ../sass/public.scss */
+.qtip-titlebar .ui-icon,
+.qtip-icon .ui-icon {
+  direction: ltr;
+  display: block;
+  text-indent: -1000em;
 }
-/* line 284, ../sass/public.scss */
-#powerTip.ne:before, #powerTip.nw:before {
-  border-top: 10px solid #333;
-  border-top: 10px solid rgba(0, 0, 0, 0.8);
-  bottom: -10px;
+
+/* line 283, ../sass/public.scss */
+.qtip-icon, .qtip-icon .ui-icon {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-decoration: none;
 }
+
 /* line 290, ../sass/public.scss */
-#powerTip.se:before, #powerTip.sw:before {
-  border-bottom: 10px solid #333;
-  border-bottom: 10px solid rgba(0, 0, 0, 0.8);
-  top: -10px;
+.qtip-icon .ui-icon {
+  width: 18px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  text-indent: 0;
+  font: normal bold 10px/13px Tahoma,sans-serif;
+  color: inherit;
+  background: transparent none no-repeat -100em -100em;
 }
-/* line 296, ../sass/public.scss */
-#powerTip.nw-alt:before, #powerTip.ne-alt:before, #powerTip.sw-alt:before, #powerTip.se-alt:before {
-  border-top: 10px solid #333;
-  border-top: 10px solid rgba(0, 0, 0, 0.8);
-  bottom: -10px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  left: 10px;
+
+/* Applied to 'focused' tooltips e.g. most recently displayed/interacted with */
+/* Applied on hover of tooltips i.e. added/removed on mouseenter/mouseleave respectively */
+/* Default tooltip style */
+/* line 310, ../sass/public.scss */
+.qtip-default {
+  border: 1px solid #F1D031;
+  background-color: #FFFFA3;
+  color: #555;
 }
-/* line 307, ../sass/public.scss */
-#powerTip.ne-alt:before {
-  left: auto;
-  right: 10px;
+
+/* line 317, ../sass/public.scss */
+.qtip-default .qtip-titlebar {
+  background-color: #FFEF93;
 }
-/* line 311, ../sass/public.scss */
-#powerTip.sw-alt:before, #powerTip.se-alt:before {
-  border-top: none;
-  border-bottom: 10px solid #333;
-  border-bottom: 10px solid rgba(0, 0, 0, 0.8);
-  bottom: auto;
-  top: -10px;
+
+/* line 321, ../sass/public.scss */
+.qtip-default .qtip-icon {
+  border-color: #CCC;
+  background: #F1F1F1;
+  color: #777;
 }
-/* line 319, ../sass/public.scss */
-#powerTip.se-alt:before {
-  left: auto;
-  right: 10px;
+
+/* line 327, ../sass/public.scss */
+.qtip-default .qtip-titlebar .qtip-close {
+  border-color: #AAA;
+  color: #111;
+}
+
+/* line 333, ../sass/public.scss */
+.qtip .qtip-tip {
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Opera bug #357 - Incorrect tip position
+https://github.com/Craga89/qTip2/issues/367 */
+/* line 342, ../sass/public.scss */
+x:-o-prefocus, .qtip .qtip-tip {
+  visibility: hidden;
+}
+
+/* line 346, ../sass/public.scss */
+.qtip .qtip-tip,
+.qtip .qtip-tip .qtip-vml,
+.qtip .qtip-tip canvas {
+  position: absolute;
+  color: #123456;
+  background: transparent;
+  border: 0 dashed transparent;
+}
+
+/* line 356, ../sass/public.scss */
+.qtip .qtip-tip canvas {
+  top: 0;
+  left: 0;
+}
+
+/* line 358, ../sass/public.scss */
+.qtip .qtip-tip .qtip-vml {
+  behavior: url(#default#VML);
+  display: inline-block;
+  visibility: visible;
 }

@@ -41,8 +41,33 @@
 	};
 
 	/* Private: show tooltip */
-	var showTooltip = function(){
-
+	var showTooltip = function(area, newInfo, eventTrigger){
+		var showEvent = eventTrigger == 'hover' ? 'showHighlight' : 'stickyHighlight',
+			hideEvent = eventTrigger == 'hover' ? 'removeHighlight' : 'unStickyHighlight';
+		$(area).qtip({
+			content: {
+				text: newInfo
+			},
+			show: {
+				solo: true,
+				event: showEvent
+			},
+			hide: {
+				fixed: true,
+				delay: 300,
+				event: hideEvent
+			},
+			position: {
+				at: 'top right',
+				viewport: $(window),
+				adjust: {
+					method: 'flipinvert'
+				}
+			},
+			style: {
+				classes: 'qtip-da-custom'
+			}
+		});
 	};
 
 	/* Private: show info area */
@@ -78,6 +103,13 @@
 		});
 
 		/* Tooltip Layout */
+		$('.hotspots-container.tooltip').find('area').each(function(){
+			var $this = $(this),
+				newInfo = $($this.attr('href')),
+				eventTrigger = $this.parents('.hotspots-container').find('img[usemap]').data('event-trigger');
+
+			showTooltip(this, newInfo, eventTrigger);
+		});
 
 
 		/* Non-lightbox Layout */
@@ -90,7 +122,7 @@
 		});
 
 		/* Hover event: Mouseover */
-		$('.hotspots-container.event-hover').not('.lightbox').on('showHighlight', 'img.hotspots-image', function(e, href){
+		$('.hotspots-container.event-hover').not('.lightbox, .tooltip').on('showHighlight', 'img.hotspots-image', function(e, href){
 			var $this = $(this),
 				container = $this.parents('.hotspots-container'),
 				newInfo = $(href);
@@ -99,7 +131,7 @@
 		});
 
 		/* Hover event: Mouseout */
-		$('.hotspots-container.event-hover').not('.lightbox').on('removeHighlight', 'img.hotspots-image', function(e){
+		$('.hotspots-container.event-hover').not('.lightbox, .tooltip').on('removeHighlight', 'img.hotspots-image', function(e){
 			var $this = $(this),
 				container = $this.parents('.hotspots-container'),
 				newInfo = container.find('.hotspot-initial');
