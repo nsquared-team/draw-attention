@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Draw Attention\n"
-"POT-Creation-Date: 2015-05-07 16:19-0800\n"
+"POT-Creation-Date: 2015-06-12 14:52-0500\n"
 "PO-Revision-Date: 2015-05-07 16:19-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -31,8 +32,8 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-drawattention-admin.php:229 public/class-drawattention.php:365
-#: public/includes/cpt.php:38
+#: admin/class-drawattention-admin.php:229 public/class-drawattention.php:367
+#: public/includes/cpt.php:37
 msgid "Edit Image"
 msgstr ""
 
@@ -40,115 +41,61 @@ msgstr ""
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: public/class-drawattention.php:363
+#: public/class-drawattention.php:365
 msgid "You need to define some clickable areas for your image."
 msgstr ""
 
-#: public/class-drawattention.php:448
+#: public/class-drawattention.php:450
 msgid "Copy Shortcode"
 msgstr ""
 
-#: public/includes/cpt.php:32
+#: public/includes/cpt.php:31
 msgid "Draw Attention"
 msgstr ""
 
-#: public/includes/cpt.php:33 public/includes/cpt.php:167
+#: public/includes/cpt.php:32 public/includes/cpt.php:130
 #: public/includes/lib/drag-drop-featured-image/index.php:138
 msgid "Image"
 msgstr ""
 
-#: public/includes/cpt.php:34
+#: public/includes/cpt.php:33
 msgid "All Images"
 msgstr ""
 
-#: public/includes/cpt.php:35
+#: public/includes/cpt.php:34
 msgid "Add New"
 msgstr ""
 
-#: public/includes/cpt.php:36
+#: public/includes/cpt.php:35
 msgid "Add New Image"
 msgstr ""
 
-#: public/includes/cpt.php:37
+#: public/includes/cpt.php:36
 msgid "Edit"
 msgstr ""
 
-#: public/includes/cpt.php:39
+#: public/includes/cpt.php:38
 msgid "New Image"
 msgstr ""
 
-#: public/includes/cpt.php:40
+#: public/includes/cpt.php:39
 msgid "View Image"
 msgstr ""
 
-#: public/includes/cpt.php:41
+#: public/includes/cpt.php:40
 msgid "Search Images"
 msgstr ""
 
-#: public/includes/cpt.php:42
+#: public/includes/cpt.php:41
 msgid "Nothing found in the Database."
 msgstr ""
 
-#: public/includes/cpt.php:43
+#: public/includes/cpt.php:42
 msgid "Nothing found in Trash"
 msgstr ""
 
-#: public/includes/cpt.php:46
+#: public/includes/cpt.php:45
 msgid "Stores "
-msgstr ""
-
-#: public/includes/cpt.php:76
-msgctxt "Taxonomy plural name"
-msgid "Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:77
-msgctxt "Taxonomy singular name"
-msgid "Hotspot Image"
-msgstr ""
-
-#: public/includes/cpt.php:78
-msgid "Search Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:79
-msgid "Popular Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:80
-msgid "All Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:81 public/includes/cpt.php:82
-msgid "Parent Hotspot Image"
-msgstr ""
-
-#: public/includes/cpt.php:83
-msgid "Edit Hotspot Image"
-msgstr ""
-
-#: public/includes/cpt.php:84
-msgid "Update Hotspot Image"
-msgstr ""
-
-#: public/includes/cpt.php:85
-msgid "Add New Hotspot Image"
-msgstr ""
-
-#: public/includes/cpt.php:86
-msgid "New Hotspot Image Name"
-msgstr ""
-
-#: public/includes/cpt.php:87
-msgid "Add or remove Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:88
-msgid "Choose from most used Hotspot Images"
-msgstr ""
-
-#: public/includes/cpt.php:89
-msgid "Hotspot Image"
 msgstr ""
 
 #: public/includes/custom_fields.php:54 public/includes/custom_fields.php:215
@@ -309,4 +256,8 @@ msgstr ""
 
 #: public/includes/themes.php:19
 msgid "Select a theme..."
+msgstr ""
+
+#: public/views/single-da_image.php:15
+msgid "Edit Interactive Image"
 msgstr ""
