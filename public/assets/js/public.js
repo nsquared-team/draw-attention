@@ -62,7 +62,7 @@
 			},
 			position: {
 				target: 'mouse',
-				viewport: container,
+				viewport: $(window),
 				adjust: {
 					mouse: false
 				}
