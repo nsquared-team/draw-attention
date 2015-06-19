@@ -128,13 +128,16 @@ class DrawAttention_Pro {
 			$title_color = $settings[$this->parent->custom_fields->prefix.'map_title_color'][0];
 			$custom_css = "
 				#{$spot_id} .hotspots-placeholder,
-				.featherlight .featherlight-content.lightbox{$imageID} {
+				.featherlight .featherlight-content.lightbox{$imageID},
+				.qtip.tooltip-{$imageID} {
 					background: {$bg_color};
+					border: 0 {$bg_color} solid;
 					color: {$text_color};
 				}
 
 				#{$spot_id} .hotspot-title,
-				.featherlight .featherlight-content.lightbox{$imageID} .hotspot-title {
+				.featherlight .featherlight-content.lightbox{$imageID} .hotspot-title,
+				.qtip.tooltip-{$imageID} .hotspot-title {
 					color: {$title_color};
 				}";
 			wp_add_inline_style( $this->parent->plugin_slug . '-plugin-styles', $custom_css );

@@ -377,7 +377,7 @@
 			stickyCanvas.addClass('sticky-canvas');
 			img.trigger('activateHighlight', [href]);
 			area.trigger('stickyHighlight', [true]);
-			stickyCanvas.siblings('canvas.sticky-canvas').stop(true, true).fadeOut('fast', function(){
+			stickyCanvas.siblings('canvas').stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
 			area.siblings('area').data('stickyCanvas', false).trigger('removeHighlight');

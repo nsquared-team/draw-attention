@@ -41,7 +41,7 @@
 	};
 
 	/* Private: show tooltip */
-	var showTooltip = function(area, newInfo, eventTrigger){
+	var showTooltip = function(area, newInfo, eventTrigger, container){
 		var showEvent = eventTrigger == 'hover' ? 'showHighlight' : 'stickyHighlight',
 			hideEvent = eventTrigger == 'hover' ? 'removeHighlight' : 'unStickyHighlight';
 		$(area).qtip({
@@ -58,14 +58,23 @@
 				event: hideEvent
 			},
 			position: {
-				at: 'top right',
-				viewport: $(window),
+				target: 'mouse',
+				viewport: container,
 				adjust: {
-					method: 'flipinvert'
+					mouse: false
 				}
 			},
 			style: {
 				classes: 'qtip-da-custom'
+			},
+			events: {
+				render: function(event, api) {
+					var tooltip = api.elements.tooltip,
+						mapId = container.attr('id'),
+						mapNo = mapId.match(/\d+/)[0];
+
+					tooltip.addClass('tooltip-'+ mapNo);
+				}
 			}
 		});
 	};
@@ -106,9 +115,10 @@
 		$('.hotspots-container.tooltip').find('area').each(function(){
 			var $this = $(this),
 				newInfo = $($this.attr('href')),
-				eventTrigger = $this.parents('.hotspots-container').find('img[usemap]').data('event-trigger');
+				container = $this.parents('.hotspots-container'),
+				eventTrigger = container.find('img[usemap]').data('event-trigger');
 
-			showTooltip(this, newInfo, eventTrigger);
+			showTooltip(this, newInfo, eventTrigger, container);
 		});
 
 
