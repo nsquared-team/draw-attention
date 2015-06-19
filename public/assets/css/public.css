@@ -303,16 +303,21 @@
   height: auto;
   max-width: 100%;
 }
+/* line 262, ../sass/public.scss */
+.qtip-content .hotspot-thumb img {
+  height: auto;
+  max-width: 100%;
+}
 
 /* Default tooltip style */
-/* line 264, ../sass/public.scss */
+/* line 270, ../sass/public.scss */
 .qtip-default {
   background-color: #FFFFA3;
   border: 0 none;
   color: #555;
 }
 
-/* line 270, ../sass/public.scss */
+/* line 276, ../sass/public.scss */
 .qtip .qtip-tip {
   margin: 0 auto;
   overflow: hidden;
@@ -321,12 +326,12 @@
 
 /* Opera bug #357 - Incorrect tip position
 https://github.com/Craga89/qTip2/issues/367 */
-/* line 278, ../sass/public.scss */
+/* line 284, ../sass/public.scss */
 x:-o-prefocus, .qtip .qtip-tip {
   visibility: hidden;
 }
 
-/* line 282, ../sass/public.scss */
+/* line 288, ../sass/public.scss */
 .qtip .qtip-tip,
 .qtip .qtip-tip .qtip-vml,
 .qtip .qtip-tip canvas {
@@ -336,13 +341,13 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 0 dashed transparent;
 }
 
-/* line 291, ../sass/public.scss */
+/* line 297, ../sass/public.scss */
 .qtip .qtip-tip canvas {
   top: 0;
   left: 0;
 }
 
-/* line 293, ../sass/public.scss */
+/* line 299, ../sass/public.scss */
 .qtip .qtip-tip .qtip-vml {
   behavior: url(#default#VML);
   display: inline-block;
