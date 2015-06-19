@@ -50,7 +50,10 @@
 			},
 			show: {
 				solo: true,
-				event: showEvent
+				event: showEvent,
+				effect: function() {
+					$(this).fadeTo(300, 1);
+				}
 			},
 			hide: {
 				fixed: true,
