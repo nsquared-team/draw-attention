@@ -58,7 +58,7 @@
 			hide: {
 				fixed: true,
 				delay: 300,
-				event: hideEvent
+				event: hideEvent + ' unfocus'
 			},
 			position: {
 				target: 'mouse',
