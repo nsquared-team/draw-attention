@@ -12,7 +12,7 @@ class DrawAttention_CustomFields {
 				require_once  __DIR__ .'/lib/CMB2/init.php';
 			}
 		}
-		 if ( !class_exists( 'cmb2_bootstrap_205', false ) ) return;
+		 if ( !class_exists( 'cmb2_bootstrap_208', false ) ) return;
 
 		add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
 		add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
@@ -21,7 +21,7 @@ class DrawAttention_CustomFields {
 		add_filter( 'cmb2_sanitize_opacity', array( $this, 'cmb2_sanitize_opacity' ) );
 
 		// add_action( 'add_meta_boxes', array( $this, 'add_hotspot_area_details_table_metabox' ) );
-		add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 5 );
+		add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 4 );
 		add_action( 'wp_ajax_hotspot_update_custom_fields', array( $this, 'update_hotspot_area_details' ) );
 
 		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
@@ -274,7 +274,7 @@ class DrawAttention_CustomFields {
 		return $metaboxes;
 	}
 
-	function hotspot_area_override_title_and_content( $value, $object_id, $args, $object_type, $field ) {
+	function hotspot_area_override_title_and_content( $value, $object_id, $args, $field ) {
 		if ( $value != 'cmb2_field_no_override_val' ) return $value; // don't modify already overridden values
 
 		if ( $args['id'] == '_title' ) {

@@ -57,10 +57,10 @@
 	var hotspotCloning = function() {
 		var repeatGroup = $('.cmb-repeatable-group');
 		repeatGroup.on('cmb2_add_row', function(){
-			var lastRow = $(this).find('.cmb-row.cmb-repeatable-grouping').last(),
-				fields = lastRow.find(':input').not(':button');
+			// var lastRow = $(this).find('.cmb-row.cmb-repeatable-grouping').last(),
+			// 	fields = lastRow.find(':input').not(':button');
 
-			fields.val('');
+			// fields.val('');
 			hotspotAdmin.reset();
 		});
 	}
