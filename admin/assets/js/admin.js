@@ -65,6 +65,29 @@
 		});
 	}
 
+	var executeConditionalLogic = function( area ) {
+		$(area).find('[data-action]').closest('.cmb-row').hide();
+		$(area).find('.wp-editor-wrap').closest('.cmb-row').hide();
+
+		var selectedAction = $(area).find('.cmb2_select.action').val();
+		if ( !selectedAction ) {
+			$(area).find('[data-action="more-info"]').closest('.cmb-row').show();
+			$(area).find('.wp-editor-wrap').closest('.cmb-row').show();
+		} else {
+			$(area).find('[data-action="'+selectedAction+'"]').closest('.cmb-row').show();
+		}
+	}
+
+	var hotspotActions = function() {
+		$('.cmb2-wrap .cmb-repeatable-grouping').each(function() {
+			executeConditionalLogic(this);
+		});
+		$('.cmb2-wrap').on('change', '.cmb2_select.action', function() {
+			var area = $(this).closest('.cmb-repeatable-grouping');
+			executeConditionalLogic(area);
+		});
+	}
+
 	/* Select a new color scheme to be applied to the current Draw Attention */
 	var themeSelect = function() {
 		$('#da-theme-pack-select').on('change', function() {
@@ -136,6 +159,7 @@
 		accordion();
 		hotspotNames();
 		hotspotCloning();
+		hotspotActions();
 		themeSelect();
 		opacityLabelSync();
 		confirmDelete();
