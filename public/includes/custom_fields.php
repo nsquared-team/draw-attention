@@ -2,6 +2,7 @@
 class DrawAttention_CustomFields {
 	public $parent;
 	public $prefix = '_da_';
+	public $actions = array();
 
 	function __construct( $parent ) {
 		$this->parent = $parent;
@@ -12,7 +13,11 @@ class DrawAttention_CustomFields {
 				require_once  __DIR__ .'/lib/CMB2/init.php';
 			}
 		}
-		if ( !class_exists( 'cmb2_bootstrap_205', false ) ) return;
+		if ( !class_exists( 'cmb2_bootstrap_208', false ) ) return;
+
+		include_once __DIR__ . '/actions/action.php';
+		include_once __DIR__ . '/actions/action-url.php';
+		$this->actions['url'] = new DrawAttention_URL_Action();
 
 		add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
 		add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
@@ -161,48 +166,6 @@ class DrawAttention_CustomFields {
 		return $metaboxes;
 	}
 
-	function get_custom_field_objects_for_post( $post, $parent_post ) {
-		$fields = array();
-
-		$fields['_title'] = new CMB2_Field( array(
-			'object_type' => 'post',
-			'object_id'   => $post->ID,
-			'field_args'  =>     array(
-				'name'       => __( 'Title', 'drawattention' ),
-				'desc'       => __( '', 'drawattention' ),
-				'id'         => '_title',
-				'type'       => 'text',
-			),
-		) );
-
-		$fields['_content'] = new CMB2_Field( array(
-			'object_type' => 'post',
-			'object_id'   => $post->ID,
-			'field_args'  =>     array(
-				'name'       => __( 'Description', 'drawattention' ),
-				'desc'       => __( '', 'drawattention' ),
-				'id'         => '_content',
-				'type'       => 'wysiwyg',
-			),
-		) );
-
-		$fields[$this->prefix . 'coordinates'] = new CMB2_Field( array(
-			'object_type' => 'post',
-			'object_id'   => $post->ID,
-			'field_args'  =>     array(
-				'name'       => __( 'Coordinates', 'drawattention' ),
-				'desc'       => __( '', 'drawattention' ),
-				'id'         => $this->prefix . 'coordinates',
-				'type'       => 'text',
-				'attributes' => array(
-					'data-image-url' => wp_get_attachment_url( get_post_thumbnail_id( $parent_post->ID ) ),
-				),
-			),
-		) );
-
-		return $fields;
-	}
-
 	function hotspot_area_group_details_metabox( array $metaboxes ) {
 		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
 
@@ -210,7 +173,7 @@ class DrawAttention_CustomFields {
 			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( esc_attr( $_REQUEST['post'] ) ), 'full' );
 		}
 
-		$metaboxes['field_group'] = array(
+		$metaboxes['field_group'] = apply_filters( 'da_hotspot_area_group_details', array(
 			'id'           => 'field_group',
 			'title'        => __( 'Hotspot Areas', 'drawattention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
@@ -227,7 +190,7 @@ class DrawAttention_CustomFields {
 					),
 					// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
 					'fields'      => array(
-						array(
+						'coordinates' => array(
 							'name' => __( 'Coordinates', 'drawattention' ),
 							'id'   => 'coordinates',
 							'type' => 'text',
@@ -235,12 +198,25 @@ class DrawAttention_CustomFields {
 								'data-image-url' => ( !empty( $thumbnail_src[0] ) ) ? $thumbnail_src[0] : '',
 							),
 						),
-						array(
+						'title' => array(
 							'name' => __('Title', 'drawattention' ),
 							'id'   => 'title',
 							'type' => 'text',
 						),
-						array(
+						'action' => array(
+							'name' => __('Action', 'drawattention' ),
+							'description' => '',
+							'id'   => 'action',
+							'attributes' => array(
+								'class' => 'cmb2_select action',
+							),
+							// 'type' => 'textarea_small',
+							'type' => 'select',
+							'options' => array(
+								'' => 'Show More Info',
+							),
+						),
+						'description' => array(
 							'name' => __('Description', 'drawattention' ),
 							'description' => '',
 							'id'   => 'description',
@@ -259,17 +235,23 @@ class DrawAttention_CustomFields {
 								// 'tinymce' => true, // load TinyMCE, can be used to pass settings directly to TinyMCE using an array()
 								// 'quicktags' => true // load Quicktags, can be used to pass settings directly to Quicktags using an array()
 							),
+							'attributes' => array(
+								'data-action' => 'more-info',
+							),
 						),
-						array(
+						'detail_image' => array(
 							'name' => __( 'Detail Image', 'drawattention' ),
 							'desc' => __( 'Upload an image or enter a URL to show in the more info box', 'drawattention' ),
 							'id'   => 'detail_image',
 							'type' => 'file',
+							'attributes' => array(
+								'data-action' => 'more-info',
+							),
 						),
 					),
 				),
 			),
-		);
+		) );
   
 		return $metaboxes;
 	}

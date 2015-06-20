@@ -67,6 +67,30 @@
 		});
 	}
 
+	var executeConditionalLogic = function( area ) {
+		$(area).find('[data-action]').closest('.cmb-row').hide();
+		$(area).find('.wp-editor-wrap').closest('.cmb-row').hide();
+
+		var selectedAction = $(area).find('.cmb2_select.action').val();
+		if ( !selectedAction ) {
+			$(area).find('[data-action="more-info"]').closest('.cmb-row').show();
+			$(area).find('.wp-editor-wrap').closest('.cmb-row').show();
+		} else {
+			$(area).find('[data-action="'+selectedAction+'"]').closest('.cmb-row').show();
+		}
+	}
+
+	var hotspotActions = function() {
+		$('.cmb2-wrap .cmb-repeatable-grouping').each(function() {
+			executeConditionalLogic(this);
+		});
+		$('.cmb2-wrap').on('change', '.cmb2_select.action', function() {
+			var area = $(this).closest('.cmb-repeatable-grouping');
+			executeConditionalLogic(area);
+		});
+	}
+
+	/* Select a new color scheme to be applied to the current Draw Attention */
 	var themeSelect = function() {
 		$('#da-theme-pack-select').on('change', function() {
 			var confirmed = confirm('Applying a new theme will overwrite the current styling you have selected');
@@ -98,8 +122,6 @@
 			cmb = window.CMB2,
 			$metabox = cmb.metabox();
 
-		console.log($metabox);
-
 		/* Adding a row */
 		repeatGroup.on('cmb2_add_group_row_start', function(){
 			var areaCount = repeatGroup.children('.postbox.cmb-row').length + 1;
@@ -122,6 +144,19 @@
 			var areaCount = repeatGroup.children('.postbox.cmb-row').length;
 			if (areaCount < hotspots) {
 				$metabox.on( 'click', '.cmb-add-group-row', cmb.addGroupRow );
+			}
+		});
+	};
+
+	/* Confirm before deleting a hotspot */
+	var confirmDelete = function(){
+		$('.cmb2-wrap > .cmb2-metabox').on('click', '.cmb-remove-group-row', function(e){
+			var confirmed = confirm('You\'re deleting a hotspot. There is no undo');
+			if (confirmed) {
+				return true;
+			} else {
+				e.stopImmediatePropagation();
+				e.preventDefault();
 			}
 		});
 	};
@@ -155,8 +190,10 @@
 		accordion();
 		hotspotNames();
 		hotspotCloning();
+		hotspotActions();
 		themeSelect();
 		opacityLabelSync();
+		confirmDelete();
 		areaLimit();
 		saveAlert();
 	}
