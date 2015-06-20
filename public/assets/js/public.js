@@ -27,6 +27,7 @@
 
 					if ( imgHeight > maxImgHeight ) {
 						img.height(maxImgHeight);
+						img.css({'width': 'auto'});
 					}
 				},
 				afterClose: function() {
@@ -37,6 +38,46 @@
 				}
 			});
 		}
+	};
+
+	/* Private: show tooltip */
+	var showTooltip = function(area, newInfo, container){
+		area.qtip({
+			content: {
+				text: newInfo
+			},
+			show: {
+				solo: true,
+				event: 'stickyHighlight',
+				effect: function() {
+					$(this).fadeTo(300, 1);
+				}
+			},
+			hide: {
+				fixed: true,
+				delay: 300,
+				event: 'unstickyHighlight unfocus'
+			},
+			position: {
+				target: 'mouse',
+				viewport: $(window),
+				adjust: {
+					mouse: false
+				}
+			},
+			style: {
+				classes: 'qtip-da-custom'
+			},
+			events: {
+				render: function(event, api) {
+					var tooltip = api.elements.tooltip,
+						mapId = container.attr('id'),
+						mapNo = mapId.match(/\d+/)[0];
+
+					tooltip.addClass('tooltip-'+ mapNo);
+				}
+			}
+		});
 	};
 
 	/* Private: show info area */
@@ -62,42 +103,30 @@
 	var daInitialize = function() {
 		$('.hotspot-info').hide();
 
-		/* Lightbox Layout */
-		$('.hotspots-container.lightbox').on('stickyHighlight', 'area', function(e, isSticky){
-			var $this = $(this),
+		var container = $('.hotspots-container');
+
+		if (container.hasClass('tooltip')) {
+			container.find('area').each(function(){
+				var $this = $(this),
+					newInfo = $($this.attr('href'));
+
+				showTooltip($this, newInfo, container);
+			});
+		} else {
+			$('.hotspots-container').on('stickyHighlight', 'area', function(e){
+				var $this = $(this),
 				container = $this.parents('.hotspots-container'),
-				newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
+				isSticky = $this.data('stickyCanvas'),
+				newInfo = $($this.attr('href'));
 
-			showLightbox(container, isSticky, newInfo, $this);
-		});
-
-		/* Non-lightbox Layout */
-		$('.hotspots-container.event-click').not('.lightbox').on('stickyHighlight', 'area', function(e, isSticky) {
-			var $this = $(this),
-				container = $this.parents('.hotspots-container'),
-				newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
-
-			showNewInfo(container, isSticky, newInfo);
-		});
-
-		/* Hover event: Mouseover */
-		$('.hotspots-container.event-hover').not('.lightbox').on('showHighlight', 'img.hotspots-image', function(e, href){
-			var $this = $(this),
-				container = $this.parents('.hotspots-container'),
-				newInfo = $(href);
-
-			showNewInfo(container, false, newInfo);
-		});
-
-		/* Hover event: Mouseout */
-		$('.hotspots-container.event-hover').not('.lightbox').on('removeHighlight', 'img.hotspots-image', function(e){
-			var $this = $(this),
-				container = $this.parents('.hotspots-container'),
-				newInfo = container.find('.hotspot-initial');
-
-			showNewInfo(container, false, newInfo);
-		});
-
+				if (container.hasClass('lightbox')) {
+					showLightbox(container, isSticky, newInfo, $this);
+				} else {
+					newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
+					showNewInfo(container, isSticky, newInfo);
+				}
+			});
+		}
 	};
 
 	/* Public: initialize */
