@@ -61,8 +61,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = BETA =
+* New: Added image and shortcode columns to "All Images" section in admin
+* Improved: Portuguese translation
 * Fixed: Preview not working in some cases
-* Updated: Portuguese translation
 
 = 1.3 =
 * New: Easily preview your interactive image using "Preview Changes" or "View Post" after saving changes in the dashboard
