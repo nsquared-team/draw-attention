@@ -82,6 +82,10 @@
 
 .hotspot-thumb {
 	text-align: center;
+	img {
+		height: auto;
+		max-width: 100%;
+	}
 }
 
 @media (min-width: 600px) {
@@ -253,12 +257,6 @@
 			font-size: 1em;
 			margin: 1em 0;
 		}
-		img {
-			height: auto;
-			max-width: 100%;
-		}
-	}
-	.hotspot-thumb {
 		img {
 			height: auto;
 			max-width: 100%;
