@@ -329,7 +329,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@tylerdigital.com'>support@tylerdigital.com</a> we'll be happy to provide
 				you with a list of hosts who run PHP 5.3+ and will help you migrate your site from your current hosting provider.</p>
 				<h4>Additional info:</h4>
-				<ul> 
+				<ul>
 					<li><a href='http://w3techs.com/technologies/details/pl-php/5/all'>http://w3techs.com/technologies/details/pl-php/5/all</a></li>
 					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
 				</ul>
@@ -366,7 +366,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				echo ' ';
 				echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $imageID );
 			} else {
-				$img_url = wp_get_attachment_url( get_post_thumbnail_id( $imageID ));
+				$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $imageID ), 'full' );
+
+				$img_url = $img_src[0];
+				$img_width = $img_src[1];
+				$img_height = $img_src[2];
+
 				$img_post = get_post( $imageID );
 
 				$settings = get_metadata( 'post', $imageID, '', false );
@@ -392,7 +397,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$image_html = '';
 				$image_html .=    '<div class="hotspots-image-container">';
-				$image_html .=      '<img src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="click" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
+				$image_html .=      '<img width="' . $img_width . '" height= "' . $img_height . '" src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="click" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '"/>';
 				$image_html .=    '</div>';
 
 				$info_html = '';
