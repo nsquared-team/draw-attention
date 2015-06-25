@@ -355,7 +355,7 @@
 			stickyCanvas.stop(true, true).fadeOut('fast', function(){
 				$(this).remove();
 			});
-			area.trigger('unStickyHighlight');
+			area.trigger('unstickyHighlight');
 			area.trigger('removeHighlight');
 		} else {
 			area.data('stickyCanvas', true);
