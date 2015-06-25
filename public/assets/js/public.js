@@ -105,15 +105,27 @@
 
 		var container = $('.hotspots-container');
 
+		container.on('click', 'area.url-area', function(e){
+			var $this = $(this),
+				href = $this.attr('href'),
+				target = $this.attr('target');
+
+			if (target == '_new') {
+				window.open(href);
+			} else {
+				window.location.href = href;
+			}
+		});
+
 		if (container.hasClass('tooltip')) {
-			container.find('area').each(function(){
+			container.find('area.more-info-area').each(function(){
 				var $this = $(this),
 					newInfo = $($this.attr('href'));
 
 				showTooltip($this, newInfo, container);
 			});
 		} else {
-			$('.hotspots-container').on('stickyHighlight', 'area', function(e){
+			container.on('stickyHighlight', 'area.more-info-area', function(e){
 				var $this = $(this),
 				container = $this.parents('.hotspots-container'),
 				isSticky = $this.data('stickyCanvas'),

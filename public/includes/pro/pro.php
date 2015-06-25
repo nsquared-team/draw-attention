@@ -178,7 +178,26 @@ class DrawAttention_Pro {
 			$html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
 			foreach ($hotspots as $key => $hotspot) {
 				$coords = $hotspot['coordinates'];
-				$html .= '<area shape="poly" coords="' . $coords . '" href="#hotspot-' . $spot_id . '-' . $key . '" title="' . $hotspot['title'] . '">';
+				$target = '';
+				if( !empty( $hotspot[ 'action' ] ) ) {
+					$target = $hotspot['action'];
+				}
+				$new_window = '';
+				$target_window = '';
+				if ( !empty( $hotspot[ 'action-url-open-in-window' ] ) ) {
+					$new_window = $hotspot[ 'action-url-open-in-window' ];
+					$target_window = ( $new_window == 'on' ? '_new' : '' );
+				}
+				$target_url = '';
+				if ( !empty( $hotspot[ 'action-url-url' ] ) ) {
+					$target_url = $hotspot[ 'action-url-url' ];
+				}
+
+				$area_class = ( $target == 'url' ) ? 'url-area' : 'more-info-area';
+
+				$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
+
+				$html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
 			}
 
 			$html .=    '</map>';
