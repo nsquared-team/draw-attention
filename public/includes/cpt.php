@@ -6,8 +6,8 @@ class DrawAttention_CPT {
 	function __construct( $parent ) {
 
 		add_action( 'init' , array( $this, 'register_cpt' ) );
-		// add_filter( 'manage_edit-' . $this->post_type . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
-		// add_action( 'manage_' . $this->post_type .'_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
+		add_filter( 'manage_edit-' . $this->post_type . '_columns', array( $this, 'register_custom_column_headings' ), 10, 1 );
+		add_action( 'manage_' . $this->post_type .'_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
 
 		add_action( 'init', array( $this, 'load_drag_drop_featured_image' ) );
 	}
@@ -102,12 +102,13 @@ class DrawAttention_CPT {
 		switch ( $column_name ) {
 
 			case 'image':
-			$value = '';
-
-			$value = $this->get_image( $id, 120 );
-
-			echo $value;
-			break;
+				$value = $this->get_image( $id, 120 );
+				echo $value;
+				break;
+			case 'shortcode-string':
+				$shortcode = '[drawattention ID='.$id.']';
+				echo '<code>'.$shortcode.'</code>';
+				break;
 
 			default:
 			break;
@@ -146,6 +147,7 @@ class DrawAttention_CPT {
 				break;
 			}
 		}
+		$defaults['shortcode-string'] = __( 'Shortcode', 'drawattention' );
 
 		return $defaults;
 	} // End register_custom_column_headings()
