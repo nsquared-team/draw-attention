@@ -113,6 +113,7 @@
 			if (target == '_new') {
 				window.open(href);
 			} else {
+				$('body').hide();
 				window.location.href = href;
 			}
 		});
