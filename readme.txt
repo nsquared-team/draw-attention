@@ -83,8 +83,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = BETA =
+* Improved: Usability on mobile phones and touch devices
+* Improved: Portuguese translation
 * Fixed: Preview not working in some cases
-* Updated: Portuguese translation 
+* Fixed: Compatibility issue with Jetpack Photon
 
 = 1.3 =
 * New: Easily preview your interactive image using "Preview Changes" or "View Post" in the dashboard
