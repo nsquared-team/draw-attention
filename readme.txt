@@ -61,9 +61,13 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = BETA =
+* New: Tooltip Layout option
 * New: Added image and shortcode columns to "All Images" section in admin
+* Improved: Usability on mobile phones and touch devices
 * Improved: Portuguese translation
 * Fixed: Preview not working in some cases
+* Fixed: Compatibility issue with Jetpack Photon
+* Fixed: Lightbox ignoring color settings
 
 = 1.3 =
 * New: Easily preview your interactive image using "Preview Changes" or "View Post" in the dashboard
