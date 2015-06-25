@@ -41,7 +41,7 @@ class DrawAttention_Pro {
 
 				array(
 					'name'    => __( 'Show more info on', 'drawattention' ),
-					'desc'    => __( '', 'drawattention' ),
+					'desc'    => __( 'Click is recommended for best results. If you use Hover, please test carefully with your image', 'drawattention' ),
 					'id'      => $this->parent->custom_fields->prefix . 'event_trigger',
 					'type'    => 'select',
 					'options' => array(

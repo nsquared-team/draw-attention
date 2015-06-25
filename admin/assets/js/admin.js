@@ -53,6 +53,20 @@
 		}
 	}
 
+	var layoutSelect = function() {
+		$('input[name="_da_map_layout"]').on('change', function() {
+			showHideEventTriggerMetabox();
+		});
+	}
+	var showHideEventTriggerMetabox = function() {
+		var selectedLayout = $('input[name="_da_map_layout"]:checked').val();
+		if (selectedLayout==='lightbox') {
+			$('.cmb2-id--da-event-trigger').hide();
+		} else {
+			$('.cmb2-id--da-event-trigger').show();
+		}
+	}
+
 	/* Fix the weird-o cloning behavior when adding a new row */
 	var hotspotCloning = function() {
 		var repeatGroup = $('.cmb-repeatable-group');
@@ -157,6 +171,8 @@
 	hotspotAdmin.init = function() {
 		canvasDraw();
 		accordion();
+		layoutSelect();
+		showHideEventTriggerMetabox();
 		hotspotNames();
 		hotspotCloning();
 		hotspotActions();
