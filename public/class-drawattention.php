@@ -359,6 +359,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_reset_query();
 
 			$hotspots = get_post_meta( $imageID, $this->custom_fields->prefix.'hotspots', true );
+			$url_hotspots = array();
+			$urls_only = false;
+			$urls_class = '';
 			$html = '';
 
 			if ( empty( $hotspots ) || empty( $hotspots['0']['coordinates'] ) ) {
@@ -409,16 +412,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
 
-
-				$html .=  '<div class="hotspots-container ' . $layout . ' event-click' .'" id="' . $spot_id . '">';
-				$html .=		'<div class="hotspots-interaction">';
-
-				$html .= $info_html;
-				$html .= $image_html;
-
-				$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
-
-				$html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
+				$map_html = '';
+				$map_html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
 				foreach ($hotspots as $key => $hotspot) {
 					if ( empty( $hotspot['coordinates'] ) ) { continue; }
 					$target = '';
@@ -441,10 +436,32 @@ if ( !class_exists( 'DrawAttention' ) ) {
 					$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $key;
 
 					$coords = $hotspot['coordinates'];
-					$html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+					$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+					if ( $target == 'url' ) {
+						$url_hotspots[] = $hotspot;
+					}
 				}
 
-				$html .=    '</map>';
+				if ( count( $hotspots ) == count( $url_hotspots ) ) {
+					$urls_only = true;
+					$urls_class = 'links-only';
+				}
+
+				$map_html .=    '</map>';
+
+				$html .=  '<div class="hotspots-container ' . $urls_class . ' ' . $layout . ' event-click' .'" id="' . $spot_id . '">';
+				$html .=		'<div class="hotspots-interaction">';
+
+				if ( $urls_only ) {
+					$html .= $image_html;
+				} else {
+					$html .= $info_html;
+					$html .= $image_html;
+				}
+
+				$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
+
+				$html .= $map_html;
 
 				foreach ($hotspots as $key => $hotspot) {
 					$html .=  '<div class="hotspot-info" id="hotspot-' . $key . '">';
