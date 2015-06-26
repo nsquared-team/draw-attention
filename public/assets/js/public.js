@@ -80,6 +80,31 @@
 		});
 	};
 
+	/* Private: show URL tooltip */
+	var showUrlTooltip = function(area, container){
+		area.qtip({
+			position: {
+				target: 'mouse',
+				viewport: $(window),
+				adjust: {
+					x: 10
+				}
+			},
+			style: {
+				classes: 'qtip-da-custom tip-title-only'
+			},
+			events: {
+				render: function(event, api) {
+					var tooltip = api.elements.tooltip,
+						mapId = container.attr('id'),
+						mapNo = mapId.match(/\d+/)[0];
+
+					tooltip.addClass('tooltip-'+ mapNo);
+				}
+			}
+		});
+	};
+
 	/* Private: show info area */
 	var showNewInfo = function(container, isSticky, info) {
 		var infoContainer = container.find('.hotspots-placeholder'),
@@ -117,6 +142,14 @@
 				window.location.href = href;
 			}
 		});
+
+		if (container.hasClass('event-hover')) {
+			container.find('area.url-area').each(function(){
+				var $this = $(this);
+
+				showUrlTooltip($this, container);
+			});
+		}
 
 		if (container.hasClass('tooltip')) {
 			container.find('area.more-info-area').each(function(){

@@ -117,14 +117,14 @@ class DrawAttention_Pro {
 				wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
 			}
 
-			if ( $layout == 'tooltip' ) {
-				wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
-				wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
-			}
-
 			$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
 			if ( empty( $event_trigger ) ) {
 				$event_trigger = 'click';
+			}
+
+			if ( $event_trigger == 'hover' || $layout == 'tooltip' ) {
+				wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
+				wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
 			}
 
 			$spot_id = 'hotspot-' . $imageID;
