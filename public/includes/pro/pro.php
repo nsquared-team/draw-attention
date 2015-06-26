@@ -95,6 +95,9 @@ class DrawAttention_Pro {
 			wp_reset_query();
 		}
 		$hotspots = get_post_meta( $imageID, $this->parent->custom_fields->prefix.'hotspots', true );
+		$url_hotspots = array();
+		$urls_only = false;
+		$urls_class = '';
 		$html = '';
 
 		if ( empty( $hotspots['0']['coordinates'] ) ) {
@@ -153,29 +156,19 @@ class DrawAttention_Pro {
 			$image_html .=    '</div>';
 
 			$info_html = '';
-			$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
-			$info_html .=      '<div class="hotspot-initial">';
-			$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-			$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? apply_filters( 'the_content', ($settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) : '';
-			$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
-			$info_html .=      '</div>';
-			$info_html .=    '</div>';
 
-
-			$html .=  '<div class="hotspots-container ' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
-			$html .=		'<div class="hotspots-interaction">';
-
-			if ( $layout == 'left' || $layout == 'top' ) {
-				$html .= $info_html;
-				$html .= $image_html;
-			} else {
-				$html .= $image_html;
-				$html .= $info_html;
+			if ( $layout != 'lightbox' && $layout != 'tooltip' ) {
+				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
+				$info_html .=      '<div class="hotspot-initial">';
+				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
+				$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? apply_filters( 'the_content', ($settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) : '';
+				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
+				$info_html .=      '</div>';
+				$info_html .=    '</div>';
 			}
 
-			$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
-
-			$html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
+			$map_html = '';
+			$map_html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
 			foreach ($hotspots as $key => $hotspot) {
 				$coords = $hotspot['coordinates'];
 				$target = '';
@@ -197,10 +190,38 @@ class DrawAttention_Pro {
 
 				$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
 
-				$html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+
+				if ( $target == 'url' ) {
+					$url_hotspots[] = $hotspot;
+				}
 			}
 
-			$html .=    '</map>';
+			if ( count( $hotspots ) == count( $url_hotspots ) ) {
+				$urls_only = true;
+				$urls_class = 'links-only';
+			}
+
+			$map_html .=    '</map>';
+
+
+			$html .=  '<div class="hotspots-container ' . $urls_class . ' ' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
+			$html .=		'<div class="hotspots-interaction">';
+
+			if ( $urls_only ) {
+				$html .= $image_html;
+			}
+			elseif ( $layout == 'left' || $layout == 'top' ) {
+				$html .= $info_html;
+				$html .= $image_html;
+			} else {
+				$html .= $image_html;
+				$html .= $info_html;
+			}
+
+			$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
+
+			$html .= $map_html;
 
 			foreach ($hotspots as $key => $hotspot) {
 				$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
