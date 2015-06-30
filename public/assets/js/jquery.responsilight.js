@@ -222,11 +222,11 @@
 		map.find('area').each(function(){
 			var $this = $(this);
 
-			$this.on('mouseover', function(){
+			$this.on('mouseover touchstart', function(){
 				mapOver($this, img);
 			});
 
-			$this.on('mouseout', function(){
+			$this.on('mouseout touchend', function(){
 				mapOut($this, img);
 			});
 
@@ -280,7 +280,7 @@
 		$canvas = $('#canvas-' + id);
 
 		/* Fix for bug on iOS where touch event doesn't register on the area */
-		$canvas.off('touchstart').on('touchstart', function(e){
+		$canvas.on('touchstart', function(e){
 			e.preventDefault();
 		});
 

@@ -142,6 +142,9 @@ class DrawAttention_Pro {
 					border: 0 {$bg_color} solid;
 					color: {$text_color};
 				}
+				.qtip.tooltip-{$imageID} .qtip-icon .ui-icon {
+					color: {$title_color};
+				}
 
 				#{$spot_id} .hotspot-title,
 				.featherlight .featherlight-content.lightbox-{$imageID} .hotspot-title,
@@ -191,6 +194,7 @@ class DrawAttention_Pro {
 				$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
 
 				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+
 
 				if ( $target == 'url' ) {
 					$url_hotspots[] = $hotspot;

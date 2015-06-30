@@ -41,43 +41,82 @@
 	};
 
 	/* Private: show tooltip */
-	var showTooltip = function(area, newInfo, container){
-		area.qtip({
-			content: {
-				text: newInfo
-			},
-			show: {
-				solo: true,
-				event: 'stickyHighlight',
-				effect: function() {
-					$(this).fadeTo(300, 1);
-				}
-			},
-			hide: {
-				fixed: true,
-				delay: 300,
-				event: 'unstickyHighlight unfocus'
-			},
-			position: {
-				target: 'mouse',
-				viewport: $(window),
-				adjust: {
-					mouse: false
-				}
-			},
-			style: {
-				classes: 'qtip-da-custom'
-			},
-			events: {
-				render: function(event, api) {
-					var tooltip = api.elements.tooltip,
-						mapId = container.attr('id'),
-						mapNo = mapId.match(/\d+/)[0];
+	var showTooltip = function(area, newInfo, container, tooSmall) {
+		if (tooSmall) {
+			area.qtip({
+					content: {
+						text: newInfo,
+						title: '&nbsp;',
+						button: true
+					},
+					show: {
+						event: 'stickyHighlight',
+						modal: {
+							on: true,
+							blur: false
+						}
+					},
+					hide: {
+						fixed: true,
+						delay: 300,
+						event: 'unstickyHighlight unfocus'
+					},
+					position: {
+						my: 'center',
+						at: 'center',
+						target: $(window)
+					},
+					style: {
+						classes: 'qtip-da-custom'
+					},
+					events: {
+						render: function(event, api) {
+							var tooltip = api.elements.tooltip,
+								mapId = container.attr('id'),
+								mapNo = mapId.match(/\d+/)[0];
 
-					tooltip.addClass('tooltip-'+ mapNo);
+							tooltip.addClass('tooltip-'+ mapNo);
+						}
+					}
+				});
+		} else {
+			area.qtip({
+				content: {
+					text: newInfo
+				},
+				show: {
+					solo: true,
+					event: 'stickyHighlight',
+					effect: function() {
+						$(this).fadeTo(300, 1);
+					}
+				},
+				hide: {
+					fixed: true,
+					delay: 300,
+					event: 'unstickyHighlight unfocus'
+				},
+				position: {
+					target: 'mouse',
+					viewport: $(window),
+					adjust: {
+						mouse: false
+					}
+				},
+				style: {
+					classes: 'qtip-da-custom'
+				},
+				events: {
+					render: function(event, api) {
+						var tooltip = api.elements.tooltip,
+							mapId = container.attr('id'),
+							mapNo = mapId.match(/\d+/)[0];
+
+						tooltip.addClass('tooltip-'+ mapNo);
+					}
 				}
-			}
-		});
+			});
+		}
 	};
 
 	/* Private: show URL tooltip */
@@ -152,11 +191,20 @@
 		}
 
 		if (container.hasClass('tooltip')) {
+			var screenWidth = $(window).width(),
+				daWidth = container.width(),
+				tipWidth = 280 * 3,
+				tooSmall = false;
+
+			if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.8)) {
+				tooSmall = true;
+			}
+
 			container.find('area.more-info-area').each(function(){
 				var $this = $(this),
 					newInfo = $($this.attr('href'));
 
-				showTooltip($this, newInfo, container);
+				showTooltip($this, newInfo, container, tooSmall);
 			});
 		} else {
 			container.on('stickyHighlight', 'area.more-info-area', function(e){
