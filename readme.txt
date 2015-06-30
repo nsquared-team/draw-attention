@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map
 Requires at least: 3.5.1
 Tested up to: 4.2
-Stable tag: 1.4
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,7 +85,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= 1.4 =
+= 1.4.1 =
 * New: Ability to link an area to a URL (instead of showing more info)
 * New: Added Visual/WYSIWYG editor to area descriptions (more info box)
 * Improved: Usability on mobile phones and touch devices
