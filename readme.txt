@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map
 Requires at least: 3.5.1
 Tested up to: 4.2
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Your content is accessible even to users who have JavaScript disabled - SEO frie
 Choose your own custom color scheme to match your site
 
 ### Highlight on Hover ###
-Highlight different areas of your image when you site visitors moves their mouse over the image
+Highlight different areas of your image when your site visitor moves their mouse over the image
 
 ### Easy to Draw ###
 Easy to draw the highlightable areas of your image - and easy to edit the shapes later too!
@@ -32,15 +32,18 @@ Easy to draw the highlightable areas of your image - and easy to edit the shapes
 ### More Info on Click ###
 When a highlighted map area is clicked, show more information.
 
+### Go to a URL ###
+Optionally send a site visitor to another URL when clicking a highlightable area of the image.
+
 [vimeo https://vimeo.com/118974102]
 
 [Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization:
 
 ### Have Multiple Interactive Images (Pro only) ###
-Need more than one interactive image on your site? The Pro version allows unlimited interactive images
+Need more than one interactive image on your site? The Pro version allows unlimited highlightable areas on unlimited interactive images
 
 ### Layout Options (Pro only) ###
-Show more info about highlighted map areas in a variety of different layouts or in a lightbox
+Show more info about highlighted map areas in a variety of different layouts, including lightbox and tooltip.
 
 ### 20 Pre-Defined Color Palettes (Pro only) ###
 Choose from one of 20 pre-defined color palettes or use your own custom color scheme
@@ -71,18 +74,20 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 - Ability to create more than 1 interactive image
 - Unlimited number of highlightable areas for each image
 - 20 preset color schemes
-- Custom layout options (change position of more info box or use a lightbox)
+- Custom layout options (change position of more info box or use a lightbox or a tooltip)
 
 == Screenshots ==
 1. Draw your highlightable areas right in the dasbhoard
 2. Site visitors can click to learn more about your highlighted areas
 3. Upload a floor plan and show detail photos for each room
 4. Customize the colors and appearance of the highlighted areas
-5. 
+5.
 
 == Changelog ==
 
-= BETA =
+= 1.4 =
+* New: Ability to link an area to a URL (instead of showing more info)
+* New: Added Visual/WYSIWYG editor to area descriptions (more info box)
 * Improved: Usability on mobile phones and touch devices
 * Improved: Portuguese translation
 * Fixed: Preview not working in some cases
