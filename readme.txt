@@ -64,6 +64,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 * New: Tooltip Layout option
 * New: Ability to link an area to a URL (instead of showing more info)
 * New: Added image and shortcode columns to "All Images" section in admin
+* New: Added Visual/WYSIWYG editor to area descriptions (more info box)
 * Improved: Usability on mobile phones and touch devices
 * Improved: Portuguese translation
 * Fixed: Preview not working in some cases
