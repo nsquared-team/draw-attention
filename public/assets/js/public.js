@@ -65,7 +65,8 @@
 						at: 'center',
 						target: $(window),
 						adjust: {
-							scroll: false
+							scroll: false,
+							mouse: false
 						}
 					},
 					style: {
