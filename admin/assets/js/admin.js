@@ -164,7 +164,6 @@
 	var saveAlert = function(){
 		var isDirty = false;
 		$('.cmb2-wrap > .cmb2-metabox').on('change', ':input', function(){
-			console.log('Form is dirty?: ' + isDirty);
 			isDirty = true;
 		});
 
