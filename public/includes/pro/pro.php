@@ -193,6 +193,9 @@ class DrawAttention_Pro {
 
 				$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
 
+				if ( empty( $hotspot['title'] ) ) {
+					$hotspot['title'] = '';
+				}
 				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
 
 
