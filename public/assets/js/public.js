@@ -46,7 +46,6 @@
 			area.qtip({
 					content: {
 						text: newInfo,
-						title: '&nbsp;',
 						button: true
 					},
 					show: {
@@ -64,7 +63,10 @@
 					position: {
 						my: 'center',
 						at: 'center',
-						target: $(window)
+						target: $(window),
+						adjust: {
+							scroll: false
+						}
 					},
 					style: {
 						classes: 'qtip-da-custom'
@@ -76,13 +78,33 @@
 								mapNo = mapId.match(/\d+/)[0];
 
 							tooltip.addClass('tooltip-'+ mapNo);
+						},
+						visible: function(event, api) {
+							var tooltip = api.elements.tooltip,
+								winHeight = $(window).height(),
+								tipHeight = tooltip.height(),
+								img = tooltip.find('img'),
+								imgHeight = img.height();
+
+							if (tipHeight > winHeight) {
+								var textHeight = tipHeight - imgHeight;
+								if (textHeight < winHeight) {
+									img.css({
+										'width': 'auto',
+										'maxHeight': winHeight - textHeight + 'px'
+									});
+									api.reposition();
+								}
+							}
 						}
 					}
 				});
 		} else {
 			area.qtip({
 				content: {
-					text: newInfo
+					text: newInfo,
+					title: '&nbsp;',
+					button: true
 				},
 				show: {
 					solo: true,
@@ -100,7 +122,8 @@
 					target: 'mouse',
 					viewport: $(window),
 					adjust: {
-						mouse: false
+						mouse: false,
+						method: 'shift'
 					}
 				},
 				style: {
@@ -113,6 +136,8 @@
 							mapNo = mapId.match(/\d+/)[0];
 
 						tooltip.addClass('tooltip-'+ mapNo);
+
+
 					}
 				}
 			});

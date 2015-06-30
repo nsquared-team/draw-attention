@@ -310,7 +310,7 @@ x:-o-prefocus, .qtip .qtip-tip{
 
 	.qtip-close{
 		position: absolute;
-		right: -9px; top: -9px;
+		right: 4px; top: 4px;
 		z-index: 11; /* Overlap .qtip-tip */
 
 		cursor: pointer;
