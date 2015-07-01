@@ -15,25 +15,25 @@ Create interactive images in WordPress. Perfect for floor plans, trade shows, gr
 Interactive images resize to fit your theme and the available screen size
 
 ### Accessible ###
-Map info is accessible to everyone who visits your site, regardless of device or capabilities.
+Image info is accessible to everyone who visits your site, regardless of device or capabilities.
 
 ### Progressively Enhanced ###
-Your content is accessible even to users who have JavaScript disabled - SEO friendly too!
+Your content is accessible even to users who have JavaScript disabled - SEO friendly too! Draw Attention uses canvas elements in modern browsers, and falls back to image maps in older browsers.
 
 ### Customizable Colors ###
 Choose your own custom color scheme to match your site
 
 ### Highlight on Hover ###
-Highlight different areas of your image when your site visitor moves their mouse over the image
+Highlight different areas of your image when your site visitor moves their mouse over the interactive image
 
 ### Easy to Draw ###
 Easy to draw the highlightable areas of your image - and easy to edit the shapes later too!
 
 ### More Info on Click ###
-When a highlighted map area is clicked, show more information.
+When a highlighted area is clicked, show more information.
 
 ### Go to a URL ###
-Optionally send a site visitor to another URL when clicking a highlightable area of the image.
+Optionally send a site visitor to another URL when clicking a highlightable area of the image map.
 
 [vimeo https://vimeo.com/118974102]
 
