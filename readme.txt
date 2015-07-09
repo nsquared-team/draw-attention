@@ -65,7 +65,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 * Fixed: Clicking or mousing off a selected area will display the default placeholder text in the left, right, bottom, or top layouts
 * Fixed: Potential conflict with other themes and plugins when using the tooltip layout
 
-= 1.4.3 =
+= 1.4.2 =
 * Fixed: Allow shortcodes in more info area, without using the_content which caused some conflicts with other plugins (ie. showing sharing buttons)
 
 = 1.4.1 =
