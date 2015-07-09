@@ -6,6 +6,10 @@
 	margin: 1em 0;
 }
 
+.hotspots-map area {
+	outline: 0 none;
+}
+
 .hotspots-placeholder {
 	padding: 1em;
 	position: relative;
@@ -85,24 +89,28 @@
 }
 
 @media (min-width: 600px) {
-	.hotspots-interaction {
+	.layout-left .hotspots-interaction,
+	.layout-right .hotspots-interaction {
 		display: table;
 		table-layout: fixed;
 		width: 100%;
 	}
-	.hotspots-image-container {
+	.layout-left .hotspots-image-container,
+	.layout-right .hotspots-image-container {
 		display: table-cell;
 		vertical-align: top;
 		width: 66%;
 	}
-	.hotspots-placeholder {
+	.layout-left .hotspots-placeholder,
+	.layout-right .hotspots-placeholder {
 		display: table-cell;
 		vertical-align: top;
 	}
 }
 
 @media (min-width: 900px) {
-	.hotspots-image-container {
+	.layout-left .hotspots-image-container,
+	.layout-right .hotspots-image-container {
 		width: 75%;
 	}
 }
@@ -112,7 +120,7 @@
 /* Light Box
 /* ------------------------------------------- */
 
-.lightbox .hotspots-placeholder {
+.layout-lightbox .hotspots-placeholder {
 	display: none;
 }
 
@@ -127,7 +135,7 @@
 	top: 0;
 	left: 0;
 	white-space: nowrap;
-	z-index: 2;
+	z-index: 99999;
 	&:last-of-type {
 		background: rgba(0, 0, 0, 0.8);
 	}
@@ -141,12 +149,15 @@
 	.featherlight-content {
 		background: #fff;
 		border-bottom: 25px solid transparent;
+		@include box-sizing(border-box);
 		cursor: auto;
 		display: inline-block;
 		overflow: auto;
 		margin-left: 5%;
 		margin-right: 5%;
 		max-height: 95%;
+		max-width: 95%;
+		min-height: 3%;
 		min-width:  30%;
 		padding: 25px 25px 0;
 		position: relative;
@@ -177,14 +188,20 @@
 	iframe {
 		border: none;
 	}
-	.hotspot-title {
+	h2.hotspot-title {
 		font-size: 1.2em;
-		margin-bottom: 0.4em;
+		margin: 0 0 0.4em 0;
+		padding: 0;
 	}
 	.hotspot-content {
 		p {
+			font-size: 1em;
 			margin: 1em 0;
 		}
+	}
+	img {
+		height: auto;
+		max-width: 100%;
 	}
 }
 
@@ -202,3 +219,138 @@
 		padding: 10px 10px 0;
 	}
 }
+
+/* ------------------------------------------- */
+/* Tooltip
+/* ------------------------------------------- */
+
+.layout-tooltip .hotspots-placeholder {
+	display: none;
+}
+
+.qtip {
+	box-shadow: none;
+	direction: ltr;
+	display: none;
+	left: -28000px;
+	max-width: 280px;
+	min-width: 50px;
+	padding: 0;
+	position: absolute;
+	top: -28000px;
+}
+
+.qtip-content {
+	overflow: hidden;
+	padding: 0.5em 0.75em;
+	position: relative;
+	text-align: left;
+	word-wrap: break-word;
+	h2.hotspot-title {
+		font-size: 1.2em;
+		margin: 0 0 0.4em 0;
+		padding: 0;
+		text-align: center;
+	}
+	.hotspot-content {
+		p {
+			font-size: 1em;
+			margin: 1em 0;
+		}
+		img {
+			height: auto;
+			max-width: 100%;
+		}
+	}
+}
+
+/* Default tooltip style */
+.qtip-default{
+	background-color: #FFFFA3;
+	border: 0 none;
+	color: #555;
+}
+
+.qtip .qtip-tip{
+	margin: 0 auto;
+	overflow: hidden;
+	z-index: 10;
+}
+
+/* Opera bug #357 - Incorrect tip position
+https://github.com/Craga89/qTip2/issues/367 */
+x:-o-prefocus, .qtip .qtip-tip{
+	visibility: hidden;
+}
+
+	.qtip .qtip-tip,
+	.qtip .qtip-tip .qtip-vml,
+	.qtip .qtip-tip canvas{
+		position: absolute;
+		color: #123456;
+		background: transparent;
+		border: 0 dashed transparent;
+	}
+
+	.qtip .qtip-tip canvas{ top: 0; left: 0; }
+
+	.qtip .qtip-tip .qtip-vml{
+		behavior: url(#default#VML);
+		display: inline-block;
+		visibility: visible;
+	}
+
+	.qtip-titlebar{
+		position: relative;
+		padding: 0;
+		overflow: hidden;
+		border-width: 0;
+	}
+
+
+	.qtip-close{
+		position: absolute;
+		right: 4px; top: 4px;
+		z-index: 11; /* Overlap .qtip-tip */
+
+		cursor: pointer;
+		outline: medium none;
+
+		border: 1px solid transparent;
+	}
+
+		.qtip-titlebar .qtip-close{
+			right: 4px; top: 50%;
+			margin-top: -9px;
+		}
+
+		* html .qtip-titlebar .qtip-close{ top: 16px; } /* IE fix */
+
+		.qtip-titlebar .ui-icon,
+		.qtip-icon .ui-icon{
+			display: block;
+			text-indent: -1000em;
+			direction: ltr;
+		}
+
+		.qtip-icon, .qtip-icon .ui-icon{
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+			text-decoration: none;
+		}
+
+			.qtip-icon .ui-icon{
+				width: 18px;
+				height: 14px;
+
+				line-height: 14px;
+				text-align: center;
+				text-indent: 0;
+				font: normal bold 16px/16px Tahoma,sans-serif;
+
+				// color: inherit;
+				color: white;
+				background: transparent none no-repeat -100em -100em;
+			}
+

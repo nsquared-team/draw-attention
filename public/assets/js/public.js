@@ -216,7 +216,7 @@
 			});
 		}
 
-		if (container.hasClass('tooltip')) {
+		if (container.hasClass('layout-tooltip')) {
 			var screenWidth = $(window).width(),
 				daWidth = container.width(),
 				tipWidth = 280 * 3,
@@ -239,7 +239,7 @@
 				isSticky = $this.data('stickyCanvas'),
 				newInfo = $($this.attr('href'));
 
-				if (container.hasClass('lightbox')) {
+				if (container.hasClass('layout-lightbox')) {
 					showLightbox(container, isSticky, newInfo, $this);
 				} else {
 					newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');

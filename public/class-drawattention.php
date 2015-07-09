@@ -452,7 +452,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$map_html .=    '</map>';
 
-				$html .=  '<div class="hotspots-container ' . $urls_class . ' ' . $layout . ' event-click' .'" id="' . $spot_id . '">';
+				$html .=  '<div class="hotspots-container ' . $urls_class . ' layout-' . $layout . ' event-click' .'" id="' . $spot_id . '">';
 				$html .=		'<div class="hotspots-interaction">';
 
 				if ( $urls_only ) {
