@@ -233,7 +233,7 @@
 				showTooltip($this, newInfo, container, tooSmall);
 			});
 		} else {
-			container.on('stickyHighlight', 'area.more-info-area', function(e){
+			container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
 				var $this = $(this),
 				container = $this.parents('.hotspots-container'),
 				isSticky = $this.data('stickyCanvas'),
