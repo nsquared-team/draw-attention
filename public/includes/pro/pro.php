@@ -212,7 +212,7 @@ class DrawAttention_Pro {
 			$map_html .=    '</map>';
 
 
-			$html .=  '<div class="hotspots-container ' . $urls_class . ' ' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
+			$html .=  '<div class="hotspots-container ' . $urls_class . ' layout-' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
 			$html .=		'<div class="hotspots-interaction">';
 
 			if ( $urls_only ) {

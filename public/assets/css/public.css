@@ -117,32 +117,32 @@
 
 @media (min-width: 600px) {
   /* line 92, ../sass/public.scss */
-  .left .hotspots-interaction,
-  .right .hotspots-interaction {
+  .layout-left .hotspots-interaction,
+  .layout-right .hotspots-interaction {
     display: table;
     table-layout: fixed;
     width: 100%;
   }
 
   /* line 98, ../sass/public.scss */
-  .left .hotspots-image-container,
-  .right .hotspots-image-container {
+  .layout-left .hotspots-image-container,
+  .layout-right .hotspots-image-container {
     display: table-cell;
     vertical-align: top;
     width: 66%;
   }
 
   /* line 104, ../sass/public.scss */
-  .left .hotspots-placeholder,
-  .right .hotspots-placeholder {
+  .layout-left .hotspots-placeholder,
+  .layout-right .hotspots-placeholder {
     display: table-cell;
     vertical-align: top;
   }
 }
 @media (min-width: 900px) {
   /* line 112, ../sass/public.scss */
-  .left .hotspots-image-container,
-  .right .hotspots-image-container {
+  .layout-left .hotspots-image-container,
+  .layout-right .hotspots-image-container {
     width: 75%;
   }
 }
@@ -150,7 +150,7 @@
 /* Light Box
 /* ------------------------------------------- */
 /* line 123, ../sass/public.scss */
-.lightbox .hotspots-placeholder {
+.layout-lightbox .hotspots-placeholder {
   display: none;
 }
 
@@ -266,7 +266,7 @@
 /* Tooltip
 /* ------------------------------------------- */
 /* line 227, ../sass/public.scss */
-.tooltip .hotspots-placeholder {
+.layout-tooltip .hotspots-placeholder {
   display: none;
 }
 
