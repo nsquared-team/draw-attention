@@ -4,7 +4,8 @@
 	/* Browser support checking */
 	/* ------------------------------------------- */
 	var hasCanvas,
-		hasPointerEvents;
+		hasPointerEvents,
+		doHighlights = false;
 
 	/* test if browser supports canvas */
 	hasCanvas = (function() {
@@ -30,6 +31,10 @@
 		documentElement.removeChild(element);
 		return !!supports;
 	})();
+
+	if (hasCanvas && hasPointerEvents) {
+		doHighlights = true;
+	}
 
 	/* ------------------------------------------- */
 	/* Helpers */
@@ -60,7 +65,7 @@
 		drawOptions;
 
 	drawIt = function(img, map) {
-		if(hasCanvas && hasPointerEvents) {
+		if(doHighlights) {
 			prepImage(img, map);
 		} else {
 			simpleMap(map);
@@ -255,60 +260,61 @@
 	};
 
 	mapOver = function(area, img) {
-		var w = img.width(),
-			h = img.height(),
-			shape = area.attr('shape'),
-			id = area.attr('id'),
+		if (doHighlights) {
+			var w = img.width(),
+				h = img.height(),
+				shape = area.attr('shape'),
+				id = area.attr('id'),
+				$canvas = $('#canvas-' + id);
+
+			if ($canvas.length) {
+				return;
+			}
+
+			var makeCanvas = $('<canvas id="canvas-' + id + '" width="' + w + '" height="' + h + '"></canvas>');
+
+			img.parent().append(makeCanvas);
+
+			makeCanvas.css({
+				'position': 'absolute',
+				'top': '0',
+				'left': '0',
+				'pointer-events': 'none',
+				'display': 'none'
+			});
+
 			$canvas = $('#canvas-' + id);
 
-		if ($canvas.length) {
-			return;
-		}
+			/* Fix for bug on iOS where touch event doesn't register on the area */
+			$canvas.on('touchstart', function(e){
+				e.preventDefault();
+			});
 
-		var makeCanvas = $('<canvas id="canvas-' + id + '" width="' + w + '" height="' + h + '"></canvas>');
+			var canvas = $canvas.get(0),
+				context = canvas.getContext('2d');
 
-		img.parent().append(makeCanvas);
+			var coords = area.attr('coords').split(','),
+				xCoords = [],
+				yCoords = [];
 
-		makeCanvas.css({
-			'position': 'absolute',
-			'top': '0',
-			'left': '0',
-			'pointer-events': 'none',
-			'display': 'none'
-		});
-
-		$canvas = $('#canvas-' + id);
-
-		/* Fix for bug on iOS where touch event doesn't register on the area */
-		$canvas.on('touchstart', function(e){
-			e.preventDefault();
-		});
-
-		var canvas = $canvas.get(0),
-			context = canvas.getContext('2d');
-
-		var coords = area.attr('coords').split(','),
-			xCoords = [],
-			yCoords = [];
-
-		for(var i=0; i<coords.length; i++) {
-			if(i%2 == 0) {
-				xCoords.push(coords[i]);
-			} else {
-				yCoords.push(coords[i]);
+			for(var i=0; i<coords.length; i++) {
+				if(i%2 == 0) {
+					xCoords.push(coords[i]);
+				} else {
+					yCoords.push(coords[i]);
+				}
 			}
-		}
 
-		if(shape == 'poly') {
-			drawPoly(context, xCoords, yCoords, img);
-		} else if(shape == 'circle') {
-			drawCircle(context, xCoords, yCoords, img);
-		} else if(shape == 'rect') {
-			drawRect(context, xCoords, yCoords, img);
-		}
+			if(shape == 'poly') {
+				drawPoly(context, xCoords, yCoords, img);
+			} else if(shape == 'circle') {
+				drawCircle(context, xCoords, yCoords, img);
+			} else if(shape == 'rect') {
+				drawRect(context, xCoords, yCoords, img);
+			}
 
-		$canvas.stop(true, true).fadeIn('fast');
-		var href = area.attr('href');
+			$canvas.stop(true, true).fadeIn('fast');
+		}
 		area.trigger('showHighlight');
 		if(opts.eventTrigger == 'hover') {
 			area.data('stickyCanvas', true);
@@ -321,13 +327,15 @@
 			area.data('stickyCanvas', false);
 			area.trigger('unstickyHighlight');
 		}
-		var id = area.attr('id'),
-			canvas = $('#canvas-' + id);
+		if(doHighlights) {
+			var id = area.attr('id'),
+				canvas = $('#canvas-' + id);
 
-		if (!area.data('stickyCanvas')) {
-			canvas.stop(true, true).fadeOut('fast', function(){
-				canvas.remove();
-			});
+			if (!area.data('stickyCanvas')) {
+				canvas.stop(true, true).fadeOut('fast', function(){
+					canvas.remove();
+				});
+			}
 		}
 		area.trigger('removeHighlight');
 	};
@@ -340,30 +348,36 @@
 		}
 		lastMapClick = now;
 
-		var id = area.attr('id'),
-			stickyCanvas = $('#canvas-' + id),
-			isSticky = area.data('stickyCanvas'),
-			href = area.attr('href');
+		if(doHighlights) {
+			var id = area.attr('id'),
+				stickyCanvas = $('#canvas-' + id),
+				isSticky = area.data('stickyCanvas');
 
-		if (stickyCanvas.length == 0) {
-			mapOver(area, img);
-			stickyCanvas = $('#canvas-' + id);
+			if (stickyCanvas.length == 0) {
+				mapOver(area, img);
+				stickyCanvas = $('#canvas-' + id);
+			}
+
+			if (isSticky) {
+				stickyCanvas.stop(true, true).fadeOut('fast', function(){
+					$(this).remove();
+				});
+			} else {
+				area.data('stickyCanvas', true);
+				stickyCanvas.addClass('sticky-canvas');
+				stickyCanvas.siblings('canvas').stop(true, true).fadeOut('fast', function(){
+					$(this).remove();
+				});
+			}
 		}
 
 		if (isSticky) {
 			area.data('stickyCanvas', false);
-			stickyCanvas.stop(true, true).fadeOut('fast', function(){
-				$(this).remove();
-			});
 			area.trigger('unstickyHighlight');
 			area.trigger('removeHighlight');
 		} else {
 			area.data('stickyCanvas', true);
-			stickyCanvas.addClass('sticky-canvas');
 			area.trigger('stickyHighlight');
-			stickyCanvas.siblings('canvas').stop(true, true).fadeOut('fast', function(){
-				$(this).remove();
-			});
 			area.siblings('area').data('stickyCanvas', false).trigger('removeHighlight');
 		}
 	};
@@ -382,12 +396,12 @@
 	})();
 
 	simpleMap = function(map) {
-		map.find('area')
-			.off()
-			.on('click', function(e){
-				e.preventDefault();
-				$(this).trigger('stickyHighlight');
-			});
+		map.find('area').each(function(e){
+			e.preventDefault();
+			var $this = $(this);
+			index++;
+			$this.attr('id', mapName + '-area-' + index);
+		});
 	}
 
 	/* Responsilighter plugin */
