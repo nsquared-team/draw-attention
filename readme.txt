@@ -85,6 +85,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.4.3 =
+* Fixed: Loading more info in IE9 and IE10. Note that these browsers do not support the area highlights
+* Fixed: Clicking off a selected area will display the default placeholder text in the more info area
+
 = 1.4.2 =
 * Fixed: Allow shortcodes in more info area, without using the_content which caused some conflicts with other plugins (ie. showing sharing buttons)
 
