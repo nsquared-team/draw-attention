@@ -225,41 +225,46 @@
 
 	imageEvents = function(img, map) {
 		map.find('area').each(function(){
-			var $this = $(this);
+			var $this = $(this),
+				action = $this.data('action'),
+				trigger = opts.eventTrigger;
 
-			$this.on('mouseover touchstart', function(){
-				mapOver($this, img);
-			});
-
-			$this.on('mouseout touchend', function(){
-				mapOut($this, img);
-			});
-
-			$this.on('click touchstart', function(e){
+			$this.on('mouseover touchstart mouseout touchend click focus blur keypress', function(e){
+				var type = e.type;
 				e.preventDefault();
-				if (opts.eventTrigger == 'click') {
-					mapClick($this, img);
-				}
-			});
 
-			$this.on('focus', function(){
-				mapOver($this, img);
-			});
-
-			$this.on('blur', function(){
-				mapOut($this, img);
-			});
-
-			$this.on('keypress', function(e){
-				e.preventDefault();
-				if (e.which === 13) {
-					mapClick($this, img);
+				switch(type) {
+					case 'touchstart':
+						mapOver($this, img, type);
+						mapClick($this, img);
+						break;
+					case 'touchend':
+						// mapOut($this,img);
+						break;
+					case 'mouseout':
+					case 'blur':
+						mapOut($this,img);
+						break;
+					case 'mouseover':
+					case 'focus':
+						mapOver($this, img);
+						break;
+					case 'click':
+					case 'keypress':
+						if(trigger == 'click') {
+							mapClick($this, img);
+						}
+						if (e.which === 13) {
+							mapClick($this, img);
+						}
+						break;
 				}
 			});
 		});
 	};
 
-	mapOver = function(area, img) {
+	mapOver = function(area, img, type) {
+		type = type || '';
 		if (doHighlights) {
 			var w = img.width(),
 				h = img.height(),
@@ -316,7 +321,7 @@
 			$canvas.stop(true, true).fadeIn('fast');
 		}
 		area.trigger('showHighlight');
-		if(opts.eventTrigger == 'hover') {
+		if(opts.eventTrigger == 'hover' && type != 'touchstart') {
 			area.data('stickyCanvas', true);
 			area.trigger('stickyHighlight');
 		}
