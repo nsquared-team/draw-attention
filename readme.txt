@@ -61,6 +61,8 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = 1.4.4 =
+* Fixed: Mobile/Touch events required 4 taps for areas with URL action
+* Fixed: Shortcode content broken in lightbox and tooltip layouts
 * Fixed: Prevent accidental selection of lightbox with hover event
 
 = 1.4.3 =
