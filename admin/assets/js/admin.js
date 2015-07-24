@@ -61,6 +61,7 @@
 	var showHideEventTriggerMetabox = function() {
 		var selectedLayout = $('input[name="_da_map_layout"]:checked').val();
 		if (selectedLayout==='lightbox') {
+			$('#_da_event_trigger').val('click');
 			$('.cmb2-id--da-event-trigger').hide();
 		} else {
 			$('.cmb2-id--da-event-trigger').show();
