@@ -195,7 +195,9 @@
 
 		var container = $('.hotspots-container');
 
-		container.on('click', 'area.url-area', function(e){
+		container.on('touchstart click', 'area.url-area', function(e){
+			e.preventDefault();
+
 			var $this = $(this),
 				href = $this.attr('href'),
 				target = $this.attr('target');
