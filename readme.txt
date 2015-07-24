@@ -60,6 +60,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.4.4 =
+* Fixed: Prevent accidental selection of lightbox with hover event
+
 = 1.4.3 =
 * Fixed: Loading more info in IE9 and IE10. Note that these browser do not support the area highlights
 * Fixed: Clicking or mousing off a selected area will display the default placeholder text in the left, right, bottom, or top layouts
