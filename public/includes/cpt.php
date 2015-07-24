@@ -102,7 +102,7 @@ class DrawAttention_CPT {
 		switch ( $column_name ) {
 
 			case 'image':
-				$value = $this->get_image( $id, 120 );
+				$value = '<a href="'.get_edit_post_link( $id ).'">'.$this->get_image( $id, 120 ).'</a>';
 				echo $value;
 				break;
 			case 'shortcode-string':
