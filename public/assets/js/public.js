@@ -137,8 +137,6 @@
 							mapNo = mapId.match(/\d+/)[0];
 
 						tooltip.addClass('tooltip-'+ mapNo);
-
-
 					}
 				}
 			});
@@ -224,7 +222,7 @@
 				tipWidth = 280 * 3,
 				tooSmall = false;
 
-			if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.8)) {
+			if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.75)) {
 				tooSmall = true;
 			}
 
