@@ -130,6 +130,14 @@ class DrawAttention_CustomFields {
 			'fields' => array(
 
 				array(
+					'name'    => __( 'Image Background Color', 'drawattention' ),
+					'desc'    => __( 'Set the background color of behind the image', 'drawattention' ),
+					'id'      => $this->prefix . 'image_background_color',
+					'type'    => 'colorpicker',
+					'default' => '#efefef'
+				),
+
+				array(
 					'name'    => __( 'Title Color', 'drawattention' ),
 					'desc'    => __( 'Set the color of titles in More Info box', 'drawattention' ),
 					'id'      => $this->prefix . 'map_title_color',
@@ -146,7 +154,7 @@ class DrawAttention_CustomFields {
 				),
 
 				array(
-					'name'    => __( 'Background Color', 'drawattention' ),
+					'name'    => __( 'More Info Background Color', 'drawattention' ),
 					'desc'    => __( 'Set the background color of the More Info box', 'drawattention' ),
 					'id'      => $this->prefix . 'map_background_color',
 					'type'    => 'colorpicker',
