@@ -250,7 +250,7 @@
 			container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
 				var $this = $(this),
 				container = $this.parents('.hotspots-container'),
-				isSticky = $this.data('stickyCanvas') || true,
+				isSticky = $this.data('stickyCanvas') || '',
 				newInfo = $($this.attr('href'));
 
 				if (container.hasClass('layout-lightbox')) {

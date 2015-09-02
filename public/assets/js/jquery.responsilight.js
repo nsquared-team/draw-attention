@@ -67,6 +67,7 @@
 	drawIt = function(img, map) {
 		if(doHighlights) {
 			prepImage(img, map);
+			linkToHotspot(img, map);
 		} else {
 			simpleMap(map);
 		}
@@ -181,6 +182,7 @@
 
 	var resizeImageMap,
 		imageEvents,
+		linkToHotspot,
 		mapOver,
 		mapOut,
 		mapClick,
@@ -261,6 +263,16 @@
 				}
 			});
 		});
+	};
+
+	linkToHotspot = function(img, map) {
+		var hash = window.location.hash;
+
+		if (hash) {
+			var area = map.find('area[href="' + hash + '"]');
+			mapOver(area, img, null);
+			mapClick(area, img);
+		}
 	};
 
 	mapOver = function(area, img, type) {
@@ -420,8 +432,8 @@
 					$mapName = $this.attr('usemap').replace('#', ''),
 					$map = $('map[name="' + $mapName + '"]');
 				drawOptions($this);
-				imageEvents($(this), $map);
-				resizeImageMap($(this), $map);
+				imageEvents($this, $map);
+				resizeImageMap($this, $map);
 			});
 		}
 
