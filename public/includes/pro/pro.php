@@ -134,7 +134,15 @@ class DrawAttention_Pro {
 			$bg_color = $settings[$this->parent->custom_fields->prefix.'map_background_color'][0];
 			$text_color = $settings[$this->parent->custom_fields->prefix.'map_text_color'][0];
 			$title_color = $settings[$this->parent->custom_fields->prefix.'map_title_color'][0];
+			$image_background_color = $settings[$this->parent->custom_fields->prefix.'image_background_color'][0];
+			if ( empty( $image_background_color ) ) {
+				$image_background_color = '#efefef';
+			}
 			$custom_css = "
+				#{$spot_id} .hotspots-image-container {
+					background: {$image_background_color};
+				}
+
 				#{$spot_id} .hotspots-placeholder,
 				.featherlight .featherlight-content.lightbox-{$imageID},
 				.qtip.tooltip-{$imageID} {
