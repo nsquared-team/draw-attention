@@ -2,8 +2,8 @@
 Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
-Tested up to: 4.2
-Stable tag: 1.4.4
+Tested up to: 4.3
+Stable tag: 1.5
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -59,6 +59,11 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 4. Activate the plugin in the Plugin dashboard
 
 == Changelog ==
+
+= 1.5 =
+* New: Customize background color (behind image) with new color picker added to interface
+* New: Link directly to a hotspot (right-click and copy link) - area will be highlighted automatically
+* Improved: Update lightbox javascript library
 
 = 1.4.4 =
 * Fixed: Mobile/Touch events required 4 taps for areas with URL action
