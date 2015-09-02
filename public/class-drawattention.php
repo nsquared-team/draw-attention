@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.4.5';
+		const VERSION = '1.5';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -394,7 +394,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 					#{$spot_id} .hotspots-image-container {
 						background: {$image_background_color};
 					}
-					
+
 					#{$spot_id} .hotspots-placeholder,
 					.featherlight .featherlight-content.lightbox{$imageID} {
 						background: {$bg_color};

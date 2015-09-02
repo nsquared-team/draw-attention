@@ -2,8 +2,8 @@
 Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map
 Requires at least: 3.5.1
-Tested up to: 4.2
-Stable tag: 1.4.5
+Tested up to: 4.3
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 5.
 
 == Changelog ==
+
+= 1.5 =
+* New: Customize background color (behind image) with new color picker added to interface
+* New: Link directly to a hotspot (right-click and copy link) - area will be highlighted automatically
 
 = 1.4.5 =
 * Fixed: Mobile/Touch events required 4 taps for areas with URL action
