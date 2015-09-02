@@ -97,6 +97,13 @@
 									api.reposition();
 								}
 							}
+						},
+						hide: function(event, api) {
+							var mapId = container.attr('id');
+							area.data('stickyCanvas', false);
+							$('#' + mapId).find('canvas').fadeOut('slow', function(){
+								$(this).remove();
+							});
 						}
 					}
 				});
@@ -137,6 +144,13 @@
 							mapNo = mapId.match(/\d+/)[0];
 
 						tooltip.addClass('tooltip-'+ mapNo);
+					},
+					hide: function(event, api) {
+						var mapId = container.attr('id');
+						area.data('stickyCanvas', false);
+						$('#' + mapId).find('canvas').fadeOut('slow', function(){
+							$(this).remove();
+						});
 					}
 				}
 			});
@@ -236,7 +250,7 @@
 			container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
 				var $this = $(this),
 				container = $this.parents('.hotspots-container'),
-				isSticky = $this.data('stickyCanvas'),
+				isSticky = $this.data('stickyCanvas') || true,
 				newInfo = $($this.attr('href'));
 
 				if (container.hasClass('layout-lightbox')) {

@@ -272,7 +272,9 @@
 
 /* line 231, ../sass/public.scss */
 .qtip {
-  box-shadow: none;
+  -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   direction: ltr;
   display: none;
   left: -28000px;
