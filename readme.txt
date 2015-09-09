@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= Beta =
+* Fixed: PHP warnings when WP_DEBUG was on
+
 = 1.5 =
 * New: Customize background color (behind image) with new color picker added to interface
 * New: Link directly to a hotspot (right-click and copy link) - area will be highlighted automatically
