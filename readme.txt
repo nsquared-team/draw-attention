@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.5
+Stable tag: 1.5.1
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -60,8 +60,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= Beta =
+= 1.5.1 =
 * Fixed: PHP warnings when WP_DEBUG was on
+* Fixed: Scrolling issue with deep-linked hotspots
+* Fixed: Styling issue with multiple images on one page  (when one used tooltip layout)
 
 = 1.5 =
 * New: Customize background color (behind image) with new color picker added to interface
