@@ -270,8 +270,14 @@
 
 		if (hash) {
 			var area = map.find('area[href="' + hash + '"]');
-			mapOver(area, img, null);
-			mapClick(area, img);
+			if ( area.length ) {
+				var imgTop = img.offset().top;
+				mapOver(area, img, null);
+				mapClick(area, img);
+				setTimeout(function() {
+    			window.scrollTo(0, imgTop - 50);
+  			}, 1);
+			}
 		}
 	};
 

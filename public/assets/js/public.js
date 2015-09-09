@@ -97,6 +97,13 @@
 									api.reposition();
 								}
 							}
+						},
+						hide: function(event, api) {
+							var mapId = container.attr('id');
+							area.data('stickyCanvas', false);
+							$('#' + mapId).find('canvas').fadeOut('slow', function(){
+								$(this).remove();
+							});
 						}
 					}
 				});
@@ -137,8 +144,13 @@
 							mapNo = mapId.match(/\d+/)[0];
 
 						tooltip.addClass('tooltip-'+ mapNo);
-
-
+					},
+					hide: function(event, api) {
+						var mapId = container.attr('id');
+						area.data('stickyCanvas', false);
+						$('#' + mapId).find('canvas').fadeOut('slow', function(){
+							$(this).remove();
+						});
 					}
 				}
 			});
@@ -195,60 +207,63 @@
 
 		var container = $('.hotspots-container');
 
-		container.on('touchstart click', 'area.url-area', function(e){
-			e.preventDefault();
+		container.each(function(){
+			var container = $(this);
+			container.on('touchstart click', 'area.url-area', function(e){
+				e.preventDefault();
 
-			var $this = $(this),
-				href = $this.attr('href'),
-				target = $this.attr('target');
-
-			if (target == '_new') {
-				window.open(href);
-			} else {
-				$('body').hide();
-				window.location.href = href;
-			}
-		});
-
-		if (container.hasClass('event-hover')) {
-			container.find('area.url-area').each(function(){
-				var $this = $(this);
-
-				showUrlTooltip($this, container);
-			});
-		}
-
-		if (container.hasClass('layout-tooltip')) {
-			var screenWidth = $(window).width(),
-				daWidth = container.width(),
-				tipWidth = 280 * 3,
-				tooSmall = false;
-
-			if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.8)) {
-				tooSmall = true;
-			}
-
-			container.find('area.more-info-area').each(function(){
 				var $this = $(this),
-					newInfo = $($this.attr('href'));
+					href = $this.attr('href'),
+					target = $this.attr('target');
 
-				showTooltip($this, newInfo, container, tooSmall);
-			});
-		} else {
-			container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
-				var $this = $(this),
-				container = $this.parents('.hotspots-container'),
-				isSticky = $this.data('stickyCanvas'),
-				newInfo = $($this.attr('href'));
-
-				if (container.hasClass('layout-lightbox')) {
-					showLightbox(container, isSticky, newInfo, $this);
+				if (target == '_new') {
+					window.open(href);
 				} else {
-					newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
-					showNewInfo(container, isSticky, newInfo);
+					$('body').hide();
+					window.location.href = href;
 				}
 			});
-		}
+
+			if (container.hasClass('event-hover')) {
+				container.find('area.url-area').each(function(){
+					var $this = $(this);
+
+					showUrlTooltip($this, container);
+				});
+			}
+
+			if (container.hasClass('layout-tooltip')) {
+				var screenWidth = $(window).width(),
+					daWidth = container.width(),
+					tipWidth = 280 * 3,
+					tooSmall = false;
+
+				if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.75)) {
+					tooSmall = true;
+				}
+
+				container.find('area.more-info-area').each(function(){
+					var $this = $(this),
+						newInfo = $($this.attr('href'));
+
+					showTooltip($this, newInfo, container, tooSmall);
+				});
+			} else {
+				container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
+					var $this = $(this),
+					container = $this.parents('.hotspots-container'),
+					isSticky = $this.data('stickyCanvas') || '',
+					newInfo = $($this.attr('href'));
+
+					if (container.hasClass('layout-lightbox')) {
+						showLightbox(container, isSticky, newInfo, $this);
+					} else {
+						newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
+						showNewInfo(container, isSticky, newInfo);
+					}
+				});
+			}
+		});
 	};
 
 	/* Public: initialize */
