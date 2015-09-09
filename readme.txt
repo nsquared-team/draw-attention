@@ -35,7 +35,7 @@ When a highlighted area is clicked, show more information.
 ### Go to a URL ###
 Optionally send a site visitor to another URL when clicking a highlightable area of the image map.
 
-[vimeo https://vimeo.com/118974102]
+[vimeo https://vimeo.com/138407309]
 
 [Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization:
 
