@@ -25,6 +25,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 	class DrawAttention_Admin {
 
 		public $upsell;
+		public $script_handle_whitelist;
 
 		/**
 		 * Instance of this class.
@@ -79,6 +80,10 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
+
+			add_action( 'admin_notices', array( $this, 'display_third_party_js_conflict_notice' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'store_enqueued_scripts' ), 1 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'disable_third_party_js' ), 9999999 );
 
 			// Add the options page and menu item.
 			// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
@@ -259,6 +264,81 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 				wp_redirect( get_edit_post_link( $imageID, 'raw' ) );
 				exit();
+			}
+		}
+
+		public function display_third_party_js_conflict_notice() {
+			global $pagenow;
+			$screen = get_current_screen();
+			if ( $screen->base != 'post' || $screen->post_type != $this->da->cpt->post_type ) {
+				return;
+			}
+			if ( get_option( 'da_disable_third_party_js' ) ) {
+				return;
+			}
+
+			if ( !empty( $_GET['da_disable_third_party_js'] ) ) {
+				update_option( 'da_disable_third_party_js', true );
+				$disable_url = add_query_arg( array( 'da_disable_third_party_js' => 1 ) );
+				$class = "da-disabled-third-party-js updated";
+				$message = "
+				<h3>3rd party scripts disabled</h3>
+				<p>
+					Draw Attention is currently disabling 3rd party scripts on this page. If you still have trouble using Draw Attention, please contact us at <a href='mailto:support@tylerdigital.com'>support@tylerdigital.com</a>
+				</p>
+				";
+				echo"<div class=\"$class\">$message</div>";
+
+			} else {
+				$disable_url = add_query_arg( array( 'da_disable_third_party_js' => 1 ) );
+				$class = "error da-disable-third-party-js";
+				$message = "
+				<h3>Theme or plugin conflict</h3>
+				<p>
+					A 3rd party script (from your theme or one of your plugins) is conflicting with Draw Attention. You will probably be unable to draw areas until you switch themes or disable the conflicting plugin.
+				</p>
+				<p>
+					<a href='".$disable_url."'>Click here</a> and Draw Attention will try to fix it by reloading this page & disabling 3rd party scripts
+				</p>
+				";
+				echo"<div class=\"$class\">$message</div>";
+			}
+		}
+
+		public function store_enqueued_scripts() {
+			global $pagenow;
+			$screen = get_current_screen();
+			if ( $screen->base != 'post' || $screen->post_type != $this->da->cpt->post_type ) {
+				return;
+			}
+
+			global $wp_scripts;
+			$this->script_handle_whitelist = $wp_scripts->queue;
+		}
+
+		public function disable_third_party_js() {
+			global $pagenow;
+			$screen = get_current_screen();
+			if ( $screen->base != 'post' || $screen->post_type != $this->da->cpt->post_type ) {
+				return;
+			}
+			if ( get_option( 'da_disable_third_party_js', false ) === false  && empty( $_GET['da_disable_third_party_js'] ) ) {
+				return;
+			}
+
+			$draw_attention_whitelist = array(
+				'drawattention-admin-script',
+				'plupload-all',
+				'dgd_uploaderScript'
+			);
+
+			global $wp_scripts;
+			foreach ($wp_scripts->queue as $key => $handle) {
+				if ( in_array( $handle, $this->script_handle_whitelist ) || in_array( $handle, $draw_attention_whitelist ) ) {
+					continue;
+				}
+
+				wp_dequeue_script( $handle );
 			}
 		}
 

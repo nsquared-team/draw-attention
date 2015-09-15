@@ -183,6 +183,10 @@
 		})
 	};
 
+	var hideNotice = function() {
+		$('.da-disable-third-party-js').hide();
+	}
+
 
 	hotspotAdmin.init = function() {
 		canvasDraw();
@@ -195,6 +199,7 @@
 		confirmDelete();
 		areaLimit();
 		saveAlert();
+		hideNotice();
 	}
 
 	/* Reset the drawable canvas areas */

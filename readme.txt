@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.5.2 =
+* Fixed: Incompatibility with 3rd party theme/plugin javascript in the admin
+
 = 1.5.1 =
 * Fixed: PHP warnings when WP_DEBUG was on
 * Fixed: Scrolling issue with deep-linked hotspots
