@@ -271,11 +271,38 @@
 		if (hash) {
 			var area = map.find('area[href="' + hash + '"]');
 			if ( area.length ) {
-				var imgTop = img.offset().top;
+				var imgTop = img.offset().top,
+					coords = area.attr('coords').split(','),
+					yCoords = [];
+
+				for(var i=0; i<coords.length; i++) {
+					if(i%2 != 0) {
+						yCoords.push(coords[i]);
+					}
+				}
+
+				var areaImgTop = Math.min.apply(Math, yCoords),
+					areaImgBottom = Math.max.apply(Math, yCoords),
+					windowHeight = $(window).height(),
+					windowBottom = imgTop + windowHeight,
+					areaBottom = imgTop + areaImgBottom,
+					areaTop = imgTop + areaImgTop,
+					padding = 50,
+					scrollCoord;
+
+				if (areaBottom > windowBottom) {
+					scrollCoord = imgTop + (areaBottom - windowBottom) + padding;
+					if ((areaBottom-areaTop) > windowHeight) {
+						scrollCoord = areaTop - padding;
+					}
+				} else {
+					scrollCoord = imgTop - padding;
+				}
+
 				mapOver(area, img, null);
 				mapClick(area, img);
 				setTimeout(function() {
-    			window.scrollTo(0, imgTop - 50);
+    			window.scrollTo(0, scrollCoord);
   			}, 1);
 			}
 		}
