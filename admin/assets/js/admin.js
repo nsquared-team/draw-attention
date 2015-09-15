@@ -167,6 +167,10 @@
 		})
 	};
 
+	var hideNotice = function() {
+		$('.da-disable-third-party-js').hide();
+	}
+
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
 		canvasDraw();
@@ -180,6 +184,7 @@
 		opacityLabelSync();
 		confirmDelete();
 		saveAlert();
+		hideNotice();
 	}
 
 	/* Reset the drawable canvas areas */
