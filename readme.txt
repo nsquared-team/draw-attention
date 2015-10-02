@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.5.3 =
+* Fixed: Conflict between post ID and hotspot ID caused image to disappear when clicking hotspot
+
 = 1.5.2 =
 * Fixed: Incompatibility with 3rd party theme/plugin javascript in the admin
 * Fixed: Scrolling issue with deep-linked hotspots on tall vertical images
