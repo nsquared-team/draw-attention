@@ -247,6 +247,9 @@ class DrawAttention_Pro {
 					$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $img_post, $settings ) );
 					$html .=  '</div>';
 				}
+				if ( empty( $hotspot['description'] ) ) {
+					$hotspot['description'] = '';
+				}
 				$html .=    '<div class="hotspot-content">' . wpautop( do_shortcode ( $wp_embed->run_shortcode( $hotspot['description'] ) ) ) . '</div>';
 				$html .=  '</div>';
 			}
