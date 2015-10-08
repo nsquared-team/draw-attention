@@ -235,6 +235,10 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		}
 
 		public function admin_init() {
+			if ( empty( $_GET['post_type'] ) ) {
+				return;
+			}
+			
 			global $pagenow;
 			if (
 				$pagenow == 'edit.php' && $_GET['post_type'] == $this->da->cpt->post_type
