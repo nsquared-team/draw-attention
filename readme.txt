@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= Beta =
+* Fixed: PHP (strict mode) warning when `post_type` is unset
+
 = 1.5.3 =
 * Fixed: Conflict between post ID and hotspot ID caused image to disappear when clicking hotspot
 
