@@ -1,6 +1,6 @@
 === Draw Attention ===
 Contributors: tylerdigital, nataliemac, croixhaug
-Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map
+Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.3
 Stable tag: 1.5.3
