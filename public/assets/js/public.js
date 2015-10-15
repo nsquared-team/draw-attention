@@ -277,4 +277,7 @@
 
 jQuery(function(){
 	hotspots.init();
+	jQuery(window).on('pageloaded', function() {
+		hotspots.init();
+	});
 });
