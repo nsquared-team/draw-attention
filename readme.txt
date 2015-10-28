@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.6
+Stable tag: 1.6.1
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -60,7 +60,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= 1.6 =
+= 1.6.1 =
 * Added: Support for placing Draw Attention inside Divi theme Tabs & Toggles
 * Added: Support for Visual Composer AJAX Page Transitions
 * Added: Filter to load Draw Attention scripts early & everywhere (for themes using ajax page transitions)
