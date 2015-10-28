@@ -216,8 +216,10 @@
 					href = $this.attr('href'),
 					target = $this.attr('target');
 
-				if (target == '_new') {
+				if (target == '_new') { /* If the link is being opened in a new window */
 					window.open(href);
+				} else if ((this.host == '' || this.pathname == window.location.pathname) && this.hash != '') { /* If the link is on the current page */
+					window.location.href = href;
 				} else {
 					$('body').hide();
 					window.location.href = href;
