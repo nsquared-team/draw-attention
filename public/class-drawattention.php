@@ -83,8 +83,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 			// Load public-facing style sheet and JavaScript.
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 1 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 1 );
 
 			// Shortcode for displaying the image map
 			add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
@@ -316,6 +316,16 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-qtip', plugins_url( 'assets/js/jquery.qtip.min.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-imagesloaded' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-mobile-events', plugins_url( 'assets/js/jquery.mobile-events.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
+
+			$enqueue = apply_filters( 'da_enqueue_scripts_early_everywhere', false );
+			if ( !empty( $enqueue ) ) {
+				wp_enqueue_script( $this->plugin_slug . '-responsilight' );
+				wp_enqueue_script( $this->plugin_slug . '-featherlight' );
+				wp_enqueue_script( $this->plugin_slug . '-imagesloaded' );
+				wp_enqueue_script( $this->plugin_slug . '-qtip' );
+				wp_enqueue_script( $this->plugin_slug . '-mobile-events' );
+				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
+			}
 		}
 
 		function php_52_notice() {
