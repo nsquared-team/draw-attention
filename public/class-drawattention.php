@@ -310,7 +310,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
 
-			$enqueue = apply_filters( 'da_enqueue_scripts_early_everywhere', false );
+			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
 			if ( !empty( $enqueue ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-responsilight' );
 				wp_enqueue_script( $this->plugin_slug . '-featherlight' );
