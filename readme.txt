@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.5.3
+Stable tag: 1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,7 +85,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= Beta =
+= 1.6 =
+* Added: Support for placing Draw Attention inside Divi theme Tabs & Toggles
+* Added: Support for Visual Composer AJAX Page Transitions
+* Added: Filter to load Draw Attention scripts early & everywhere (for themes using ajax page transitions)
 * Fixed: PHP (strict mode) warning when `post_type` is unset
 
 = 1.5.3 =
