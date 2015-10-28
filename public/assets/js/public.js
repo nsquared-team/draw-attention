@@ -279,4 +279,21 @@
 
 jQuery(function(){
 	hotspots.init();
-});
+	jQuery(window).on('pageloaded', function() {
+		hotspots.init();
+	});
+	jQuery('.et_pb_tabs .et_pb_tabs_controls li').on('click', function() {
+		setTimeout(function() {
+			hotspots.init();
+		}, 1000);
+	});
+	jQuery('.et_pb_toggle_title').on('click', function() {
+		setTimeout(function() {
+			hotspots.init();
+		}, 1000);
+	});
+	jQuery(window).on('et_hashchange', function() {
+		setTimeout(function() {
+			hotspots.init();
+		}, 1000);
+	});});
