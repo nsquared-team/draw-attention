@@ -114,15 +114,20 @@ class DrawAttention_Pro {
 			$img_post = get_post( $imageID );
 
 			$settings = get_metadata( 'post', $imageID, '', false );
-			$layout = $settings[$this->parent->custom_fields->prefix.'map_layout'][0];
+			if ( empty( $settings[$this->parent->custom_fields->prefix.'map_layout'][0] ) ) {
+				$layout = 'left';
+			} else {
+				$layout = $settings[$this->parent->custom_fields->prefix.'map_layout'][0];
+			}
 
 			if ( $layout == 'lightbox' ) {
 				wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
 			}
 
-			$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
-			if ( empty( $event_trigger ) ) {
+			if ( empty( $settings[$this->parent->custom_fields->prefix.'event_trigger'][0] ) ) {
 				$event_trigger = 'click';
+			} else {
+				$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
 			}
 
 			if ( $event_trigger == 'hover' || $layout == 'tooltip' ) {
