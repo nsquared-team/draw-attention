@@ -76,9 +76,10 @@ class DrawAttention_Pro {
 
 		$imageID = $a['id'];
 
+		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
-		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
+		
 
 
 		if ( empty($imageID ) ) {
@@ -164,7 +165,13 @@ class DrawAttention_Pro {
 				.qtip.tooltip-{$imageID} .hotspot-title {
 					color: {$title_color};
 				}";
-			wp_add_inline_style( $this->parent->plugin_slug . '-plugin-styles', $custom_css );
+
+			// the following can be removed if the manual $custom_style doesn't cause problems
+			// wp_add_inline_style( $this->parent->plugin_slug . '-plugin-styles', $custom_css );
+
+			$custom_style = '<style type="text/css">';
+			$custom_style .= $custom_css;
+			$custom_style .= '</style>';
 
 			$image_html = '';
 			$image_html .=    '<div class="hotspots-image-container">';
@@ -262,7 +269,9 @@ class DrawAttention_Pro {
 			$html .=  '</div>';
 		}
 
-		return $html;
+		$css_and_html = $custom_style;
+		$css_and_html .= $html;
+		return $css_and_html;
 
 	}
 
