@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 5.
 
 == Changelog ==
+
+= 1.6.2 =
+* Added: Support for interactive images to work within jQuery UI tabs
+* Fixed: Safari bug when navigating back to an image with a clickable area using the URL action
 
 = 1.6.1 =
 * Added: Support for placing Draw Attention inside Divi theme Tabs & Toggles
