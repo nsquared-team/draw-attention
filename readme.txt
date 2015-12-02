@@ -62,6 +62,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = 1.6.2 =
 * Added: Support for interactive images to work within jQuery UI tabs
+* Improved: Window resizing and redrawing of image hotspots
 * Fixed: Safari bug when navigating back to an image with a clickable area using the URL action
 
 = 1.6.1 =
