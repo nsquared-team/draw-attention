@@ -221,7 +221,6 @@
 				} else if ((this.host == '' || this.pathname == window.location.pathname) && this.hash != '') { /* If the link is on the current page */
 					window.location.href = href;
 				} else {
-					$('body').hide();
 					window.location.href = href;
 				}
 			});
