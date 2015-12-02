@@ -58,7 +58,9 @@
 	/* ------------------------------------------- */
 
 	var drawIt,
+		cleanUp,
 		prepImage,
+		drawShape,
 		drawPoly,
 		drawCircle,
 		drawRect,
@@ -68,9 +70,22 @@
 		if(doHighlights) {
 			prepImage(img, map);
 			linkToHotspot(img, map);
+			cleanUp(img,map);
 		} else {
 			simpleMap(map);
 		}
+	};
+
+	cleanUp = function(img,map){
+		map.find('area').each(function(){
+			var $this = $(this);
+			if($this.data('stickyCanvas') && $this.data('stickyCanvas' == true)) {
+				var id = $this.attr('id'),
+					stickyCanvas = $('#canvas-' + id);
+
+				drawShape(stickyCanvas,$this,img);
+			}
+		});
 	};
 
 	prepImage = function(img, map) {
@@ -109,6 +124,34 @@
 			index++;
 			$this.attr('id', mapName + '-area-' + index);
 		});
+	};
+
+	drawShape = function($canvas, area, img){
+		var canvas = $canvas.get(0),
+			context = canvas.getContext('2d'),
+			shape = area.attr('shape');
+
+		context.clearRect(0,0,canvas.width,canvas.height);
+
+		var coords = area.attr('coords').split(','),
+			xCoords = [],
+			yCoords = [];
+
+		for(var i=0; i<coords.length; i++) {
+			if(i%2 == 0) {
+				xCoords.push(coords[i]);
+			} else {
+				yCoords.push(coords[i]);
+			}
+		}
+
+		if(shape == 'poly') {
+			drawPoly(context, xCoords, yCoords, img);
+		} else if(shape == 'circle') {
+			drawCircle(context, xCoords, yCoords, img);
+		} else if(shape == 'rect') {
+			drawRect(context, xCoords, yCoords, img);
+		}
 	};
 
 	drawPoly = function(context, xCoords, yCoords, img) {
@@ -197,14 +240,25 @@
 		var image = img.get(0),
 			$image = img;
 
-		$('<img />').load(function() {
+		if(!$image.data('responsilight')) {
+			/* This is the initial page load */
+			$image.data('responsilight', 'initialized');
+			$('<img />').load(function() {
+				recalcCoords();
+			}).attr('src', $image.attr('src'));
+		} else {
+			/* We're resizing the page */
+			recalcCoords();
+		}
+
+		function recalcCoords(){
 			var w = image.naturalWidth,
 				h = image.naturalHeight,
 				wPercent = $image.width()/100,
 				hPercent = $image.height()/100,
 				c = 'coords';
 
-			map.find('area').each(function(){
+			map.find('area').each(function(index){
 				var $this = $(this);
 
 				if(!$this.data(c))
@@ -219,10 +273,13 @@
 					else
 						coordsPercent[i] = parseInt(((coords[i]/h)*100)*hPercent);
 				}
+
 				$this.attr(c, coordsPercent.toString());
+
 			});
 			drawIt(img, map);
-		}).attr('src', $image.attr('src'));
+		}
+
 	};
 
 	imageEvents = function(img, map) {
@@ -340,28 +397,7 @@
 				e.preventDefault();
 			});
 
-			var canvas = $canvas.get(0),
-				context = canvas.getContext('2d');
-
-			var coords = area.attr('coords').split(','),
-				xCoords = [],
-				yCoords = [];
-
-			for(var i=0; i<coords.length; i++) {
-				if(i%2 == 0) {
-					xCoords.push(coords[i]);
-				} else {
-					yCoords.push(coords[i]);
-				}
-			}
-
-			if(shape == 'poly') {
-				drawPoly(context, xCoords, yCoords, img);
-			} else if(shape == 'circle') {
-				drawCircle(context, xCoords, yCoords, img);
-			} else if(shape == 'rect') {
-				drawRect(context, xCoords, yCoords, img);
-			}
+			drawShape($canvas, area, img);
 
 			$canvas.stop(true, true).fadeIn('fast');
 		}
