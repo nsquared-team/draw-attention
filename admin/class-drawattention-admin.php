@@ -211,10 +211,8 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		}
 
 		public function display_third_party_js_conflict_notice() {
-			global $pagenow;
-			$screen = get_current_screen();
-			if ( $screen->base != 'post' || $screen->post_type != $this->da->cpt->post_type ) {
-				return;
+			if ( !empty( $_GET['da_enable_third_party_js'] ) ) {
+				delete_option( 'da_disable_third_party_js' );
 			}
 			if ( get_option( 'da_disable_third_party_js' ) ) {
 				return;
@@ -228,20 +226,6 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				<h3>3rd party scripts disabled</h3>
 				<p>
 					Draw Attention is currently disabling 3rd party scripts on this page. If you still have trouble using Draw Attention, please contact us at <a href='mailto:support@tylerdigital.com'>support@tylerdigital.com</a>
-				</p>
-				";
-				echo"<div class=\"$class\">$message</div>";
-
-			} else {
-				$disable_url = add_query_arg( array( 'da_disable_third_party_js' => 1 ) );
-				$class = "error da-disable-third-party-js";
-				$message = "
-				<h3>Theme or plugin conflict</h3>
-				<p>
-					A 3rd party script (from your theme or one of your plugins) is conflicting with Draw Attention. You will probably be unable to draw areas until you switch themes or disable the conflicting plugin.
-				</p>
-				<p>
-					<a href='".$disable_url."'>Click here</a> and Draw Attention will try to fix it by reloading this page & disabling 3rd party scripts
 				</p>
 				";
 				echo"<div class=\"$class\">$message</div>";
