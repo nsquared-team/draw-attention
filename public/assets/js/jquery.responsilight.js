@@ -197,14 +197,25 @@
 		var image = img.get(0),
 			$image = img;
 
-		$('<img />').load(function() {
+		if(!$image.data('responsilight')) {
+			/* This is the initial page load */
+			$image.data('responsilight', 'initialized');
+			$('<img />').load(function() {
+				recalcCoords();
+			}).attr('src', $image.attr('src'));
+		} else {
+			/* We're resizing the page */
+			recalcCoords();
+		}
+
+		function recalcCoords(){
 			var w = image.naturalWidth,
 				h = image.naturalHeight,
 				wPercent = $image.width()/100,
 				hPercent = $image.height()/100,
 				c = 'coords';
 
-			map.find('area').each(function(){
+			map.find('area').each(function(index){
 				var $this = $(this);
 
 				if(!$this.data(c))
@@ -219,10 +230,14 @@
 					else
 						coordsPercent[i] = parseInt(((coords[i]/h)*100)*hPercent);
 				}
+
+
+
 				$this.attr(c, coordsPercent.toString());
 			});
 			drawIt(img, map);
-		}).attr('src', $image.attr('src'));
+		}
+
 	};
 
 	imageEvents = function(img, map) {
