@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -59,6 +59,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 4. Activate the plugin in the Plugin dashboard
 
 == Changelog ==
+
+= 1.6.2 =
+* Added: Support for interactive images to work within jQuery UI tabs
+* Fixed: Safari bug when navigating back to an image with a clickable area using the URL action
 
 = 1.6.1 =
 * Added: Support for placing Draw Attention inside Divi theme Tabs & Toggles
