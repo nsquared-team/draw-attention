@@ -14,22 +14,16 @@
 
 	/* test if browser supports non-SVG pointer-events */
 	hasPointerEvents = (function () {
-		var element = document.createElement('x'),
-			documentElement = document.documentElement,
-			getComputedStyle = window.getComputedStyle,
-			supports;
+		var supports = false,
+			a = document.createElement("x");
+			a.style.cssText = "pointer-events:auto;";
 
-		if (!('pointerEvents' in element.style)) {
-			return false;
+		if (window.PointerEvent) {
+			supports = true;
+		} else if (a.style.pointerEvents === 'auto') {
+			supports = true;
 		}
-
-		element.style.pointerEvents = 'auto';
-		element.style.pointerEvents = 'x';
-		documentElement.appendChild(element);
-		supports = getComputedStyle &&
-				getComputedStyle(element, '').pointerEvents === 'auto';
-		documentElement.removeChild(element);
-		return !!supports;
+		return supports;
 	})();
 
 	if (hasCanvas && hasPointerEvents) {
@@ -482,10 +476,9 @@
 	})();
 
 	simpleMap = function(map) {
-		map.find('area').each(function(e){
-			e.preventDefault();
-			var $this = $(this);
-			index++;
+		map.find('area').each(function(index){
+			var $this = $(this),
+				mapName = map.attr('name');
 			$this.attr('id', mapName + '-area-' + index);
 		});
 	}
