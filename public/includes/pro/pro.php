@@ -80,6 +80,10 @@ class DrawAttention_Pro {
 		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
 		
+		if ( class_exists( 'Jetpack_Photon' ) ) {
+			$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
+			var_dump($photon_removed );
+		}
 
 
 		if ( empty($imageID ) ) {
@@ -271,6 +275,11 @@ class DrawAttention_Pro {
 
 		$css_and_html = $custom_style;
 		$css_and_html .= $html;
+
+		if ( class_exists( 'Jetpack_Photon' ) && $photon_removed ) {
+			add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
+		}
+
 		return $css_and_html;
 
 	}
