@@ -82,7 +82,6 @@ class DrawAttention_Pro {
 		
 		if ( class_exists( 'Jetpack_Photon' ) ) {
 			$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
-			var_dump($photon_removed );
 		}
 
 
