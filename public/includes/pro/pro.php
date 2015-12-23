@@ -1,6 +1,7 @@
 <?php
 class DrawAttention_Pro {
 	public $parent;
+	public $photon_excluded_images = array();
 
 	function __construct( $parent ) {
 		$this->parent = $parent;
@@ -12,6 +13,7 @@ class DrawAttention_Pro {
 		remove_shortcode( 'drawattention' );
 		add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
 		add_filter( 'da_detail_image_size', array( $this, 'optimize_detail_image_size' ), 10, 4 );
+		add_filter( 'jetpack_photon_skip_image', array ($this, 'jetpack_photon_skip_image' ), 10, 3 );
 	}
 
 	function add_layout_metabox( $metaboxes ) {
@@ -69,6 +71,14 @@ class DrawAttention_Pro {
 		return $size;
 	}
 
+	public function jetpack_photon_skip_image( $val, $src, $tag ) {
+		if ( in_array( $src, $this->photon_excluded_images ) ) {
+			return true;
+		}
+
+		return $val;
+	}
+
 	public function shortcode( $atts ) {
 		$a = shortcode_atts( array(
 			'id' => ''
@@ -114,6 +124,7 @@ class DrawAttention_Pro {
 			$img_url = $img_src[0];
 			$img_width = $img_src[1];
 			$img_height = $img_src[2];
+			$this->photon_excluded_images[$imageID] = $img_src[0];
 
 			$img_post = get_post( $imageID );
 
