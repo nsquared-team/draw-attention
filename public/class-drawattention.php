@@ -68,6 +68,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public $custom_fields;
 		public $pro;
 		public $themes;
+		public $photon_excluded_images = array();
 
 		/**
 		 * Initialize the plugin by setting localization and loading public scripts
@@ -95,6 +96,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_shortcode_metabox' ) );
 
 			add_action( 'template_include', array( $this, 'single_template' ) );
+
+			add_filter( 'jetpack_photon_skip_image', array ($this, 'jetpack_photon_skip_image' ), 10, 3 );
 
 		/**
 		 * @TODO - Uncomment requried features
@@ -345,6 +348,14 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			}
 		}
 
+		public function jetpack_photon_skip_image( $val, $src, $tag ) {
+			if ( in_array( $src, $this->photon_excluded_images ) ) {
+				return true;
+			}
+
+			return $val;
+		}
+
 		/**
 		 * Shortcode for displaying the image map
 		 *
@@ -353,6 +364,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public function shortcode( $atts ) {
 			wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 			wp_enqueue_style( $this->plugin_slug . '-plugin-styles' );
+
+			if ( class_exists( 'Jetpack_Photon' ) ) {
+				$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
+			}
 
 			$image_args = array(
 				'post_type' => $this->cpt->post_type,
@@ -381,6 +396,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$img_url = $img_src[0];
 				$img_width = $img_src[1];
 				$img_height = $img_src[2];
+				if ( class_exists( 'Jetpack_Photon' ) ) {
+					$this->photon_excluded_images[$imageID] = $img_src[0];
+				}
 
 				$img_post = get_post( $imageID );
 
@@ -500,6 +518,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$html .=  '</div>';
 			}
+
+			if ( class_exists( 'Jetpack_Photon' ) && $photon_removed ) {
+				add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
+			}
+
 
 			return $html;
 
