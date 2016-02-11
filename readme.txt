@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+== BETA ==
+Fixed: Conflict with Unveil Lazy Load plugin
+
 = 1.6.2 =
 * Added: Support for interactive images to work within jQuery UI tabs
 * Improved: Window resizing and redrawing of image hotspots
