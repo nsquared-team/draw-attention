@@ -95,6 +95,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			add_action( 'template_include', array( $this, 'single_template' ) );
 
+			add_filter( 'cmb2_meta_box_url', array( $this, 'cmb2_meta_box_url' ) );
+
 		/**
 		 * @TODO - Uncomment requried features
 		 *
@@ -469,6 +471,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 		public static function get_plugin_url() {
 			return dirname( plugin_dir_url( __FILE__ ) );
+		}
+
+		public function cmb2_meta_box_url( $url ) {
+			$url = self::get_plugin_url().'/public/includes/lib/cmb2/';
+			return $url;
 		}
 
 	}
