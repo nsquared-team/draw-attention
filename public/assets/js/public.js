@@ -281,6 +281,12 @@ jQuery(function(){
 	jQuery(window).on('pageloaded', function() {
 		hotspots.init();
 	});
+	jQuery(window).on('load', function() {
+		jQuery('#canvas-undefined').each(function() {
+			jQuery(this).remove();
+			hotspots.init();
+		});
+	});
 	jQuery('.et_pb_tabs .et_pb_tabs_controls li').on('click', function() {
 		setTimeout(function() {
 			hotspots.init();
