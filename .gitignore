@@ -144,3 +144,4 @@ php_errorlog
 wp-config.php
 
 wp-content/plugins/akismet/.htaccess
+node_modules/
