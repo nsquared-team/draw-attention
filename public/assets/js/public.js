@@ -297,6 +297,11 @@ jQuery(function(){
 			hotspots.init();
 		}, 750);
 	});
+	jQuery('.nav-tabs > li').on('click', function() {
+		setTimeout(function() {
+			hotspots.init();
+		}, 750);
+	});
 	jQuery('.et_pb_toggle_title').on('click', function() {
 		setTimeout(function() {
 			hotspots.init();
