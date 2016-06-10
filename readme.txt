@@ -85,8 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-== BETA ==
-Fixed: Conflict with Unveil Lazy Load plugin
+== 1.6.4 ==
+* Fixed: Conflict with Unveil Lazy Load plugin
+* Fixed: Compatibility with popup blocking in Mobile Safari (iOS 9+)
 
 = 1.6.2 =
 * Added: Support for interactive images to work within jQuery UI tabs
