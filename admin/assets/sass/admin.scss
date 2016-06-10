@@ -99,6 +99,12 @@ input[name$='[coordinates]'] {
 	}
 }
 
+#cmb2-metabox-field_group {
+	.cmb-repeat-group-wrap {
+		max-width: 100% !important;
+	}
+}
+
 .wp-picker-container {
 	white-space: nowrap;
 }
