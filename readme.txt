@@ -85,6 +85,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.5 =
+* Fixed: Make canvas for drawing hotspots fill the available width
+
 == 1.6.4 ==
 * Fixed: Conflict with Unveil Lazy Load plugin
 * Fixed: Compatibility with popup blocking in Mobile Safari (iOS 9+)
