@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.5
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,7 +88,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 = 1.6.5 =
 * Fixed: Make canvas for drawing hotspots fill the available width
 
-== 1.6.4 ==
+= 1.6.4 =
 * Fixed: Conflict with Unveil Lazy Load plugin
 * Fixed: Compatibility with popup blocking in Mobile Safari (iOS 9+)
 
