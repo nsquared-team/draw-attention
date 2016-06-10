@@ -62,6 +62,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = 1.6.4 =
 * Fixed: Compatibility with popup blocking in Mobile Safari (iOS 9+)
+* Fixed: Mobile safari bug when using tooltip mode and landscape view
 
 = 1.6.3 =
 * Added: Support for interactive images to work within jQuery UI tabs
