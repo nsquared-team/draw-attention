@@ -127,12 +127,8 @@
 					event: 'unstickyHighlight unfocus'
 				},
 				position: {
-					target: 'mouse',
+					target: 'event',
 					viewport: $(window),
-					adjust: {
-						mouse: false,
-						method: 'shift'
-					}
 				},
 				style: {
 					classes: 'qtip-da-custom'
