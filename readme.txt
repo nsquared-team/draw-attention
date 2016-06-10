@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.3
-Stable tag: 1.6.4
+Stable tag: 1.6.6
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -60,7 +60,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
-= 1.6.5 =
+= 1.6.6 =
 * Fixed: Make canvas for drawing hotspots fill the available width
 
 = 1.6.4 =
