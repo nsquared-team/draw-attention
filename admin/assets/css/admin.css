@@ -154,7 +154,12 @@ input[name$='[coordinates]'] + div {
   }
 }
 
-/* line 102, ../sass/admin.scss */
+/* line 103, ../sass/admin.scss */
+#cmb2-metabox-field_group .cmb-repeat-group-wrap {
+  max-width: 100% !important;
+}
+
+/* line 109, ../sass/admin.scss */
 .wp-picker-container {
   white-space: nowrap;
 }
