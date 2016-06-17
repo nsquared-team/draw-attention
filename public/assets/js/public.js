@@ -42,115 +42,103 @@
 
 	/* Private: show tooltip */
 	var showTooltip = function(area, newInfo, container, tooSmall) {
+		/* Global qtip settings */
+		var qtipSettings = {
+			content: {
+				text: newInfo,
+				button: true
+			},
+			show: {
+				event: 'stickyHighlight'
+			},
+			hide: {
+				fixed: true,
+				delay: 300,
+				event: 'unstickyHighlight unfocus'
+			},
+			style: {
+				classes: 'qtip-da-custom'
+			},
+			events: {
+				render: function(event, api) {
+					var tooltip = api.elements.tooltip,
+						mapId = container.attr('id'),
+						mapNo = mapId.match(/\d+/)[0];
+
+					tooltip.addClass('tooltip-'+ mapNo);
+				},
+				hide: function(event, api) {
+					var mapId = container.attr('id');
+					area.data('stickyCanvas', false);
+					$('#' + mapId).find('canvas').fadeOut('slow', function(){
+						$(this).remove();
+					});
+				}
+			}
+		};
+
+		/* qtip settings for small screens */
 		if (tooSmall) {
-			area.qtip({
-					content: {
-						text: newInfo,
-						button: true
-					},
-					show: {
-						event: 'stickyHighlight',
-						modal: {
-							on: true,
-							blur: false
-						}
-					},
-					hide: {
-						fixed: true,
-						delay: 300,
-						event: 'unstickyHighlight unfocus'
-					},
-					position: {
-						my: 'center',
-						at: 'center',
-						target: $(window),
-						adjust: {
-							scroll: false,
-							mouse: false
-						}
-					},
-					style: {
-						classes: 'qtip-da-custom'
-					},
-					events: {
-						render: function(event, api) {
-							var tooltip = api.elements.tooltip,
-								mapId = container.attr('id'),
-								mapNo = mapId.match(/\d+/)[0];
+			qtipSettings.show.modal = {
+				on: true,
+				blur: false
+			};
+			qtipSettings.position = {
+				my: 'center',
+				at: 'center',
+				target: $(window),
+				adjust: {
+					scroll: false,
+					mouse: false
+				}
+			};
+			qtipSettings.events.visible = function(event, api) {
+				var tooltip = api.elements.tooltip,
+					winHeight = $(window).height(),
+					tipHeight = tooltip.height(),
+					img = tooltip.find('img'),
+					imgHeight = img.height();
 
-							tooltip.addClass('tooltip-'+ mapNo);
-						},
-						visible: function(event, api) {
-							var tooltip = api.elements.tooltip,
-								winHeight = $(window).height(),
-								tipHeight = tooltip.height(),
-								img = tooltip.find('img'),
-								imgHeight = img.height();
-
-							if (tipHeight > winHeight) {
-								var textHeight = tipHeight - imgHeight;
-								if (textHeight < winHeight) {
-									img.css({
-										'width': 'auto',
-										'maxHeight': winHeight - textHeight + 'px'
-									});
-									api.reposition();
-								}
-							}
-						},
-						hide: function(event, api) {
-							var mapId = container.attr('id');
-							area.data('stickyCanvas', false);
-							$('#' + mapId).find('canvas').fadeOut('slow', function(){
-								$(this).remove();
-							});
-						}
-					}
-				});
-		} else {
-			area.qtip({
-				content: {
-					text: newInfo,
-					title: '&nbsp;',
-					button: true
-				},
-				show: {
-					solo: true,
-					event: 'stickyHighlight',
-					effect: function() {
-						$(this).fadeTo(300, 1);
-					}
-				},
-				hide: {
-					fixed: true,
-					delay: 300,
-					event: 'unstickyHighlight unfocus'
-				},
-				position: {
-					target: 'event',
-					viewport: $(window),
-				},
-				style: {
-					classes: 'qtip-da-custom'
-				},
-				events: {
-					render: function(event, api) {
-						var tooltip = api.elements.tooltip,
-							mapId = container.attr('id'),
-							mapNo = mapId.match(/\d+/)[0];
-
-						tooltip.addClass('tooltip-'+ mapNo);
-					},
-					hide: function(event, api) {
-						var mapId = container.attr('id');
-						area.data('stickyCanvas', false);
-						$('#' + mapId).find('canvas').fadeOut('slow', function(){
-							$(this).remove();
+				if (tipHeight > winHeight) {
+					var textHeight = tipHeight - imgHeight;
+					if (textHeight < winHeight) {
+						img.css({
+							'width': 'auto',
+							'maxHeight': winHeight - textHeight + 'px'
 						});
+						api.reposition();
 					}
 				}
-			});
+			}
+		/* qtip settings for larger screens */
+		} else {
+			qtipSettings.content.title = '&nbsp;';
+			qtipSettings.show.solo = true;
+			qtipSettings.show.effect = function() {
+				$(this).fadeTo(300, 1);
+			}
+			qtipSettings.position = {
+				target: 'mouse',
+				viewport: $(window),
+				adjust: {
+					mouse: false,
+					method: 'shift'
+				}
+			}
+			/* Make tooltip follow mouse if action is hover */
+			if (container.hasClass('event-hover')) {
+				qtipSettings.position.adjust.mouse = true;
+				qtipSettings.position.adjust.x = 15;
+			}
+			/* Fix for mobile safari in landscape */
+			if ('ontouchstart' in document.documentElement && window.innerWidth > window.innerHeight) {
+				qtipSettings.position.target = 'event';
+				qtipSettings.position.adjust.mouse = true;
+				qtipSettings.position.adjust.method = 'flipinvert';
+			}
 		}
+
+		area.qtip(qtipSettings);
 	};
 
 	/* Private: show URL tooltip */
@@ -234,12 +222,18 @@
 			if (container.hasClass('layout-tooltip')) {
 				var screenWidth = $(window).width(),
 					daWidth = container.width(),
-					tipWidth = 280 * 3,
+					tipWidth = 280,
 					tooSmall = false;
 
-				if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.75)) {
+					console.log('Screen Width: ' + screenWidth);
+					console.log('DA Width: ' + daWidth);
+					console.log('Tip Width: ' + tipWidth);
+
+				if ( (screenWidth < tipWidth*3) || (screenWidth < tipWidth*4) && (daWidth/screenWidth > 0.75)) {
 					tooSmall = true;
 				}
+
+				console.log('Too Small? ' + tooSmall);
 
 				container.find('area.more-info-area').each(function(){
 					var $this = $(this),
