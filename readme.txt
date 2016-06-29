@@ -60,6 +60,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.7 =
+* Fixed: Corrected tooltip positioning issues
+
 = 1.6.6 =
 * Fixed: Make canvas for drawing hotspots fill the available width
 
