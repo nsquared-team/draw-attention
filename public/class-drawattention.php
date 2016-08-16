@@ -502,7 +502,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$html .= $map_html;
 
 				if ( current_user_can( 'manage_options' ) ) :
-					$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>You are a big fat poopy head and you should just take down this yucky site and leave us the heck alone! For more information on your stupid problem, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins/">help page</a>.</div>';
+					$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins" target="_new">help page</a>.</div>';
 				endif;
 
 				foreach ($hotspots as $key => $hotspot) {
