@@ -272,7 +272,7 @@ class DrawAttention_Pro {
 			foreach ($hotspots as $key => $hotspot) {
 				$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
 				$html .=    '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>';
-				if ( !empty( $hotspot['detail_image'] ) ) {
+				if ( !empty( $hotspot['detail_image_id'] ) ) {
 					$html .=  '<div class="hotspot-thumb">';
 					$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $img_post, $settings ) );
 					$html .=  '</div>';
