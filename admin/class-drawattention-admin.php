@@ -78,6 +78,10 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			add_action( 'admin_notices', array( $this, 'display_third_party_js_conflict_notice' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'store_enqueued_scripts' ), 1 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'disable_third_party_js' ), 9999999 );
+
+			add_action( 'cmb2_save_post_fields', array( $this, 'save_hotspots_json' ), 10, 4 );
+			add_action( 'current_screen', array( $this, 'load_from_hotspots_json' ) );
+
 		}
 
 		/**
@@ -266,6 +270,39 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				}
 
 				wp_dequeue_script( $handle );
+			}
+		}
+
+		public function save_hotspots_json( $post_id, $cmb_id, $updated_fields, $cmb_object ) {
+			$post_type = get_post_type( $post_id );
+
+			if (
+				$this->da->cpt->post_type != $post_type
+				|| defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE
+			) {
+				return;
+			}
+
+			update_post_meta( $post_id, '_da_hotspots_json', json_encode( $cmb_object->data_to_save['_da_hotspots'] ) );
+		}
+
+		public function load_from_hotspots_json() {
+			$screen = get_current_screen();
+
+			if ( $screen->post_type!=='da_image' || $_GET['action'] !== 'edit' ) {
+				return;
+			}
+
+			$post_id = $_GET['post'];
+
+			$deserialized_hotspots = get_post_meta( $post_id, '_da_hotspots', true );
+			if ( empty( $deserialized_hotspots ) ) {
+				/* Maybe a parse error when deserializing */
+				$json = get_post_meta( $post_id, '_da_hotspots_json', true );
+				if ( !empty( $json ) ) {
+					/* Fall back to the JSON values */
+					update_post_meta( $post_id, '_da_hotspots', json_decode( $json, true ) );
+				}
 			}
 		}
 
