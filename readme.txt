@@ -85,6 +85,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.6 =
+* New: Added troubleshooting note for admins when there's a theme or plugin conflict
+* New: Improved compatibility for site migrations
+
 = 1.6.5 =
 * Fixed: Make canvas for drawing hotspots fill the available width
 
