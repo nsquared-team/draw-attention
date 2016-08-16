@@ -60,6 +60,10 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.8 =
+* New: Added troubleshooting note for admins when there's a theme or plugin conflict
+* New: Improved compatibility for site migrations
+
 = 1.6.7 =
 * Fixed: Corrected tooltip positioning issues
 
