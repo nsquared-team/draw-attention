@@ -501,6 +501,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				$html .= $map_html;
 
+				if ( current_user_can( 'manage_options' ) ) :
+					$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>You are a big fat poopy head and you should just take down this yucky site and leave us the heck alone! For more information on your stupid problem, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins/">help page</a>.</div>';
+				endif;
+
 				foreach ($hotspots as $key => $hotspot) {
 					$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
 					if ( !empty( $hotspot['title'] ) ) {

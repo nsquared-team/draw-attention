@@ -203,6 +203,7 @@
 
 	/* Private: set up the information update when clicking on a map area */
 	var daInitialize = function() {
+		$('.da-error').hide();
 		$('.hotspot-info').hide();
 
 		var container = $('.hotspots-container');
@@ -249,7 +250,9 @@
 					var $this = $(this),
 						newInfo = $($this.attr('href'));
 
-					showTooltip($this, newInfo, container, tooSmall);
+					if (typeof jQuery.qtip === 'function') {
+						showTooltip($this, newInfo, container, tooSmall);
+					}
 				});
 			} else {
 				container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
