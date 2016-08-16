@@ -225,21 +225,17 @@
 					tipWidth = 280,
 					tooSmall = false;
 
-					console.log('Screen Width: ' + screenWidth);
-					console.log('DA Width: ' + daWidth);
-					console.log('Tip Width: ' + tipWidth);
-
 				if ( (screenWidth < tipWidth*3) || (screenWidth < tipWidth*4) && (daWidth/screenWidth > 0.75)) {
 					tooSmall = true;
 				}
-
-				console.log('Too Small? ' + tooSmall);
 
 				container.find('area.more-info-area').each(function(){
 					var $this = $(this),
 						newInfo = $($this.attr('href'));
 
-					showTooltip($this, newInfo, container, tooSmall);
+					if (typeof jQuery.qtip === 'function') {
+						showTooltip($this, newInfo, container, tooSmall);
+					}
 				});
 			} else {
 				container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
