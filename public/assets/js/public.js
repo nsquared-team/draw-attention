@@ -187,6 +187,7 @@
 
 	/* Private: set up the information update when clicking on a map area */
 	var daInitialize = function() {
+		$('.da-error').hide();
 		$('.hotspot-info').hide();
 
 		var container = $('.hotspots-container');

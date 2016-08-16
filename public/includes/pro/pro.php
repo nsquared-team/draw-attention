@@ -89,7 +89,7 @@ class DrawAttention_Pro {
 		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
-		
+
 		if ( class_exists( 'Jetpack_Photon' ) ) {
 			$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
 		}
@@ -264,6 +264,10 @@ class DrawAttention_Pro {
 			$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
 
 			$html .= $map_html;
+
+			if ( current_user_can( 'manage_options' ) ) :
+				$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins" target="_new">help page</a>.</div>';
+			endif;
 
 			foreach ($hotspots as $key => $hotspot) {
 				$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
