@@ -309,7 +309,7 @@ msgstr ""
 #: public/includes/pro/updater.php:52
 msgid ""
 "Invalid license. Please verify the license key, you may need to <a href="
-"\"http://tylerdigital.com/products/draw-attention/\" target=\"_blank\">renew "
+"\"https://wpdrawattention.com\" target=\"_blank\">renew "
 "your license</a> or <a href=\"mailto:support@tylerdigital.com\">contact "
 "support</a></p>"
 msgstr ""

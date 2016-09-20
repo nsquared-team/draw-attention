@@ -6,7 +6,7 @@
 class DrawAttention_Updater {
 	public $parent;
 	
-	const edd_store_url = 'http://tylerdigital.com';
+	const edd_store_url = 'https://wpdrawattention.com';
 
 	function __construct( $parent ) {
 		$this->parent = $parent;
@@ -45,11 +45,11 @@ class DrawAttention_Updater {
 	function license_key_html() {
 		$license_key_status = get_option( 'da_license_key_status' );
 		if ( empty( $license_key_status ) ) {
-			$license_key_status_html = '<p class="notice-yellow">'.__( 'Please enter your license key to receive support & updates', 'drawattention' ).'. <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">'.__( 'Click here to purchase or renew a license', 'drawattention' ).'</a></p>';
+			$license_key_status_html = '<p class="notice-yellow">'.__( 'Please enter your license key to receive support & updates', 'drawattention' ).'. <a href="https://wpdrawattention.com" target="_blank">'.__( 'Click here to purchase or renew a license', 'drawattention' ).'</a></p>';
 		} elseif ( $license_key_status == 'valid' ) {
 			$license_key_status_html = '<p class="notice-green">'.__( 'Valid license', 'drawattention' ).'</p>';
 		} elseif ( $license_key_status == 'invalid' ) {
-			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="http://tylerdigital.com/products/draw-attention/" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'drawattention');
+			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="https://wpdrawattention.com" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'drawattention');
 		}
 
 		$html  = '<form>';

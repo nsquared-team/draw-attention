@@ -300,8 +300,8 @@ msgid "Valid license"
 msgstr "Licença válida"
 
 #: public/includes/pro/updater.php:52
-msgid "Invalid license. Please verify the license key, you may need to <a href=\"http://tylerdigital.com/products/draw-attention/\" target=\"_blank\">renew your license</a> or <a href=\"mailto:support@tylerdigital.com\">contact support</a></p>"
-msgstr "Licença inválida. Por favor verique a sua chave de licença, poderá ter de <a href=\"http://tylerdigital.com/products/draw-attention/\" target=\"_blank\">renovar a sua licença</a> ou <a href=\"mailto:support@tylerdigital.com\">contactar o apoio</a></p>"
+msgid "Invalid license. Please verify the license key, you may need to <a href=\"https://wpdrawattention.com\" target=\"_blank\">renew your license</a> or <a href=\"mailto:support@tylerdigital.com\">contact support</a></p>"
+msgstr "Licença inválida. Por favor verique a sua chave de licença, poderá ter de <a href=\"https://wpdrawattention.com\" target=\"_blank\">renovar a sua licença</a> ou <a href=\"mailto:support@tylerdigital.com\">contactar o apoio</a></p>"
 
 #: public/includes/pro/updater.php:56
 msgid "License Key"
