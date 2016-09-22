@@ -289,7 +289,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		public function load_from_hotspots_json() {
 			$screen = get_current_screen();
 
-			if ( $screen->post_type!=='da_image' || $_GET['action'] !== 'edit' ) {
+			if ( $screen->post_type!=='da_image' || empty( $_GET['action'] ) || $_GET['action'] !== 'edit' ) {
 				return;
 			}
 
