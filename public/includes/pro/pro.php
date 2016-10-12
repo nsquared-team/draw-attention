@@ -200,7 +200,7 @@ class DrawAttention_Pro {
 				$info_html .=      '<div class="hotspot-initial">';
 				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
 				$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop( do_shortcode( $wp_embed->run_shortcode( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
-				$info_html .=        '<div class="hotspot-content">' . $more_info_html . '</div>';
+				$info_html .=        '<div class="hotspot-content hostspot-content">' . $more_info_html . '</div>';
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
 			}
