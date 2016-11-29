@@ -241,7 +241,7 @@ class DrawAttention_Pro {
 				if ( empty( $hotspot['title'] ) ) {
 					$hotspot['title'] = '';
 				}
-				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" alt="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
 
 
 				if ( $target == 'url' ) {
