@@ -130,8 +130,7 @@ class DrawAttention_Pro {
 			$img_post = get_post( $imageID );
 
 			// Get Alt Text
-			$thumb_img = get_post_meta( get_post_thumbnail_id( $img_post) );
-			$img_alt= $thumb_img['_wp_attachment_image_alt']['0'];
+			$img_alt = get_post_meta( get_post_thumbnail_id( $img_post), '_wp_attachment_image_alt', true );
 
 			// If no Alt text declared, add post title as alt text
 			if ( ! $img_alt ) {
