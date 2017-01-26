@@ -108,6 +108,7 @@ class DrawAttention_Pro {
 			}
 			wp_reset_query();
 		}
+
 		$hotspots = get_post_meta( $imageID, $this->parent->custom_fields->prefix.'hotspots', true );
 		$url_hotspots = array();
 		$urls_only = false;
@@ -127,6 +128,14 @@ class DrawAttention_Pro {
 			$this->photon_excluded_images[$imageID] = $img_src[0];
 
 			$img_post = get_post( $imageID );
+
+			// Get Alt Text
+			$img_alt = get_post_meta( get_post_thumbnail_id( $img_post), '_wp_attachment_image_alt', true );
+
+			// If no Alt text declared, add post title as alt text
+			if ( ! $img_alt ) {
+				$img_alt = get_the_title( $img_post );
+			}
 
 			$settings = get_metadata( 'post', $imageID, '', false );
 			if ( empty( $settings[$this->parent->custom_fields->prefix.'map_layout'][0] ) ) {
@@ -189,7 +198,7 @@ class DrawAttention_Pro {
 
 			$image_html = '';
 			$image_html .=    '<div class="hotspots-image-container">';
-			$image_html .=      '<img width="' . $img_width . '" height= "' . $img_height . '" src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="'. $event_trigger . '" data-highlight-color="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->parent->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->parent->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_border_opacity'][0] . '" data-no-lazy="1" data-lazy="false" />';
+			$image_html .=      '<img width="' . $img_width . '" height= "' . $img_height . '" alt="'. $img_alt . '" src="' . $img_url . '" class="hotspots-image" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="'. $event_trigger . '" data-highlight-color="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->parent->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->parent->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_border_opacity'][0] . '" data-no-lazy="1" data-lazy="false" />';
 			$image_html .=    '</div>';
 
 			$info_html = '';
@@ -200,7 +209,7 @@ class DrawAttention_Pro {
 				$info_html .=      '<div class="hotspot-initial">';
 				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
 				$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop( do_shortcode( $wp_embed->run_shortcode( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
-				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
+				$info_html .=        '<div class="hotspot-content hostspot-content">' . $more_info_html . '</div>';
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
 			}
@@ -231,7 +240,7 @@ class DrawAttention_Pro {
 				if ( empty( $hotspot['title'] ) ) {
 					$hotspot['title'] = '';
 				}
-				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
+				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" alt="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
 
 
 				if ( $target == 'url' ) {
