@@ -2,8 +2,8 @@
 Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
-Tested up to: 4.6
-Stable tag: 1.6.7
+Tested up to: 4.7.1
+Stable tag: 1.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 5.
 
 == Changelog ==
+
+= 1.6.8 =
+Fixed: Strict PHP Notice when saving
 
 = 1.6.7 =
 Fixed: Edge case with missing detail image ID
