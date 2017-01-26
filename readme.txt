@@ -87,6 +87,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = 1.6.8 =
 Fixed: Strict PHP Notice when saving
+Fixed: Missing detail images on some server environments
 
 = 1.6.7 =
 Fixed: Edge case with missing detail image ID
