@@ -60,6 +60,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.7.1 =
+* Fixed: Missing detail images on some server environments
+
 = 1.7 =
 * Use wpdrawattention.com domain for updates and support
 
