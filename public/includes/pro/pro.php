@@ -276,6 +276,10 @@ class DrawAttention_Pro {
 					$html .=  '<div class="hotspot-thumb">';
 					$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $img_post, $settings ) );
 					$html .=  '</div>';
+				} elseif ( empty( $hotspot['detail_image_id'] ) && ! empty( $hotspot[ 'detail_image' ] ) ) {
+					$html .=  '<div class="hotspot-thumb">';
+					$html .=  '<img src="' . $hotspot[ 'detail_image' ] . '"/>';
+					$html .=  '</div>';
 				}
 				if ( empty( $hotspot['description'] ) ) {
 					$hotspot['description'] = '';
