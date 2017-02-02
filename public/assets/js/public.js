@@ -148,7 +148,7 @@
 				target: 'mouse',
 				viewport: $(window),
 				adjust: {
-					x: 10
+					x: 20
 				}
 			},
 			style: {
