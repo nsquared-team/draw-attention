@@ -1,0 +1,986 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Project-Id-Version: Draw Attention Pro\n"
+"POT-Creation-Date: 2017-02-03 21:53+0600\n"
+"PO-Revision-Date: 2017-02-07 00:11+0600\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: draw-attention.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: ru\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-drawattention-admin.php:180
+#: admin/class-drawattention-admin.php:181
+msgid "DrawAttention"
+msgstr "DrawAttention (Привлечь внимание)"
+
+#: admin/class-drawattention-admin.php:210
+msgid "Settings"
+msgstr "Настройки"
+
+#: public/class-drawattention.php:374 public/includes/pro/pro.php:316
+msgid "Copy Shortcode"
+msgstr "Скопировать короткий код"
+
+#: public/includes/actions/action-url.php:4
+msgid "Go to URL"
+msgstr "Перейти на URL-адрес"
+
+#: public/includes/actions/action-url.php:7
+msgid "URL"
+msgstr "URL-адрес"
+
+#: public/includes/actions/action-url.php:17
+msgid "Open in New Window"
+msgstr "Открыть в новом окне"
+
+#: public/includes/cpt.php:31
+msgid "Draw Attention"
+msgstr "Привлечь внимание"
+
+#: public/includes/cpt.php:32 public/includes/cpt.php:131
+#: public/includes/lib/drag-drop-featured-image/index.php:138
+msgid "Image"
+msgstr "Картинка"
+
+#: public/includes/cpt.php:33
+msgid "All Images"
+msgstr "Добавить картинки"
+
+#: public/includes/cpt.php:34
+msgid "Add New"
+msgstr "Добавить новую"
+
+#: public/includes/cpt.php:35
+msgid "Add New Image"
+msgstr "Добавить новую картинку"
+
+#: public/includes/cpt.php:36
+msgid "Edit"
+msgstr "Редактировать"
+
+#: public/includes/cpt.php:37 public/includes/pro/pro.php:121
+msgid "Edit Image"
+msgstr "Редактировать картинку"
+
+#: public/includes/cpt.php:38
+msgid "New Image"
+msgstr "Новая картинка"
+
+#: public/includes/cpt.php:39
+msgid "View Image"
+msgstr "Просмотреть картинку"
+
+#: public/includes/cpt.php:40
+msgid "Search Images"
+msgstr "Поиск картинок"
+
+#: public/includes/cpt.php:41
+msgid "Nothing found in the Database."
+msgstr "Ничего не найдено в базе данных"
+
+#: public/includes/cpt.php:42
+msgid "Nothing found in Trash"
+msgstr "Ничего не найдено в мусорной карзине"
+
+#: public/includes/cpt.php:45
+msgid "Stores "
+msgstr "Магазины"
+
+#: public/includes/cpt.php:150
+msgid "Shortcode"
+msgstr "Короткий код"
+
+#: public/includes/custom_fields.php:59 public/includes/custom_fields.php:186
+msgid "Hotspot Areas"
+msgstr "Горячие участки"
+
+#: public/includes/custom_fields.php:70
+msgid "Highlight Styling"
+msgstr "Стиль выделения"
+
+#: public/includes/custom_fields.php:77
+msgid "Highlight Color"
+msgstr "Цвет выделения"
+
+#: public/includes/custom_fields.php:84
+msgid "Highlight Opacity"
+msgstr "Затененность выделения"
+
+#: public/includes/custom_fields.php:92
+msgid "Border Color"
+msgstr "Цвет рамки"
+
+#: public/includes/custom_fields.php:99
+msgid "Border Opacity"
+msgstr "Затененность рамки"
+
+#: public/includes/custom_fields.php:106
+msgid "Border Width"
+msgstr "Ширина рамки"
+
+#: public/includes/custom_fields.php:126
+msgid "More Info Box Styling"
+msgstr "Стилизация текстового окна Дополнительная Информация"
+
+#: public/includes/custom_fields.php:133
+msgid "Image Background Color"
+msgstr "Цвет фона картинки"
+
+#: public/includes/custom_fields.php:134
+msgid "Set the background color of behind the image"
+msgstr "Выбрать цвет фона за картинкой"
+
+#: public/includes/custom_fields.php:141
+msgid "Title Color"
+msgstr "Цвет Заголовка"
+
+#: public/includes/custom_fields.php:142
+msgid "Set the color of titles in More Info box"
+msgstr "Выбрать цвет заголовков в окне Дополнительная Информация"
+
+#: public/includes/custom_fields.php:149
+msgid "Text Color"
+msgstr "Цвет текста"
+
+#: public/includes/custom_fields.php:150
+msgid "Set the color of body text in More Info box"
+msgstr "Выбрать цвет основного текста в окне Дополнительная Информация"
+
+#: public/includes/custom_fields.php:157
+msgid "More Info Background Color"
+msgstr "Цвет фона окна Дополнительная Информация"
+
+#: public/includes/custom_fields.php:158
+msgid "Set the background color of the More Info box"
+msgstr "Выбрать цвет фона в окне Дополнительная Информация"
+
+#: public/includes/custom_fields.php:165
+msgid "Default More Info"
+msgstr "Дополнительная Информация по умолчанию"
+
+#: public/includes/custom_fields.php:166
+msgid "Set the text to show up in the more info box (when no area is selected)"
+msgstr ""
+"Выбрать текст для отображения в окне Дополнительная Информация (когда зона "
+"не выбрана)"
+
+#: public/includes/custom_fields.php:192
+msgid "Draw the clickable areas of your image"
+msgstr "Рисуйте нажимаемые зоны вашей картинки"
+
+#: public/includes/custom_fields.php:194
+msgid "Clickable Area #{#}"
+msgstr "Нажимаемая Зона #{#}"
+
+#: public/includes/custom_fields.php:195
+msgid "Add Another Area"
+msgstr "Добавить Очередную Зону"
+
+#: public/includes/custom_fields.php:196
+msgid "Remove Area"
+msgstr "Удалить Зону"
+
+#: public/includes/custom_fields.php:202
+msgid "Coordinates"
+msgstr "Координаты"
+
+#: public/includes/custom_fields.php:210
+msgid "Title"
+msgstr "Заголовок"
+
+#: public/includes/custom_fields.php:215
+msgid "Action"
+msgstr "Действие"
+
+#: public/includes/custom_fields.php:228
+#: public/includes/lib/cmb2/example-functions.php:433
+msgid "Description"
+msgstr "Описание"
+
+#: public/includes/custom_fields.php:251
+msgid "Detail Image"
+msgstr "Картинка детализации"
+
+#: public/includes/custom_fields.php:252
+msgid "Upload an image or enter a URL to show in the more info box"
+msgstr ""
+"Загрузить картинку или указать URL-адрес для отображения в окне "
+"Дополнительная Информация"
+
+#: public/includes/lib/cmb2/example-functions.php:82
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:206
+msgid "Test Metabox"
+msgstr "Тестовое Мета-окно"
+
+#: public/includes/lib/cmb2/example-functions.php:93
+#: public/includes/lib/cmb2/example-functions.php:380
+msgid "Test Text"
+msgstr "Тестовый Текст"
+
+#: public/includes/lib/cmb2/example-functions.php:94
+#: public/includes/lib/cmb2/example-functions.php:106
+#: public/includes/lib/cmb2/example-functions.php:114
+#: public/includes/lib/cmb2/example-functions.php:122
+#: public/includes/lib/cmb2/example-functions.php:131
+#: public/includes/lib/cmb2/example-functions.php:139
+#: public/includes/lib/cmb2/example-functions.php:153
+#: public/includes/lib/cmb2/example-functions.php:160
+#: public/includes/lib/cmb2/example-functions.php:168
+#: public/includes/lib/cmb2/example-functions.php:185
+#: public/includes/lib/cmb2/example-functions.php:194
+#: public/includes/lib/cmb2/example-functions.php:202
+#: public/includes/lib/cmb2/example-functions.php:209
+#: public/includes/lib/cmb2/example-functions.php:216
+#: public/includes/lib/cmb2/example-functions.php:230
+#: public/includes/lib/cmb2/example-functions.php:243
+#: public/includes/lib/cmb2/example-functions.php:256
+#: public/includes/lib/cmb2/example-functions.php:268
+#: public/includes/lib/cmb2/example-functions.php:277
+#: public/includes/lib/cmb2/example-functions.php:285
+#: public/includes/lib/cmb2/example-functions.php:294
+#: public/includes/lib/cmb2/example-functions.php:301
+#: public/includes/lib/cmb2/example-functions.php:315
+#: public/includes/lib/cmb2/example-functions.php:381
+#: public/includes/lib/cmb2/example-functions.php:475
+#: public/includes/lib/cmb2/example-functions.php:483
+#: public/includes/lib/cmb2/example-functions.php:490
+#: public/includes/lib/cmb2/example-functions.php:497
+#: public/includes/lib/cmb2/example-functions.php:504
+#: public/includes/lib/cmb2/example-functions.php:511
+#: public/includes/lib/cmb2/example-functions.php:518
+#: public/includes/lib/cmb2/example-functions.php:556
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:218
+msgid "field description (optional)"
+msgstr "описание поля (не обязательно)"
+
+#: public/includes/lib/cmb2/example-functions.php:105
+msgid "Test Text Small"
+msgstr "Тестовый Текст Маленький"
+
+#: public/includes/lib/cmb2/example-functions.php:113
+msgid "Test Text Medium"
+msgstr "Тестовый Текст Средний"
+
+#: public/includes/lib/cmb2/example-functions.php:121
+msgid "Website URL"
+msgstr "URL-адрес веб-сайта"
+
+#: public/includes/lib/cmb2/example-functions.php:130
+msgid "Test Text Email"
+msgstr "Тестовый Текст Електронной Почты"
+
+#: public/includes/lib/cmb2/example-functions.php:138
+msgid "Test Time"
+msgstr "Тестовое Время"
+
+#: public/includes/lib/cmb2/example-functions.php:145
+#: public/includes/lib/cmb2/example-functions.php:146
+msgid "Time zone"
+msgstr "Временной пояс"
+
+#: public/includes/lib/cmb2/example-functions.php:152
+msgid "Test Date Picker"
+msgstr "Выбор Тестовой Даты"
+
+#: public/includes/lib/cmb2/example-functions.php:159
+msgid "Test Date Picker (UNIX timestamp)"
+msgstr "Выбор Тестовой Даты (метка времени UNIX)"
+
+#: public/includes/lib/cmb2/example-functions.php:167
+msgid "Test Date/Time Picker Combo (UNIX timestamp)"
+msgstr "Комбинация Выбора Даты/Времени (метка времени UNIX)"
+
+#: public/includes/lib/cmb2/example-functions.php:184
+msgid "Test Money"
+msgstr "Тестовые Деньги"
+
+#: public/includes/lib/cmb2/example-functions.php:193
+msgid "Test Color Picker"
+msgstr "Тестовый Выбор Цвета"
+
+#: public/includes/lib/cmb2/example-functions.php:201
+msgid "Test Text Area"
+msgstr "Тестовая Текстовая Зона"
+
+#: public/includes/lib/cmb2/example-functions.php:208
+msgid "Test Text Area Small"
+msgstr "Тестовая Текстовая Зона Маленькая"
+
+#: public/includes/lib/cmb2/example-functions.php:215
+msgid "Test Text Area for Code"
+msgstr "Тестовая Текстовая Зона для Кода"
+
+#: public/includes/lib/cmb2/example-functions.php:222
+msgid "Test Title Weeeee"
+msgstr "Тестовый Заголовок, Ура!!"
+
+#: public/includes/lib/cmb2/example-functions.php:223
+msgid "This is a title description"
+msgstr "Это описание заголовка"
+
+#: public/includes/lib/cmb2/example-functions.php:229
+msgid "Test Select"
+msgstr "Тестовый Выбор"
+
+#: public/includes/lib/cmb2/example-functions.php:235
+#: public/includes/lib/cmb2/example-functions.php:248
+#: public/includes/lib/cmb2/example-functions.php:260
+msgid "Option One"
+msgstr "Вариант Один"
+
+#: public/includes/lib/cmb2/example-functions.php:236
+#: public/includes/lib/cmb2/example-functions.php:249
+#: public/includes/lib/cmb2/example-functions.php:261
+msgid "Option Two"
+msgstr "Вариант Два"
+
+#: public/includes/lib/cmb2/example-functions.php:237
+#: public/includes/lib/cmb2/example-functions.php:250
+#: public/includes/lib/cmb2/example-functions.php:262
+msgid "Option Three"
+msgstr "Вариант Три"
+
+#: public/includes/lib/cmb2/example-functions.php:242
+msgid "Test Radio inline"
+msgstr "Тестовое Радио в строчку"
+
+#: public/includes/lib/cmb2/example-functions.php:255
+msgid "Test Radio"
+msgstr "Текстовое Радио"
+
+#: public/includes/lib/cmb2/example-functions.php:267
+msgid "Test Taxonomy Radio"
+msgstr "Тестовая Классификация Радио"
+
+#: public/includes/lib/cmb2/example-functions.php:276
+msgid "Test Taxonomy Select"
+msgstr "Тестовая Классификация Выбор"
+
+#: public/includes/lib/cmb2/example-functions.php:284
+msgid "Test Taxonomy Multi Checkbox"
+msgstr "Тестовая Классификация Мульти-Отмечаемая Кнопка"
+
+#: public/includes/lib/cmb2/example-functions.php:293
+msgid "Test Checkbox"
+msgstr "Тестовая Отмечаемая Кнопка"
+
+#: public/includes/lib/cmb2/example-functions.php:300
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:217
+msgid "Test Multi Checkbox"
+msgstr "Тестовая Мульти-Отмечаемая Кнопка"
+
+#: public/includes/lib/cmb2/example-functions.php:306
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:223
+msgid "Check One"
+msgstr "Отметка Один"
+
+#: public/includes/lib/cmb2/example-functions.php:307
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:224
+msgid "Check Two"
+msgstr "Отметка Два"
+
+#: public/includes/lib/cmb2/example-functions.php:308
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:225
+msgid "Check Three"
+msgstr "Отметка Три"
+
+#: public/includes/lib/cmb2/example-functions.php:314
+msgid "Test wysiwyg"
+msgstr "Тест wysiwyg (режим точного отображения)"
+
+#: public/includes/lib/cmb2/example-functions.php:322
+msgid "Test Image"
+msgstr "Тестовая Картинка"
+
+#: public/includes/lib/cmb2/example-functions.php:323
+msgid "Upload an image or enter a URL."
+msgstr "Загрузить картинку или указать URL-адрес."
+
+#: public/includes/lib/cmb2/example-functions.php:329
+msgid "Multiple Files"
+msgstr "Несколько Файлов"
+
+#: public/includes/lib/cmb2/example-functions.php:330
+msgid "Upload or add multiple images/attachments."
+msgstr "Загрузить или добавить несколько картинок/приложений"
+
+#: public/includes/lib/cmb2/example-functions.php:337
+msgid "oEmbed"
+msgstr "Вставка oEmbed"
+
+#: public/includes/lib/cmb2/example-functions.php:338
+msgid ""
+"Enter a youtube, twitter, or instagram URL. Supports services listed at <a "
+"href=\"http://codex.wordpress.org/Embeds\">http://codex.wordpress.org/"
+"Embeds</a>."
+msgstr ""
+"Ввести URL-адрес YouTube, Twitter или Instagram. Поддерживает услуги "
+"перечисленные по адресу <a href=\"http://codex.wordpress.org/Embeds\">http://"
+"codex.wordpress.org/Embeds</a>."
+
+#: public/includes/lib/cmb2/example-functions.php:371
+msgid "About Page Metabox"
+msgstr "Мета-Окно Страница О Проекте"
+
+#: public/includes/lib/cmb2/example-functions.php:402
+msgid "Repeating Field Group"
+msgstr "Повторяющаяся Полевая Группа"
+
+#: public/includes/lib/cmb2/example-functions.php:410
+msgid "Generates reusable form entries"
+msgstr "Генерирует повторно используемые записи в форму"
+
+#: public/includes/lib/cmb2/example-functions.php:412
+msgid "Entry {#}"
+msgstr "Запись {#}"
+
+#: public/includes/lib/cmb2/example-functions.php:413
+msgid "Add Another Entry"
+msgstr "Добавить Очередную Запись"
+
+#: public/includes/lib/cmb2/example-functions.php:414
+msgid "Remove Entry"
+msgstr "Удалить Запись"
+
+#: public/includes/lib/cmb2/example-functions.php:426
+msgid "Entry Title"
+msgstr "Заголовок Записи"
+
+#: public/includes/lib/cmb2/example-functions.php:434
+msgid "Write a short description for this entry"
+msgstr "Напишите краткое описание для этой записи"
+
+#: public/includes/lib/cmb2/example-functions.php:440
+msgid "Entry Image"
+msgstr "Картинка Записи"
+
+#: public/includes/lib/cmb2/example-functions.php:446
+msgid "Image Caption"
+msgstr "Подпись Под Картинкой"
+
+#: public/includes/lib/cmb2/example-functions.php:467
+msgid "User Profile Metabox"
+msgstr "Мета-Окно Профиль Пользователя"
+
+#: public/includes/lib/cmb2/example-functions.php:474
+msgid "Extra Info"
+msgstr "Дополнительная Информация"
+
+#: public/includes/lib/cmb2/example-functions.php:482
+msgid "Avatar"
+msgstr "Аватар"
+
+#: public/includes/lib/cmb2/example-functions.php:489
+msgid "Facebook URL"
+msgstr "URL-адрес Facebook"
+
+#: public/includes/lib/cmb2/example-functions.php:496
+msgid "Twitter URL"
+msgstr "URL-адрес Twitter"
+
+#: public/includes/lib/cmb2/example-functions.php:503
+msgid "Google+ URL"
+msgstr "URL-адрес Google+"
+
+#: public/includes/lib/cmb2/example-functions.php:510
+msgid "Linkedin URL"
+msgstr "URL-адрес Linkedin"
+
+#: public/includes/lib/cmb2/example-functions.php:517
+msgid "User Field"
+msgstr "Поле Пользователя"
+
+#: public/includes/lib/cmb2/example-functions.php:540
+msgid "Theme Options Metabox"
+msgstr "Мета-Окно Настройки Темы"
+
+#: public/includes/lib/cmb2/example-functions.php:555
+msgid "Site Background Color"
+msgstr "Цвет Фона Сайта"
+
+#: public/includes/lib/cmb2/includes/CMB2.php:120
+msgid "Metabox configuration is required to have an ID parameter"
+msgstr ""
+"Конфигурация мета-окна требует наличие идентификационного параметра (ID)"
+
+#: public/includes/lib/cmb2/includes/CMB2.php:326
+msgid "Click to toggle"
+msgstr "Щелкните чтобы переключить"
+
+#: public/includes/lib/cmb2/includes/CMB2_Ajax.php:40
+msgid "Please Try Again"
+msgstr "Пожалуйста, попробуйте еще раз"
+
+#: public/includes/lib/cmb2/includes/CMB2_Ajax.php:135
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:786
+msgid "Remove Embed"
+msgstr "Удалить Вставку"
+
+#: public/includes/lib/cmb2/includes/CMB2_Ajax.php:139
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:787
+#, php-format
+msgid "No oEmbed Results Found for %s. View more info at"
+msgstr ""
+"Не найдены результаты вставки oEmbed для %. Смотрите дополнительную "
+"информацию на"
+
+#: public/includes/lib/cmb2/includes/CMB2_Field.php:891
+msgid "Add Group"
+msgstr "Добавить Группу"
+
+#: public/includes/lib/cmb2/includes/CMB2_Field.php:892
+msgid "Remove Group"
+msgstr "Удалить Группу"
+
+#: public/includes/lib/cmb2/includes/CMB2_Field.php:914
+#: public/includes/lib/cmb2/includes/CMB2_Field.php:918
+#: public/includes/lib/cmb2/tests/test-cmb-field.php:178
+msgid "None"
+msgstr "Отсутствует"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:86
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:119
+msgid "Clear"
+msgstr "Очистить"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:87
+msgid "Default"
+msgstr "По умолчанию"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:88
+msgid "Select Color"
+msgstr "Выбрать Цвет"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:89
+msgid "Current Color"
+msgstr "Текущий Цвет"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:109
+msgctxt "Valid formatDate string for jquery-ui datepicker"
+msgid "mm/dd/yy"
+msgstr "мм/дд/гг"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:110
+msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
+msgstr "Воскресенье, Понедельник, Вторник, Среда, Пятница, Суббота"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:111
+msgid "Su, Mo, Tu, We, Th, Fr, Sa"
+msgstr "Вс, Пн, Вт, Ср, Чт, Пт, Сб"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:112
+msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
+msgstr "Вос, Пон, Вто, Сре, Чет, Пят, Суб"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:113
+msgid ""
+"January, February, March, April, May, June, July, August, September, "
+"October, November, December"
+msgstr ""
+"Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, "
+"Ноябрь, Декабрь"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:114
+msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+msgstr "Янв, Фев, Мар, Апр, Май, Июн, Июл, Авг, Сен, Окт, Ноя, Дек"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:115
+msgid "Next"
+msgstr "Следующий"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:116
+msgid "Prev"
+msgstr "Предыдущий"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:117
+msgid "Today"
+msgstr "Сегодня"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:118
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:128
+msgid "Done"
+msgstr "Закончено"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:122
+msgid "Choose Time"
+msgstr "Выбрать Время"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:123
+msgid "Time"
+msgstr "Время"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:124
+msgid "Hour"
+msgstr "Час"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:125
+msgid "Minute"
+msgstr "Минута"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:126
+msgid "Second"
+msgstr "Секунда"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:127
+msgid "Now"
+msgstr "Сейчас"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:129
+msgctxt ""
+"Valid formatting string, as per http://trentrichardson.com/examples/"
+"timepicker/"
+msgid "hh:mm TT"
+msgstr "чч:мм ТТ"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:135
+msgid "Use this file"
+msgstr "Используйте этот файл"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:136
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:983
+msgid "Remove Image"
+msgstr "Удалить Картинку"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:137
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:356
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:1002
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:155
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:163
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:735
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:760
+msgid "Remove"
+msgstr "Удалить"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:138
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:997
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:736
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:761
+msgid "File:"
+msgstr "Файл:"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:139
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:1000
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:734
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:759
+msgid "Download"
+msgstr "Скачать"
+
+#: public/includes/lib/cmb2/includes/CMB2_JS.php:140
+msgid "Select / Deselect All"
+msgstr "Выбрать / Отменить Все"
+
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:297
+msgid "Add Row"
+msgstr "Добавить Строку"
+
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:734
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:782
+msgid "No terms"
+msgstr "Нет терминов"
+
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:847
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:711
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:737
+msgid "Add or Upload Files"
+msgstr "Добавить или Загрузить Файлы"
+
+#: public/includes/lib/cmb2/includes/CMB2_Types.php:907
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:747
+#: public/includes/lib/cmb2/tests/test-cmb-types.php:762
+msgid "Add or Upload File"
+msgstr "Добавить или Загрузить Файл"
+
+#: public/includes/lib/cmb2/includes/helper-functions.php:249
+msgid "Save"
+msgstr "Сохранить"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:36
+msgid "Success:"
+msgstr "Успех:"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:36
+msgid "The plugin options have been successfully updated!"
+msgstr "Настройки плагина успешно обновлены!"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:41
+msgid ""
+"Please make sure you filled in all the required fields before submitting. At "
+"least <em><strong>one post type</strong></em> and <em><strong>one extension</"
+"strong></em> must be selected!"
+msgstr ""
+"Пожалуйста, проверьте, что вы действительно заполнили все необходимые поля "
+"перед отправкой. По крайней мере <em><strong>один вид публикации</strong></"
+"em> и <em><strong>одно окончание </strong></em> должно быть выбрано! "
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:54
+msgid "Contact me"
+msgstr "Свяжитесь со мной"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:56
+msgid ""
+"If you have any questions regarding this plugin or have ideas on how to "
+"improve it then please dont hesitate to"
+msgstr ""
+"Если у вас имеются вопросы касательно этого плагина, или если у вас есть "
+"идеи по его улучшение, пожалуйста, не стесняйтесь"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:56
+msgid "contact me"
+msgstr "связаться со мной"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:58
+msgid "Send me an email"
+msgstr "Отправить мне электронное письмо"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:59
+msgid "Find me on Facebook"
+msgstr "Найти меня на Facebook"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:60
+msgid "Find me on Twitter"
+msgstr "Найти меня на Twitter"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:61
+msgid "Find me on Google+"
+msgstr "Найти меня на Google+"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:73
+msgid "Available options:"
+msgstr "Доступные варианты:"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:78
+msgid "Which post types do you want the meta box to display at?"
+msgstr "В каких видах постов вы желаете отображение мета-окна?"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:97
+msgid "Which of the following file types should be supported?"
+msgstr "Какие из следующий видов файлов должны поддерживаться?"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:115
+msgid "Change the capability required to customize the plugin settings"
+msgstr ""
+"Изменить функциональные возможности, необходимые для индивидуализации "
+"настроек плагина"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:116
+msgid ""
+"The default capability is <code>manage_options</code> and applies to "
+"administrators."
+msgstr ""
+"Функциональная возможность по умолчанию является <code>manage_options</"
+"code>, и подлежит управлению администраторов"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:118
+msgid "User roles &amp; capabilities"
+msgstr "Пользовательские роли &amp; возможности"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:123
+msgid "Publish / update post after successful image upload?"
+msgstr "Опубликовать / обновить пост после успешной загрузки картинки?"
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:124
+msgid ""
+"If you like some users upload the featured image as the last step when "
+"publishing a post, this option is for you."
+msgstr ""
+"Если вы, как некоторые пользователи, загружаете главную картинку в последнюю "
+"очередь при опубликовании поста, этот вариант для вас."
+
+#: public/includes/lib/drag-drop-featured-image/assets/views/options.php:136
+msgid "Update settings"
+msgstr "Обновить настройки."
+
+#: public/includes/lib/drag-drop-featured-image/index.php:173
+#: public/includes/lib/drag-drop-featured-image/index.php:174
+msgid "Set featured image"
+msgstr "Выбрать главную картинку"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:243
+msgid "Remove image"
+msgstr "Удалить картинку"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:255
+msgid "Drop image here"
+msgstr "Перетащить картинку сюда"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:256
+msgctxt "Uploader: Drop files here - or - Select Files"
+msgid "or"
+msgstr "или"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:257
+msgid "Upload Image"
+msgstr "Загрузить Картинку"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:263
+#: public/includes/lib/drag-drop-featured-image/index.php:267
+msgid "Media Library"
+msgstr "Медиа-библиотека"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:294
+msgid "Allowed Files"
+msgstr "Разрешенные Файлы"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:344
+msgid "You may only upload one image at a time!"
+msgstr "Вы можете загружать только одну картинку одновременно!"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:359
+msgid "The file you selected exceeds the maximum filesize limit."
+msgstr "Выбранный вами файл превышает максимальный размер файла."
+
+#: public/includes/lib/drag-drop-featured-image/index.php:512
+msgid ""
+"Drag & Drop Feaured image: Unknown post och attachment ID, please try again!"
+msgstr ""
+"Перетащите Главную Картинку: Неизвестный идентификатор приложения к посту, "
+"пожалуйста, попробуйте снова!"
+
+#: public/includes/lib/drag-drop-featured-image/index.php:537
+msgid "Drag & Drop Feaured image: An error occured, please reload page!"
+msgstr ""
+"Перетащите Главную Картинку: Произошла ошибка, пожалуйста, перезагрузите "
+"страницу!"
+
+#: public/includes/pro/pro.php:22
+msgid "Layout"
+msgstr "Разметка страницы"
+
+#: public/includes/pro/pro.php:34
+msgid "Left"
+msgstr "Слева"
+
+#: public/includes/pro/pro.php:35
+msgid "Right"
+msgstr "Справа"
+
+#: public/includes/pro/pro.php:36
+msgid "Bottom"
+msgstr "Снизу"
+
+#: public/includes/pro/pro.php:37
+msgid "Top"
+msgstr "Сверху"
+
+#: public/includes/pro/pro.php:38
+msgid "Lightbox"
+msgstr "Лайтбокс (всплывающее окно с затемнением фона)"
+
+#: public/includes/pro/pro.php:39
+msgid "Tooltip"
+msgstr "Всплывающая подсказка"
+
+#: public/includes/pro/pro.php:45
+msgid "Show more info on"
+msgstr "Показать больше информации о"
+
+#: public/includes/pro/pro.php:46
+msgid ""
+"Click is recommended for best results. If you use Hover, please test "
+"carefully with your image"
+msgstr ""
+"Рекомендуется применять нажатие для наилучших результатов. Если вы "
+"используете Навод Курсора, проведите тщательное тестирование с вашей "
+"картинкой"
+
+#: public/includes/pro/pro.php:50
+msgid "Click"
+msgstr "Нажать"
+
+#: public/includes/pro/pro.php:51
+msgid "Hover"
+msgstr "Навести"
+
+#: public/includes/pro/pro.php:119
+msgid "You need to define some clickable areas for your image."
+msgstr "Вам необходимо определить нажимаемые зоны для вашей картинки."
+
+#: public/includes/pro/updater.php:24
+msgid "License & Support"
+msgstr "Лицензия и Поддержка"
+
+#: public/includes/pro/updater.php:33
+msgid "Enter License Key"
+msgstr "Ввести Ключ Лицензии"
+
+#: public/includes/pro/updater.php:41
+msgid "Draw Attention Pro - License & Updates"
+msgstr "Draw Attention Pro (Привлечь Внимание Pro) - Лицензия и Обновления"
+
+#: public/includes/pro/updater.php:48
+msgid "Please enter your license key to receive support & updates"
+msgstr ""
+"Пожалуйста, введите ваш ключ лицензии для получения поддержки и обновлений"
+
+#: public/includes/pro/updater.php:48
+msgid "Click here to purchase or renew a license"
+msgstr "Щелкните сюда чтобы купить или обновить лицензию"
+
+#: public/includes/pro/updater.php:50
+msgid "Valid license"
+msgstr "Действительная лицензия"
+
+#: public/includes/pro/updater.php:52
+msgid ""
+"Invalid license. Please verify the license key, you may need to <a href="
+"\"https://wpdrawattention.com\" target=\"_blank\">renew your license</a> or "
+"<a href=\"mailto:support@tylerdigital.com\">contact support</a></p>"
+msgstr ""
+"Недействительная лицензия. Пожалуйста, проверьте ваш ключ лицензии. "
+"Возможно, вам необходимо <a href=\"https://wpdrawattention.com\" target="
+"\"_blank\">обновить вашу лицензию</a> или <a href=\"mailto:"
+"support@tylerdigital.com\">связаться с техподдержкой</a></p>"
+
+#: public/includes/pro/updater.php:56
+msgid "License Key"
+msgstr "Ключ Лицензии"
+
+#: public/includes/pro/updater.php:65
+msgid "Update"
+msgstr "Обновления"
+
+#: public/includes/themes.php:13
+msgid "Apply Color Scheme"
+msgstr "Применить Цветную Гамму"
+
+#: public/includes/themes.php:17
+msgid "Quickly apply a theme (you can adjust each color afterwards)."
+msgstr "Быстро применить тему (вы можете изменить каждый цвет в последствии)"
+
+#: public/includes/themes.php:19
+msgid "Select a theme..."
+msgstr "Выбрать тему..."
+
+#: public/views/single-da_image.php:19
+msgid "Edit Interactive Image"
+msgstr "Редактировать Интерактивную Картинку"
+
+#. Plugin Name of the plugin/theme
+msgid "Draw Attention Pro"
+msgstr "Draw Attention Pro (Привлечь Внимание Про)"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://wpdrawattention.com"
+msgstr "http://wpdrawattention.com"
+
+#. Description of the plugin/theme
+msgid "Create interactive images in WordPress"
+msgstr "Создавайте интерактивные картинки в WordPress"
+
+#. Author of the plugin/theme
+msgid "Tyler Digital & Purple Pen Productions"
+msgstr "Производство Tyler Digital и Purple Pen Productions"
