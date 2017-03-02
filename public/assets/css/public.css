@@ -301,11 +301,12 @@
   max-width: 280px;
   min-width: 50px;
   padding: 0;
+  pointer-events: none;
   position: absolute;
   top: -28000px;
 }
 
-/* line 261, ../sass/public.scss */
+/* line 262, ../sass/public.scss */
 .qtip-content {
   overflow: hidden;
   padding: 0.5em 0.75em;
@@ -313,33 +314,33 @@
   text-align: left;
   word-wrap: break-word;
 }
-/* line 267, ../sass/public.scss */
+/* line 268, ../sass/public.scss */
 .qtip-content h2.hotspot-title {
   font-size: 1.2em;
   margin: 0 0 0.4em 0;
   padding: 0;
   text-align: center;
 }
-/* line 274, ../sass/public.scss */
+/* line 275, ../sass/public.scss */
 .qtip-content .hotspot-content p {
   font-size: 1em;
   margin: 1em 0;
 }
-/* line 278, ../sass/public.scss */
+/* line 279, ../sass/public.scss */
 .qtip-content .hotspot-content img {
   height: auto;
   max-width: 100%;
 }
 
 /* Default tooltip style */
-/* line 286, ../sass/public.scss */
+/* line 287, ../sass/public.scss */
 .qtip-default {
   background-color: #FFFFA3;
   border: 0 none;
   color: #555;
 }
 
-/* line 292, ../sass/public.scss */
+/* line 293, ../sass/public.scss */
 .qtip .qtip-tip {
   margin: 0 auto;
   overflow: hidden;
@@ -348,12 +349,12 @@
 
 /* Opera bug #357 - Incorrect tip position
 https://github.com/Craga89/qTip2/issues/367 */
-/* line 300, ../sass/public.scss */
+/* line 301, ../sass/public.scss */
 x:-o-prefocus, .qtip .qtip-tip {
   visibility: hidden;
 }
 
-/* line 304, ../sass/public.scss */
+/* line 305, ../sass/public.scss */
 .qtip .qtip-tip,
 .qtip .qtip-tip .qtip-vml,
 .qtip .qtip-tip canvas {
@@ -363,20 +364,20 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 0 dashed transparent;
 }
 
-/* line 313, ../sass/public.scss */
+/* line 314, ../sass/public.scss */
 .qtip .qtip-tip canvas {
   top: 0;
   left: 0;
 }
 
-/* line 315, ../sass/public.scss */
+/* line 316, ../sass/public.scss */
 .qtip .qtip-tip .qtip-vml {
   behavior: url(#default#VML);
   display: inline-block;
   visibility: visible;
 }
 
-/* line 321, ../sass/public.scss */
+/* line 322, ../sass/public.scss */
 .qtip-titlebar {
   position: relative;
   padding: 0;
@@ -384,7 +385,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   border-width: 0;
 }
 
-/* line 329, ../sass/public.scss */
+/* line 330, ../sass/public.scss */
 .qtip-close {
   position: absolute;
   right: 4px;
@@ -396,20 +397,20 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 1px solid transparent;
 }
 
-/* line 340, ../sass/public.scss */
+/* line 341, ../sass/public.scss */
 .qtip-titlebar .qtip-close {
   right: 4px;
   top: 50%;
   margin-top: -9px;
 }
 
-/* line 345, ../sass/public.scss */
+/* line 346, ../sass/public.scss */
 * html .qtip-titlebar .qtip-close {
   top: 16px;
 }
 
 /* IE fix */
-/* line 347, ../sass/public.scss */
+/* line 348, ../sass/public.scss */
 .qtip-titlebar .ui-icon,
 .qtip-icon .ui-icon {
   display: block;
@@ -417,7 +418,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   direction: ltr;
 }
 
-/* line 354, ../sass/public.scss */
+/* line 355, ../sass/public.scss */
 .qtip-icon, .qtip-icon .ui-icon {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -425,7 +426,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   text-decoration: none;
 }
 
-/* line 361, ../sass/public.scss */
+/* line 362, ../sass/public.scss */
 .qtip-icon .ui-icon {
   width: 18px;
   height: 14px;
