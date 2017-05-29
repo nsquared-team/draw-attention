@@ -259,7 +259,7 @@
 
 	resizeDelay = function() {
 		resizing = false;
-		$(window).trigger('responsilight.resizeComplete');
+		$(window).trigger('resizeComplete.responsilight');
 	};
 
 	resizeStart = function(img) {
@@ -268,7 +268,7 @@
 
 	imgEvents = function(img) {
 		img
-			.on('responsilight.init', function(){
+			.on('init.responsilight', function(){
 				img.data('initialized', true);
 				img.addClass('responsilight-initialized');
 				linkToArea(img);
@@ -276,10 +276,10 @@
 			});
 
 		$(window)
-			.on('responsilight.resizeStart', function(){
+			.on('resizeStart.responsilight', function(){
 				resizeStart(img);
 			})
-			.on('responsilight.resizeComplete', function(){
+			.on('resizeComplete.responsilight', function(){
 				mapResize(img);
 			});
 	}
@@ -287,10 +287,9 @@
 	areaEvents = function(img, area) {
 		var trigger = opts.eventTrigger;
 
+		// Translate browser events to responsilight events
 		area.on('mouseover touchstart mouseout touchend click focus blur keypress', function(e){
 			var type = e.type;
-			e.preventDefault();
-
 			switch(type) {
 				case 'touchstart':
 					mapOver(img, area, e);
@@ -326,7 +325,7 @@
 	};
 
 	mapOver = function(img, area, e) {
-		area.trigger('responsilight.over');
+		area.trigger('over.responsilight');
 
 		area.data('canvasHover').addClass('canvas-show');
 
@@ -334,19 +333,21 @@
 			area.data('canvasDisplay').removeClass('canvas-show');
 		}
 
+		console.log(opts.eventTrigger);
+
 		if (opts.eventTrigger === 'hover' && e.type !== 'touchstart') {
 			area.addClass('active');
-			area.trigger('responsilight.active');
+			area.trigger('active.responsilight');
 		}
 	};
 
 	mapOut = function(img, area, e) {
-		area.trigger('responsilight.out');
+		area.trigger('out.responsilight');
 
 		if (opts.eventTrigger === 'hover') {
 			area.data('canvasHover').removeClass('canvas-show');
 			area.removeClass('active');
-			area.trigger('responsilight.inactive');
+			area.trigger('.inactive.responsilight');
 			if (opts.alwaysVisible) {
 				area.data('canvasDisplay').addClass('canvas-show');
 			}
@@ -359,13 +360,13 @@
 	};
 
 	mapClick = function(img, area, e) {
-		area.trigger('responsilight.click');
+		area.trigger('areaClick.responsilight');
 		area.toggleClass('active');
 
 		if (area.hasClass('active')) {
-			area.trigger('responsilight.active');
+			area.trigger('active.responsilight');
 		} else {
-			area.trigger('responsilight.inactive');
+			area.trigger('inactive.responsilight');
 		}
 
 		var oldActive = area.siblings('.active').removeClass('active');
@@ -379,7 +380,7 @@
 
 	showActiveArea = function(img, area) {
 		area.data('canvasHover').addClass('canvas-show');
-		area.trigger('responsilight.active');
+		area.trigger('active.responsilight');
 	};
 
 	/* ------------------------------------------- */
@@ -403,7 +404,7 @@
 		if (img.data('initialized')) {
 			// Re-initialization
 			getSize(img);
-			img.trigger('responsilight.reInit');
+			img.trigger('reInit.responsilight');
 		} else {
 			// Initial page load
 			$('<img />').load(function() {
@@ -414,7 +415,7 @@
 				wrapImage(img);
 				prepAreas(img);
 				imgEvents(img);
-				img.trigger('responsilight.init');
+				img.trigger('init.responsilight');
 			}).attr('src', img.attr('src'));
 		}
 	};
@@ -543,14 +544,14 @@
 		$(window).on('resize orientationchange', function() {
 			if (!resizing) {
 				resizing = true;
-				$(this).trigger('responsilight.resizeStart');
+				$(this).trigger('resizeStart.responsilight');
 				setTimeout(resizeDelay, 800);
 			}
 		});
 
-		$(window).on('responsilight.resizeComplete', function(){
+		$(window).on('resizeComplete.responsilight', function(){
 			responsilight_init();
-		}).trigger('responsilight.resizeComplete');
+		}).trigger('resizeComplete.responsilight');
 
 		return this;
 	};
