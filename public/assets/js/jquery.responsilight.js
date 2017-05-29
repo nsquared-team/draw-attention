@@ -333,8 +333,6 @@
 			area.data('canvasDisplay').removeClass('canvas-show');
 		}
 
-		console.log(opts.eventTrigger);
-
 		if (opts.eventTrigger === 'hover' && e.type !== 'touchstart') {
 			area.addClass('active');
 			area.trigger('active.responsilight');
