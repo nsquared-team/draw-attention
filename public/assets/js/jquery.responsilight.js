@@ -401,6 +401,7 @@
 
 		if (img.data('initialized')) {
 			// Re-initialization
+			getImageOptions(img);
 			getSize(img);
 			img.trigger('reInit.responsilight');
 		} else {
