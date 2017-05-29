@@ -253,7 +253,7 @@
 			wrap = info.wrap;
 
 		wrap.css({
-			'width': img.data('width')
+			'maxWidth': natW
 		});
 	};
 
