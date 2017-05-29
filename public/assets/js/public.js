@@ -298,6 +298,9 @@
 				hotspots.init();
 			}, 750);
 		});
+		$('.responsive-tabs').on('click', '.responsive-tabs__list__item', function(){
+			hotspots.init();
+		});
 		$(window).on('et_hashchange', function() {
 			setTimeout(function() {
 				hotspots.init();
