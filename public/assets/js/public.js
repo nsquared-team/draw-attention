@@ -1,60 +1,67 @@
 ;(function ($, hotspots, undefined) {
 	"use strict";
 
-	/* Private: get settings and set up each map */
-	var mapSetup  = function() {
-		$('img.hotspots-image').responsilight();
+
+	/* Get settings and initialize responsilight */
+	var mapSetup = function(){
+		$('img.hotspots-image').responsilight({
+			alwaysVisible: true,
+			eventTrigger: 'hover'
+		});
 	};
 
-	/* Private: show lightbox */
-	var showLightbox = function(container, isSticky, info, area) {
-		var mapId, mapNo;
-		if (isSticky) {
-			$.featherlight(info, {
-				afterContent: function(){
-					var content = $('.hotspot-info.featherlight-inner'),
-						lb = $('.featherlight-content');
-					mapId = container.attr('id');
-					mapNo = mapId.match(/\d+/)[0];
 
-					content.show();
-					lb.addClass('lightbox-' + mapNo);
-
-					var img = content.find('img'),
-						imgHeight = img.height(),
-						lbHeight = lb.height(),
-						maxImgHeight = lbHeight * 0.8;
-
-					if ( imgHeight > maxImgHeight ) {
-						img.height(maxImgHeight);
-						img.css({'width': 'auto'});
-					}
-				},
-				afterClose: function() {
-					area.data('stickyCanvas', false);
-					$('#' + mapId).find('canvas').fadeOut('slow', function(){
-						$(this).remove();
-					});
-				}
-			});
+	/* Display title tooltips for URL areas */
+	var showUrlTooltip = function(area) {
+		if (typeof jQuery.qtip === 'undefined') {
+			return;
 		}
+
+		area.qtip({
+			position: {
+				target: 'mouse',
+				viewport: $(window),
+				adjust: {
+					x: 15,
+					y: 15
+				}
+			},
+			style: {
+				classes: 'qtip-da-custom tip-title-only'
+			},
+			events: {
+				render: function(event, api) {
+					var tooltip = api.elements.tooltip,
+						mapId = area.parent('map').attr('name'),
+						mapNo = mapId.match(/\d+/)[0];
+
+					tooltip.addClass('tooltip-'+ mapNo);
+				}
+			}
+		});
 	};
 
-	/* Private: show tooltip */
-	var showTooltip = function(area, newInfo, container, tooSmall) {
-		/* Global qtip settings */
+
+	/* Display content tooltips for more info areas */
+	var showTooltip = function(area, container, tooSmall) {
+		if (typeof jQuery.qtip === 'undefined') {
+			return;
+		}
+
+		var newInfo = $(area.attr('href'));
+
 		var qtipSettings = {
 			content: {
 				text: newInfo,
 				button: true
 			},
 			show: {
-				event: 'stickyHighlight'
+				event: 'active.responsilight'
 			},
 			hide: {
 				fixed: true,
 				delay: 300,
-				event: 'unstickyHighlight unfocus'
+				event: 'inactive.responsilight unfocus'
 			},
 			style: {
 				classes: 'qtip-da-custom'
@@ -69,10 +76,11 @@
 				},
 				hide: function(event, api) {
 					var mapId = container.attr('id');
-					area.data('stickyCanvas', false);
-					$('#' + mapId).find('canvas').fadeOut('slow', function(){
-						$(this).remove();
-					});
+					area.removeClass('active');
+					area.data('canvasHover').removeClass('canvas-show');
+					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
+						area.data('canvasDisplay').addClass('canvas-show');
+					}
 				}
 			}
 		};
@@ -141,165 +149,173 @@
 		area.qtip(qtipSettings);
 	};
 
-	/* Private: show URL tooltip */
-	var showUrlTooltip = function(area, container){
-		area.qtip({
-			position: {
-				target: 'mouse',
-				viewport: $(window),
-				adjust: {
-					x: 15,
-					y: 15
+
+	/* Display lightbox for more info areas */
+	var showLightbox = function(container, area, e) {
+		var mapId, mapNo;
+		var info = $(area.attr('href'));
+		if (e.type === 'active') {
+			$.featherlight(info, {
+				afterContent: function(){
+					var content = $('.hotspot-info.featherlight-inner'),
+						lb = $('.featherlight-content');
+					mapId = area.parent('map').attr('name');
+					mapNo = mapId.match(/\d+/)[0];
+
+					content.show();
+					lb.addClass('lightbox-' + mapNo);
+
+					var img = content.find('img'),
+						imgHeight = img.height(),
+						lbHeight = lb.height(),
+						maxImgHeight = lbHeight * 0.8;
+
+					if ( imgHeight > maxImgHeight ) {
+						img.height(maxImgHeight);
+						img.css({'width': 'auto'});
+					}
+				},
+				afterClose: function() {
+					area.removeClass('active');
+					area.data('canvasHover').removeClass('canvas-show');
+					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
+						area.data('canvasDisplay').addClass('canvas-show');
+					}
 				}
-			},
-			style: {
-				classes: 'qtip-da-custom tip-title-only'
-			},
-			events: {
-				render: function(event, api) {
-					var tooltip = api.elements.tooltip,
-						mapId = container.attr('id'),
-						mapNo = mapId.match(/\d+/)[0];
+			});
+		}
+	}
 
-					tooltip.addClass('tooltip-'+ mapNo);
-				}
-			}
-		});
-	};
 
-	/* Private: show info area */
-	var showNewInfo = function(container, isSticky, info) {
-		var infoContainer = container.find('.hotspots-placeholder'),
-			infoContent = infoContainer.find('.hotspots-content');
+	/* Display new info box for more info areas */
+	var showInfobox = function(content, area, e) {
+		var info;
 
-		if ( infoContent.length == 0 ) {
-			infoContainer.wrapInner('<div class="hotspots-content"></div>');
-			infoContent = infoContainer.find('.hotspots-content');
+		if (e.type === 'active') {
+			info = $(area.attr('href'));
+		} else {
+			info = content.find('.hotspot-initial');
 		}
 
-		infoContainer.addClass('loading');
-		infoContent.fadeOut('fast', function(){
-			infoContent.children().hide().end().append(info);
+		var oldContent = content.children(':visible');
+
+		oldContent.fadeOut('fast', function(){
+			content.children().hide().end().append(info);
 			info.show();
-			infoContainer.removeClass('loading');
-			infoContent.fadeIn('fast');
+			info.fadeIn('fast');
 		});
 	}
 
-	/* Private: set up the information update when clicking on a map area */
-	var daInitialize = function() {
+
+	/* Setup Tooltip areas */
+	var tooltipSetup = function(areas, container) {
+		var screenWidth = $(window).width(),
+			daWidth = container.width(),
+			tipWidth = 280,
+			tooSmall = false;
+
+		if ( screenWidth<tipWidth*3 || ( screenWidth<tipWidth*4 && daWidth/screenWidth>0.75) ) {
+			tooSmall = true;
+		}
+
+		areas.each(function(){
+			showTooltip($(this), container, tooSmall);
+		});
+	};
+
+
+	/* Setup Lightbox areas */
+	var lightboxSetup = function(areas, container) {
+		areas.on('active.responsilight', function(e){
+			showLightbox(container, $(this), e);
+		});
+	};
+
+
+	/* Setup Infobox areas */
+	var infoboxSetup = function(areas, container) {
+		var infoContainer = container.find('.hotspots-placeholder'),
+			infoContent = infoContainer.find('.hotspots-content');
+
+		if (!infoContent.length) {
+			infoContent = $('<div></div>', {'class': 'hotspots-content'});
+			infoContainer.wrapInner(infoContent);
+		}
+
+		areas.on('active.responsilight inactive.responsilight', function(e){
+			showInfobox(infoContainer, $(this), e)
+		});
+	};
+
+
+	/* Set up the information update when interacting with the image */
+	var daInitialize = function(){
 		$('.da-error').hide();
 		$('.hotspot-info').hide();
 
-		var container = $('.hotspots-container');
+		var containers = $('.hotspots-container');
 
-		container.each(function(){
+		// Show tooltips for URL areas
+		containers.find('area.url-area').each(function(){
+			showUrlTooltip($(this));
+		});
+
+		// Prevent default action when clicking more info areas
+		containers.find('area.more-info-area').on('click', function(e){
+			e.preventDefault();
+		});
+
+		// Sort containers into more info types, call setup
+		containers.each(function(index){
 			var container = $(this);
-			container.on('touchstart click', 'area.url-area', function(e){
-				e.preventDefault();
-
-				var $this = $(this),
-					href = $this.attr('href'),
-					target = $this.attr('target');
-
-				if (target == '_new') { /* If the link is being opened in a new window */
-					if (null == window.open(href) ) {
-						window.location.href = href;
-					}
-				} else if ((this.host == '' || this.pathname == window.location.pathname) && this.hash != '') { /* If the link is on the current page */
-					window.location.href = href;
-				} else {
-					window.location.href = href;
-				}
-			});
-
-			if (container.hasClass('event-hover')) {
-				container.find('area.url-area').each(function(){
-					var $this = $(this);
-
-					showUrlTooltip($this, container);
-				});
-			}
-
 			if (container.hasClass('layout-tooltip')) {
-				var screenWidth = $(window).width(),
-					daWidth = container.width(),
-					tipWidth = 280,
-					tooSmall = false;
-
-				if ( (screenWidth < tipWidth*3) || (screenWidth < tipWidth*4) && (daWidth/screenWidth > 0.75)) {
-					tooSmall = true;
-				}
-
-				container.find('area.more-info-area').each(function(){
-					var $this = $(this),
-						newInfo = $($this.attr('href'));
-
-					if (typeof jQuery.qtip === 'function') {
-						showTooltip($this, newInfo, container, tooSmall);
-					}
-				});
+				tooltipSetup(container.find('area.more-info-area'), container);
+			} else if (container.hasClass('layout-lightbox')) {
+				lightboxSetup(container.find('area.more-info-area'), container);
 			} else {
-				container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
-					var $this = $(this),
-					container = $this.parents('.hotspots-container'),
-					isSticky = $this.data('stickyCanvas') || '',
-					newInfo = $($this.attr('href'));
-
-					if (container.hasClass('layout-lightbox')) {
-						showLightbox(container, isSticky, newInfo, $this);
-					} else {
-						newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
-						showNewInfo(container, isSticky, newInfo);
-					}
-				});
+				infoboxSetup(container.find('area.more-info-area'), container);
 			}
 		});
 	};
 
-	/* Public: initialize */
-	hotspots.init = function() {
-	  mapSetup();
-	  daInitialize();
+
+	/* Fix compatibility with common plugins/addons */
+	hotspots.compatibilityFixes = function(){
+		$(window).on('pageloaded', function(){
+			hotspots.init();
+		});
+		$(window).on('load', function(){
+			$('#canvas-undefined').remove();
+			hotspots.init();
+		});
+		$('.et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
+		$('.ui-tabs-anchor, .nav-tabs > li').on('click', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 750);
+		});
+		$(window).on('et_hashchange', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
 	};
+
+
+	/* Initialize */
+	hotspots.init = function() {
+		mapSetup();
+		daInitialize();
+	};
+
 
 }(jQuery, window.hotspots = window.hotspots || {}));
 
-
 jQuery(function(){
 	hotspots.init();
-	jQuery(window).on('pageloaded', function() {
-		hotspots.init();
-	});
-	jQuery(window).on('load', function() {
-		jQuery('#canvas-undefined').each(function() {
-			jQuery(this).remove();
-			hotspots.init();
-		});
-	});
-	jQuery('.et_pb_tabs .et_pb_tabs_controls li').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});
-	jQuery('.ui-tabs-anchor').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 750);
-	});
-	jQuery('.nav-tabs > li').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 750);
-	});
-	jQuery('.et_pb_toggle_title').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});
-	jQuery(window).on('et_hashchange', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});
+	hotspots.compatibilityFixes();
 });

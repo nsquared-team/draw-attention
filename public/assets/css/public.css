@@ -14,34 +14,6 @@
   padding: 1em;
   position: relative;
 }
-/* line 16, ../sass/public.scss */
-.hotspots-placeholder.loading:before {
-  border: 20px solid rgba(255, 255, 255, 0.5);
-  border-left-color: rgba(0, 0, 0, 0.5);
-  border-bottom-color: rgba(0, 0, 0, 0.5);
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-  -moz-animation-name: spin;
-  -webkit-animation-name: spin;
-  animation-name: spin;
-  -moz-animation-duration: 2000ms;
-  -webkit-animation-duration: 2000ms;
-  animation-duration: 2000ms;
-  -moz-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  -moz-animation-timing-function: linear;
-  -webkit-animation-timing-function: linear;
-  animation-timing-function: linear;
-  content: '';
-  height: 40px;
-  left: 50%;
-  margin-left: -40px;
-  position: absolute;
-  top: 20%;
-  width: 40px;
-}
 
 @-moz-keyframes spin {
   from {
@@ -67,15 +39,15 @@
     transform: rotate(360deg);
   }
 }
-/* line 48, ../sass/public.scss */
+/* line 31, ../sass/public.scss */
 .hotspots-image-container {
   background: #efefef;
 }
-/* line 50, ../sass/public.scss */
+/* line 33, ../sass/public.scss */
 .hotspots-image-container > div {
   margin: 0 auto;
 }
-/* line 53, ../sass/public.scss */
+/* line 36, ../sass/public.scss */
 .hotspots-image-container img {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -90,34 +62,34 @@
   padding: 0 !important;
 }
 
-/* line 65, ../sass/public.scss */
+/* line 48, ../sass/public.scss */
 .entry-content .hotspot-title {
   text-align: center;
   margin-top: 0;
   padding-top: 0;
 }
-/* line 71, ../sass/public.scss */
+/* line 54, ../sass/public.scss */
 .entry-content .hotspot-content p {
   color: inherit;
 }
 
-/* line 78, ../sass/public.scss */
+/* line 61, ../sass/public.scss */
 .hotspot-content p {
   color: inherit;
 }
 
-/* line 84, ../sass/public.scss */
+/* line 67, ../sass/public.scss */
 .hotspot-thumb {
   text-align: center;
 }
-/* line 86, ../sass/public.scss */
+/* line 69, ../sass/public.scss */
 .hotspot-thumb img {
   height: auto;
   max-width: 100%;
 }
 
 @media (min-width: 600px) {
-  /* line 93, ../sass/public.scss */
+  /* line 76, ../sass/public.scss */
   .layout-left .hotspots-interaction,
   .layout-right .hotspots-interaction {
     display: table;
@@ -125,7 +97,7 @@
     width: 100%;
   }
 
-  /* line 99, ../sass/public.scss */
+  /* line 82, ../sass/public.scss */
   .layout-left .hotspots-image-container,
   .layout-right .hotspots-image-container {
     display: table-cell;
@@ -133,7 +105,7 @@
     width: 66%;
   }
 
-  /* line 105, ../sass/public.scss */
+  /* line 88, ../sass/public.scss */
   .layout-left .hotspots-placeholder,
   .layout-right .hotspots-placeholder {
     display: table-cell;
@@ -141,7 +113,7 @@
   }
 }
 @media (min-width: 900px) {
-  /* line 113, ../sass/public.scss */
+  /* line 96, ../sass/public.scss */
   .layout-left .hotspots-image-container,
   .layout-right .hotspots-image-container {
     width: 75%;
@@ -150,14 +122,14 @@
 /* ------------------------------------------- */
 /* Responsilight
 /* ------------------------------------------- */
-/* line 123, ../sass/public.scss */
+/* line 106, ../sass/public.scss */
 .responsilight-wrap {
   line-height: 0;
   margin: 0 auto;
   position: relative;
 }
 
-/* line 129, ../sass/public.scss */
+/* line 112, ../sass/public.scss */
 canvas.canvas-display,
 canvas.canvas-hover {
   left: 0;
@@ -170,7 +142,7 @@ canvas.canvas-hover {
   -webkit-transition: opacity 400ms;
   transition: opacity 400ms;
 }
-/* line 137, ../sass/public.scss */
+/* line 120, ../sass/public.scss */
 canvas.canvas-display.canvas-show,
 canvas.canvas-hover.canvas-show {
   opacity: 1;
@@ -179,12 +151,12 @@ canvas.canvas-hover.canvas-show {
 /* ------------------------------------------- */
 /* Light Box
 /* ------------------------------------------- */
-/* line 147, ../sass/public.scss */
+/* line 130, ../sass/public.scss */
 .layout-lightbox .hotspots-placeholder {
   display: none;
 }
 
-/* line 151, ../sass/public.scss */
+/* line 134, ../sass/public.scss */
 .featherlight {
   background: #333;
   bottom: 0;
@@ -198,11 +170,11 @@ canvas.canvas-hover.canvas-show {
   white-space: nowrap;
   z-index: 99999;
 }
-/* line 163, ../sass/public.scss */
+/* line 146, ../sass/public.scss */
 .featherlight:last-of-type {
   background: rgba(0, 0, 0, 0.8);
 }
-/* line 166, ../sass/public.scss */
+/* line 149, ../sass/public.scss */
 .featherlight:before {
   content: '';
   display: inline-block;
@@ -210,7 +182,7 @@ canvas.canvas-hover.canvas-show {
   margin-right: -0.25em;
   vertical-align: middle;
 }
-/* line 173, ../sass/public.scss */
+/* line 156, ../sass/public.scss */
 .featherlight .featherlight-content {
   background: #fff;
   border-bottom: 25px solid transparent;
@@ -232,11 +204,11 @@ canvas.canvas-hover.canvas-show {
   vertical-align: middle;
   white-space: normal;
 }
-/* line 192, ../sass/public.scss */
+/* line 175, ../sass/public.scss */
 .featherlight .featherlight-inner {
   display: block;
 }
-/* line 195, ../sass/public.scss */
+/* line 178, ../sass/public.scss */
 .featherlight .featherlight-close-icon {
   background: #fff;
   background: rgba(255, 255, 255, 0.3);
@@ -251,39 +223,39 @@ canvas.canvas-hover.canvas-show {
   width: 25px;
   z-index: 9999;
 }
-/* line 209, ../sass/public.scss */
+/* line 192, ../sass/public.scss */
 .featherlight .featherlight-image {
   width: 100%;
 }
-/* line 212, ../sass/public.scss */
+/* line 195, ../sass/public.scss */
 .featherlight iframe {
   border: none;
 }
-/* line 215, ../sass/public.scss */
+/* line 198, ../sass/public.scss */
 .featherlight h2.hotspot-title {
   font-size: 1.2em;
   margin: 0 0 0.4em 0;
   padding: 0;
 }
-/* line 221, ../sass/public.scss */
+/* line 204, ../sass/public.scss */
 .featherlight .hotspot-content p {
   font-size: 1em;
   margin: 1em 0;
 }
-/* line 226, ../sass/public.scss */
+/* line 209, ../sass/public.scss */
 .featherlight img {
   height: auto;
   max-width: 100%;
 }
 
-/* line 232, ../sass/public.scss */
+/* line 215, ../sass/public.scss */
 .featherlight-iframe .featherlight-content {
   border-bottom: 0;
   padding: 0;
 }
 
 @media only screen and (max-width: 1024px) {
-  /* line 238, ../sass/public.scss */
+  /* line 221, ../sass/public.scss */
   .featherlight .featherlight-content {
     border-bottom: 10px solid transparent;
     margin-left: 10px;
@@ -295,17 +267,17 @@ canvas.canvas-hover.canvas-show {
 /* ------------------------------------------- */
 /* Error Message
 /* ------------------------------------------- */
-/* line 251, ../sass/public.scss */
+/* line 234, ../sass/public.scss */
 .da-error {
   border: 2px solid #cc0000;
   padding: 1rem;
 }
-/* line 254, ../sass/public.scss */
+/* line 237, ../sass/public.scss */
 .da-error > *:first-child {
   margin-top: 0;
   padding-top: 0;
 }
-/* line 258, ../sass/public.scss */
+/* line 241, ../sass/public.scss */
 .da-error > *:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -314,12 +286,12 @@ canvas.canvas-hover.canvas-show {
 /* ------------------------------------------- */
 /* Tooltip
 /* ------------------------------------------- */
-/* line 268, ../sass/public.scss */
+/* line 251, ../sass/public.scss */
 .layout-tooltip .hotspots-placeholder {
   display: none;
 }
 
-/* line 272, ../sass/public.scss */
+/* line 255, ../sass/public.scss */
 .qtip {
   -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -335,7 +307,7 @@ canvas.canvas-hover.canvas-show {
   top: -28000px;
 }
 
-/* line 285, ../sass/public.scss */
+/* line 268, ../sass/public.scss */
 .qtip-content {
   overflow: hidden;
   padding: 0.5em 0.75em;
@@ -343,33 +315,33 @@ canvas.canvas-hover.canvas-show {
   text-align: left;
   word-wrap: break-word;
 }
-/* line 291, ../sass/public.scss */
+/* line 274, ../sass/public.scss */
 .qtip-content h2.hotspot-title {
   font-size: 1.2em;
   margin: 0 0 0.4em 0;
   padding: 0;
   text-align: center;
 }
-/* line 298, ../sass/public.scss */
+/* line 281, ../sass/public.scss */
 .qtip-content .hotspot-content p {
   font-size: 1em;
   margin: 1em 0;
 }
-/* line 302, ../sass/public.scss */
+/* line 285, ../sass/public.scss */
 .qtip-content .hotspot-content img {
   height: auto;
   max-width: 100%;
 }
 
 /* Default tooltip style */
-/* line 310, ../sass/public.scss */
+/* line 293, ../sass/public.scss */
 .qtip-default {
   background-color: #FFFFA3;
   border: 0 none;
   color: #555;
 }
 
-/* line 316, ../sass/public.scss */
+/* line 299, ../sass/public.scss */
 .qtip .qtip-tip {
   margin: 0 auto;
   overflow: hidden;
@@ -378,12 +350,12 @@ canvas.canvas-hover.canvas-show {
 
 /* Opera bug #357 - Incorrect tip position
 https://github.com/Craga89/qTip2/issues/367 */
-/* line 324, ../sass/public.scss */
+/* line 307, ../sass/public.scss */
 x:-o-prefocus, .qtip .qtip-tip {
   visibility: hidden;
 }
 
-/* line 328, ../sass/public.scss */
+/* line 311, ../sass/public.scss */
 .qtip .qtip-tip,
 .qtip .qtip-tip .qtip-vml,
 .qtip .qtip-tip canvas {
@@ -393,20 +365,20 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 0 dashed transparent;
 }
 
-/* line 337, ../sass/public.scss */
+/* line 320, ../sass/public.scss */
 .qtip .qtip-tip canvas {
   top: 0;
   left: 0;
 }
 
-/* line 339, ../sass/public.scss */
+/* line 322, ../sass/public.scss */
 .qtip .qtip-tip .qtip-vml {
   behavior: url(#default#VML);
   display: inline-block;
   visibility: visible;
 }
 
-/* line 345, ../sass/public.scss */
+/* line 328, ../sass/public.scss */
 .qtip-titlebar {
   position: relative;
   padding: 0;
@@ -414,7 +386,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   border-width: 0;
 }
 
-/* line 353, ../sass/public.scss */
+/* line 336, ../sass/public.scss */
 .qtip-close {
   position: absolute;
   right: 4px;
@@ -426,20 +398,20 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 1px solid transparent;
 }
 
-/* line 364, ../sass/public.scss */
+/* line 347, ../sass/public.scss */
 .qtip-titlebar .qtip-close {
   right: 4px;
   top: 50%;
   margin-top: -9px;
 }
 
-/* line 369, ../sass/public.scss */
+/* line 352, ../sass/public.scss */
 * html .qtip-titlebar .qtip-close {
   top: 16px;
 }
 
 /* IE fix */
-/* line 371, ../sass/public.scss */
+/* line 354, ../sass/public.scss */
 .qtip-titlebar .ui-icon,
 .qtip-icon .ui-icon {
   display: block;
@@ -447,7 +419,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   direction: ltr;
 }
 
-/* line 378, ../sass/public.scss */
+/* line 361, ../sass/public.scss */
 .qtip-icon, .qtip-icon .ui-icon {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -455,7 +427,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   text-decoration: none;
 }
 
-/* line 385, ../sass/public.scss */
+/* line 368, ../sass/public.scss */
 .qtip-icon .ui-icon {
   width: 18px;
   height: 14px;

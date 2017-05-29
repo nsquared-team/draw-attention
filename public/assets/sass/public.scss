@@ -13,23 +13,6 @@
 .hotspots-placeholder {
 	padding: 1em;
 	position: relative;
-	&.loading:before {
-		border: 20px solid rgba(white,0.5);
-		border-left-color: rgba(black,0.5);
-		border-bottom-color: rgba(black,0.5);
-		@include border-radius(50%);
-		@include animation-name(spin);
-		@include animation-duration(2000ms);
-		@include animation-iteration-count(infinite);
-		@include animation-timing-function(linear);
-		content: '';
-		height: 40px;
-		left: 50%;
-		margin-left: -40px;
-		position: absolute;
-		top: 20%;
-		width: 40px;
-	}
 }
 
 @-moz-keyframes spin {
