@@ -116,6 +116,29 @@
 	}
 }
 
+/* ------------------------------------------- */
+/* Responsilight
+/* ------------------------------------------- */
+
+.responsilight-wrap {
+	line-height: 0;
+	margin: 0 auto;
+	position: relative;
+}
+
+canvas.canvas-display,
+canvas.canvas-hover {
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	@include transition(opacity 400ms);
+	&.canvas-show {
+		opacity: 1;
+	}
+}
+
 
 /* ------------------------------------------- */
 /* Light Box
