@@ -359,6 +359,11 @@
 
 	mapClick = function(img, area, e) {
 		area.trigger('areaClick.responsilight');
+
+		if (opts.eventTrigger === 'hover' ) {
+			return;
+		}
+
 		area.toggleClass('active');
 
 		if (area.hasClass('active')) {
