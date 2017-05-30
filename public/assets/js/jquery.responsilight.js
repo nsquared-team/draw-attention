@@ -360,7 +360,7 @@
 	mapClick = function(img, area, e) {
 		area.trigger('areaClick.responsilight');
 
-		if (opts.eventTrigger === 'hover' ) {
+		if (opts.eventTrigger === 'hover' && e.type !== 'keypress' ) {
 			return;
 		}
 
