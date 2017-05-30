@@ -171,6 +171,12 @@
 		$('.da-disable-third-party-js').hide();
 	}
 
+	var sortHotspots = function() {
+		$('#_da_hotspots_repeat').sortable({
+			items: '.cmb-repeatable-grouping'
+		});
+	}
+
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
 		canvasDraw();
@@ -185,6 +191,7 @@
 		confirmDelete();
 		saveAlert();
 		hideNotice();
+		sortHotspots();
 	}
 
 	/* Reset the drawable canvas areas */
