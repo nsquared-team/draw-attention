@@ -38,7 +38,7 @@ class DrawAttention_Updater {
 	}
 
 	function output_license_page() {
-		echo '<h2>'.__('Draw Attention Pro - License & Updates', 'drawattention' ).'.</h2>';
+		echo '<h2>'.__('Draw Attention Pro - License & Updates', 'drawattention' ).'</h2>';
 		echo $this->license_key_html();
 	}
 

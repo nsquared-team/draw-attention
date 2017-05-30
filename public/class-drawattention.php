@@ -117,6 +117,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			include_once( 'includes/pro/updater.php' );
 			$this->pro = new DrawAttention_Updater( $this );
 
+			include_once( 'includes/pro/import-export.php' );
+			$this->pro = new DrawAttention_ImportExport( $this );
 		}
 
 		/**
