@@ -173,7 +173,8 @@
 
 	var sortHotspots = function() {
 		$('#_da_hotspots_repeat').sortable({
-			items: '.cmb-repeatable-grouping'
+			items: '.cmb-repeatable-grouping',
+			handle: '.cmbhandle-title'
 		});
 	}
 
