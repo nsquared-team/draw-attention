@@ -345,7 +345,7 @@
 		if (opts.eventTrigger === 'hover') {
 			area.data('canvasHover').removeClass('canvas-show');
 			area.removeClass('active');
-			area.trigger('.inactive.responsilight');
+			area.trigger('inactive.responsilight');
 			if (opts.alwaysVisible) {
 				area.data('canvasDisplay').addClass('canvas-show');
 			}
@@ -420,7 +420,59 @@
 	};
 
 	getImageOptions = function(img) {
-		opts = $.extend({}, $.fn.responsilight.defaults, opts);
+		var dataOpts = {},
+			fillColor = img.data('highlight-color'),
+			fillOpacity = img.data('highlight-opacity'),
+			borderColor = img.data('highlight-border-color'),
+			borderWidth = img.data('highlight-border-width'),
+			borderOpacity = img.data('highlight-border-opacity'),
+			eventTrigger = img.data('event-trigger'),
+			alwaysVisible = img.data('always-visible');
+
+		// Event trigger
+		if (eventTrigger) {
+			dataOpts.eventTrigger = eventTrigger;
+		}
+
+		// Always visible
+		if (alwaysVisible) {
+			dataOpts.alwaysVisible = alwaysVisible;
+		}
+
+		// Create colorSchemes property of dataOpts if there are color schemes
+		if (opts && opts.colorSchemes && opts.colorSchemes.length) {
+			dataOpts.colorSchemes = opts.colorSchemes.concat();
+		} else if (fillColor || fillOpacity || borderColor || borderWidth || borderOpacity) {
+			dataOpts.colorSchemes = [{
+				name: 'default',
+				hover: {}
+			}];
+		}
+
+		if (dataOpts.colorSchemes && dataOpts.colorSchemes.length) {
+			$.grep(dataOpts.colorSchemes, function(el){
+				if (el.name === 'default') {
+					if (fillColor) {
+						el.hover.fillColor = fillColor;
+					}
+					if (fillOpacity) {
+						el.hover.fillOpacity = fillOpacity;
+					}
+					if (borderColor) {
+						el.hover.borderColor = borderColor;
+					}
+					if (borderWidth) {
+						el.borderWidth = borderWidth;
+					}
+					if (borderOpacity) {
+						el.hover.borderOpacity = borderOpacity;
+					}
+				}
+				return el;
+			});
+		}
+
+		opts = $.extend({}, $.fn.responsilight.defaults, opts, dataOpts);
 	};
 
 	getImageMap = function(img) {

@@ -5,9 +5,7 @@
 	/* Get settings and initialize responsilight */
 	var mapSetup = function(){
 		// TODO: UPDATE THIS CALL SO IT'S CORRECT
-		$('img.hotspots-image').responsilight({
-			alwaysVisible: true
-		});
+		$('img.hotspots-image').responsilight();
 	};
 
 
@@ -320,5 +318,5 @@
 
 jQuery(function(){
 	hotspots.init();
-	hotspots.compatibilityFixes();
+	// hotspots.compatibilityFixes();
 });
