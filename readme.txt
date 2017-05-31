@@ -64,6 +64,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 * Improved: Refactored image highlighting to be more performant
 * Added: Able to drag to re-order hotspots on an image
 * Added: Import/Export functionality for moving all hotspots to another WP install
+* Added: Beaver Builder module for adding images to page builder pages
 
 = 1.7.1 =
 * Fixed: Missing detail images on some server environments
