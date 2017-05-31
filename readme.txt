@@ -65,6 +65,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 * Added: Able to drag to re-order hotspots on an image
 * Added: Import/Export functionality for moving all hotspots to another WP install
 * Added: Beaver Builder module for adding images to page builder pages
+* Improved: Hotspot drawing tool now allows for the entire hotspot to be moved - no more adjusting individual spots
 
 = 1.7.1 =
 * Fixed: Missing detail images on some server environments
