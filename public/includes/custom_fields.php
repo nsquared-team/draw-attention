@@ -3,6 +3,7 @@ class DrawAttention_CustomFields {
 	public $parent;
 	public $prefix = '_da_';
 	public $actions = array();
+	public $styles = array();
 
 	function __construct( $parent ) {
 		$this->parent = $parent;
@@ -19,6 +20,10 @@ class DrawAttention_CustomFields {
 		include_once __DIR__ . '/actions/action-url.php';
 		$this->actions['url'] = new DrawAttention_URL_Action();
 
+		include_once __DIR__ . '/styles/style.php';
+		include_once __DIR__ . '/styles/style-user.php';
+		$this->styles['user'] = new DrawAttention_User_Style();
+
 		add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
 		add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
 
@@ -29,8 +34,9 @@ class DrawAttention_CustomFields {
 		add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 4 );
 		add_action( 'wp_ajax_hotspot_update_custom_fields', array( $this, 'update_hotspot_area_details' ) );
 
-		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
 		add_filter( 'cmb2_meta_boxes', array( $this, 'moreinfo_metabox' ) );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_define_styles_metabox' ), 11 );
 		add_filter( 'cmb2_meta_boxes', array( $this, 'hotspot_area_group_details_metabox' ), 11 );
 	}
 
@@ -109,6 +115,36 @@ class DrawAttention_CustomFields {
 					'type'    => 'text_number',
 				),
 
+				array(
+					'name'    => __( 'Always show hotspots for this image', 'drawattention' ),
+					'desc'    => 'The areas stay highlighted so visitors can see where they are',
+					'id'      => $this->prefix . 'always_visible',
+					'type' => 'checkbox',
+				),
+
+				array(
+					'name'    => __( 'Hover Color', 'drawattention' ),
+					'desc'    => '',
+					'id'      => $this->prefix . 'map_hover_color',
+					'type'    => 'colorpicker',
+					'default' => '#ffffff'
+				),
+
+				array(
+					'name'    => __( 'Hover Opacity', 'drawattention' ),
+					'desc'    => '',
+					'id'      => $this->prefix . 'map_hover_opacity',
+					'type'    => 'opacity',
+					'default' => '0.81',
+					'escape_cb' => array( $this, 'cmb2_allow_0_value' ),
+				),
+
+				array(
+					'name'    => __( 'Define multiple highlight styles for this image', 'drawattention' ),
+					'desc'    => '',
+					'id'      => $this->prefix . 'has_multiple_styles',
+					'type' => 'checkbox',
+				),
 
 			),
 		);
@@ -123,7 +159,7 @@ class DrawAttention_CustomFields {
 	function moreinfo_metabox( array $metaboxes ) {
 		$metaboxes['moreinfo'] = array(
 			'id' => 'moreinfo_metabox',
-			'title' => __( 'More Info Box Styling', 'drawattention' ),
+			'title' => __( 'General Settings', 'drawattention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'context'       => 'normal',
 			'priority'      => 'high',
@@ -174,6 +210,82 @@ class DrawAttention_CustomFields {
 		return $metaboxes;
 	}
 
+	function highlight_define_styles_metabox( array $metaboxes ) {
+		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
+
+		if ( !empty( $_REQUEST['post'] ) ) {
+			$thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( esc_attr( $_REQUEST['post'] ) ), 'full' );
+		}
+
+		$metaboxes['styles'] = apply_filters( 'highlight_define_styles', array(
+			'id'           => 'styles',
+			'title'        => __( 'Styles', 'drawattention' ),
+			'object_types' => array( $this->parent->cpt->post_type, ),
+			'fields'       => array(
+				array(
+					'id'          => $this->prefix . 'styles',
+					'type'        => 'group',
+					'description' => __( 'Define the alternate styles you\'d like to use', 'drawattention' ),
+					'options'     => array(
+						'group_title'   => __( 'Style #{#}', 'drawattention' ), // {#} gets replaced by row number
+						'add_button'    => __( 'Add Another Style', 'drawattention' ),
+						'remove_button' => __( 'Remove Style', 'drawattention' ),
+						'sortable'      => false, // beta
+					),
+					// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
+					'fields'      => array(
+						'title' => array(
+							'name' => __('Title', 'drawattention' ),
+							'id'   => 'title',
+							'type' => 'text',
+						),
+						'map_highlight_color' => array(
+							'name'    => __( 'Highlight Color', 'drawattention' ),
+							'desc'    => '',
+							'id'      => 'map_highlight_color',
+							'type'    => 'colorpicker',
+							'default' => '#ffffff'
+						),
+						'map_highlight_opacity' => array(
+							'name'    => __( 'Highlight Opacity', 'drawattention' ),
+							'desc'    => '',
+							'id'      => 'map_highlight_opacity',
+							'type'    => 'opacity',
+							'default' => '0.81',
+							'escape_cb' => array( $this, 'cmb2_allow_0_value' ),
+						),
+						'map_border_color' => array(
+							'name'    => __( 'Border Color', 'drawattention' ),
+							'desc'    => '',
+							'id'      => 'map_border_color',
+							'type'    => 'colorpicker',
+							'default' => '#ffffff'
+						),
+						
+						array(
+							'name'    => __( 'Hover Color', 'drawattention' ),
+							'desc'    => '',
+							'id'      => $this->prefix . 'map_hover_color',
+							'type'    => 'colorpicker',
+							'default' => '#ffffff'
+						),
+
+						array(
+							'name'    => __( 'Hover Opacity', 'drawattention' ),
+							'desc'    => '',
+							'id'      => $this->prefix . 'map_hover_opacity',
+							'type'    => 'opacity',
+							'default' => '0.81',
+							'escape_cb' => array( $this, 'cmb2_allow_0_value' ),
+						),
+					),
+				),
+			),
+		) );
+  
+		return $metaboxes;
+	}
+
 	function hotspot_area_group_details_metabox( array $metaboxes ) {
 		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
 
@@ -210,6 +322,17 @@ class DrawAttention_CustomFields {
 							'name' => __('Title', 'drawattention' ),
 							'id'   => 'title',
 							'type' => 'text',
+						),
+						'style' => array(
+							'name' => __('Style', 'drawattention' ),
+							'id'   => 'style',
+							'type' => 'select',
+							'attributes' => array(
+								'class' => 'cmb2_select style',
+							),
+							'options' => array(
+								'' => 'Default',
+							),
 						),
 						'action' => array(
 							'name' => __('Action', 'drawattention' ),
