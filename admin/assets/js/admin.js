@@ -2,8 +2,17 @@
 	"use strict";
 
 	/* Enable drawing hotspots on the full-size image */
-	var canvasDraw = function() {
-		$('input[data-image-url]').canvasAreaDraw();
+	var canvasDraw = function(container) {
+		canvasDestroy(container);
+		var input = container.find('input[data-image-url]');
+		input.canvasAreaDraw();
+	}
+
+	/* Destroy canvas drawing hotspots */
+	var canvasDestroy = function(container) {
+		var input = container.find('input[data-image-url]');
+		input.off();
+		input.siblings().remove();
 	}
 
 	/* Only allow one hotspot editing area to be open at one time. Close them all on page load */
@@ -12,14 +21,17 @@
 			var $this = $(this),
 				parent = $this.closest('.cmb-row'),
 				areas = parent.siblings('.cmb-repeatable-grouping').addClass('closed');
+				canvasDetroy(areas);
 		});
 
-		$('#field_group').on('click', '.cmbhandle', function() {
+		$('#field_group').on('click', '.cmb-group-title', function() {
 			var $this = $(event.target),
 				parent = $this.closest('.cmb-row');
 
 			if (!parent.hasClass('closed')) {
 				var areas = parent.siblings('.cmb-repeatable-grouping').addClass('closed');
+				canvasDestroy(areas);
+				canvasDraw(parent);
 			}
 		});
 
@@ -72,11 +84,9 @@
 	var hotspotCloning = function() {
 		var repeatGroup = $('.cmb-repeatable-group');
 		repeatGroup.on('cmb2_add_row', function(){
-			// var lastRow = $(this).find('.cmb-row.cmb-repeatable-grouping').last(),
-			// 	fields = lastRow.find(':input').not(':button');
-
-			// fields.val('');
-			hotspotAdmin.reset();
+			var lastRow = $(this).find('.cmb-row.cmb-repeatable-grouping').last();
+			canvasDestroy(repeatGroup);
+			canvasDraw(lastRow);
 		});
 	}
 
@@ -180,7 +190,7 @@
 
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
-		canvasDraw();
+		// canvasDraw();
 		accordion();
 		layoutSelect();
 		showHideEventTriggerMetabox();
@@ -193,14 +203,6 @@
 		saveAlert();
 		hideNotice();
 		sortHotspots();
-	}
-
-	/* Reset the drawable canvas areas */
-	hotspotAdmin.reset = function() {
-		var coordsInputs = $('input[data-image-url]');
-
-		coordsInputs.off('change').siblings('div, button').remove();
-		coordsInputs.canvasAreaDraw();
 	}
 
 }(jQuery, window.hotspotAdmin = window.hotspotAdmin || {}));

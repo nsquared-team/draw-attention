@@ -25,9 +25,6 @@
 input[name$='[coordinates]'] {
 	display: none;
 	/* Contain big images */
-	& + div {
-		overflow: auto;
-	}
 }
 
 #cmb2-metabox-highlight_styling_metabox,
@@ -107,4 +104,11 @@ input[name$='[coordinates]'] {
 
 .wp-picker-container {
 	white-space: nowrap;
+}
+
+#field_group {
+	.cmb-td {
+		overflow: auto;
+		padding-bottom: 2rem;
+	}
 }
