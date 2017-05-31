@@ -38,7 +38,7 @@
             $canvas.attr('height', image.height).attr('width', image.width);
             draw();
         };
-        $(image).load(resize);
+        $(image).on('load', resize);
         image.src = settings.imageUrl;
         if (image.loaded) {
             resize();
