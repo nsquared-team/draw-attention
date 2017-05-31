@@ -279,7 +279,7 @@
 
 	/* Fix compatibility with common plugins/addons */
 	hotspots.compatibilityFixes = function(){
-		$(window).on('pageloaded', function(){
+		$(window).on('pageloaded change.zf.tabs', function(){
 			hotspots.init();
 		});
 		$(window).on('load', function(){
@@ -318,5 +318,5 @@
 
 jQuery(function(){
 	hotspots.init();
-	// hotspots.compatibilityFixes();
+	hotspots.compatibilityFixes();
 });
