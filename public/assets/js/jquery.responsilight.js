@@ -411,7 +411,7 @@
 			img.trigger('reInit.responsilight');
 		} else {
 			// Initial page load
-			$('<img />').load(function() {
+			$('<img />').on('load', function() {
 				getImageOptions(img);
 				getImageMap(img);
 				getSize(img);
