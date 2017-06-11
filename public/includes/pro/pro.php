@@ -84,244 +84,101 @@ class DrawAttention_Pro {
 			'id' => ''
 		), $atts);
 
-		$imageID = $a['id'];
-
+		// Enqueue CSS and Scripts
 		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
-		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
+		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 
-		if ( class_exists( 'Jetpack_Photon' ) ) {
+		// Begin settings array
+		$settings = array(
+			'image_id' => $a['id'],
+			'has_photon' => class_exists( 'Jetpack_Photon' ),
+			'url_hotspots' => array(),
+			'urls_only' => false,
+			'urls_class' => '',
+		);
+
+		// If no ID is passed, get the most recent DA image
+		if ( empty ( $settings['image_id'] ) ) {
+			$latest_da = get_posts('post_type=' . $this->parent->cpt->post_type . '&numberposts=1');
+			$settings['image_id'] = $latest_da[0]->ID;
+		}
+
+		// Get and set DA settings
+		$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
+		$settings['spot_id'] = 'hotspot-' . $settings['image_id'];
+
+		// Add hotspots to settings
+		$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->parent->custom_fields->prefix . 'hotspots', true );
+		$settings['url_hotspots'] = array_filter($settings['hotspots'], function($var){
+			return $var['action'] == 'url';
+		});
+		if ( count( $settings['hotspots'] ) == count( $settings['url_hotspots'] ) ) {
+			$settings['urls_only'] = true;
+			$settings['urls_class'] = 'links-only';
+		}
+
+		// Add styles to settings
+		$settings['styles'] = get_post_meta( $settings['image_id'], $this->parent->custom_fields->prefix . 'styles', true );
+		$settings['border_width'] = $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_width'][0];
+		$settings['border_opacity'] = $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_opacity'][0];
+		$settings['more_info_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_background_color'][0] : '';
+		$settings['more_info_text'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] : '';
+		$settings['more_info_title'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] : '';
+		$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] : '#efefef';
+
+		// Create default style
+		$settings['styles'][] = array(
+			'title' => 'default',
+			'map_highlight_color' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_highlight_color'][0],
+			'map_highlight_opacity' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_highlight_opacity'][0],
+			'map_border_color' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_color'][0],
+			'_da_map_hover_color' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_hover_color'][0],
+			'_da_map_hover_opacity' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_hover_opacity'][0]
+		);
+
+		// Get image post, src, and meta
+		$settings['img_post'] = get_post($settings['image_id']);
+		$settings['img_src'] = wp_get_attachment_image_src( get_post_thumbnail_id( $settings['image_id'] ), 'full' );
+		$settings['img_url'] = $settings['img_src'][0];
+		$settings['img_width'] = $settings['img_src'][1];
+		$settings['img_height'] = $settings['img_src'][2];
+		$settings['img_alt'] = get_post_meta( get_post_thumbnail_id( $settings['img_post'] ), '_wp_attachment_image_alt', true );
+		if ( empty( $settings['img_alt'] ) ) {
+			$settings['img_alt'] = get_the_title( $settings['img_post'] );
+		}
+
+		// Set default values for missing settings
+		$settings['layout'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0] : 'left';
+		$settings['event_trigger'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0] : 'click';
+
+		// Enqueue any extra needed scripts
+		if ( $settings['layout'] == 'lightbox' ) {
+			wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
+		}
+		if ( $settings['event_trigger'] == 'hover' || $settings['layout'] == 'tooltip' ) {
+			wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
+			wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
+		}
+
+		// Remove Photon filter
+		if ( $settings['has_photon'] ) {
 			$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
 		}
+		$this->photon_excluded_images[ $settings['image_id'] ] = $settings['img_url'];
 
+		// Create a new embed
+		$wp_embed = new WP_Embed();
 
-		if ( empty($imageID ) ) {
-			$image_args = array(
-				'post_type' => $this->parent->cpt->post_type,
-				'posts_per_page' => 1,
-				'post_parent' => 0
-			);
-			$image = new WP_Query($image_args);
-			if ($image->have_posts() ) {
-				$image->the_post();
-				$imageID = get_the_ID();
-			}
-			wp_reset_query();
-		}
+		ob_start();
 
-		$hotspots = get_post_meta( $imageID, $this->parent->custom_fields->prefix.'hotspots', true );
-		$url_hotspots = array();
-		$urls_only = false;
-		$urls_class = '';
-		$html = '';
+		require_once( $this->parent->get_plugin_dir() . '/public/views/shortcode_template.php' );
 
-		if ( empty( $hotspots['0']['coordinates'] ) ) {
-			_e( 'You need to define some clickable areas for your image.', 'drawattention' );
-			echo ' ';
-			echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $imageID );
-		} else {
-			$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $imageID ), 'full' );
-
-			$img_url = $img_src[0];
-			$img_width = $img_src[1];
-			$img_height = $img_src[2];
-			$this->photon_excluded_images[$imageID] = $img_src[0];
-
-			$img_post = get_post( $imageID );
-
-			// Get Alt Text
-			$img_alt = get_post_meta( get_post_thumbnail_id( $img_post), '_wp_attachment_image_alt', true );
-
-			// If no Alt text declared, add post title as alt text
-			if ( ! $img_alt ) {
-				$img_alt = get_the_title( $img_post );
-			}
-
-			$settings = get_metadata( 'post', $imageID, '', false );
-			if ( empty( $settings[$this->parent->custom_fields->prefix.'map_layout'][0] ) ) {
-				$layout = 'left';
-			} else {
-				$layout = $settings[$this->parent->custom_fields->prefix.'map_layout'][0];
-			}
-
-			if ( $layout == 'lightbox' ) {
-				wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
-			}
-
-			if ( empty( $settings[$this->parent->custom_fields->prefix.'event_trigger'][0] ) ) {
-				$event_trigger = 'click';
-			} else {
-				$event_trigger = $settings[$this->parent->custom_fields->prefix.'event_trigger'][0];
-			}
-
-			if ( $event_trigger == 'hover' || $layout == 'tooltip' ) {
-				wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
-				wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
-			}
-
-			$spot_id = 'hotspot-' . $imageID;
-			$bg_color = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings[$this->parent->custom_fields->prefix.'map_background_color'][0] : '';
-			$text_color = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings[$this->parent->custom_fields->prefix.'map_text_color'][0] : '';
-			$title_color = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings[$this->parent->custom_fields->prefix.'map_title_color'][0] : '';
-			$image_background_color = ( !empty( $settings[$this->parent->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings[$this->parent->custom_fields->prefix.'image_background_color'][0] : '';
-			if ( empty( $image_background_color ) ) {
-				$image_background_color = '#efefef';
-			}
-			$custom_css = "
-				#{$spot_id} .hotspots-image-container {
-					background: {$image_background_color};
-				}
-
-				#{$spot_id} .hotspots-placeholder,
-				.featherlight .featherlight-content.lightbox-{$imageID},
-				.qtip.tooltip-{$imageID} {
-					background: {$bg_color};
-					border: 0 {$bg_color} solid;
-					color: {$text_color};
-				}
-				.qtip.tooltip-{$imageID} .qtip-icon .ui-icon {
-					color: {$title_color};
-				}
-
-				#{$spot_id} .hotspot-title,
-				.featherlight .featherlight-content.lightbox-{$imageID} .hotspot-title,
-				.qtip.tooltip-{$imageID} .hotspot-title {
-					color: {$title_color};
-				}";
-
-			// the following can be removed if the manual $custom_style doesn't cause problems
-			// wp_add_inline_style( $this->parent->plugin_slug . '-plugin-styles', $custom_css );
-
-			$custom_style = '<style type="text/css">';
-			$custom_style .= $custom_css;
-			$custom_style .= '</style>';
-
-			$image_html = '';
-			$image_html .=    '<div class="hotspots-image-container">';
-			$image_html .=      '<img width="' . $img_width .
-				'" height= "' . $img_height .
-				'" alt="'. $img_alt .
-				'" src="' . $img_url .
-				'" class="hotspots-image"
-				usemap="#hotspots-image-' . $imageID .
-				'" data-event-trigger="'. $event_trigger .
-				'" data-highlight-color="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_color'][0] .
-				'" data-highlight-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_highlight_opacity'][0] .
-				'" data-highlight-border-color="' . $settings[$this->parent->custom_fields->prefix.'map_border_color'][0] .
-				'" data-highlight-border-width="' . $settings[$this->parent->custom_fields->prefix.'map_border_width'][0] .
-				'" data-highlight-border-opacity="' . $settings[$this->parent->custom_fields->prefix.'map_border_opacity'][0] .
-				'" data-no-lazy="1"
-				data-lazy="false" />';
-			$image_html .=    '</div>';
-
-			$info_html = '';
-
-			$wp_embed = new WP_Embed();
-			if ( $layout != 'lightbox' && $layout != 'tooltip' ) {
-				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
-				$info_html .=      '<div class="hotspot-initial">';
-				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-				$more_info_html = ( !empty( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop( do_shortcode( $wp_embed->run_shortcode( $settings[$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
-				$info_html .=        '<div class="hotspot-content hostspot-content">' . $more_info_html . '</div>';
-				$info_html .=      '</div>';
-				$info_html .=    '</div>';
-			}
-
-			$map_html = '';
-			$map_html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
-			foreach ($hotspots as $key => $hotspot) {
-				$coords = $hotspot['coordinates'];
-				$target = '';
-				if( !empty( $hotspot[ 'action' ] ) ) {
-					$target = $hotspot['action'];
-				}
-				$new_window = '';
-				$target_window = '';
-				if ( !empty( $hotspot[ 'action-url-open-in-window' ] ) ) {
-					$new_window = $hotspot[ 'action-url-open-in-window' ];
-					$target_window = ( $new_window == 'on' ? '_new' : '' );
-				}
-				$target_url = '';
-				if ( !empty( $hotspot[ 'action-url-url' ] ) ) {
-					$target_url = $hotspot[ 'action-url-url' ];
-				}
-
-				$area_class = ( $target == 'url' ) ? 'url-area' : 'more-info-area';
-
-				$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
-
-				if ( empty( $hotspot['title'] ) ) {
-					$hotspot['title'] = '';
-				}
-				$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" alt="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
-
-
-				if ( $target == 'url' ) {
-					$url_hotspots[] = $hotspot;
-				}
-			}
-
-			if ( count( $hotspots ) == count( $url_hotspots ) ) {
-				$urls_only = true;
-				$urls_class = 'links-only';
-			}
-
-			$map_html .=    '</map>';
-
-
-			$html .=  '<div class="hotspots-container ' . $urls_class . ' layout-' . $layout . ' event-'. $event_trigger .'" id="' . $spot_id . '">';
-			$html .=		'<div class="hotspots-interaction">';
-
-			if ( $urls_only ) {
-				$html .= $image_html;
-			}
-			elseif ( $layout == 'left' || $layout == 'top' ) {
-				$html .= $info_html;
-				$html .= $image_html;
-			} else {
-				$html .= $image_html;
-				$html .= $info_html;
-			}
-
-			$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
-
-			$html .= $map_html;
-
-			if ( current_user_can( 'manage_options' ) ) :
-				$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins" target="_new">help page</a>.</div>';
-			endif;
-
-			foreach ($hotspots as $key => $hotspot) {
-				$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
-				$html .=    apply_filters( 'drawattention_hotspot_title', '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>', $hotspot );
-				if ( !empty( $hotspot['detail_image_id'] ) ) {
-					$html .=  '<div class="hotspot-thumb">';
-					$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $img_post, $settings ) );
-					$html .=  '</div>';
-				} elseif ( empty( $hotspot['detail_image_id'] ) && ! empty( $hotspot[ 'detail_image' ] ) ) {
-					$html .=  '<div class="hotspot-thumb">';
-					$html .=  '<img src="' . $hotspot[ 'detail_image' ] . '"/>';
-					$html .=  '</div>';
-				}
-				if ( empty( $hotspot['description'] ) ) {
-					$hotspot['description'] = '';
-				}
-				$html .=    '<div class="hotspot-content">' . wpautop( do_shortcode ( $wp_embed->run_shortcode( $hotspot['description'] ) ) ) . '</div>';
-				$html .=  '</div>';
-			}
-
-			$html .=  '</div>';
-		}
-
-		$css_and_html = $custom_style;
-		$css_and_html .= $html;
-
-		if ( class_exists( 'Jetpack_Photon' ) && $photon_removed ) {
+		if ( $settings['has_photon'] && $photon_removed ) {
 			add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
 		}
 
-		return $css_and_html;
-
+		return ob_get_clean();
 	}
 
 	function add_shortcode_metabox() {
