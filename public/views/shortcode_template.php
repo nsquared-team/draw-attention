@@ -1,7 +1,5 @@
 <?php
 
-var_dump($settings['hotspots']);
-
 // No hotspots are defined
 if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	<p><?php _e( 'You need to define some clickable areas for your image.', 'drawattention' ); ?></p>
