@@ -118,6 +118,11 @@ class DrawAttention_Pro {
 			$settings['urls_class'] = 'links-only';
 		}
 
+		// Set default values for missing settings
+		$settings['layout'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0] : 'left';
+		$settings['event_trigger'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0] : 'click';
+		$settings['always_visible'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0] : 'false';
+
 		// Add styles to settings
 		$settings['styles'] = get_post_meta( $settings['image_id'], $this->parent->custom_fields->prefix . 'styles', true );
 		$settings['border_width'] = $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_width'][0];
@@ -137,6 +142,38 @@ class DrawAttention_Pro {
 			'_da_map_hover_opacity' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_hover_opacity'][0]
 		);
 
+		// Create formatted array of styles
+		$formatted_styles = array();
+		foreach ($settings['styles'] as $key => $style) {
+			$new_style = array(
+				'name' => strtolower( $style['title'] ),
+				'borderWidth' => $settings['border_width'],
+			);
+
+			if ( $settings['always_visible'] && $settings['always_visible'] !== 'false' ) {
+				$new_style['display'] = array(
+					'fillColor' => $style['map_highlight_color'],
+					'fillOpacity' => $style['map_highlight_opacity'],
+					'borderColor' => $style['map_border_color'],
+					'borderOpacity' => $settings['border_opacity'],
+				);
+				$new_style['hover'] = array(
+					'fillColor' => $style['_da_map_hover_color'],
+					'fillOpacity' => $style['_da_map_hover_opacity'],
+					'borderColor' => $style['map_border_color'],
+					'borderOpacity' => $settings['border_opacity'],
+				);
+			} else {
+				$new_style['hover'] = array(
+					'fillColor' => $style['map_highlight_color'],
+					'fillOpacity' => $style['map_highlight_opacity'],
+					'borderColor' => $style['map_border_color'],
+					'borderOpacity' => $settings['border_opacity'],
+				);
+			}
+			array_push($formatted_styles, $new_style);
+		}
+
 		// Get image post, src, and meta
 		$settings['img_post'] = get_post($settings['image_id']);
 		$settings['img_src'] = wp_get_attachment_image_src( get_post_thumbnail_id( $settings['image_id'] ), 'full' );
@@ -147,11 +184,6 @@ class DrawAttention_Pro {
 		if ( empty( $settings['img_alt'] ) ) {
 			$settings['img_alt'] = get_the_title( $settings['img_post'] );
 		}
-
-		// Set default values for missing settings
-		$settings['layout'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0] : 'left';
-		$settings['event_trigger'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0] : 'click';
-		$settings['always_visible'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0] : 'false';
 
 		// Enqueue any extra needed scripts
 		if ( $settings['layout'] == 'lightbox' ) {

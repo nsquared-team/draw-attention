@@ -4,8 +4,14 @@
 
 	/* Get settings and initialize responsilight */
 	var mapSetup = function(){
-		// TODO: UPDATE THIS CALL SO IT'S CORRECT
-		$('img.hotspots-image').responsilight();
+		$('img.hotspots-image').each(function(){
+			var img = $(this),
+				imgId = img.data('id'),
+				colorData = window['daStyles' + imgId];
+			img.responsilight({
+				colorSchemes: colorData
+			});
+		});
 	};
 
 

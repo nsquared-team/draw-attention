@@ -8,6 +8,7 @@
 		usemap="#hotspots-image-<?php echo $settings['image_id']; ?>"
 		data-event-trigger="<?php echo $settings['event_trigger']; ?>"
 		data-always-visible="<?php echo $settings['always_visible']; ?>"
+		data-id="<?php echo $settings['image_id']; ?>"
 		data-no-lazy="1"
 		data-lazy="false"
 		>

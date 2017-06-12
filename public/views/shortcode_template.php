@@ -31,6 +31,10 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	}
 </style>
 
+<script>
+	window.daStyles<?php echo $settings['image_id']; ?> = <?php echo json_encode($formatted_styles); ?>
+</script>
+
 	<div class="hotspots-container <?php echo $settings['urls_class']; ?> layout-<?php echo $settings['layout']; ?> event-<?php echo $settings['event_trigger']; ?>" id="<?php echo $settings['spot_id']; ?>">
 		<div class="hotspots-interaction">
 			<?php if ( $settings['urls_only'] ) {
@@ -57,8 +61,19 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 					if ( empty( $hotspot['description'] ) ) {
 						$hotspot['description'] = '';
 					}
+					$color_scheme = $hotspot['style'];
 				?>
-				<area shape="poly" coords="<?php echo $coords; ?>" href="<?php echo $href; ?>" title="<?php echo $title; ?>" alt="<?php echo $title; ?>" data-action="<?php echo $target; ?>" target="<?php echo $target_window; ?>" class="<?php echo $area_class; ?>">
+				<area
+					shape="poly"
+					coords="<?php echo $coords; ?>"
+					href="<?php echo $href; ?>"
+					title="<?php echo $title; ?>"
+					alt="<?php echo $title; ?>"
+					data-action="<?php echo $target; ?>"
+					data-color-scheme="<?php echo $color_scheme; ?>"
+					target="<?php echo $target_window; ?>"
+					class="<?php echo $area_class; ?>"
+					>
 			<?php endforeach; ?>
 		</map>
 
