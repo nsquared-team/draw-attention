@@ -151,6 +151,7 @@ class DrawAttention_Pro {
 		// Set default values for missing settings
 		$settings['layout'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'map_layout'][0] : 'left';
 		$settings['event_trigger'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'event_trigger'][0] : 'click';
+		$settings['always_visible'] = !empty($settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0]) ? $settings['img_settings'][$this->parent->custom_fields->prefix . 'always_visible'][0] : 'false';
 
 		// Enqueue any extra needed scripts
 		if ( $settings['layout'] == 'lightbox' ) {

@@ -66,6 +66,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 * Added: Import/Export functionality for moving all hotspots to another WP install
 * Added: Beaver Builder module for adding images to page builder pages
 * Improved: Hotspot drawing tool now allows for the entire hotspot to be moved - no more adjusting individual spots
+* Improved: Snappier animation for switching between hotspot more info content
+* Improved: Updated qTip, Featherlight, Mobile Events, and Images Loaded scripts to latest versions
+* Added: Always visible option for hotspots to help make them obvious - needed for cases where the active areas of the image aren't immediately obvious
 
 = 1.7.1 =
 * Fixed: Missing detail images on some server environments
