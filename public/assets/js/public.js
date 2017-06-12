@@ -176,6 +176,8 @@
 				afterClose: function() {
 					area.removeClass('active');
 					area.data('canvasHover').removeClass('canvas-show');
+					var canvas = area.data('canvasHover');
+					canvas.css('opacity', 0); //Fix bug where remove class wasn't making the area transparent
 					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
 						area.data('canvasDisplay').addClass('canvas-show');
 					}
@@ -195,13 +197,11 @@
 			info = content.find('.hotspot-initial');
 		}
 
-		var oldContent = content.children(':visible');
+		var oldContent = content.children('.visible');
 
-		oldContent.fadeOut('fast', function(){
-			content.children().hide().end().append(info);
-			info.show();
-			info.fadeIn('fast');
-		});
+		oldContent.removeClass('visible');
+		content.children().removeClass('visible').end().append(info);
+		info.removeClass('hidden').addClass('visible');
 	}
 
 
@@ -224,7 +224,7 @@
 
 	/* Setup Lightbox areas */
 	var lightboxSetup = function(areas, container) {
-		areas.on('active.responsilight', function(e){
+		areas.off('active.responsilight').on('active.responsilight', function(e){
 			showLightbox(container, $(this), e);
 		});
 	};
@@ -235,12 +235,7 @@
 		var infoContainer = container.find('.hotspots-placeholder'),
 			infoContent = infoContainer.find('.hotspots-content');
 
-		if (!infoContent.length) {
-			infoContent = $('<div></div>', {'class': 'hotspots-content'});
-			infoContainer.wrapInner(infoContent);
-		}
-
-		areas.on('active.responsilight inactive.responsilight', function(e){
+		areas.off('active.responsilight inactive.responsilight').on('active.responsilight inactive.responsilight', function(e){
 			showInfobox(infoContainer, $(this), e)
 		});
 	};
@@ -249,7 +244,7 @@
 	/* Set up the information update when interacting with the image */
 	var daInitialize = function(){
 		$('.da-error').hide();
-		$('.hotspot-info').hide();
+		$('.hotspot-info').addClass('hidden');
 
 		var containers = $('.hotspots-container');
 
@@ -271,6 +266,7 @@
 			} else if (container.hasClass('layout-lightbox')) {
 				lightboxSetup(container.find('area.more-info-area'), container);
 			} else {
+				container.find('.hotspot-initial').addClass('visible');
 				infoboxSetup(container.find('area.more-info-area'), container);
 			}
 		});

@@ -2,6 +2,10 @@
 
 @import "compass";
 
+.hotspot-info.hidden {
+	display: none;
+}
+
 .hotspots-interaction {
 	margin: 1em 0;
 }
@@ -13,6 +17,17 @@
 .hotspots-placeholder {
 	padding: 1em;
 	position: relative;
+	& > div {
+		height: 0;
+		opacity: 0;
+		@include transition(all 200ms);
+		&.visible {
+			height: auto;
+			opacity: 1;
+			@include transition(all 200ms);
+			@include transition-delay(200ms);
+		}
+	}
 }
 
 .hotspots-image-container {
