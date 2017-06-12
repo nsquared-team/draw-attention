@@ -156,7 +156,7 @@ class DrawAttention_Pro {
 		if ( $settings['layout'] == 'lightbox' ) {
 			wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
 		}
-		if ( $settings['event_trigger'] == 'hover' || $settings['layout'] == 'tooltip' ) {
+		if ( $settings['event_trigger'] == 'hover' || $settings['layout'] == 'tooltip' || count( $settings['url_hotspots'] ) > 0 ) {
 			wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
 			wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
 		}
