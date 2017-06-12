@@ -21,10 +21,10 @@
 			var $this = $(this),
 				parent = $this.closest('.cmb-row'),
 				areas = parent.siblings('.cmb-repeatable-grouping').addClass('closed');
-				canvasDetroy(areas);
+				canvasDestroy(areas);
 		});
 
-		$('#field_group').on('click', '.cmb-group-title', function() {
+		$('#field_group').on('click', '.cmb-group-title, .cmbhandle', function() {
 			var $this = $(event.target),
 				parent = $this.closest('.cmb-row');
 
