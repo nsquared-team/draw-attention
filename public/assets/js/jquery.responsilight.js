@@ -317,7 +317,7 @@
 						mapClick(img, area, e);
 					}
 					if (e.which === 13) {
-						mapClick(img.area.e);
+						mapClick(img, area, e);
 					}
 					break;
 			}
