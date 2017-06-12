@@ -146,7 +146,7 @@ class DrawAttention_Pro {
 		$formatted_styles = array();
 		foreach ($settings['styles'] as $key => $style) {
 			$new_style = array(
-				'name' => strtolower( $style['title'] ),
+				'name' => $style['title'],
 				'borderWidth' => $settings['border_width'],
 			);
 
