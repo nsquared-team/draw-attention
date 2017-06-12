@@ -125,12 +125,14 @@ class DrawAttention_Pro {
 
 		// Add styles to settings
 		$settings['styles'] = get_post_meta( $settings['image_id'], $this->parent->custom_fields->prefix . 'styles', true );
+		$map_style_names_to_titles = $this->parent->custom_fields->styles['user']->get_saved_styles( $settings['image_id']);
 		$settings['border_width'] = $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_width'][0];
 		$settings['border_opacity'] = $settings['img_settings'][$this->parent->custom_fields->prefix.'map_border_opacity'][0];
 		$settings['more_info_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_background_color'][0] : '';
 		$settings['more_info_text'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] : '';
 		$settings['more_info_title'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] : '';
 		$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] : '#efefef';
+		var_dump($settings['styles']);
 
 		// Create default style
 		$settings['styles'][] = array(
@@ -145,8 +147,9 @@ class DrawAttention_Pro {
 		// Create formatted array of styles
 		$formatted_styles = array();
 		foreach ($settings['styles'] as $key => $style) {
+			$style_slug = array_search($style['title'], $map_style_names_to_titles);
 			$new_style = array(
-				'name' => $style['title'],
+				'name' => $style_slug ? $style_slug : $style['title'],
 				'borderWidth' => $settings['border_width'],
 			);
 
