@@ -141,7 +141,7 @@ class DrawAttention_CustomFields {
 
 				array(
 					'name'    => __( 'Define multiple highlight styles for this image', 'drawattention' ),
-					'desc'    => '',
+					'desc'    => __( 'Use multiple highlight colors on this image', 'drawattention' ),
 					'id'      => $this->prefix . 'has_multiple_styles',
 					'type' => 'checkbox',
 				),
@@ -167,7 +167,7 @@ class DrawAttention_CustomFields {
 
 				array(
 					'name'    => __( 'Image Background Color', 'drawattention' ),
-					'desc'    => __( 'Set the background color of behind the image', 'drawattention' ),
+					'desc'    => __( 'Set the background color behind the image', 'drawattention' ),
 					'id'      => $this->prefix . 'image_background_color',
 					'type'    => 'colorpicker',
 					'default' => '#efefef'
@@ -203,7 +203,7 @@ class DrawAttention_CustomFields {
 					'id'      => $this->prefix . 'map_more_info',
 					'type'    => 'textarea_small',
 				),
-				
+
 			),
 		);
 
@@ -261,7 +261,7 @@ class DrawAttention_CustomFields {
 							'type'    => 'colorpicker',
 							'default' => '#ffffff'
 						),
-						
+
 						array(
 							'name'    => __( 'Hover Color', 'drawattention' ),
 							'desc'    => '',
@@ -282,7 +282,7 @@ class DrawAttention_CustomFields {
 				),
 			),
 		) );
-  
+
 		return $metaboxes;
 	}
 
@@ -383,7 +383,7 @@ class DrawAttention_CustomFields {
 				),
 			),
 		) );
-  
+
 		return $metaboxes;
 	}
 

@@ -3,15 +3,18 @@
 @import "compass";
 
 @mixin bp($point) {
-  @if $point == m {
-    @media screen and (min-width: 600px) { @content; }
-  }
-  @else if $point == l {
-  	@media screen and (min-width: 1100px) { @content; }
-  }
-  @else if #point == xl {
-  	@media screen and (min-width: 1280px) { @content; }
-  }
+	@if $point == m {
+		@media screen and (min-width: 600px) { @content; }
+	}
+	@else if $point == wp {
+		@media screen and (min-width: 851px) { @content; }
+	}
+	@else if $point == l {
+		@media screen and (min-width: 1144px) { @content; }
+	}
+	@else if #point == xl {
+		@media screen and (min-width: 1280px) { @content; }
+	}
 }
 
 /* Hide the post slug editor */
@@ -24,75 +27,264 @@
 /* Hide the coordinates input */
 input[name$='[coordinates]'] {
 	display: none;
-	/* Contain big images */
 }
 
-#cmb2-metabox-highlight_styling_metabox,
 #cmb2-metabox-moreinfo_metabox {
 	@include display-flex;
 	@include flex-wrap(wrap);
-	.cmb-row {
-		@include box-sizing(border-box);
+	margin: 1rem 0;
+	@include bp(m) {
+		margin-left: -0.5rem;
+	}
+	.cmb-row.cmb-type-colorpicker {
 		border-bottom: 0 none;
+		@include box-sizing(border-box);
 		@include display-flex;
-		padding: 0.5em;
-		&:after {
+		@include flex-direction(column);
+		padding: 0;
+		width: 100%;
+		@include bp(m) {
+			padding-left: 0.5rem;
+			width: 50%;
+		}
+		@include bp(l) {
+			width: 25%;
+		}
+		.cmb-th {
+			border: 1px solid #e9e9e9;
+			border-bottom: 0 none;
+			float: none;
+			line-height: normal;
+			padding: 0.5rem;
+			vertical-align: baseline;
+			width: auto;
+		}
+		.cmb-td {
+			border: 1px solid #e9e9e9;
+			border-top: 0 none;
+			@include flex(1);
+			float: none;
+			padding: 0 0.5rem 0.5rem;
 			width: auto;
 		}
 	}
-	.cmb-th {
-		border: 1px solid #e9e9e9;
-		border-right: 0 none;
+	.cmb-row.cmb-type-textarea-small {
+		border-bottom: 0 none;
 		@include box-sizing(border-box);
-		float: none;
-		padding: 1em 0 1em 1em;
-		width: 45%;
-		@include bp(xl) {
-			width: 30%;
-		}
-	}
-	.cmb-td {
-		border: 1px solid #e9e9e9;
-		border-left: 0 none;
-		@include box-sizing(border-box);
-		float: none;
-		padding: 1em 1em 1em 0;
-		width: 55%;
-		@include bp(xl) {
-			width: 70%;
-		}
-	}
-	.cmb2-id--hotspot-map-highlight-color,
-	.cmb2-id--hotspot-map-highlight-opacity {
-		@include box-sizing(border-box);
+		padding: 0;
 		width: 100%;
 		@include bp(m) {
-			width: 50%;
+			padding-left: 0.5rem;
+		}
+		.cmb-th {
+			border: 1px solid #e9e9e9;
+			border-bottom: 0 none;
+			float: none;
+			line-height: normal;
+			padding: 0.5rem;
+			vertical-align: baseline;
+			width: auto;
+		}
+		.cmb-td {
+			border: 1px solid #e9e9e9;
+			border-top: 0 none;
+			float: none;
+			padding: 0 0.5rem 0.5rem;
+			width: auto;
+			textarea {
+				@include box-sizing(border-box);
+				width: 100%;
+			}
 		}
 	}
-	.cmb2-id--hotspot-map-border-color,
-	.cmb2-id--hotspot-map-border-opacity,
-	.cmb2-id--hotspot-map-border-width {
-		@include box-sizing(border-box);
-		width: 100%;
-		@include bp(m) {
-			width: 50%;
+}
+
+#cmb2-metabox-highlight_styling_metabox {
+	@include display-flex;
+	@include flex-wrap(wrap);
+	margin: 1rem 0;
+	@include bp(m) {
+		margin-left: -0.5rem;
+	}
+	.cmb-row {
+		&.cmb-type-colorpicker,
+		&.cmb-type-opacity,
+		&.cmb-type-text-number {
+			border-bottom: 0 none;
+			@include box-sizing(border-box);
+			@include display-flex;
+			@include flex-direction(column);
+			padding: 0;
+			@include bp(m) {
+				padding-left: 0.5rem;
+			}
+			.cmb-th {
+				border: 1px solid #e9e9e9;
+				border-bottom: 0 none;
+				float: none;
+				line-height: normal;
+				padding: 0.5rem;
+				vertical-align: baseline;
+				width: auto;
+			}
+			.cmb-td {
+				border: 1px solid #e9e9e9;
+				border-top: 0 none;
+				@include flex(1);
+				float: none;
+				padding: 0 0.5rem 0.5rem;
+				width: auto;
+			}
 		}
-		@include bp(l) {
-			width: 33%;
+		&.cmb-type-checkbox {
+			border-bottom: 0 none;
+			@include box-sizing(border-box);
+			padding: 0;
+			width: 100%;
+			@include bp(m) {
+				padding-left: 0.5rem;
+			}
+			.cmb-th {
+				border: 1px solid #e9e9e9;
+				border-bottom: 0 none;
+				float: none;
+				line-height: normal;
+				padding: 0.5rem;
+				vertical-align: baseline;
+				width: auto;
+			}
+			.cmb-td {
+				border: 1px solid #e9e9e9;
+				border-top: 0 none;
+				@include flex(1);
+				float: none;
+				padding: 0 0.5rem 0.5rem;
+				width: auto;
+			}
+		}
+		&.cmb2-id--da-map-highlight-color,
+		&.cmb2-id--da-map-highlight-opacity,
+		&.cmb2-id--da-map-hover-color,
+		&.cmb2-id--da-map-hover-opacity {
+			width: 100%;
+			@include bp(m) {
+				width: 50%;
+			}
+		}
+		&.cmb2-id--da-map-border-color,
+		&.cmb2-id--da-map-border-opacity {
+			width: 100%;
+			@include bp(m) {
+				width: 36%;
+			}
+		}
+		&.cmb2-id--da-map-border-width {
+			width: 100%;
+			@include bp(m) {
+				width: 28%;
+			}
+			input.cmb2-text-small {
+				width: 50px;
+			}
 		}
 	}
-	.cmb2-id--hotspot-map-title-color,
-	.cmb2-id--hotspot-map-text-color,
-	.cmb2-id--hotspot-map-background-color {
-		@include box-sizing(border-box);
-		width: 100%;
+	.cmb-row.cmb2-id--da-map-hover-color,
+	.cmb-row.cmb2-id--da-map-hover-opacity {
+		display: none;
+	}
+	&.always-visible {
+		.cmb-row.cmb2-id--da-map-hover-color,
+		.cmb-row.cmb2-id--da-map-hover-opacity {
+			display: block;
+		}
+	}
+}
+
+#cmb2-metabox-styles {
+	.cmb-nested .cmb-nested {
+		@include display-flex;
+		@include flex-wrap(wrap);
+		margin: 1rem 0;
 		@include bp(m) {
-			width: 50%;
+			margin-left: -0.5rem;
 		}
-		@include bp(l) {
-			width: 33%;
+		.cmb-row {
+			border-bottom: 0 none;
+			margin: 0 0 0.5rem 0;
+			padding: 0;
+			&.cmb-type-text {
+				@include display-flex;
+				@include flex-direction(column);
+				padding: 0;
+				width: 100%;
+				@include bp(m) {
+					padding-left: 0.5rem;
+				}
+				input[type='text'] {
+					@include box-sizing(border-box);
+					width: 100%;
+				}
+			}
+			&[class*='map-highlight-color'],
+			&[class*='map-highlight-opacity'],
+			&[class*='map-border-color'] {
+				@include box-sizing(border-box);
+				@include display-flex;
+				@include flex-direction(column);
+				width: 100%;
+				@include bp(m) {
+					padding-left: 0.5rem;
+					width: (100%/3);
+				}
+			}
+			&[class*='map-hover-color'],
+			&[class*='map-hover-opacity'] {
+				@include box-sizing(border-box);
+				@include flex-direction(column);
+				width: 100%;
+				@include bp(m) {
+					padding-left: 0.5rem;
+					width: (50%);
+				}
+			}
+			&.cmb-remove-field-row {
+				text-align: right;
+				width: 100%;
+				@include bp(m) {
+					padding-left: 0.5rem;
+				}
+			}
+			.cmb-th {
+				border: 1px solid #e9e9e9;
+				border-bottom: 0 none;
+				float: none;
+				line-height: normal;
+				padding: 0.5rem;
+				vertical-align: baseline;
+				width: auto;
+			}
+			.cmb-td {
+				border: 1px solid #e9e9e9;
+				border-top: 0 none;
+				@include flex(1);
+				float: none;
+				padding: 0 0.5rem 0.5rem;
+				width: auto;
+			}
 		}
+	}
+	.cmb-row[class*='map-hover-color'],
+	.cmb-row[class*='map-hover-opacity'] {
+		display: none;
+	}
+	&.always-visible {
+		.cmb-row[class*='map-hover-color'],
+		.cmb-row[class*='map-hover-opacity'] {
+			@include display-flex;
+		}
+	}
+	.cmb-nested .closed .cmb-nested {
+		display: none;
 	}
 }
 
@@ -102,13 +294,37 @@ input[name$='[coordinates]'] {
 	}
 }
 
-.wp-picker-container {
-	white-space: nowrap;
+.cmb2-wrap .wp-picker-container {
+	.wp-color-result {
+		white-space: nowrap;
+	}
+	.wp-picker-input-wrap {
+		display: block;
+		margin-top: 0.5rem;
+	}
+	.wp-picker-holder {
+		position: absolute;
+		z-index: 1;
+	}
+	input:not([type=hidden])+.button, .cmb2-wrap input:not([type=hidden])+input {
+		font-size: 12px;
+		margin: 1px 0 0 0;
+		padding: 3px 12px;
+		@include bp(wp) {
+			height: auto;
+			line-height: normal;
+			margin: 0 0 0 0.5rem;
+			padding: 5px 12px;
+		}
+	}
 }
 
+
 #field_group {
-	.cmb-td {
-		overflow: auto;
-		padding-bottom: 2rem;
+	.cmb-row[class*='coordinates'] {
+		.cmb-td {
+			overflow: auto;
+			padding-bottom: 2rem;
+		}
 	}
 }

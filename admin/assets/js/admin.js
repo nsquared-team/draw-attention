@@ -179,18 +179,51 @@
 
 	var hideNotice = function() {
 		$('.da-disable-third-party-js').hide();
-	}
+	};
 
 	var sortHotspots = function() {
 		$('#_da_hotspots_repeat').sortable({
 			items: '.cmb-repeatable-grouping',
 			handle: '.cmbhandle-title'
 		});
-	}
+	};
+
+	var alwaysVisible = function(){
+		var checkbox = $('#_da_always_visible');
+		toggleVisible();
+		checkbox.on('change', toggleVisible);
+
+		function toggleVisible(){
+			var highlightStyles = $('#cmb2-metabox-highlight_styling_metabox'),
+				multiStyles = $('#cmb2-metabox-styles');
+			if (checkbox.is(':checked')) {
+				highlightStyles.addClass('always-visible');
+				multiStyles.addClass('always-visible');
+			} else {
+				highlightStyles.removeClass('always-visible');
+				multiStyles.removeClass('always-visible');
+			}
+		};
+	};
+
+	var multiStyles = function(){
+		var checkbox = $('#_da_has_multiple_styles');
+		console.log(checkbox);
+		toggleStyles();
+		checkbox.on('change', toggleStyles);
+
+		function toggleStyles(){
+			var styles = $('#styles');
+			if (checkbox.is(':checked')) {
+				styles.show();
+			} else {
+				styles.hide();
+			}
+		}
+	};
 
 	/* Stuff to fire off on page load */
 	hotspotAdmin.init = function() {
-		// canvasDraw();
 		accordion();
 		layoutSelect();
 		showHideEventTriggerMetabox();
@@ -203,6 +236,8 @@
 		saveAlert();
 		hideNotice();
 		sortHotspots();
+		alwaysVisible();
+		multiStyles();
 	}
 
 }(jQuery, window.hotspotAdmin = window.hotspotAdmin || {}));

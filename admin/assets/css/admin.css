@@ -1,6 +1,6 @@
 /* This stylesheet is used to style the admin option form of the plugin. */
 /* Hide the post slug editor */
-/* line 18, ../sass/admin.scss */
+/* line 21, ../sass/admin.scss */
 .post-type-hotspot #edit-slug-box,
 .post-type-hotspot #slugdiv,
 .post-type-hotspot #screen-meta label[for=slugdiv-hide] {
@@ -8,160 +8,404 @@
 }
 
 /* Hide the coordinates input */
-/* line 25, ../sass/admin.scss */
+/* line 28, ../sass/admin.scss */
 input[name$='[coordinates]'] {
   display: none;
-  /* Contain big images */
 }
 
-/* line 30, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox,
+/* line 32, ../sass/admin.scss */
 #cmb2-metabox-moreinfo_metabox {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  margin: 1rem 0;
 }
-/* line 34, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb-row,
-#cmb2-metabox-moreinfo_metabox .cmb-row {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  border-bottom: 0 none;
-  display: -webkit-flex;
-  display: flex;
-  padding: 0.5em;
+@media screen and (min-width: 600px) {
+  /* line 32, ../sass/admin.scss */
+  #cmb2-metabox-moreinfo_metabox {
+    margin-left: -0.5rem;
+  }
 }
 /* line 39, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb-row:after,
-#cmb2-metabox-moreinfo_metabox .cmb-row:after {
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-colorpicker {
+  border-bottom: 0 none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 39, ../sass/admin.scss */
+  #cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-colorpicker {
+    padding-left: 0.5rem;
+    width: 50%;
+  }
+}
+@media screen and (min-width: 1144px) {
+  /* line 39, ../sass/admin.scss */
+  #cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-colorpicker {
+    width: 25%;
+  }
+}
+/* line 53, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-colorpicker .cmb-th {
+  border: 1px solid #e9e9e9;
+  border-bottom: 0 none;
+  float: none;
+  line-height: normal;
+  padding: 0.5rem;
+  vertical-align: baseline;
   width: auto;
 }
-/* line 43, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb-th,
-#cmb2-metabox-moreinfo_metabox .cmb-th {
+/* line 62, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-colorpicker .cmb-td {
   border: 1px solid #e9e9e9;
-  border-right: 0 none;
+  border-top: 0 none;
+  -webkit-flex: 1;
+  flex: 1;
+  float: none;
+  padding: 0 0.5rem 0.5rem;
+  width: auto;
+}
+/* line 71, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-textarea-small {
+  border-bottom: 0 none;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  float: none;
-  padding: 1em 0 1em 1em;
-  width: 45%;
+  padding: 0;
+  width: 100%;
 }
-/* line 54, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb-td,
-#cmb2-metabox-moreinfo_metabox .cmb-td {
+@media screen and (min-width: 600px) {
+  /* line 71, ../sass/admin.scss */
+  #cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-textarea-small {
+    padding-left: 0.5rem;
+  }
+}
+/* line 79, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-textarea-small .cmb-th {
   border: 1px solid #e9e9e9;
-  border-left: 0 none;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  border-bottom: 0 none;
   float: none;
-  padding: 1em 1em 1em 0;
-  width: 55%;
+  line-height: normal;
+  padding: 0.5rem;
+  vertical-align: baseline;
+  width: auto;
 }
-/* line 65, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
+/* line 88, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-textarea-small .cmb-td {
+  border: 1px solid #e9e9e9;
+  border-top: 0 none;
+  float: none;
+  padding: 0 0.5rem 0.5rem;
+  width: auto;
+}
+/* line 94, ../sass/admin.scss */
+#cmb2-metabox-moreinfo_metabox .cmb-row.cmb-type-textarea-small .cmb-td textarea {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-}
-@media screen and (min-width: 600px) {
-  /* line 65, ../sass/admin.scss */
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
-    width: 50%;
-  }
-}
-/* line 73, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-}
-@media screen and (min-width: 600px) {
-  /* line 73, ../sass/admin.scss */
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
-    width: 50%;
-  }
-}
-@media screen and (min-width: 1100px) {
-  /* line 73, ../sass/admin.scss */
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
-    width: 33%;
-  }
-}
-/* line 85, ../sass/admin.scss */
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-}
-@media screen and (min-width: 600px) {
-  /* line 85, ../sass/admin.scss */
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
-    width: 50%;
-  }
-}
-@media screen and (min-width: 1100px) {
-  /* line 85, ../sass/admin.scss */
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
-  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
-  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
-    width: 33%;
-  }
 }
 
-/* line 100, ../sass/admin.scss */
+/* line 102, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+@media screen and (min-width: 600px) {
+  /* line 102, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox {
+    margin-left: -0.5rem;
+  }
+}
+/* line 110, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-colorpicker, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-opacity, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-text-number {
+  border-bottom: 0 none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  padding: 0;
+}
+@media screen and (min-width: 600px) {
+  /* line 110, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-colorpicker, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-opacity, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-text-number {
+    padding-left: 0.5rem;
+  }
+}
+/* line 121, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-colorpicker .cmb-th, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-opacity .cmb-th, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-text-number .cmb-th {
+  border: 1px solid #e9e9e9;
+  border-bottom: 0 none;
+  float: none;
+  line-height: normal;
+  padding: 0.5rem;
+  vertical-align: baseline;
+  width: auto;
+}
+/* line 130, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-colorpicker .cmb-td, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-opacity .cmb-td, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-text-number .cmb-td {
+  border: 1px solid #e9e9e9;
+  border-top: 0 none;
+  -webkit-flex: 1;
+  flex: 1;
+  float: none;
+  padding: 0 0.5rem 0.5rem;
+  width: auto;
+}
+/* line 139, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-checkbox {
+  border-bottom: 0 none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 139, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-checkbox {
+    padding-left: 0.5rem;
+  }
+}
+/* line 147, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-checkbox .cmb-th {
+  border: 1px solid #e9e9e9;
+  border-bottom: 0 none;
+  float: none;
+  line-height: normal;
+  padding: 0.5rem;
+  vertical-align: baseline;
+  width: auto;
+}
+/* line 156, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb-type-checkbox .cmb-td {
+  border: 1px solid #e9e9e9;
+  border-top: 0 none;
+  -webkit-flex: 1;
+  flex: 1;
+  float: none;
+  padding: 0 0.5rem 0.5rem;
+  width: auto;
+}
+/* line 165, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-highlight-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-highlight-opacity, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-opacity {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 165, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-highlight-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-highlight-opacity, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-opacity {
+    width: 50%;
+  }
+}
+/* line 174, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-opacity {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 174, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-color, #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-opacity {
+    width: 36%;
+  }
+}
+/* line 181, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-width {
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 181, ../sass/admin.scss */
+  #cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-width {
+    width: 28%;
+  }
+}
+/* line 186, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-border-width input.cmb2-text-small {
+  width: 50px;
+}
+/* line 191, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-color,
+#cmb2-metabox-highlight_styling_metabox .cmb-row.cmb2-id--da-map-hover-opacity {
+  display: none;
+}
+/* line 196, ../sass/admin.scss */
+#cmb2-metabox-highlight_styling_metabox.always-visible .cmb-row.cmb2-id--da-map-hover-color,
+#cmb2-metabox-highlight_styling_metabox.always-visible .cmb-row.cmb2-id--da-map-hover-opacity {
+  display: block;
+}
+
+/* line 204, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+@media screen and (min-width: 600px) {
+  /* line 204, ../sass/admin.scss */
+  #cmb2-metabox-styles .cmb-nested .cmb-nested {
+    margin-left: -0.5rem;
+  }
+}
+/* line 211, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row {
+  border-bottom: 0 none;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+}
+/* line 215, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row.cmb-type-text {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 215, ../sass/admin.scss */
+  #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row.cmb-type-text {
+    padding-left: 0.5rem;
+  }
+}
+/* line 223, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row.cmb-type-text input[type='text'] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+/* line 228, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-highlight-color'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-highlight-opacity'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-border-color'] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 228, ../sass/admin.scss */
+  #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-highlight-color'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-highlight-opacity'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-border-color'] {
+    padding-left: 0.5rem;
+    width: 33.33333%;
+  }
+}
+/* line 240, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-hover-color'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-hover-opacity'] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 240, ../sass/admin.scss */
+  #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-hover-color'], #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row[class*='map-hover-opacity'] {
+    padding-left: 0.5rem;
+    width: 50%;
+  }
+}
+/* line 250, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row.cmb-remove-field-row {
+  text-align: right;
+  width: 100%;
+}
+@media screen and (min-width: 600px) {
+  /* line 250, ../sass/admin.scss */
+  #cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row.cmb-remove-field-row {
+    padding-left: 0.5rem;
+  }
+}
+/* line 257, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row .cmb-th {
+  border: 1px solid #e9e9e9;
+  border-bottom: 0 none;
+  float: none;
+  line-height: normal;
+  padding: 0.5rem;
+  vertical-align: baseline;
+  width: auto;
+}
+/* line 266, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .cmb-nested .cmb-row .cmb-td {
+  border: 1px solid #e9e9e9;
+  border-top: 0 none;
+  -webkit-flex: 1;
+  flex: 1;
+  float: none;
+  padding: 0 0.5rem 0.5rem;
+  width: auto;
+}
+/* line 276, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-row[class*='map-hover-color'],
+#cmb2-metabox-styles .cmb-row[class*='map-hover-opacity'] {
+  display: none;
+}
+/* line 281, ../sass/admin.scss */
+#cmb2-metabox-styles.always-visible .cmb-row[class*='map-hover-color'],
+#cmb2-metabox-styles.always-visible .cmb-row[class*='map-hover-opacity'] {
+  display: -webkit-flex;
+  display: flex;
+}
+/* line 286, ../sass/admin.scss */
+#cmb2-metabox-styles .cmb-nested .closed .cmb-nested {
+  display: none;
+}
+
+/* line 292, ../sass/admin.scss */
 #cmb2-metabox-field_group .cmb-repeat-group-wrap {
   max-width: 100% !important;
 }
 
-/* line 105, ../sass/admin.scss */
-.wp-picker-container {
+/* line 298, ../sass/admin.scss */
+.cmb2-wrap .wp-picker-container .wp-color-result {
   white-space: nowrap;
 }
+/* line 301, ../sass/admin.scss */
+.cmb2-wrap .wp-picker-container .wp-picker-input-wrap {
+  display: block;
+  margin-top: 0.5rem;
+}
+/* line 305, ../sass/admin.scss */
+.cmb2-wrap .wp-picker-container .wp-picker-holder {
+  position: absolute;
+  z-index: 1;
+}
+/* line 309, ../sass/admin.scss */
+.cmb2-wrap .wp-picker-container input:not([type=hidden]) + .button, .cmb2-wrap .wp-picker-container .cmb2-wrap input:not([type=hidden]) + input {
+  font-size: 12px;
+  margin: 1px 0 0 0;
+  padding: 3px 12px;
+}
+@media screen and (min-width: 851px) {
+  /* line 309, ../sass/admin.scss */
+  .cmb2-wrap .wp-picker-container input:not([type=hidden]) + .button, .cmb2-wrap .wp-picker-container .cmb2-wrap input:not([type=hidden]) + input {
+    height: auto;
+    line-height: normal;
+    margin: 0 0 0 0.5rem;
+    padding: 5px 12px;
+  }
+}
 
-/* line 110, ../sass/admin.scss */
-#field_group .cmb-td {
+/* line 325, ../sass/admin.scss */
+#field_group .cmb-row[class*='coordinates'] .cmb-td {
   overflow: auto;
   padding-bottom: 2rem;
 }
