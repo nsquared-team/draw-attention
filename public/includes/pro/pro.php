@@ -132,7 +132,6 @@ class DrawAttention_Pro {
 		$settings['more_info_text'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_text_color'][0] : '';
 		$settings['more_info_title'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'map_title_color'][0] : '';
 		$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] : '#efefef';
-		var_dump($settings['styles']);
 
 		// Create default style
 		$settings['styles'][] = array(
