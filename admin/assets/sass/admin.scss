@@ -213,16 +213,29 @@ input[name$='[coordinates]'] {
 			margin: 0 0 0.5rem 0;
 			padding: 0;
 			&.cmb-type-text {
+				@include box-sizing(border-box);
 				@include display-flex;
 				@include flex-direction(column);
 				padding: 0;
 				width: 100%;
 				@include bp(m) {
 					padding-left: 0.5rem;
+					width: (100%/3*2);
 				}
 				input[type='text'] {
 					@include box-sizing(border-box);
 					width: 100%;
+				}
+			}
+			&.cmb-type-select {
+				@include box-sizing(border-box);
+				@include display-flex;
+				@include flex-direction(column);
+				padding: 0;
+				width: 100%;
+				@include bp(m) {
+					padding-left: 0.5rem;
+					width: (100%/3);
 				}
 			}
 			&[class*='map-highlight-color'],

@@ -82,7 +82,7 @@
 
 	/* Fix the weird-o cloning behavior when adding a new row */
 	var hotspotCloning = function() {
-		var repeatGroup = $('.cmb-repeatable-group');
+		var repeatGroup = $('#field_group .cmb-repeatable-group');
 		repeatGroup.on('cmb2_add_row', function(){
 			var lastRow = $(this).find('.cmb-row.cmb-repeatable-grouping').last();
 			canvasDestroy(repeatGroup);
@@ -208,7 +208,6 @@
 
 	var multiStyles = function(){
 		var checkbox = $('#_da_has_multiple_styles');
-		console.log(checkbox);
 		toggleStyles();
 		checkbox.on('change', toggleStyles);
 
@@ -220,6 +219,64 @@
 				styles.hide();
 			}
 		}
+	};
+
+	var multiThemeSelect = function(){
+		var colorSchemeContainer = $('#styles'),
+			colorSchemes = colorSchemeContainer.find('.cmb-repeatable-grouping'),
+			colorSchemeSelect = $('#da-theme-pack-select');
+
+		colorSchemes.each(function(){
+			var colorScheme = $(this),
+				newColorSchemeSelect = colorScheme.find('select');
+
+			if (!newColorSchemeSelect.length) {
+				var iterator = colorScheme.data('iterator');
+				newColorSchemeSelect = colorSchemeSelect.clone().attr('id', 'colorScheme-' + iterator);
+
+				var colorTitle = colorScheme.find('.cmb2-id--da-styles-' + iterator + '-title'),
+					wrapper = $('<div></div>', {
+						'class': 'cmb-row cmb-type-select premade-color-schemes'
+					}),
+					schemeHeader = $('<div></div>', {
+						'class': 'cmb-th',
+						'html': '<label for="colorScheme-' + iterator + '">Color Scheme</label>'
+					}).appendTo(wrapper),
+					schemeBody = $('<div></div>',{
+						'class': 'cmb-td',
+						'html': '<p class="cmb2-metabox-description">Quickly apply a color scheme to this style (you can adjust each color afterwards)</p>'
+					}).appendTo(wrapper);
+
+				schemeBody.prepend(newColorSchemeSelect);
+				colorTitle.after(wrapper);
+			}
+
+			newColorSchemeSelect.on('change', function(){
+				var confirmed = confirm('Applying a new theme will overwite the current styling you have selected for this hotspot style');
+				if (confirmed) {
+					multiThemeApply(colorScheme, $(this));
+				} else {
+					$(this).val('');
+				}
+			});
+		});
+	};
+
+	var multiThemeApply = function(colorScheme, select) {
+		var themeSlug = select.val(),
+			themeProperties = Object.keys(daThemes.themes[themeSlug].values);
+		$.each( themeProperties, function(){
+			var cfName = this;
+			var input = colorScheme.find('input[id$="' + cfName + '"]');
+			input.val(daThemes.themes[themeSlug].values[cfName]).trigger('change');
+		});
+	};
+
+	var styleCloning = function(){
+		var repeatGroup = $('#styles .cmb-repeatable-group');
+		repeatGroup.on('cmb2_add_row', function(){
+			multiThemeSelect();
+		});
 	};
 
 	/* Stuff to fire off on page load */
@@ -238,6 +295,8 @@
 		sortHotspots();
 		alwaysVisible();
 		multiStyles();
+		multiThemeSelect();
+		styleCloning();
 	}
 
 }(jQuery, window.hotspotAdmin = window.hotspotAdmin || {}));
