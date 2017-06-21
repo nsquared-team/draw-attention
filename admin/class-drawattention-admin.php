@@ -167,7 +167,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				wp_localize_script( $this->plugin_slug . '-admin-script', 'hotspotAdminVars', array(
 					'ajaxURL' => admin_url( 'admin-ajax.php' ),
 				) );
-				wp_enqueue_script( $this->plugin_slug . '-admin-script' );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', array(),  DrawAttention::VERSION );
 			}
 
 		}
