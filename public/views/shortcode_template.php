@@ -61,7 +61,12 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 					if ( empty( $hotspot['description'] ) ) {
 						$hotspot['description'] = '';
 					}
-					$color_scheme = $hotspot['style'];
+					if ( empty( $settings['img_settings']['_da_has_multiple_styles']['0'] ) || $settings['img_settings']['_da_has_multiple_styles']['0'] != 'on' ) {
+						$color_scheme = '';
+					} else {
+						$color_scheme = $hotspot['style'];
+					}
+
 				?>
 				<area
 					shape="poly"
