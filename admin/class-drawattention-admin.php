@@ -81,7 +81,24 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			add_action( 'cmb2_save_post_fields', array( $this, 'save_hotspots_json' ), 10, 4 );
 			add_action( 'current_screen', array( $this, 'load_from_hotspots_json' ) );
+			add_action( 'admin_init', array( $this, 'upgrade_process' ) );
+		}
 
+		public function upgrade_process() {
+			global $wpdb;
+			$current_version = get_option( 'da_version', '0.0.0' );
+
+			while ( version_compare( $current_version, DrawAttention::VERSION ) < 0 ) {
+				if ( version_compare( $current_version, '1.8' ) < 0 ) {
+					$sql = $wpdb->prepare( "DELETE FROM {$wpdb->usermeta} WHERE meta_key=%s", 'meta-box-order_da_image' );
+					$wpdb->get_results( $sql );
+
+					$current_version = '1.8';
+					continue;
+				}
+			}
+
+			update_option( 'da_version', DrawAttention::VERSION );
 		}
 
 		/**
