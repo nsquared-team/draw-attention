@@ -12,7 +12,7 @@ class DrawAttention_Themes {
 	function add_theme_pack_metabox() {
 		add_meta_box( 'da_theme_pack', __( 'Apply Color Scheme', 'drawattention' ), array( $this, 'display_theme_pack_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
 	}
-	
+
 	function display_theme_pack_metabox() {
 		echo '<p>'.__( 'Quickly apply a theme (you can adjust each color afterwards).', 'drawattention' ).'</p>'; ?>
 		<select id="da-theme-pack-select">
@@ -53,6 +53,9 @@ class DrawAttention_Themes {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 1,
 
+					'map_hover_color' => '#666666',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#000000',
 					'map_text_color' => '#000000',
 					'map_background_color' => '#ffffff',
@@ -69,6 +72,9 @@ class DrawAttention_Themes {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 1,
 
+					'map_hover_color' => '#999999',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#ffffff',
 					'map_text_color' => '#ffffff',
 					'map_background_color' => '#000000',
@@ -84,6 +90,9 @@ class DrawAttention_Themes {
 					'map_border_color' => '#235B6E',
 					'map_border_opacity' => 1,
 					'map_border_width' => 2,
+
+					'map_hover_color' => '#256464',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#93C7A4',
 					'map_text_color' => '#DFEBE5',

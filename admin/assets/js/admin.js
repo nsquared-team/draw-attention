@@ -212,11 +212,16 @@
 		checkbox.on('change', toggleStyles);
 
 		function toggleStyles(){
-			var styles = $('#styles');
+			var styles = $('#styles'),
+				hotspots = $('#field_group'),
+				styleSelects = hotspots.find('select[id$="_style"]'),
+				styleSelectContainers = styleSelects.parents('.cmb-repeat-group-field');
 			if (checkbox.is(':checked')) {
 				styles.show();
+				styleSelectContainers.show();
 			} else {
 				styles.hide();
+				styleSelectContainers.hide();
 			}
 		}
 	};
