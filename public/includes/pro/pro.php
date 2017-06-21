@@ -238,6 +238,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
 
+					'map_hover_color' => '#fe26af',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#FF80D1',
 					'map_text_color' => '#FFCCEC',
 					'map_background_color' => '#8B0059',
@@ -253,6 +256,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#210900',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 1,
+
+					'map_hover_color' => '#6c0202',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#D4A600',
 					'map_text_color' => '#F2EACB',
@@ -270,6 +276,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 5,
 
+					'map_hover_color' => '#c26594',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#DAA2BE',
 					'map_text_color' => '#8FB46B',
 					'map_background_color' => '#F1FFE4',
@@ -285,6 +294,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#000D1A',
 					'map_border_opacity' => 1,
 					'map_border_width' => 1,
+
+					'map_hover_color' => '#004488',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#ffffff',
 					'map_text_color' => '#A2BEDA',
@@ -302,6 +314,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 1,
 					'map_border_width' => 2,
 
+					'map_hover_color' => '#9b0024',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#FF023D',
 					'map_text_color' => '#FFFFFF',
 					'map_background_color' => '#050004',
@@ -317,6 +332,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#800000',
 					'map_border_opacity' => 1,
 					'map_border_width' => 2,
+
+					'map_hover_color' => '#770000',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#F22424',
 					'map_text_color' => '#FF7373',
@@ -334,6 +352,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 1,
 					'map_border_width' => 2,
 
+					'map_hover_color' => '#ae6000',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#FFC073',
 					'map_text_color' => '#7F4600',
 					'map_background_color' => '#F28500',
@@ -349,6 +370,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#5983FF',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 2,
+
+					'map_hover_color' => '#9db6ff',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#FFCC33',
 					'map_text_color' => '#A6BCFF',
@@ -366,6 +390,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
 
+					'map_hover_color' => '#2bd620',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#3DB235',
 					'map_text_color' => '#68D861',
 					'map_background_color' => '#044000',
@@ -381,6 +408,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#001440',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
+
+					'map_hover_color' => '#0d1b3a',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#20418D',
 					'map_text_color' => '#001440',
@@ -398,6 +428,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 2,
 
+					'map_hover_color' => '#590a6b',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#9a36b2',
 					'map_text_color' => '#75158C',
 					'map_background_color' => '#EB99FF',
@@ -413,6 +446,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#0052A5',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 5,
+
+					'map_hover_color' => '#0052a5',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#ffffff',
 					'map_text_color' => '#ffffff',
@@ -430,6 +466,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
 
+					'map_hover_color' => '#6e9b5b',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#9CBD8E',
 					'map_text_color' => '#F0E6BD',
 					'map_background_color' => '#4A2607',
@@ -445,6 +484,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#A79C8E',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
+
+					'map_hover_color' => '#f8ecc9',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#F1BBBA',
 					'map_text_color' => '#F8ECC9',
@@ -462,6 +504,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
 
+					'map_hover_color' => '#8ebdb6',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#8EBDB6',
 					'map_text_color' => '#ECE1C3',
 					'map_background_color' => '#063940',
@@ -478,6 +523,9 @@ class DrawAttention_Pro {
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
 
+					'map_hover_color' => '#cdb380',
+					'map_hover_opacity' => 0.9,
+
 					'map_title_color' => '#CDB380',
 					'map_text_color' => '#E8DDCB',
 					'map_background_color' => '#033649',
@@ -493,6 +541,9 @@ class DrawAttention_Pro {
 					'map_border_color' => '#7F9CA0',
 					'map_border_opacity' => 0.8,
 					'map_border_width' => 3,
+
+					'map_hover_color' => '#7f9ca0',
+					'map_hover_opacity' => 0.9,
 
 					'map_title_color' => '#F74553',
 					'map_text_color' => '#E5DBC0',
