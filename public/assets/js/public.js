@@ -207,7 +207,7 @@
 
 		oldContent.removeClass('visible');
 		content.children().removeClass('visible').end().append(info);
-		info.removeClass('hidden').addClass('visible');
+		info.removeClass('da-hidden').addClass('visible');
 	}
 
 
@@ -250,7 +250,7 @@
 	/* Set up the information update when interacting with the image */
 	var daInitialize = function(){
 		$('.da-error').hide();
-		$('.hotspot-info').addClass('hidden');
+		$('.hotspot-info').addClass('da-hidden');
 
 		var containers = $('.hotspots-container');
 

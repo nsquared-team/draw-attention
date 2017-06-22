@@ -1,6 +1,6 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 /* line 5, ../sass/public.scss */
-.hotspot-info.hidden {
+.hotspot-info.da-hidden {
   display: none;
 }
 
