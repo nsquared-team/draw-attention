@@ -96,6 +96,8 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 					$current_version = '1.8';
 					continue;
 				}
+
+				$current_version = DrawAttention::VERSION;
 			}
 
 			update_option( 'da_version', DrawAttention::VERSION );
