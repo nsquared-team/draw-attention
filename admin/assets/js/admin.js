@@ -24,7 +24,7 @@
 				canvasDestroy(areas);
 		});
 
-		$('#field_group').on('click', '.cmb-group-title, .cmbhandle', function() {
+		$('#field_group').on('click', '.cmb-group-title, .cmbhandle', function(event) {
 			var $this = $(event.target),
 				parent = $this.closest('.cmb-row');
 
