@@ -181,12 +181,7 @@
 				},
 				afterClose: function() {
 					area.removeClass('active');
-					area.data('canvasHover').removeClass('canvas-show');
-					var canvas = area.data('canvasHover');
-					canvas.css('opacity', 0); //Fix bug where remove class wasn't making the area transparent
-					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
-						area.data('canvasDisplay').addClass('canvas-show');
-					}
+					setTimeout(function(){area.trigger('blur')}, 100);
 				}
 			});
 		}
