@@ -182,10 +182,13 @@
 	};
 
 	var sortHotspots = function() {
-		$('#_da_hotspots_repeat').sortable({
-			items: '.cmb-repeatable-grouping',
-			handle: '.cmbhandle-title'
-		});
+		var hotspots = $('#_da_hotspots_repeat');
+		if (hotspots.length) {
+			hotspots.sortable({
+				items: '.cmb-repeatable-grouping',
+				handle: '.cmbhandle-title'
+			});
+		}
 	};
 
 	var alwaysVisible = function(){
