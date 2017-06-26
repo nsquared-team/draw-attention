@@ -211,7 +211,7 @@ class DrawAttention_Pro {
 
 		ob_start();
 
-		require_once( $this->parent->get_plugin_dir() . '/public/views/shortcode_template.php' );
+		require( $this->parent->get_plugin_dir() . '/public/views/shortcode_template.php' );
 
 		if ( $settings['has_photon'] && $photon_removed ) {
 			add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );

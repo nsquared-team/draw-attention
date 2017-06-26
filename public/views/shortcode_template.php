@@ -38,13 +38,13 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	<div class="hotspots-container <?php echo $settings['urls_class']; ?> layout-<?php echo $settings['layout']; ?> event-<?php echo $settings['event_trigger']; ?>" id="<?php echo $settings['spot_id']; ?>">
 		<div class="hotspots-interaction">
 			<?php if ( $settings['urls_only'] ) {
-				require_once( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
+				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
 			} elseif ( $settings['layout'] == 'left' || $settings['layout'] == 'top' ) {
-				require_once( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
-				require_once( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
+				require( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
+				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
 			} else {
-				require_once( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
-				require_once( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
+				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
+				require( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
 			} ?>
 		</div>
 		<map name="hotspots-image-<?php echo $settings['image_id']; ?>" class="hotspots-map">
