@@ -610,7 +610,9 @@
 
 		$(window).on('resizeComplete.responsilight', function(){
 			responsilight_init();
-		}).trigger('resizeComplete.responsilight');
+		});
+
+		responsilight_init();
 
 		return this;
 	};
