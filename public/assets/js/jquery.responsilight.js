@@ -372,11 +372,14 @@
 			area.trigger('inactive.responsilight');
 		}
 
-		var oldActive = area.siblings('.active').removeClass('active');
+		var oldActive = area.siblings('.active');
 		if (oldActive.length) {
-			oldActive.data('canvasHover').removeClass('canvas-show');
+			oldActive
+				.removeClass('active')
+				.data('canvasHover').removeClass('canvas-show');
 			if (opts.alwaysVisible) {
-				oldActive.data('canvasDisplay').addClass('canvas-show');
+				oldActive
+					.data('canvasDisplay').addClass('canvas-show');
 			}
 		}
 	};
