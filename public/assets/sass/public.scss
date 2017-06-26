@@ -117,11 +117,21 @@ canvas.canvas-hover {
 	pointer-events: none;
 	position: absolute;
 	top: 0;
-	visibility: hidden;
-	@include transition(opacity 400ms);
+}
+
+canvas.canvas-display {
+	opacity: 0;
+	@include transition(opacity 300ms ease-in-out);
 	&.canvas-show {
 		opacity: 1;
-		visibility: visible;
+	}
+}
+
+canvas.canvas-hover {
+	opacity: 0;
+	@include transition(opacity 300ms ease-in-out);
+	&.canvas-show {
+		opacity: 1;
 	}
 }
 
