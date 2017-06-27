@@ -20,6 +20,7 @@
 	& > div {
 		height: 0;
 		opacity: 0;
+		overflow: hidden;
 		@include transition(all 200ms);
 		&.visible {
 			height: auto;
