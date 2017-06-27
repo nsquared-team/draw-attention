@@ -4,8 +4,7 @@
 	/* Global vars */
 	/* ------------------------------------------- */
 
-	var opts,
-		resizing = false;
+	var resizing = false;
 
 	/* ------------------------------------------- */
 	/* Browser support checking */
@@ -70,7 +69,7 @@
 		drawCircle,
 		drawRect;
 
-	areaDraw = function(img, area) {
+	areaDraw = function(img, area, opts) {
 		if (!doHighlights)
 			return;
 
@@ -104,13 +103,13 @@
 			e.preventDefault(); //iOS bug fix
 		});
 
-		drawShape(img, area);
+		drawShape(img, area, opts);
 		if (area.hasClass('active')) {
 			showActiveArea(img, area);
 		}
 	};
 
-	areaOptions = function(area) {
+	areaOptions = function(area, opts) {
 		function findByName(arr, item) {
 			var found = $.grep(arr, function(el) { return el.name === item; });
 			return found[0];
@@ -124,7 +123,7 @@
 		return areaColorScheme;
 	};
 
-	drawShape = function(img, area) {
+	drawShape = function(img, area, opts) {
 		var domCanvas = area.data('canvasDisplay') ? area.data('canvasDisplay').get(0) : null,
 			domCanvasHover = area.data('canvasHover') ? area.data('canvasHover').get(0) : null;
 
@@ -148,13 +147,13 @@
 
 			switch(shape) {
 				case 'poly':
-					drawPoly(context, xCoords, yCoords, area, type);
+					drawPoly(context, xCoords, yCoords, area, type, opts);
 					break;
 				case 'circle':
-					drawCircle(context, xCoords, yCoords, area, type);
+					drawCircle(context, xCoords, yCoords, area, type, opts);
 					break;
 				case 'rect':
-					drawRect(context, xCoords, yCoords, area, type);
+					drawRect(context, xCoords, yCoords, area, type, opts);
 					break;
 			}
 		}
@@ -168,8 +167,8 @@
 		}
 	};
 
-	drawPoly = function(context, xCoords, yCoords, area, type) {
-		var colorScheme = areaOptions(area);
+	drawPoly = function(context, xCoords, yCoords, area, type, opts) {
+		var colorScheme = areaOptions(area, opts);
 		context.beginPath();
 		context.moveTo(xCoords[0], yCoords[0]);
 		for(var j=1; j<xCoords.length; j++) {
@@ -183,8 +182,8 @@
 		context.stroke();
 	};
 
-	drawCircle = function(context, xCoords, yCoords, area, type) {
-		var colorScheme = areaOptions(area);
+	drawCircle = function(context, xCoords, yCoords, area, type, opts) {
+		var colorScheme = areaOptions(area, opts);
 		context.beginPath();
 		context.arc(xCoords[0], yCoords[0], xCoords[1], 0, Math.PI*2, true);
 		context.fillStyle = convertToRgba(colorScheme[type]['fillColor'], colorScheme[type]['fillOpacity']);
@@ -194,8 +193,8 @@
 		context.stroke();
 	};
 
-	drawRect = function(context, xCoords, yCoords, area, type) {
-		var colorScheme = areaOptions(area);
+	drawRect = function(context, xCoords, yCoords, area, type, opts) {
+		var colorScheme = areaOptions(area, opts);
 		context.fillStyle = convertToRgba(colorScheme[type]['fillColor'], colorScheme[type]['fillOpacity']);
 		context.lineWidth = colorScheme.borderWidth;
 		context.strokeStyle = convertToRgba(colorScheme[type]['borderColor'], colorScheme[type]['borderOpacity']);
@@ -219,7 +218,7 @@
 		mapClick,
 		showActiveArea;
 
-	mapResize = function(img) {
+	mapResize = function(img, opts) {
 		var info = img.data('info'),
 			natW = info.naturalWidth,
 			natH = info.naturalHeight,
@@ -245,7 +244,7 @@
 				}
 			}
 			area.attr('coords', coordsPercent.toString());
-			areaDraw(img, $(this));
+			areaDraw(img, $(this), opts);
 		});
 
 		// Resize the image wrapper
@@ -266,13 +265,13 @@
 		var canvases = img.siblings('.canvas-show').removeClass('canvas-show');
 	};
 
-	imgEvents = function(img) {
+	imgEvents = function(img, opts) {
 		img
 			.on('init.responsilight', function(){
 				img.data('initialized', true);
 				img.addClass('responsilight-initialized');
 				linkToArea(img);
-				mapResize(img);
+				mapResize(img, opts);
 			});
 
 		$(window)
@@ -280,51 +279,49 @@
 				resizeStart(img);
 			})
 			.on('resizeComplete.responsilight', function(){
-				mapResize(img);
+				mapResize(img, opts);
 			});
 	}
 
-	areaEvents = function(img, area) {
+	areaEvents = function(img, area, opts) {
 		var trigger = opts.eventTrigger;
 
 		// Translate browser events to responsilight events
-		area.on('mouseover touchstart mouseout touchend click focus blur keypress', function(e){
+		area.on('mouseover mouseout tapstart focus blur keypress', function(e){
 			var type = e.type;
 			switch(type) {
-				case 'touchstart':
-					mapOver(img, area, e);
-					mapClick(img, area, e);
-					break;
-				case 'touchend':
+				case 'tapstart':
+					mapOver(img, area, e, opts);
+					mapClick(img, area, e, opts);
 					break;
 				case 'mouseout':
-					mapOut(img, area, e);
+					mapOut(img, area, e, opts);
 					break;
 				case 'blur':
-					mapOut(img, area, e);
+					mapOut(img, area, e, opts);
 					break;
 				case 'mouseover':
-					mapOver(img, area, e);
+					mapOver(img, area, e, opts);
 					break;
 				case 'focus':
-					mapOver(img, area, e);
+					mapOver(img, area, e, opts);
 					break;
 				case 'click':
-				 mapClick(img, area, e);
+				 mapClick(img, area, e, opts);
 				 break;
 				case 'keypress':
 					if (trigger === 'click') {
-						mapClick(img, area, e);
+						mapClick(img, area, e, opts);
 					}
 					if (e.which === 13) {
-						mapClick(img, area, e);
+						mapClick(img, area, e, opts);
 					}
 					break;
 			}
 		});
 	};
 
-	mapOver = function(img, area, e) {
+	mapOver = function(img, area, e, opts) {
 		area.trigger('over.responsilight');
 
 		area.data('canvasHover').addClass('canvas-show');
@@ -339,7 +336,7 @@
 		}
 	};
 
-	mapOut = function(img, area, e) {
+	mapOut = function(img, area, e, opts) {
 		area.trigger('out.responsilight');
 
 		if (opts.eventTrigger === 'hover') {
@@ -357,7 +354,7 @@
 		}
 	};
 
-	mapClick = function(img, area, e) {
+	mapClick = function(img, area, e, opts) {
 		area.trigger('areaClick.responsilight');
 
 		if (opts.eventTrigger === 'hover' && e.type !== 'keypress' ) {
@@ -403,31 +400,30 @@
 		areaIDs,
 		linkToArea;
 
-	prepImage = function(img){
+	prepImage = function(img, opts){
 		if(typeof(img.attr('usemap')) === undefined)
 			return;
 
 		if (img.data('initialized')) {
 			// Re-initialization
-			getImageOptions(img);
 			getSize(img);
 			img.trigger('reInit.responsilight');
 		} else {
 			// Initial page load
 			$('<img />').on('load', function() {
-				getImageOptions(img);
+				var newOpts = getImageOptions(img, opts);
 				getImageMap(img);
 				getSize(img);
 				getNaturalSize(img);
 				wrapImage(img);
-				prepAreas(img);
-				imgEvents(img);
+				prepAreas(img, newOpts);
+				imgEvents(img, newOpts);
 				img.trigger('init.responsilight');
 			}).attr('src', img.attr('src'));
 		}
 	};
 
-	getImageOptions = function(img) {
+	getImageOptions = function(img, opts) {
 		var dataOpts = {},
 			fillColor = img.data('highlight-color'),
 			fillOpacity = img.data('highlight-opacity'),
@@ -480,7 +476,7 @@
 			});
 		}
 
-		opts = $.extend({}, $.fn.responsilight.defaults, opts, dataOpts);
+		return opts = $.extend({}, $.fn.responsilight.defaults, opts, dataOpts);
 	};
 
 	getImageMap = function(img) {
@@ -519,12 +515,12 @@
 		});
 	};
 
-	prepAreas = function(img) {
+	prepAreas = function(img, opts) {
 		var areas = img.data('info').areas;
 		areas.each(function(index){
-			areaEvents(img, $(this));
+			areaEvents(img, $(this), opts);
 			areaIDs(img, $(this), index);
-			areaDraw(img, $(this));
+			areaDraw(img, $(this), opts);
 		});
 	};
 
@@ -588,34 +584,32 @@
 	/* Responsilighter plugin */
 	/* ------------------------------------------- */
 
-	$.fn.responsilight = function (options) {
+	$.fn.extend({
+		responsilight: 	function (options) {
+			var $img = this;
 
-		var $img = this;
-
-		opts = options;
-
-		function responsilight_init(){
-			$img.each(function(){
-				prepImage($(this));
-			});
-		}
-
-		$(window).on('resize orientationchange', function() {
-			if (!resizing) {
-				resizing = true;
-				$(this).trigger('resizeStart.responsilight');
-				setTimeout(resizeDelay, 800);
+			function responsilight_init(){
+				$img.each(function(){
+					prepImage($(this), options);
+					return this;
+				});
 			}
-		});
 
-		$(window).on('resizeComplete.responsilight', function(){
+			$(window).on('resize orientationchange', function() {
+				if (!resizing) {
+					resizing = true;
+					$(this).trigger('resizeStart.responsilight');
+					setTimeout(resizeDelay, 800);
+				}
+			});
+
+			$(window).on('resizeComplete.responsilight', function(){
+				responsilight_init();
+			});
+
 			responsilight_init();
-		});
-
-		responsilight_init();
-
-		return this;
-	};
+		}
+	});
 
 	$.fn.responsilight.defaults = {
 		eventTrigger: 'click',

@@ -158,7 +158,8 @@
 	var showLightbox = function(container, area, e) {
 		var mapId, mapNo;
 		var info = $(area.attr('href'));
-		if (e.type === 'active') {
+		var currentLightbox = $('.featherlight');
+		if (e.type === 'active' && currentLightbox.length === 0) {
 			$.featherlight(info, {
 				afterContent: function(){
 					var content = $('.hotspot-info.featherlight-inner'),
@@ -182,6 +183,7 @@
 				afterClose: function() {
 					area.removeClass('active');
 					setTimeout(function(){area.trigger('blur')}, 100);
+					console.log(document.activeElement);
 				}
 			});
 		}

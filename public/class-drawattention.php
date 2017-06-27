@@ -316,10 +316,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since    1.0.0
 		 */
 		public function enqueue_scripts() {
-			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
+			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-imagesloaded', $this->plugin_slug . '-mobile-events' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-imagesloaded', plugins_url( 'assets/js/imagesloaded.pkg.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-qtip', plugins_url( 'assets/js/jquery.qtip.min.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-imagesloaded' ), self::VERSION, true );
+			wp_register_script( $this->plugin_slug . '-qtip', plugins_url( 'assets/js/jquery.qtip.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-mobile-events', plugins_url( 'assets/js/jquery.mobile-events.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
 
