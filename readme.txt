@@ -60,6 +60,15 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.8.3 =
+* Fixed: Creeping More Info box in Internet Explorer
+* Fixed: PHP Warning for user styles
+* Fixed: Bug that prevented shortcode from being used more than once on a page
+* Improved: Tap events on touch screens
+* Fixed: Disappearing hotspots in lightbox
+* Fixed: Unable to edit hotspots in Firefox
+* Fixed: Bootstrap conflict that kept lightboxes and tooltips from working
+
 = 1.8.2 =
 * Improved: Refactored image highlighting to be more performant
 * Added: Able to drag to re-order hotspots on an image
