@@ -114,6 +114,10 @@ class DrawAttention_Pro {
 			$settings['url_hotspots'] = array();
 		} else {
 			$settings['url_hotspots'] = array_filter($settings['hotspots'], function($var){
+				if ( empty( $var['action'] ) ) {
+					return false;
+				}
+				
 				return $var['action'] == 'url';
 			});
 			if ( count( $settings['hotspots'] ) == count( $settings['url_hotspots'] ) ) {
