@@ -183,7 +183,6 @@
 				afterClose: function() {
 					area.removeClass('active');
 					setTimeout(function(){area.trigger('blur')}, 100);
-					console.log(document.activeElement);
 				}
 			});
 		}
