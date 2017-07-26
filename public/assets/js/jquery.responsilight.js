@@ -272,6 +272,9 @@
 				img.addClass('responsilight-initialized');
 				linkToArea(img);
 				mapResize(img, opts);
+			})
+			.on('reInit.responsilight', function(){
+				mapResize(img, opts);
 			});
 
 		$(window)
