@@ -290,21 +290,25 @@
 		var trigger = opts.eventTrigger;
 
 		// Translate browser events to responsilight events
-		area.on('mouseover mouseout tapstart focus blur keypress', function(e){
+		area.on('mouseover click mouseout tapstart touchstart focus blur keypress', function(e){
 			var type = e.type;
 			switch(type) {
 				case 'tapstart':
 					mapOver(img, area, e, opts);
 					mapClick(img, area, e, opts);
 					break;
+				case 'touchstart':
+					mapOver(img, area, e, opts);
+					mapClick(img, area, e, opts);
+					break;
+				case 'mouseover':
+					mapOver(img, area, e, opts);
+					break;
 				case 'mouseout':
 					mapOut(img, area, e, opts);
 					break;
 				case 'blur':
 					mapOut(img, area, e, opts);
-					break;
-				case 'mouseover':
-					mapOver(img, area, e, opts);
 					break;
 				case 'focus':
 					mapOver(img, area, e, opts);
