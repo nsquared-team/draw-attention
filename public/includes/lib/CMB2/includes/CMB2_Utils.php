@@ -173,7 +173,9 @@ class CMB2_Utils {
 				cmb2_dir()
 			);
 		}
-
+		
+		$cmb2_url = str_replace( 'http//', 'http://', $cmb2_url );
+		
 		/**
 		 * Filter the CMB location url
 		 *
