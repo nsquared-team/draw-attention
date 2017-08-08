@@ -16,7 +16,19 @@
  * @return string        Directory with optional path appended
  */
 function cmb2_dir( $path = '' ) {
-	return CMB2_DIR . $path;
+	$cmb_path = CMB2_DIR;
+	if ( function_exists( 'wp_normalize_path' ) ) {
+		$path = wp_normalize_path( $cmb_path . $path );
+		return $path;
+	}
+	// Replace newer WP's version of wp_normalize_path.
+	$cmb_path = str_replace( '\\', '/', $cmb_path );
+	$cmb_path = preg_replace( '|(?<=.)/+|', '/', $cmb_path );
+	if ( ':' === substr( $cmb_path, 1, 1 ) ) {
+		$cmb_path = ucfirst( $cmb_path );
+	}
+	$cmb_path = trailingslashit( $cmb_path );
+	return $cmb_path . $path;
 }
 
 /**
