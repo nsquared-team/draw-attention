@@ -86,7 +86,6 @@ class DrawAttention_Pro {
 
 		// Enqueue CSS and Scripts
 		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
-		wp_enqueue_script( $this->parent->plugin_slug . '-mobile-events' );
 		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 
 		// Begin settings array
@@ -117,7 +116,7 @@ class DrawAttention_Pro {
 				if ( empty( $var['action'] ) ) {
 					return false;
 				}
-				
+
 				return $var['action'] == 'url';
 			});
 			if ( count( $settings['hotspots'] ) == count( $settings['url_hotspots'] ) ) {
