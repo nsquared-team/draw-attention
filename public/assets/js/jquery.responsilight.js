@@ -288,38 +288,28 @@
 
 	areaEvents = function(img, area, opts) {
 		var trigger = opts.eventTrigger;
-		var handled = false;
 
 		// Translate browser events to responsilight events
 		area.on('touchstart touchend mouseover mouseout mouseup mousedown blur focus keypress', function(e){
 			var type = e.type;
+			e.preventDefault();
 
 			switch(type) {
 				case 'touchstart':
-					handled = true;
 					mapOver(img, area, e, opts);
 					mapClick(img, area, e, opts);
 					break;
 				case 'mousedown':
-					if (!handled) {
-						if (opts.eventTrigger === 'hover') {
-							handled = true;
-						}
 						mapClick(img, area, e, opts);
-					}
-				 break;
-				case 'blur':
-					if (!handled) {
-						mapOut(img, area, e, opts);
-					}
 					break;
 				case 'focus':
-					if (!handled) {
 						mapOver(img, area, e, opts);
-					}
 					break;
 				case 'mouseover':
 					mapOver(img, area, e, opts);
+					break;
+				case 'blur':
+						mapOut(img, area, e, opts);
 					break;
 				case 'mouseout':
 					mapOut(img, area, e, opts);
@@ -332,8 +322,6 @@
 						mapClick(img, area, e, opts);
 					}
 					break;
-				default:
-					handled = false;
 			}
 		});
 	};
@@ -374,7 +362,7 @@
 	mapClick = function(img, area, e, opts) {
 		area.trigger('areaClick.responsilight');
 
-		if (opts.eventTrigger === 'hover' && e.type !== 'keypress' ) {
+		if (opts.eventTrigger === 'hover' && e.type !== 'touchstart' ) {
 			return;
 		}
 

@@ -182,7 +182,10 @@
 				},
 				afterClose: function() {
 					area.removeClass('active');
-					setTimeout(function(){area.trigger('blur')}, 100);
+					setTimeout(function(){
+						area.trigger('blur');
+						container.trigger('focus');
+					}, 100);
 				}
 			});
 		}
