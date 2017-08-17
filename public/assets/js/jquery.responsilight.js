@@ -288,18 +288,35 @@
 
 	areaEvents = function(img, area, opts) {
 		var trigger = opts.eventTrigger;
+		var handled = false;
 
 		// Translate browser events to responsilight events
-		area.on('mouseover click mouseout tapstart touchstart focus blur keypress', function(e){
+		area.on('touchstart touchend mouseover mouseout mouseup mousedown blur focus keypress', function(e){
 			var type = e.type;
+
 			switch(type) {
-				case 'tapstart':
+				case 'touchstart':
+					handled = true;
 					mapOver(img, area, e, opts);
 					mapClick(img, area, e, opts);
 					break;
-				case 'touchstart':
-					mapOver(img, area, e, opts);
-					mapClick(img, area, e, opts);
+				case 'mousedown':
+					if (!handled) {
+						if (opts.eventTrigger === 'hover') {
+							handled = true;
+						}
+						mapClick(img, area, e, opts);
+					}
+				 break;
+				case 'blur':
+					if (!handled) {
+						mapOut(img, area, e, opts);
+					}
+					break;
+				case 'focus':
+					if (!handled) {
+						mapOver(img, area, e, opts);
+					}
 					break;
 				case 'mouseover':
 					mapOver(img, area, e, opts);
@@ -307,15 +324,6 @@
 				case 'mouseout':
 					mapOut(img, area, e, opts);
 					break;
-				case 'blur':
-					mapOut(img, area, e, opts);
-					break;
-				case 'focus':
-					mapOver(img, area, e, opts);
-					break;
-				case 'click':
-				 mapClick(img, area, e, opts);
-				 break;
 				case 'keypress':
 					if (trigger === 'click') {
 						mapClick(img, area, e, opts);
@@ -324,6 +332,8 @@
 						mapClick(img, area, e, opts);
 					}
 					break;
+				default:
+					handled = false;
 			}
 		});
 	};
