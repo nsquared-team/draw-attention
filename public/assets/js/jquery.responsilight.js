@@ -329,10 +329,14 @@
 	mapOver = function(img, area, e, opts) {
 		area.trigger('over.responsilight');
 
-		area.data('canvasHover').addClass('canvas-show');
+		if (area.data('canvasHover')) {
+			area.data('canvasHover').addClass('canvas-show');
+		}
 
 		if (opts.alwaysVisible) {
-			area.data('canvasDisplay').removeClass('canvas-show');
+			if (area.data('canvasDisplay')) {
+				area.data('canvasDisplay').removeClass('canvas-show');
+			}
 		}
 
 		if (opts.eventTrigger === 'hover' && e.type !== 'touchstart') {
@@ -345,16 +349,24 @@
 		area.trigger('out.responsilight');
 
 		if (opts.eventTrigger === 'hover') {
-			area.data('canvasHover').removeClass('canvas-show');
+			if (area.data('canvasHover')) {
+				area.data('canvasHover').removeClass('canvas-show');
+			}
 			area.removeClass('active');
 			area.trigger('inactive.responsilight');
 			if (opts.alwaysVisible) {
-				area.data('canvasDisplay').addClass('canvas-show');
+				if (area.data('canvasDisplay')) {
+					area.data('canvasDisplay').addClass('canvas-show');
+				}
 			}
 		} else if (!area.hasClass('active')) {
-			area.data('canvasHover').removeClass('canvas-show');
+			if (area.data('canvasHover')) {
+				area.data('canvasHover').removeClass('canvas-show');
+			}
 			if (opts.alwaysVisible) {
-				area.data('canvasDisplay').addClass('canvas-show');
+				if (area.data('canvasDisplay')) {
+					area.data('canvasDisplay').addClass('canvas-show');
+				}
 			}
 		}
 	};
@@ -376,10 +388,11 @@
 
 		var oldActive = area.siblings('.active');
 		if (oldActive.length) {
-			oldActive
-				.removeClass('active')
-				.data('canvasHover').removeClass('canvas-show');
-			if (opts.alwaysVisible) {
+			oldActive.removeClass('active')
+			if (oldActive.data('canvasHover')) {
+				oldActive.data('canvasHover').removeClass('canvas-show');
+			}
+			if (opts.alwaysVisible && oldActive.data('canvasDisplay')) {
 				oldActive
 					.data('canvasDisplay').addClass('canvas-show');
 			}
@@ -387,7 +400,9 @@
 	};
 
 	showActiveArea = function(img, area) {
-		area.data('canvasHover').addClass('canvas-show');
+		if (area.data('canvasHover')) {
+			area.data('canvasHover').addClass('canvas-show');
+		}
 		area.trigger('active.responsilight');
 	};
 
