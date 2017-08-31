@@ -6,32 +6,40 @@ class DrawAttention_CustomFields {
 
 	function __construct( $parent ) {
 		$this->parent = $parent;
-		if ( !class_exists( 'CMB2' ) ) {
-			if ( file_exists(  __DIR__ .'/lib/cmb2/init.php' ) ) {
-				require_once  __DIR__ .'/lib/cmb2/init.php';
-			} elseif ( file_exists(  __DIR__ .'/lib/CMB2/init.php' ) ) {
-				require_once  __DIR__ .'/lib/CMB2/init.php';
+		add_action( 'init', array( $this, 'init' ), 1 );
+	}
+
+	function init() {
+		if ( !is_admin()
+		 || ( is_admin() && defined( 'DOING_AJAX' ) && DOING_AJAX )
+		 || is_admin() && !empty( $_GET['post'] ) && get_post_type( esc_attr( $_GET['post'] ) ) == 'da_image' ) {
+			if ( !class_exists( 'CMB2' ) ) {
+				if ( file_exists(  __DIR__ .'/lib/cmb2/init.php' ) ) {
+					require_once  __DIR__ .'/lib/cmb2/init.php';
+				} elseif ( file_exists(  __DIR__ .'/lib/CMB2/init.php' ) ) {
+					require_once  __DIR__ .'/lib/CMB2/init.php';
+				}
 			}
+			if ( !class_exists( 'cmb2_bootstrap_208', false ) ) return;
+
+			include_once __DIR__ . '/actions/action.php';
+			include_once __DIR__ . '/actions/action-url.php';
+			$this->actions['url'] = new DrawAttention_URL_Action();
+
+			add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
+			add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
+
+			add_action( 'cmb2_render_opacity', array( $this, 'cmb2_render_opacity' ), 10, 5 );
+			add_filter( 'cmb2_sanitize_opacity', array( $this, 'cmb2_sanitize_opacity' ) );
+
+			// add_action( 'add_meta_boxes', array( $this, 'add_hotspot_area_details_table_metabox' ) );
+			add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 4 );
+			add_action( 'wp_ajax_hotspot_update_custom_fields', array( $this, 'update_hotspot_area_details' ) );
+
+			add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
+			add_filter( 'cmb2_meta_boxes', array( $this, 'moreinfo_metabox' ) );
+			add_filter( 'cmb2_meta_boxes', array( $this, 'hotspot_area_group_details_metabox' ), 11 );
 		}
-		if ( !class_exists( 'cmb2_bootstrap_208', false ) ) return;
-
-		include_once __DIR__ . '/actions/action.php';
-		include_once __DIR__ . '/actions/action-url.php';
-		$this->actions['url'] = new DrawAttention_URL_Action();
-
-		add_action( 'cmb2_render_text_number', array( $this, 'cmb2_render_text_number' ), 10, 5 );
-		add_filter( 'cmb2_sanitize_text_number', array( $this, 'cmb2_sanitize_text_number' ), 10, 5 );
-
-		add_action( 'cmb2_render_opacity', array( $this, 'cmb2_render_opacity' ), 10, 5 );
-		add_filter( 'cmb2_sanitize_opacity', array( $this, 'cmb2_sanitize_opacity' ) );
-
-		// add_action( 'add_meta_boxes', array( $this, 'add_hotspot_area_details_table_metabox' ) );
-		add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 4 );
-		add_action( 'wp_ajax_hotspot_update_custom_fields', array( $this, 'update_hotspot_area_details' ) );
-
-		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
-		add_filter( 'cmb2_meta_boxes', array( $this, 'moreinfo_metabox' ) );
-		add_filter( 'cmb2_meta_boxes', array( $this, 'hotspot_area_group_details_metabox' ), 11 );
 	}
 
 	function cmb2_render_text_number( $field_object, $escaped_value, $object_id, $object_type, $field_type_object ) {
