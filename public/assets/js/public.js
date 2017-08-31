@@ -253,6 +253,18 @@
 
 		var containers = $('.hotspots-container');
 
+		// Follow URLs for touch screens
+		containers.find('area.url-area').off('active.responsilight').on('active.responsilight', function(e){
+			var link = $(this),
+				href = link.attr('href'),
+				target = link.attr('target');
+
+			if (target == '_new') {
+				window.open(href, target);
+			} else {
+				window.location = href;
+			}
+		});
 		// Show tooltips for URL areas
 		containers.find('area.url-area').each(function(){
 			showUrlTooltip($(this));
