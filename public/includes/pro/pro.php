@@ -141,6 +141,9 @@ class DrawAttention_Pro {
 		$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->parent->custom_fields->prefix.'image_background_color'][0] : '#efefef';
 
 		// Create default style
+		if ( empty( $settings['styles'] ) ) {
+			$settings['styles'] = array();
+		}
 		$settings['styles'][] = array(
 			'title' => 'default',
 			'map_highlight_color' => $settings['img_settings'][$this->parent->custom_fields->prefix.'map_highlight_color'][0],
