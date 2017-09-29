@@ -550,7 +550,7 @@
 		 * @return string
 		 */
 		public function modify_admin_body_class($classes){
-			if ($this->wordpress_version >= 38){ $classes .= 'wp38'; }
+			if ($this->wordpress_version >= 38){ $classes .= ' wp38'; }
 			return $classes;
 		}
 
