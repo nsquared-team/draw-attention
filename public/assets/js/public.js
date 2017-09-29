@@ -317,6 +317,11 @@
 				hotspots.init();
 			}, 1000);
 		});
+		$('.vc_tta-tabs-container').on('click', '.vc_tta-tab', function(){
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
 	};
 
 
