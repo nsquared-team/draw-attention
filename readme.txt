@@ -86,19 +86,19 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 == Changelog ==
 
 = 1.6.10 =
-Fixed: Conflict with Ninja Forms that prevented users from being able to use the Ninja Forms WYSIWYG editor (Thanks Ninja Forms team!)
-Fixed: Handle error when 'Go to URL' is selected but no URL is entered
-Fixed: Undefined index error
+* Fixed: Conflict with Ninja Forms that prevented users from being able to use the Ninja Forms WYSIWYG editor (Thanks Ninja Forms team!)
+* Fixed: Handle error when 'Go to URL' is selected but no URL is entered
+* Fixed: Undefined index error
 
 = 1.6.9 =
-Improved: Support for WP 4.8.x
+* Improved: Support for WP 4.8.x
 
 = 1.6.8 =
-Fixed: Strict PHP Notice when saving
-Fixed: Missing detail images on some server environments
+* Fixed: Strict PHP Notice when saving
+* Fixed: Missing detail images on some server environments
 
 = 1.6.7 =
-Fixed: Edge case with missing detail image ID
+* Fixed: Edge case with missing detail image ID
 
 = 1.6.6 =
 * New: Added troubleshooting note for admins when there's a theme or plugin conflict
