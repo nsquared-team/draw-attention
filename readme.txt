@@ -60,6 +60,14 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.8.5 =
+* Fixed: Undefined index notice
+* Fixed: Handle error when 'Go to URL' is selected but no URL is entered
+* Fixed: Conflict with Ninja Forms that prevented users from being able to use the Ninja Forms WYSIWYG editor (Thanks Ninja Forms team!)
+* Improved: Compatibility with Visual Composer tabs
+* Fixed: URL hotspots not opening on mobile browsers
+* Fixed: PHP 7.1 type error
+
 = 1.8.4 =
 * Fixed: Browser compatibility
 * Improved: Mobile event handling
