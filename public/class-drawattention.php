@@ -470,6 +470,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 					$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
 
+					$href = ( ! empty($href) ) ? $href : '#';
+
 					$coords = $hotspot['coordinates'];
 					if ( empty( $hotspot['title'] ) ) {
 						$hotspot['title'] = '';
