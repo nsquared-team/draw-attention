@@ -85,6 +85,11 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.10 =
+Fixed: Conflict with Ninja Forms that prevented users from being able to use the Ninja Forms WYSIWYG editor (Thanks Ninja Forms team!)
+Fixed: Handle error when 'Go to URL' is selected but no URL is entered
+Fixed: Undefined index error
+
 = 1.6.9 =
 Improved: Support for WP 4.8.x
 
