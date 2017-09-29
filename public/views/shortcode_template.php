@@ -57,6 +57,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 					$target_url = !empty( $hotspot['action-url-url'] ) ? $hotspot['action-url-url'] : '';
 					$area_class = $target == 'url' ? 'url-area' : 'more-info-area';
 					$href = $target == 'url' ? $target_url : '#hotspot-' . $settings['spot_id'] . '-' . $key;
+					$href = !empty($href) ? $href : '#';
 					$title = !empty( $hotspot['title'] ) ? $hotspot['title'] : '';
 					if ( empty( $hotspot['description'] ) ) {
 						$hotspot['description'] = '';
