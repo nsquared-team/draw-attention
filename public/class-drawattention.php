@@ -99,6 +99,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			add_filter( 'jetpack_photon_skip_image', array ($this, 'jetpack_photon_skip_image' ), 10, 3 );
 
+			add_filter( 'cmb2_meta_box_url', array( $this, 'cmb2_meta_box_url' ) );
+
 		/**
 		 * @TODO - Uncomment requried features
 		 *
@@ -346,6 +348,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				</p>";
 				echo"<div class=\"$class\"> <p>$message</p></div>";
 			}
+		}
+
+		public function cmb2_meta_box_url( $url ) {
+			$url = self::get_plugin_url().'/public/includes/lib/CMB2/';
+			return $url;
 		}
 
 		public function jetpack_photon_skip_image( $val, $src, $tag ) {
