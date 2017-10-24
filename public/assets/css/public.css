@@ -31,8 +31,8 @@
 }
 /* line 25, ../sass/public.scss */
 .hotspots-placeholder > div.visible {
-  height: auto;
-  opacity: 1;
+  height: auto !important;
+  opacity: 1 !important;
   -moz-transition: all 200ms;
   -o-transition: all 200ms;
   -webkit-transition: all 200ms;

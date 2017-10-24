@@ -204,9 +204,11 @@
 
 		var oldContent = content.children('.visible');
 
+		console.log(oldContent);
+
 		oldContent.removeClass('visible');
-		content.children().removeClass('visible').end().append(info);
-		info.removeClass('da-hidden').addClass('visible');
+		content.children().removeClass('visible');
+		info.removeClass('da-hidden').addClass('visible').appendTo(content);
 	}
 
 
