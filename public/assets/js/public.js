@@ -261,8 +261,14 @@
 				href = link.attr('href'),
 				target = link.attr('target');
 
-			if (target == '_new') {
-				window.open(href, target);
+			var ua = window.navigator.userAgent,
+				isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
+				isWebkit = !!ua.match(/WebKit/i),
+				isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
+
+
+			if (target == '_new' && !isMobileSafari) {
+				window.open(href, '_blank');
 			} else {
 				window.location = href;
 			}
