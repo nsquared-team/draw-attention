@@ -5,6 +5,7 @@
 	/* ------------------------------------------- */
 
 	var resizing = false;
+	jQuery.event.props.push("touches"); // Pass touches through to jQuery event for special handling
 
 	/* ------------------------------------------- */
 	/* Browser support checking */
@@ -288,37 +289,54 @@
 
 	areaEvents = function(img, area, opts) {
 		var trigger = opts.eventTrigger;
+		var moved = false
 
 		// Translate browser events to responsilight events
-		area.on('touchstart touchend mouseover mouseout mouseup mousedown blur focus keypress', function(e){
+		area.on('touchstart touchend touchmove mouseover mouseout mouseup mousedown blur focus keypress', function(e){
 			var type = e.type;
-			e.preventDefault();
 
 			switch(type) {
 				case 'touchstart':
+					moved = false;
+					break;
+				case 'touchmove':
+					moved = true;
+					break;
+				case 'touchend':
+					if (moved) {
+						return;
+					}
+					e.preventDefault();
 					mapOver(img, area, e, opts);
 					mapClick(img, area, e, opts);
 					break;
 				case 'mousedown':
-						mapClick(img, area, e, opts);
+					e.preventDefault();
+					mapClick(img, area, e, opts);
 					break;
 				case 'focus':
-						mapOver(img, area, e, opts);
+					e.preventDefault();
+					mapOver(img, area, e, opts);
 					break;
 				case 'mouseover':
+					e.preventDefault();
 					mapOver(img, area, e, opts);
 					break;
 				case 'blur':
-						mapOut(img, area, e, opts);
+					e.preventDefault();
+					mapOut(img, area, e, opts);
 					break;
 				case 'mouseout':
+					e.preventDefault();
 					mapOut(img, area, e, opts);
 					break;
 				case 'keypress':
 					if (trigger === 'click') {
+						e.preventDefault();
 						mapClick(img, area, e, opts);
 					}
 					if (e.which === 13) {
+						e.preventDefault();
 						mapClick(img, area, e, opts);
 					}
 					break;
