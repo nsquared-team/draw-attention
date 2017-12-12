@@ -277,40 +277,61 @@
 	};
 
 	imageEvents = function(img, map) {
+		var moved = false;
+
 		map.find('area').each(function(){
 			var $this = $(this),
 				action = $this.data('action'),
 				trigger = opts.eventTrigger;
 
-			$this.on('mouseover touchstart mouseout touchend click focus blur keypress', function(e){
+			$this.on('touchstart touchend touchmove mouseover mouseout mouseup mousedown blur focus keypress click', function(e){
 				var type = e.type;
-				e.preventDefault();
 
 				switch(type) {
 					case 'touchstart':
+						moved = false;
+						break;
+					case 'touchmove':
+						moved = true;
+						break;
+					case 'touchend':
+						if (moved) {
+							return;
+						}
+						e.preventDefault();
 						mapOver($this, img, type);
 						mapClick($this, img);
 						break;
-					case 'touchend':
-						// mapOut($this,img);
-						break;
-					case 'mouseout':
-					case 'blur':
-						mapOut($this,img);
-						break;
-					case 'mouseover':
+					case 'mousedown':
+						e.preventDefault();
+						mapClick($this, img);
 					case 'focus':
 						mapOver($this, img);
 						break;
-					case 'click':
+					case 'mouseover':
+						e.preventDefault();
+						mapOver($this, img);
+						break;
+					case 'blur':
+						e.preventDefault();
+						mapOut($this,img);
+						break;
+					case 'mouseout':
+						e.preventDefault();
+						mapOut($this,img);
+						break;
 					case 'keypress':
 						if(trigger == 'click') {
+							e.preventDefault();
 							mapClick($this, img);
 						}
 						if (e.which === 13) {
+							e.preventDefault();
 							mapClick($this, img);
 						}
 						break;
+					case 'click':
+						e.preventDefault();
 				}
 			});
 		});
@@ -321,7 +342,9 @@
 
 		if (hash) {
 			var area = map.find('area[href="' + hash + '"]');
+
 			if ( area.length ) {
+				area = area.first();
 				var imgTop = img.offset().top,
 					coords = area.attr('coords').split(','),
 					yCoords = [];
