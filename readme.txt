@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.8.1
-Stable tag: 1.6.10
+Stable tag: 1.6.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 5.
 
 == Changelog ==
+
+= 1.6.11 =
+* Improved: Moved wpautop() on description text to a filter 'da_description'
 
 = 1.6.10 =
 * Fixed: Conflict with Ninja Forms that prevented users from being able to use the Ninja Forms WYSIWYG editor (Thanks Ninja Forms team!)
