@@ -1,13 +1,13 @@
-=== Draw Attention ===
+=== Interactive Images Draw Attention ===
 Contributors: tylerdigital, nataliemac, croixhaug
-Tags: interactive images, image maps, highlightable areas, highlight images, product images, conferences, conventions, trade shows, floor plans, virtual tour, call to action, real estate, responsive, responsive image map, infographic
+Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 4.9
 Stable tag: 1.6.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images in WordPress. Perfect for floor plans, trade shows, group photos, product features, and annotated image tutorials.
+Create interactive images in WordPress. Perfect for floor plans and real estate photos, trade show booths, group photos, product features, annotated image tutorials, or any image map.
 
 == Description ==
 
@@ -47,6 +47,14 @@ Show more info about highlighted map areas in a variety of different layouts, in
 
 ### 20 Pre-Defined Color Palettes (Pro only) ###
 Choose from one of 20 pre-defined color palettes or use your own custom color scheme
+
+### What could you make with Draw Attention? ###
+* Showcase real estate or a new property development. Give your visitors a virtual tour where they can explore floor plans and photos
+* Sell booths to exhibitors at your tradeshow/conference by showing them a map of the trade show floor
+* Make a product tour or great help documentation - explain your product by highlighting features in a visual way
+* Interactive infographic - callout important areas on your infographic and show more information
+* If you're familiar with HTML image maps, we help you make those in a modern way that's compatible with today's devices & browsers
+
 
 == Installation ==
 
