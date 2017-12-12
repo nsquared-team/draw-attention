@@ -77,6 +77,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since     1.0.0
 		 */
 		private function __construct() {
+			add_filter( 'da_description', 'wpautop' );
 
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
@@ -449,7 +450,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
 				$info_html .=      '<div class="hotspot-initial">';
 				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? wpautop( do_shortcode( $wp_embed->run_shortcode( $settings[$this->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
+				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? apply_filters( 'da_description', do_shortcode( $wp_embed->run_shortcode( $settings[$this->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
 				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
 				$info_html .=      '</div>';
 				$info_html .=    '</div>';
@@ -528,7 +529,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 						$html .=  '<img src="' . $hotspot[ 'detail_image' ] . '"/>';
 						$html .=  '</div>';
 					}
-					$description_html = ( !empty( $hotspot['description'] ) ) ? wpautop( do_shortcode ( $wp_embed->run_shortcode( $hotspot['description'] ) ) ) : '';
+					$description_html = ( !empty( $hotspot['description'] ) ) ? apply_filters( 'da_description', do_shortcode ( $wp_embed->run_shortcode( $hotspot['description'] ) ) ) : '';
 					$html .=    '<div class="hotspot-content">' . $description_html . '</div>';
 					$html .=  '</div>';
 				}
