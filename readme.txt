@@ -93,6 +93,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.6.12 =
+* Improved: Mobile scrolling over active hotspots
+
 = 1.6.11 =
 * Improved: Moved wpautop() on description text to a filter 'da_description'
 
