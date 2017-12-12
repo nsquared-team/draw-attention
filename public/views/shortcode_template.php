@@ -62,7 +62,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 					if ( empty( $hotspot['description'] ) ) {
 						$hotspot['description'] = '';
 					}
-					if ( empty( $settings['img_settings']['_da_has_multiple_styles']['0'] ) || $settings['img_settings']['_da_has_multiple_styles']['0'] != 'on' ) {
+					if ( empty( $settings['img_settings']['_da_has_multiple_styles']['0'] ) || $settings['img_settings']['_da_has_multiple_styles']['0'] != 'on' || empty( $hotspot['style'] ) ) {
 						$color_scheme = '';
 					} else {
 						$color_scheme = $hotspot['style'];
