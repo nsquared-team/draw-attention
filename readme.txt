@@ -60,6 +60,13 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Changelog ==
 
+= 1.8.6 =
+* Improved: Mobile scrolling over active hotspots
+* Improved: Moved wpautop() on description text to a filter 'da_description'
+* Fixed: Undefined index errors for title and style
+* Fixed: Mobile Safari cannot open links in new window (security). Detect Mobile Safari and open links in same window.
+* Fixed: Internet Explorer display bugs for more info area
+
 = 1.8.5 =
 * Fixed: Undefined index notice
 * Fixed: Handle error when 'Go to URL' is selected but no URL is entered
