@@ -75,6 +75,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since     1.0.0
 		 */
 		private function __construct() {
+			add_filter( 'da_description', 'wpautop' );
 
 			// Load plugin text domain
 			add_action( 'init', array( $this, 'load_plugin_textdomain' ) );

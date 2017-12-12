@@ -6,7 +6,7 @@
 			</h2>
 			<div class="hotspot-content">
 				<?php if ( !empty( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) : ?>
-				<?php echo wpautop( do_shortcode( $wp_embed->run_shortcode( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) ); ?>
+				<?php echo apply_filters( 'da_description', do_shortcode( $wp_embed->run_shortcode( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_more_info'][0] ) ) ); ?>
 				<?php endif; ?>
 			</div>
 		</div>
