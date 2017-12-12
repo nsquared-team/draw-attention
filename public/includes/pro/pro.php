@@ -156,6 +156,10 @@ class DrawAttention_Pro {
 		// Create formatted array of styles
 		$formatted_styles = array();
 		foreach ($settings['styles'] as $key => $style) {
+			if ( empty( $style['title'] ) ) {
+				$style['title'] = 'Custom';
+			}
+			
 			$style_slug = array_search($style['title'], $map_style_names_to_titles);
 			$new_style = array(
 				'name' => $style_slug ? $style_slug : $style['title'],
