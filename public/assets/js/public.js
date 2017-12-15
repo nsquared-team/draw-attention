@@ -247,6 +247,60 @@
 		});
 	};
 
+	/* Link to an area */
+	var linkToArea = function(){
+		var hash = window.location.hash,
+			area = null;
+
+		if (!hash) return;
+
+		if (hash) {
+			area = $('area[href="' + hash + '"]');
+		}
+
+		if (!area.length) return;
+
+		area.trigger('focus');
+		area.trigger('mousedown');
+
+		/* Calculate where the image and area are on the page */
+		var map = area.parents('map'),
+			mapRef = map.attr('name'),
+			img = $('img[usemap="#' + mapRef + '"]'),
+			imgTop = img.offset().top,
+			coords = area.attr('coords').split(','),
+			yCoords = [];
+
+		for (var i=0; i<coords.length; i++) {
+			if (i%2 != 0) {
+				yCoords.push(coords[i]);
+			}
+		}
+
+		var areaImgTop  = Math.min.apply(Math, yCoords),
+			areaImgBottom = Math.max.apply(Math, yCoords),
+			windowHeight = $(window).height(),
+			windowBottom = imgTop + windowHeight,
+			areaBottom = imgTop + areaImgBottom,
+			areaTop = imgTop + areaImgTop,
+			padding = 50,
+			scrollCoord;
+
+		// Scroll to the area to be sure it's in the view
+		if (areaBottom > windowBottom) {
+			scrollCoord = imgTop + (areaBottom - windowBottom) + padding;
+			if ((areaBottom - areaTop) > windowHeight) {
+				scrollCoord = areaTop - padding;
+			}
+		} else {
+			scrollCoord = imgTop - padding;
+		}
+
+		setTimeout(function(){
+			window.scrollTo(0, scrollCoord);
+		}, 1);
+	}
+
 
 	/* Set up the information update when interacting with the image */
 	var daInitialize = function(){
@@ -295,6 +349,7 @@
 				infoboxSetup(container.find('area.more-info-area'), container);
 			}
 		});
+		linkToArea();
 	};
 
 

@@ -271,7 +271,6 @@
 			.on('init.responsilight', function(){
 				img.data('initialized', true);
 				img.addClass('responsilight-initialized');
-				linkToArea(img);
 				mapResize(img, opts);
 			})
 			.on('reInit.responsilight', function(){
@@ -435,8 +434,7 @@
 		getNaturalSize,
 		wrapImage,
 		prepAreas,
-		areaIDs,
-		linkToArea;
+		areaIDs;
 
 	prepImage = function(img, opts){
 		if(typeof(img.attr('usemap')) === undefined)
@@ -565,57 +563,6 @@
 	areaIDs = function(img, area, index) {
 		var mapName = img.data('info').mapName;
 		area.attr('id', mapName + '-area-' + index);
-	};
-
-	linkToArea = function(img) {
-		var hash = window.location.hash,
-			map = img.data('info').map,
-			area;
-		if (hash) {
-			area = map.find('area[href="' + hash + '"]');
-		} else {
-			return;
-		}
-
-		if (!area.length) {
-			return;
-		}
-
-		area.addClass('active');
-		showActiveArea(img, area);
-
-		var imgTop = img.offset().top,
-			coords = area.attr('coords').split(','),
-			yCoords = [];
-
-		for (var i=0; i<coords.length; i++) {
-			if (i%2 != 0) {
-				yCoords.push(coords[i]);
-			}
-		}
-
-		var areaImgTop  = Math.min.apply(Math, yCoords),
-			areaImgBottom = Math.max.apply(Math, yCoords),
-			windowHeight = $(window).height(),
-			windowBottom = imgTop + windowHeight,
-			areaBottom = imgTop + areaImgBottom,
-			areaTop = imgTop + areaImgTop,
-			padding = 50,
-			scrollCoord;
-
-		if (areaBottom > windowBottom) {
-			scrollCoord = imgTop + (areaBottom - windowBottom) + padding;
-			if ((areaBottom - areaTop) > windowHeight) {
-				scrollCoord = areaTop - padding;
-			}
-		} else {
-			scrollCoord = imgTop - padding;
-		}
-
-		setTimeout(function(){
-			window.scrollTo(0, scrollCoord);
-		}, 1);
-
 	};
 
 	/* ------------------------------------------- */
