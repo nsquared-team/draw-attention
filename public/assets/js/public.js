@@ -304,6 +304,11 @@
 
 	/* Set up the information update when interacting with the image */
 	var daInitialize = function(){
+		var ua = window.navigator.userAgent,
+			isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
+			isWebkit = !!ua.match(/WebKit/i),
+			isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
+
 		$('.da-error').hide();
 		$('.hotspot-info').addClass('da-hidden');
 
@@ -315,10 +320,6 @@
 				href = link.attr('href'),
 				target = link.attr('target');
 
-			var ua = window.navigator.userAgent,
-				isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
-				isWebkit = !!ua.match(/WebKit/i),
-				isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
 
 
 			if (target == '_new' && !isMobileSafari) {
@@ -350,6 +351,14 @@
 			}
 		});
 		linkToArea();
+
+		if (isMobileSafari) {
+			window.onpageshow = function(event){
+				if (event.persisted) {
+					window.location.reload();
+				}
+			};
+		}
 	};
 
 
