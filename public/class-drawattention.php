@@ -357,8 +357,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 		public function jetpack_photon_skip_image( $val, $src, $tag ) {
-			if ( in_array( $src, $this->photon_excluded_images ) ) {
-				return true;
+			foreach ($this->photon_excluded_images as $key => $photon_excluded_image) {
+				if ( strpos( $src, $photon_excluded_image ) !== false ) {
+					return true;
+				}
 			}
 
 			return $val;
