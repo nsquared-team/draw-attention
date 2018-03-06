@@ -25,7 +25,9 @@
 			a = document.createElement("x");
 			a.style.cssText = "pointer-events:auto;";
 
-		if (window.PointerEvent) {
+		if (!!navigator.userAgent.match(/Trident\/7\./)) { // IE 11 support is not reliable
+			supports = false;
+		} else if (window.PointerEvent) {
 			supports = true;
 		} else if (a.style.pointerEvents === 'auto') {
 			supports = true;
