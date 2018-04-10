@@ -144,7 +144,7 @@ class DrawAttention_ImportExport {
 					$export_ids = array_map( 'esc_attr', $export_ids );
 					$export_json = $this->get_export_json( $export_ids );
 					?>
-					<textarea disabled="disabled" cols="100" rows="20"><?php echo $export_json; ?></textarea>
+					<textarea cols="100" rows="20"><?php echo $export_json; ?></textarea>
 				<?php endif ?>
 			<?php endif ?>
 		</div>
