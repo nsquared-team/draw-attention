@@ -104,7 +104,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 					</div>
 				<?php endif; ?>
 				<div class="hotspot-content">
-					<?php echo apply_filters( 'da_description', do_shortcode( $wp_embed->run_shortcode( $hotspot['description'] ) ) ); ?>
+					<?php if( !empty( $hotspot['description'] ) ) echo apply_filters( 'da_description', do_shortcode( $wp_embed->run_shortcode( $hotspot['description'] ) ) ); ?>
 				</div>
 			</div>
 		<?php endforeach; ?>

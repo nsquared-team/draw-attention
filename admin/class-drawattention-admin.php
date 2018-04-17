@@ -302,7 +302,12 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				return;
 			}
 
-			update_post_meta( $post_id, '_da_hotspots_json', json_encode( $cmb_object->data_to_save['_da_hotspots'] ) );
+			if ( empty( $cmb_object->data_to_save['_da_hotspots'] ) ) {
+				$da_hotspots = array();
+			} else {
+				$da_hotspots = $cmb_object->data_to_save['_da_hotspots'];
+			}
+			update_post_meta( $post_id, '_da_hotspots_json', json_encode( $da_hotspots ) );
 		}
 
 		public function load_from_hotspots_json() {
