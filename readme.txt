@@ -30,7 +30,7 @@ Highlight different areas of your image when your site visitor moves their mouse
 Easy to draw the highlightable areas of your image - and easy to edit the shapes later too!
 
 ### More Info on Click ###
-When a highlighted area is clicked, show more information.
+When a highlighted area is clicked, show more information. Great to highlight points of interest on your image.
 
 ### Go to a URL ###
 Optionally send a site visitor to another URL when clicking a highlightable area of the image map.
@@ -50,9 +50,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 ### What could you make with Draw Attention? ###
 * Showcase real estate or a new property development. Give your visitors a virtual tour where they can explore floor plans and photos
-* Sell booths to exhibitors at your tradeshow/conference by showing them a map of the trade show floor
+* Sell booths to exhibitors at your tradeshow/conference by showing them an interactive map of the trade show floor
 * Make a product tour or great help documentation - explain your product by highlighting features in a visual way
-* Interactive infographic - callout important areas on your infographic and show more information
+* Interactive infographic - callout important areas on your infographic and show more information about those points of interest
 * If you're familiar with HTML image maps, we help you make those in a modern way that's compatible with today's devices & browsers
 
 
