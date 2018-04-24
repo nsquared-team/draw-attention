@@ -84,6 +84,12 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 - 20 preset color schemes
 - Custom layout options (change position of more info box or use a lightbox or a tooltip)
 
+= Where can I find documentation and learn how to use the plugin? =
+We have tutorials, videos and other helpful information on the [Draw Attention website](https://wpdrawattention.com)
+
+= How do I draw my first image? =
+We have a video walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/document/create-your-first-draw-attention-image/).
+
 == Screenshots ==
 1. Draw your highlightable areas right in the dasbhoard
 2. Site visitors can click to learn more about your highlighted areas
