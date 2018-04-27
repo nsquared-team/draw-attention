@@ -92,7 +92,12 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 
 		<?php /* Loop through the hotspots and output the more info content for each */
 		foreach( $settings['hotspots'] as $key => $hotspot ) : ?>
-			<div class="hotspot-info" id="hotspot-<?php echo $settings['spot_id']; ?>-<?php echo $key; ?>">
+			<?php if ( empty( $settings['img_settings']['_da_has_multiple_styles']['0'] ) || $settings['img_settings']['_da_has_multiple_styles']['0'] != 'on' || empty( $hotspot['style'] ) ) {
+				$color_scheme_class = '';
+			} else {
+				$color_scheme_class = 'da-style-' . $hotspot['style'];
+			} ?>
+			<div class="hotspot-info <?php echo $color_scheme_class; ?>" id="hotspot-<?php echo $settings['spot_id']; ?>-<?php echo $key; ?>">
 				<?php echo apply_filters( 'drawattention_hotspot_title', '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>', $hotspot ); ?>
 				<?php if ( !empty($hotspot['detail_image_id'])) : ?>
 					<div class="hotspot-thumb">
