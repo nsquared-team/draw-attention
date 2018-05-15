@@ -4,8 +4,17 @@
 	var hotspots = 20;
 
 	/* Enable drawing hotspots on the full-size image */
-	var canvasDraw = function() {
-		$('input[data-image-url]').canvasAreaDraw();
+	var canvasDraw = function(container) {
+		canvasDestroy(container);
+		var input = container.find('input[data-image-url]');
+		input.canvasAreaDraw();
+	}
+
+	/* Destroy canvas drawing hotspots */
+	var canvasDestroy = function(container) {
+		var input = container.find('input[data-image-url]');
+		input.off();
+		input.siblings().remove();
 	}
 
 	/* Only allow one hotspot editing area to be open at one time. Close them all on page load */
@@ -14,14 +23,17 @@
 			var $this = $(this),
 				parent = $this.closest('.cmb-row'),
 				areas = parent.siblings('.cmb-repeatable-grouping').addClass('closed');
+				canvasDestroy(areas);
 		});
 
-		$('#field_group').on('click', '.cmbhandle', function() {
+		$('#field_group').on('click', '.cmb-group-title, .cmbhandle', function(event) {
 			var $this = $(event.target),
 				parent = $this.closest('.cmb-row');
 
 			if (!parent.hasClass('closed')) {
 				var areas = parent.siblings('.cmb-repeatable-grouping').addClass('closed');
+				canvasDestroy(areas);
+				canvasDraw(parent);
 			}
 		});
 
@@ -189,7 +201,6 @@
 
 
 	hotspotAdmin.init = function() {
-		canvasDraw();
 		accordion();
 		hotspotNames();
 		hotspotCloning();
