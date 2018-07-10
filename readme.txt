@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.8
-Stable tag: 1.8.7
+Stable tag: 1.8.9
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -59,6 +59,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 4. Activate the plugin in the Plugin dashboard
 
 == Changelog ==
+
+= 1.8.9 =
+* Fixed: Incompatibility with Jetpack Lazy Load image feature
 
 = 1.8.7 =
 * Fixed: Unable to copy the export code for images in some browsers
