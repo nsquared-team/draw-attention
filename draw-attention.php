@@ -7,11 +7,11 @@
 @copyright 2015 Tyler Digital
 @wordpress-plugin
 Plugin Name:       Draw Attention
-Plugin URI:        http://wpdrawattention.com
+Plugin URI:        https://wpdrawattention.com
 Description:       Create interactive images in WordPress
 Version:           1.7.1
-Author:            Tyler Digital & Purple Pen Productions
-Author URI:        http://wpdrawattention.com
+Author:            N Squared
+Author URI:        https://nsqua.red
 Text Domain:       drawattention
 License:           GPL-2.0+
 License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
