@@ -4,7 +4,7 @@
 		height="<?php echo $settings['img_height']; ?>"
 		src="<?php echo $settings['img_url']; ?>"
 		alt="<?php echo $settings['img_alt']; ?>"
-		class="hotspots-image"
+		class="hotspots-image skip-lazy"
 		usemap="#hotspots-image-<?php echo $settings['image_id']; ?>"
 		data-event-trigger="<?php echo $settings['event_trigger']; ?>"
 		data-always-visible="<?php echo $settings['always_visible']; ?>"
