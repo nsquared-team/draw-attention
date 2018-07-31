@@ -31,7 +31,7 @@
 				}
 			},
 			style: {
-				classes: 'qtip-da-custom tip-title-only'
+				classes: 'qtip-da-custom tip-title-only qtip-da-hover'
 			},
 			events: {
 				render: function(event, api) {
@@ -90,6 +90,11 @@
 				}
 			}
 		};
+
+		/* style hover-only tooltip */
+		if (container.hasClass('event-hover')) {
+			qtipSettings.style.classes = 'qtip-da-custom qtip-da-hover';
+		}
 
 		/* qtip settings for small screens */
 		if (tooSmall) {

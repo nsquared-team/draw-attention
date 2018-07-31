@@ -275,9 +275,11 @@ canvas.canvas-hover {
 	max-width: 280px;
 	min-width: 50px;
 	padding: 0;
-	pointer-events: none;
 	position: absolute;
 	top: -28000px;
+	&.qtip-da-hover {
+		pointer-events: none;
+	}
 }
 
 .qtip-content {
