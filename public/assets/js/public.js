@@ -81,7 +81,9 @@
 				hide: function(event, api) {
 					var mapId = container.attr('id');
 					area.removeClass('active');
-					area.data('canvasHover').removeClass('canvas-show');
+					if (area.data('canvasHover') && area.data('canvasHover').length) {
+						area.data('canvasHover').removeClass('canvas-show');
+					}
 					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
 						area.data('canvasDisplay').addClass('canvas-show');
 					}
