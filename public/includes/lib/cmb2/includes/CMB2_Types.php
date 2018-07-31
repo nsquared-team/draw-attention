@@ -185,6 +185,13 @@ class CMB2_Types {
 			if ( ! $excluded && ! $empty ) {
 				// if data attribute, use single quote wraps, else double
 				$quotes = false !== stripos( $attr, 'data-' ) ? "'" : '"';
+				if ( is_array( $val ) ) {
+					if ( empty( $val ) ) {
+						$val = '';
+					} else {
+						$val = md5( json_encode( $val ) );
+					}
+				}
 				$attributes .= sprintf( ' %1$s=%3$s%2$s%3$s', $attr, $val, $quotes );
 			}
 		}
@@ -494,6 +501,9 @@ class CMB2_Types {
 			'options' => $this->field->options(),
 		) );
 
+		if ( is_array( $a['value'] ) ) {
+			$a['value'] = '<p></p>';
+		}
 		wp_editor( $a['value'], $a['id'], $a['options'] );
 		echo $a['desc'];
 	}
