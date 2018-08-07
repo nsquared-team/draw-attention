@@ -219,7 +219,7 @@ canvas.canvas-hover.canvas-show {
   max-width: 95%;
   min-height: 3%;
   min-width: 30%;
-  padding: 25px 25px 0;
+  padding: 25px;
   position: relative;
   text-align: left;
   vertical-align: middle;
@@ -283,7 +283,7 @@ canvas.canvas-hover.canvas-show {
     margin-left: 10px;
     margin-right: 10px;
     max-height: 98%;
-    padding: 10px 10px 0;
+    padding: 10px;
   }
 }
 /* ------------------------------------------- */

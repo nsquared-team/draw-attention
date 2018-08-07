@@ -177,15 +177,24 @@
 					content.show();
 					lb.addClass('lightbox-' + mapNo);
 
-					var img = content.find('img'),
-						imgHeight = img.height(),
-						lbHeight = lb.height(),
-						maxImgHeight = lbHeight * 0.8;
+					setTimeout(function(){
+						var img = content.find('img'),
+							contentHeight = content.get(0).scrollHeight,
+							imgHeight = img.height(),
+							lbHeight = lb.outerHeight();
 
-					if ( imgHeight > maxImgHeight ) {
-						img.height(maxImgHeight);
-						img.css({'width': 'auto'});
-					}
+						if (contentHeight > lbHeight) {
+							var diff = contentHeight - lbHeight + 50,
+								newHeight = imgHeight - diff,
+								minHeight = $(window).innerHeight()/2;
+
+							newHeight = newHeight < minHeight ? minHeight : newHeight;
+
+							img.height(newHeight);
+							img.css({'width': 'auto'});
+						}
+					}, 100)
+
 				},
 				afterClose: function() {
 					area.removeClass('active');
