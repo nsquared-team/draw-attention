@@ -97,6 +97,16 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			include 'upsell-admin.php';
 			$this->upsell = new DrawAttention_Upsell( $this );
+
+			add_filter( 'gutenberg_can_edit_post_type', array( $this, 'exclude_cpt_from_gutenberg' ), 10, 2 );
+		}
+
+		public function exclude_cpt_from_gutenberg( $can_edit, $post_type ) {
+			if ( $post_type == $this->plugin->cpt->post_type ) {
+				return false;
+			}
+
+			return $can_edit;
 		}
 
 		/**
