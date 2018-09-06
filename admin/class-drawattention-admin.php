@@ -82,6 +82,16 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			add_action( 'cmb2_save_post_fields', array( $this, 'save_hotspots_json' ), 10, 4 );
 			add_action( 'current_screen', array( $this, 'load_from_hotspots_json' ) );
 			add_action( 'admin_init', array( $this, 'upgrade_process' ) );
+
+			add_filter( 'gutenberg_can_edit_post_type', array( $this, 'exclude_cpt_from_gutenberg' ), 10, 2 );
+		}
+
+		public function exclude_cpt_from_gutenberg( $can_edit, $post_type ) {
+			if ( $post_type == $this->plugin->cpt->post_type ) {
+				return false;
+			}
+
+			return $can_edit;
 		}
 
 		public function upgrade_process() {
