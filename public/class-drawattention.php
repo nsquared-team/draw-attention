@@ -415,6 +415,20 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				$settings = get_metadata( 'post', $imageID, '', false );
 				$layout = ( !empty( $settings[$this->custom_fields->prefix.'map_layout'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_layout'][0] : 'left';
 
+				if ( !empty( $_GET['fl_builder'] ) || !empty( $_GET['elementor-preview'] ) || ( !empty( $_GET['action'] ) && $_GET['action'] == 'elementor' ) ) {
+					return '<div class="hotspots-image-container">
+						<img
+							width="'.$img_width.'"
+							height="'.$img_height.'"
+							src="'.$img_url.'"
+							alt="'.$img_alt.'"
+							class="hotspots-image skip-lazy"
+							data-id="'.$image_id.'"
+							data-no-lazy="1"
+							data-lazy="false"
+							>
+					</div>';
+				}
 
 				$spot_id = 'hotspot-' . $imageID;
 				$bg_color = ( !empty( $settings[$this->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_background_color'][0] : '';
