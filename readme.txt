@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 4.8
-Stable tag: 1.8.10
+Stable tag: 1.8.11
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -59,6 +59,12 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 4. Activate the plugin in the Plugin dashboard
 
 == Changelog ==
+
+= 1.8.11 =
+* Improved: Compatibility with Beaver Builder and Elementor when editing
+* Improved: Gutenberg compatibility
+* Improved: Support for WP-native video embeds in More Info areas
+* Fixed: display of image in Firefox with no content/title in lightbox
 
 = 1.8.10 =
 * Improved: Tooltips on IE11
