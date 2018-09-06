@@ -6,6 +6,19 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	<p><?php echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $settings['image_id'] ); ?></p>
 
 <?php // There are hotspots! Show the image ?>
+<?php elseif ( !empty( $_GET['fl_builder'] ) || !empty( $_GET['elementor-preview'] ) || ( !empty( $_GET['action'] ) && $_GET['action'] == 'elementor' ) ): ?>
+	<div class="hotspots-image-container">
+		<img
+			width="<?php echo $settings['img_width']; ?>"
+			height="<?php echo $settings['img_height']; ?>"
+			src="<?php echo $settings['img_url']; ?>"
+			alt="<?php echo $settings['img_alt']; ?>"
+			class="hotspots-image skip-lazy"
+			data-id="<?php echo $settings['image_id']; ?>"
+			data-no-lazy="1"
+			data-lazy="false"
+			>
+	</div>
 <?php else : ?>
 
 <style>
