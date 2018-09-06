@@ -1,6 +1,8 @@
 ;(function ($, hotspots, undefined) {
 	"use strict";
 
+	var index = 1;
+
 
 	/* Get settings and initialize responsilight */
 	var mapSetup = function(){
@@ -220,11 +222,19 @@
 
 		var oldContent = content.children('.visible');
 
-		console.log(oldContent);
-
 		oldContent.removeClass('visible');
 		content.children().removeClass('visible');
+
 		info.removeClass('da-hidden').addClass('visible').appendTo(content);
+
+		// Check for an embedded video player
+		var video = info.find('.wp-video');
+		if (video.length) {
+			if (!info.data('video-resized')) {
+				info.data('video-resized', true);
+				window.dispatchEvent(new Event('resize'));
+			}
+		}
 	}
 
 
