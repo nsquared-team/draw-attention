@@ -197,8 +197,19 @@
 			infoContent.children().hide().end().append(info);
 			info.show();
 			infoContainer.removeClass('loading');
-			infoContent.fadeIn('fast');
+			infoContent.fadeIn('fast', function(){
+				// Check for an embedded video player
+				var video = infoContent.find('.wp-video');
+				if (video.length) {
+					if (!infoContent.data('video-resized')) {
+						infoContent.data('video-resized', true);
+						window.dispatchEvent(new Event('resize'));
+					}
+				}
+			});
 		});
+
+
 	}
 
 	/* Private: set up the information update when clicking on a map area */
