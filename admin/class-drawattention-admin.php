@@ -102,7 +102,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		}
 
 		public function exclude_cpt_from_gutenberg( $can_edit, $post_type ) {
-			if ( $post_type == $this->plugin->cpt->post_type ) {
+			if ( $post_type == $this->da->cpt->post_type ) {
 				return false;
 			}
 
