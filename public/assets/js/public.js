@@ -390,7 +390,14 @@
 
 	/* Fix compatibility with common plugins/addons */
 	hotspots.compatibilityFixes = function(){
-		$(window).on('pageloaded change.zf.tabs', function(){
+		if (window.Foundation) { /* Fix for Foundation firing tag change event indiscriminately when some items are clicked on the page */
+			$(window).on('change.zf.tabs', function(e){
+				if (e.target.tagName !== 'INPUT') {
+					hotspots.init();
+				}
+			});
+		}
+		$(window).on('pageloaded', function(){
 			hotspots.init();
 		});
 		$(window).on('load', function(){
