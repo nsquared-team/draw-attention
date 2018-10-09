@@ -109,6 +109,7 @@ class DrawAttention_Pro {
 
 		// Add hotspots to settings
 		$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->parent->custom_fields->prefix . 'hotspots', true );
+		$settings['hotspots'] = apply_filters( 'da_render_hotspots', $settings['hotspots'], $settings['image_id'] );
 		if ( empty( $settings['hotspots'] ) ) {
 			$settings['url_hotspots'] = array();
 		} else {
