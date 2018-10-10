@@ -359,6 +359,12 @@
 			showUrlTooltip($(this));
 		});
 
+		var clickContainers = containers.filter('.event-click');
+		clickContainers.find('area.more-info-area').each(function(){
+			showUrlTooltip($(this));
+		});
+
+
 		// Prevent default action when clicking more info areas
 		containers.find('area.more-info-area').on('click', function(e){
 			e.preventDefault();
