@@ -2,7 +2,7 @@
 Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
