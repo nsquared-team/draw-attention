@@ -46,7 +46,7 @@ class DrawAttention_Block_Image {
 		if( function_exists('register_block_type') ){
 			wp_register_script(
 				'drawattention-image-block-js',
-				$this->plugin->url( 'admin/assets/js/draw-attention-block.js' ),
+				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/js/draw-attention-block.js',
 				array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' )
 			);
 
@@ -55,7 +55,7 @@ class DrawAttention_Block_Image {
 				'post_status' => 'publish',
 				'posts_per_page' => -1
 			) );
-			$da_image_key_values = wp_list_pluck( $images, 'title', 'id' );
+			$da_image_key_values = wp_list_pluck( $images->posts, 'post_title', 'ID' );
 			asort( $da_image_key_values );
 
 			wp_localize_script( 'drawattention-image-block-js', 'drawAttentionImages', $da_image_key_values );
@@ -63,7 +63,7 @@ class DrawAttention_Block_Image {
 
 			register_block_type( 'draw-attention/image', array(
 				'editor_script' => 'drawattention-image-block-js',
-				'keywords' => arrayarray( 'image', 'hotspot', 'map' ),
+				'keywords' => array( 'image', 'hotspot', 'map' ),
 				'attributes' => array (
 					'id' => array (
 						'type' => 'string',

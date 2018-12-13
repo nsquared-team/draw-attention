@@ -66,6 +66,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public $cpt;
 		public $custom_fields;
 		public $pro;
+		public $block_image;
+		public $updater;
+		public $import_export;
 		public $themes;
 
 		/**
@@ -118,10 +121,14 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			$this->pro = new DrawAttention_Pro( $this );
 
 			include_once( 'includes/pro/updater.php' );
-			$this->pro = new DrawAttention_Updater( $this );
+			$this->updater = new DrawAttention_Updater( $this );
 
 			include_once( 'includes/pro/import-export.php' );
-			$this->pro = new DrawAttention_ImportExport( $this );
+			$this->import_export = new DrawAttention_ImportExport( $this );
+
+			include_once( 'includes/class-block-image.php' );
+			$this->block_image = new DrawAttention_Block_Image( $this );
+
 		}
 
 		/**
