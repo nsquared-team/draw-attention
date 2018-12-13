@@ -50,6 +50,11 @@ class DrawAttention_Block_Image {
 				array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' )
 			);
 
+			wp_register_style(
+				'drawattention-image-block-css',
+				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/css/draw-attention-block.css'
+			);
+
 			$images = new WP_Query( array(
 				'post_type' => 'da_image',
 				'post_status' => 'publish',
@@ -63,6 +68,7 @@ class DrawAttention_Block_Image {
 
 			register_block_type( 'draw-attention/image', array(
 				'editor_script' => 'drawattention-image-block-js',
+				'editor_style' => 'drawattention-image-block-css',
 				'keywords' => array( 'image', 'hotspot', 'map' ),
 				'attributes' => array (
 					'id' => array (

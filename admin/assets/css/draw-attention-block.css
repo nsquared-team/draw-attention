@@ -1,0 +1,14 @@
+.hotspots-container .hotspots-placeholder,
+.hotspots-container .hotspot-info,
+.hotspots-container .da-error {
+	display: none;
+}
+
+.hotspots-container img[usemap],
+.hotspots-container map area {
+	outline: none;
+}
+
+.hotspots-container map area {
+	display: none;
+}
