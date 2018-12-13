@@ -46,7 +46,7 @@ class DrawAttention_Block_Image {
 		if( function_exists('register_block_type') ){
 			wp_register_script(
 				'drawattention-image-block-js',
-				$this->plugin->url( 'admin/assets/js/draw-attention-block.js' ),
+				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/js/draw-attention-block.js',
 				array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' )
 			);
 
@@ -59,8 +59,8 @@ class DrawAttention_Block_Image {
 		}
 	}
 
-	function render() {
-		return $this->plugin->shortcodes->shortcode();
+	function render( $atts ) {
+		return $this->plugin->shortcode( $atts );
 	}
 
 }

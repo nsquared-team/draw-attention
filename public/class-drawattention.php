@@ -116,6 +116,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			include_once( 'includes/themes.php' );
 			$this->themes = new DrawAttention_Themes( $this );
 
+			include_once( 'includes/class-block-image.php' );
+			$this->block_image = new DrawAttention_Block_Image( $this );
+
 		}
 
 		/**
