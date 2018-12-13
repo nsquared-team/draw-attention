@@ -68,6 +68,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public $custom_fields;
 		public $pro;
 		public $themes;
+		public $block_image;
 		public $photon_excluded_images = array();
 
 		/**
