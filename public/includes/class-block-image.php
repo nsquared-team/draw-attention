@@ -50,8 +50,14 @@ class DrawAttention_Block_Image {
 				array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-editor' )
 			);
 
+			wp_register_style(
+				'drawattention-image-block-css',
+				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/css/draw-attention-block.css'
+			);
+
 			register_block_type( 'draw-attention/image', array(
 				'editor_script' => 'drawattention-image-block-js',
+				'editor_style' => 'drawattention-image-block-css',
 				'keywords' => array( 'image', 'hotspot', 'map' ),
 
 				'render_callback' => array( $this, 'render' ),
