@@ -15,7 +15,7 @@
  * Plugin Name:       Draw Attention Pro
  * Plugin URI:        https://wpdrawattention.com
  * Description:       Create interactive images in WordPress
- * Version:           1.8.13
+ * Version:           1.8.14
  * Author:            N Squared
  * Author URI:        https://nsqua.red
  * Text Domain:       drawattention
