@@ -398,12 +398,11 @@ x:-o-prefocus, .qtip .qtip-tip {
 
 /* line 339, ../sass/public.scss */
 .qtip .qtip-tip .qtip-vml {
-  behavior: url(#default#VML);
   display: inline-block;
   visibility: visible;
 }
 
-/* line 345, ../sass/public.scss */
+/* line 344, ../sass/public.scss */
 .qtip-titlebar {
   position: relative;
   padding: 0;
@@ -411,7 +410,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   border-width: 0;
 }
 
-/* line 353, ../sass/public.scss */
+/* line 352, ../sass/public.scss */
 .qtip-close {
   position: absolute;
   right: 4px;
@@ -423,20 +422,20 @@ x:-o-prefocus, .qtip .qtip-tip {
   border: 1px solid transparent;
 }
 
-/* line 364, ../sass/public.scss */
+/* line 363, ../sass/public.scss */
 .qtip-titlebar .qtip-close {
   right: 4px;
   top: 50%;
   margin-top: -9px;
 }
 
-/* line 369, ../sass/public.scss */
+/* line 368, ../sass/public.scss */
 * html .qtip-titlebar .qtip-close {
   top: 16px;
 }
 
 /* IE fix */
-/* line 371, ../sass/public.scss */
+/* line 370, ../sass/public.scss */
 .qtip-titlebar .ui-icon,
 .qtip-icon .ui-icon {
   display: block;
@@ -444,7 +443,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   direction: ltr;
 }
 
-/* line 378, ../sass/public.scss */
+/* line 377, ../sass/public.scss */
 .qtip-icon, .qtip-icon .ui-icon {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -452,7 +451,7 @@ x:-o-prefocus, .qtip .qtip-tip {
   text-decoration: none;
 }
 
-/* line 385, ../sass/public.scss */
+/* line 384, ../sass/public.scss */
 .qtip-icon .ui-icon {
   width: 18px;
   height: 14px;
