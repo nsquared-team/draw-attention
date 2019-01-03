@@ -52,15 +52,15 @@ class DrawAttention_CPT {
 				'menu_icon' => 'dashicons-images-alt2', /* the icon for the custom post type menu */
 				'rewrite'	=> false,
 				'has_archive' => $this->post_type.'s', /* you can rename the slug here */
-				// 'capabilities' => array(
-				// 	'edit_post' => 'subscriber',
-				// 	'edit_posts' => 'subscriber',
-				// 	'edit_others_posts' => 'subscriber',
-				// 	'publish_posts' => 'subscriber',
-				// 	'read_post' => 'subscriber',
-				// 	'read_private_posts' => 'subscriber',
-				// 	'delete_post' => 'subscriber'
-				// ),
+				'capabilities' => array(
+					'edit_post' => 'edit_others_posts',
+					'edit_posts' => 'edit_others_posts',
+					'edit_others_posts' => 'edit_others_posts',
+					'publish_posts' => 'edit_others_posts',
+					'read_post' => 'edit_others_posts',
+					'read_private_posts' => 'edit_others_posts',
+					'delete_post' => 'edit_others_posts'
+				),
 
 				'hierarchical' => false,
 				/* the next one is important, it tells what's enabled in the post editor */
