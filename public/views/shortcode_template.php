@@ -99,7 +99,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 		<?php /* Error message for admins when there's a JS error */
 		if ( current_user_can( 'manage_options' ) ) : ?>
 			<div id="error-<?php echo $settings['spot_id']; ?>" class="da-error">
-				<p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="http://tylerdigital.com/document/troubleshooting-conflicts-themes-plugins" target="_new">help page</a>.
+				<p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="https://wpdrawattention.com/document/troubleshooting-conflicts-themes-plugins/" target="_new">help page</a>.
 			</div>
 		<?php endif; ?>
 
