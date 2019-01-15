@@ -168,6 +168,10 @@ class DrawAttention_Pro {
 			);
 
 			if ( $settings['always_visible'] && $settings['always_visible'] !== 'false' ) {
+				if ( empty( $style['map_border_color'] ) ) {
+					$style['map_border_color'] = '#FFFFFF';
+				}
+				
 				$new_style['display'] = array(
 					'fillColor' => $style['map_highlight_color'],
 					'fillOpacity' => $style['map_highlight_opacity'],
