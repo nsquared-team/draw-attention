@@ -142,7 +142,7 @@ class DrawAttention_CustomFields {
 					'desc'    => __( 'Set the color of titles in More Info box', 'drawattention' ),
 					'id'      => $this->prefix . 'map_title_color',
 					'type'    => 'colorpicker',
-					'default' => '#ffffff'
+					'default' => '#000000'
 				),
 
 				array(
@@ -150,7 +150,7 @@ class DrawAttention_CustomFields {
 					'desc'    => __( 'Set the color of body text in More Info box', 'drawattention' ),
 					'id'      => $this->prefix . 'map_text_color',
 					'type'    => 'colorpicker',
-					'default' => '#ffffff'
+					'default' => '#000000'
 				),
 
 				array(
