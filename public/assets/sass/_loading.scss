@@ -1,0 +1,74 @@
+.hotspots-container {
+	position: relative;
+	width: 100%;
+	.hotspots-image-container {
+		& > img {
+			opacity: 0.1;
+		}
+	}
+	.hotspots-placeholder,
+	.hotspots-image-container {
+		opacity: 0.1;
+		transition: opacity 500ms ease-in-out;
+		& > div.hotspot-initial {
+			animation: none;
+			display: block;
+			position: static;
+		}
+	}
+	&:before,
+	&:after {
+		animation: bounce 2.0s infinite ease-in-out;
+		background: darkgray;
+		border-radius: 50%;
+		content: '';
+		height: 40px;
+		left: 50%;
+		margin: -20px 0 0 -20px;
+		opacity: 0.6;
+		position: absolute;
+		top: 50%;
+		width: 40px;
+	}
+	&:after {
+		animation-delay: -1.0s;
+	}
+}
+
+.hotspots-container.loaded {
+	.hotspots-image-container {
+		& > img {
+			opacity: 0;
+		}
+	}
+	.hotspots-placeholder,
+	.hotspots-image-container {
+		opacity: 1;
+		& > div.hotspot-initial {
+			display: none;
+		}
+		& > div.hotspot-initial.visible {
+			display: block;
+		}
+	}
+	&:before,
+	&:after {
+		animation: none;
+		background: transparent;
+		height: 0;
+		left: 0;
+		margin: 0;
+		opacity: 0;
+		top: 0;
+		width: 0;
+	}
+}
+
+@keyframes bounce {
+	0%, 100% {
+		transform: scale(0.0);
+	}
+	50% {
+		transform: scale(1.0);
+	}
+}

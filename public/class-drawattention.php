@@ -30,7 +30,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.8.15';
+		const VERSION = '1.9';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -324,18 +324,13 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since    1.0.0
 		 */
 		public function enqueue_scripts() {
-			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-imagesloaded' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-imagesloaded', plugins_url( 'assets/js/imagesloaded.pkg.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-qtip', plugins_url( 'assets/js/jquery.qtip.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
+			wp_register_script( $this->plugin_slug . '-leaflet', plugins_url( 'assets/js/leaflet.js', __FILE__ ), array(), '1.3.4', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-leaflet-rrose', plugins_url( 'assets/js/leaflet.rrose.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), '0.2.0', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array(), '1.7.13', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-rrose', 'jquery', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
 
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
 			if ( !empty( $enqueue ) ) {
-				wp_enqueue_script( $this->plugin_slug . '-responsilight' );
-				wp_enqueue_script( $this->plugin_slug . '-featherlight' );
-				wp_enqueue_script( $this->plugin_slug . '-imagesloaded' );
-				wp_enqueue_script( $this->plugin_slug . '-qtip' );
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 			}
 		}

@@ -5,7 +5,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	<p><?php _e( 'You need to define some clickable areas for your image.', 'drawattention' ); ?></p>
 	<p><?php echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $settings['image_id'] ); ?></p>
 
-<?php // There are hotspots! Show the image ?>
+<?php // In page builder edit mode - just display the image ?>
 <?php elseif ( !empty( $_GET['fl_builder'] ) || !empty( $_GET['elementor-preview'] ) || ( !empty( $_GET['action'] ) && $_GET['action'] == 'elementor' ) ): ?>
 	<div class="hotspots-image-container">
 		<img
@@ -19,6 +19,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 			data-lazy="false"
 			>
 	</div>
+<?php // There are hotspots! Show the interactive image ?>
 <?php else : ?>
 
 <style>
@@ -33,6 +34,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 		border: 0 <?php echo $settings['more_info_bg']; ?> solid;
 		color: <?php echo $settings['more_info_text']; ?>;
 	}
+
 	.qtip.tooltip-<?php echo $settings['image_id']; ?> .qtip-icon .ui-icon {
 		color: <?php echo $settings['more_info_title']; ?>;
 	}
@@ -42,22 +44,71 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 	.qtip.tooltip-<?php echo $settings['image_id']; ?> .hotspot-title {
 		color: <?php echo $settings['more_info_title']; ?>;
 	}
+
+	<?php foreach ($formatted_styles as $style) : ?>
+		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?> {
+			stroke-width: <?php echo $style['borderWidth']; ?>;
+			fill: <?php echo $style['display']['fillColor']; ?>;
+			fill-opacity: <?php echo $style['display']['fillOpacity']; ?>;
+			stroke: <?php echo $style['display']['borderColor']; ?>;
+			stroke-opacity: <?php echo $style['display']['borderOpacity']; ?>;
+		}
+		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:hover,
+		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>.hotspot-active {
+			fill: <?php echo $style['hover']['fillColor']; ?>;
+			fill-opacity: <?php echo $style['hover']['fillOpacity']; ?>;
+			stroke: <?php echo $style['hover']['borderColor']; ?>;
+			stroke-opacity: <?php echo $style['hover']['borderOpacity']; ?>;
+		}
+	<?php endforeach; ?>
+	#<?php echo $settings['spot_id']; ?> .leaflet-tooltip,
+	#<?php echo $settings['spot_id']; ?> .leaflet-rrose-content-wrapper {
+		background: <?php echo $settings['more_info_bg']; ?>;
+		border-color: <?php echo $settings['more_info_bg']; ?>;
+		color: <?php echo $settings['more_info_text']; ?>;
+	}
+
+	#<?php echo $settings['spot_id']; ?> a.leaflet-rrose-close-button {
+		color: <?php echo $settings['more_info_title']; ?>;
+	}
+
+	#<?php echo $settings['spot_id']; ?> .leaflet-rrose-tip {
+		background: <?php echo $settings['more_info_bg']; ?>;
+	}
+
+	#<?php echo $settings['spot_id']; ?> .leaflet-popup-scrolled {
+		border-bottom-color: <?php echo $settings['more_info_text']; ?>;
+		border-top-color: <?php echo $settings['more_info_text']; ?>;
+	}
+
+	#<?php echo $settings['spot_id']; ?> .leaflet-tooltip-top:before {
+		border-top-color: <?php echo $settings['more_info_bg']; ?>;
+	}
+
+	#<?php echo $settings['spot_id']; ?> .leaflet-tooltip-bottom:before {
+		border-bottom-color: <?php echo $settings['more_info_bg']; ?>;
+	}
+	#<?php echo $settings['spot_id']; ?> .leaflet-tooltip-left:before {
+		border-left-color: <?php echo $settings['more_info_bg']; ?>;
+	}
+	#<?php echo $settings['spot_id']; ?> .leaflet-tooltip-right:before {
+		border-right-color: <?php echo $settings['more_info_bg']; ?>;
+	}
 </style>
 
+<?php /*
 <script>
 	window.daStyles<?php echo $settings['image_id']; ?> = <?php echo json_encode($formatted_styles); ?>
 </script>
+*/ ?>
 
-	<div class="hotspots-container <?php echo $settings['urls_class']; ?> layout-<?php echo $settings['layout']; ?> event-<?php echo $settings['event_trigger']; ?>" id="<?php echo $settings['spot_id']; ?>">
+	<div class="hotspots-container <?php echo $settings['urls_class']; ?> layout-<?php echo $settings['layout']; ?> event-<?php echo $settings['event_trigger']; ?>" id="<?php echo $settings['spot_id']; ?>" data-layout="<?php echo $settings['layout']; ?>" data-trigger="<?php echo $settings['event_trigger']; ?>">
 		<div class="hotspots-interaction">
 			<?php if ( $settings['urls_only'] ) {
 				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
-			} elseif ( $settings['layout'] == 'left' || $settings['layout'] == 'top' ) {
+			} else  {
 				require( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
 				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
-			} else {
-				require( $this->parent->get_plugin_dir() . '/public/views/image_template.php' );
-				require( $this->parent->get_plugin_dir() . '/public/views/more_info_template.php' );
 			} ?>
 		</div>
 		<map name="hotspots-image-<?php echo $settings['image_id']; ?>" class="hotspots-map">
@@ -97,7 +148,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 		</map>
 
 		<?php /* Error message for admins when there's a JS error */
-		if ( current_user_can( 'manage_options' ) ) : ?>
+		if ( ! empty( $_GET['da_debug'] ) ) : ?>
 			<div id="error-<?php echo $settings['spot_id']; ?>" class="da-error">
 				<p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="https://wpdrawattention.com/document/troubleshooting-conflicts-themes-plugins/" target="_new">help page</a>.
 			</div>

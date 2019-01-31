@@ -1,0 +1,115 @@
+html.with-featherlight {
+	overflow: hidden;
+}
+
+.featherlight {
+	background: #333;
+	background: rgba(0, 0, 0, 0);
+	bottom: 0;
+	cursor: pointer;
+	display: none;
+	left: 0;
+	position: fixed;
+	right: 0;
+	text-align: center;
+	top: 0;
+	white-space: nowrap;
+	z-index: 2147483647;
+}
+
+.featherlight:last-of-type {
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.featherlight:before {
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.featherlight .featherlight-content {
+	background: #fff;
+	border-bottom: 25px solid transparent;
+	cursor: auto;
+	display: inline-block;
+	margin-left: 5%;
+	margin-right: 5%;
+	max-height: 95%;
+	overflow: auto;
+	padding: 25px 25px 0;
+	position: relative;
+	text-align: left;
+	vertical-align: middle;
+	white-space: normal;
+}
+
+.featherlight .featherlight-inner {
+	display: block;
+}
+
+.featherlight script.featherlight-inner,
+.featherlight link.featherlight-inner,
+.featherlight style.featherlight-inner {
+	display: none;
+}
+
+.featherlight .featherlight-close-icon {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.3);
+	border: none;
+	color: #000;
+	cursor: pointer;
+	font-family: Arial, sans-serif;
+	line-height: 25px;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 25px;
+	z-index: 9999;
+}
+
+.featherlight .featherlight-close-icon::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+.featherlight .featherlight-image {
+	width: 100%;
+}
+
+.featherlight-iframe .featherlight-content {
+	border-bottom: 0;
+	padding: 0;
+	overflow-scrolling: touch;
+}
+
+.featherlight iframe {
+	border: none;
+}
+
+.featerlight img {
+	max-width: 100%;
+}
+
+.featherlight * {
+	box-sizing: border-box;
+}
+
+@media only screen and (max-width: 1024px) {
+	.featherlight .featherlight-content {
+		border-bottom: 10px solid transparent;
+		margin-left: 0;
+		margin-right: 0;
+		max-height: 98%;
+		padding: 10px 10px 0;
+	}
+}
+
+@media print {
+	html.with-featherlight > * > :not(.featherlight) {
+		display: none;
+	}
+}

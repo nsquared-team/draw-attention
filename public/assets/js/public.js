@@ -1,386 +1,33 @@
 ;(function ($, hotspots, undefined) {
 	"use strict";
 
-	var index = 1;
+	var ua = window.navigator.userAgent,
+		isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
+		isWebkit = !!ua.match(/WebKit/i),
+		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
 
+	// Store all the leaflets on the page in an array for access later
+	var leaflets = [];
 
-	/* Get settings and initialize responsilight */
+	// Store all the more info area hotspots in an object for access later
+	var infoSpots = {};
+
 	var mapSetup = function(){
-		$('img.hotspots-image').each(function(){
-			var img = $(this),
-				imgId = img.data('id'),
-				colorData = window['daStyles' + imgId];
-			img.responsilight({
-				colorSchemes: colorData
-			});
-		});
-	};
-
-
-	/* Display title tooltips for URL areas */
-	var showUrlTooltip = function(area) {
-		if (typeof jQuery.qtip === 'undefined') {
-			return;
-		}
-
-		area.qtip({
-			position: {
-				target: 'mouse',
-				viewport: $(window),
-				adjust: {
-					x: 15,
-					y: 15
-				}
-			},
-			style: {
-				classes: 'qtip-da-custom tip-title-only qtip-da-hover'
-			},
-			events: {
-				render: function(event, api) {
-					var tooltip = api.elements.tooltip,
-						mapId = area.parent('map').attr('name'),
-						mapNo = mapId.match(/\d+/)[0];
-
-					tooltip.addClass('tooltip-'+ mapNo);
-				}
-			}
-		});
-	};
-
-
-	/* Display content tooltips for more info areas */
-	var showTooltip = function(area, container, tooSmall) {
-		if (typeof jQuery.qtip === 'undefined') {
-			return;
-		}
-
-		var newInfo = $(area.attr('href'));
-
-		var qtipSettings = {
-			content: {
-				text: newInfo,
-				button: true
-			},
-			show: {
-				event: 'active.responsilight'
-			},
-			hide: {
-				fixed: true,
-				delay: 300,
-				event: 'inactive.responsilight unfocus'
-			},
-			style: {
-				classes: 'qtip-da-custom'
-			},
-			events: {
-				render: function(event, api) {
-					var tooltip = api.elements.tooltip,
-						mapId = container.attr('id'),
-						mapNo = mapId.match(/\d+/)[0];
-
-					tooltip.addClass('tooltip-'+ mapNo);
-				},
-				hide: function(event, api) {
-					var mapId = container.attr('id');
-					area.removeClass('active');
-					if (area.data('canvasHover') && area.data('canvasHover').length) {
-						area.data('canvasHover').removeClass('canvas-show');
-					}
-					if (area.data('canvasDisplay') && area.data('canvasDisplay').length) {
-						area.data('canvasDisplay').addClass('canvas-show');
-					}
-				}
-			}
-		};
-
-		/* style hover-only tooltip */
-		if (container.hasClass('event-hover')) {
-			qtipSettings.style.classes = 'qtip-da-custom qtip-da-hover';
-		}
-
-		/* qtip settings for small screens */
-		if (tooSmall) {
-			qtipSettings.show.modal = {
-				on: true,
-				blur: false
-			};
-			qtipSettings.position = {
-				my: 'center',
-				at: 'center',
-				target: $(window),
-				adjust: {
-					scroll: false,
-					mouse: false
-				}
-			};
-			qtipSettings.events.visible = function(event, api) {
-				var tooltip = api.elements.tooltip,
-					winHeight = $(window).height(),
-					tipHeight = tooltip.height(),
-					img = tooltip.find('img'),
-					imgHeight = img.height();
-
-				if (tipHeight > winHeight) {
-					var textHeight = tipHeight - imgHeight;
-					if (textHeight < winHeight) {
-						img.css({
-							'width': 'auto',
-							'maxHeight': winHeight - textHeight + 'px'
-						});
-						api.reposition();
-					}
-				}
-			}
-		/* qtip settings for larger screens */
-		} else {
-			qtipSettings.content.title = '&nbsp;';
-			qtipSettings.show.solo = true;
-			qtipSettings.show.effect = function() {
-				$(this).fadeTo(300, 1);
-			}
-			qtipSettings.position = {
-				target: 'mouse',
-				viewport: $(window),
-				adjust: {
-					mouse: false,
-					method: 'shift'
-				}
-			}
-			/* Make tooltip follow mouse if action is hover */
-			if (container.hasClass('event-hover')) {
-				qtipSettings.position.adjust.mouse = true;
-				qtipSettings.position.adjust.x = 15;
-			}
-			/* Fix for mobile safari in landscape */
-			if ('ontouchstart' in document.documentElement && window.innerWidth > window.innerHeight) {
-				qtipSettings.position.target = 'event';
-				qtipSettings.position.adjust.mouse = true;
-				qtipSettings.position.adjust.method = 'flipinvert';
-			}
-		}
-
-		area.qtip(qtipSettings);
-	};
-
-
-	/* Display lightbox for more info areas */
-	var showLightbox = function(container, area, e) {
-		var mapId, mapNo;
-		var info = $(area.attr('href'));
-		var currentLightbox = $('.featherlight');
-		if (e.type === 'active' && currentLightbox.length === 0) {
-			$.featherlight(info, {
-				afterContent: function(){
-					var content = $('.hotspot-info.featherlight-inner'),
-						lb = $('.featherlight-content');
-					mapId = area.parent('map').attr('name');
-					mapNo = mapId.match(/\d+/)[0];
-
-					content.show();
-					lb.addClass('lightbox-' + mapNo);
-
-					setTimeout(function(){
-						var img = content.find('img'),
-							contentHeight = content.get(0).scrollHeight,
-							imgHeight = img.height(),
-							lbHeight = lb.outerHeight();
-
-						if (contentHeight > lbHeight) {
-							var diff = contentHeight - lbHeight + 50,
-								newHeight = imgHeight - diff,
-								minHeight = $(window).innerHeight()/2;
-
-							newHeight = newHeight < minHeight ? minHeight : newHeight;
-
-							img.height(newHeight);
-							img.css({'width': 'auto'});
-						}
-					}, 100)
-
-				},
-				afterClose: function() {
-					area.removeClass('active');
-					setTimeout(function(){
-						area.trigger('blur');
-						container.trigger('focus');
-					}, 100);
-				}
-			});
-		}
-	}
-
-
-	/* Display new info box for more info areas */
-	var showInfobox = function(content, area, e) {
-		var info;
-
-		if (e.type === 'active') {
-			info = $(area.attr('href'));
-		} else {
-			info = content.find('.hotspot-initial');
-		}
-
-		var oldContent = content.children('.visible');
-
-		oldContent.removeClass('visible');
-		content.children().removeClass('visible');
-
-		info.removeClass('da-hidden').addClass('visible').appendTo(content);
-
-		// Check for an embedded video player
-		var video = info.find('.wp-video');
-		if (video.length) {
-			if (!info.data('video-resized')) {
-				info.data('video-resized', true);
-				window.dispatchEvent(new Event('resize'));
-			}
-		}
-	}
-
-
-	/* Setup Tooltip areas */
-	var tooltipSetup = function(areas, container) {
-		var screenWidth = $(window).width(),
-			daWidth = container.width(),
-			tipWidth = 280,
-			tooSmall = false;
-
-		if ( screenWidth<tipWidth*3 || ( screenWidth<tipWidth*4 && daWidth/screenWidth>0.75) ) {
-			tooSmall = true;
-		}
-
-		areas.each(function(){
-			showTooltip($(this), container, tooSmall);
-		});
-	};
-
-
-	/* Setup Lightbox areas */
-	var lightboxSetup = function(areas, container) {
-		areas.off('active.responsilight').on('active.responsilight', function(e){
-			showLightbox(container, $(this), e);
-		});
-	};
-
-
-	/* Setup Infobox areas */
-	var infoboxSetup = function(areas, container) {
-		var infoContainer = container.find('.hotspots-placeholder'),
-			infoContent = infoContainer.find('.hotspots-content');
-
-		areas.off('active.responsilight inactive.responsilight').on('active.responsilight inactive.responsilight', function(e){
-			showInfobox(infoContainer, $(this), e)
-		});
-	};
-
-	/* Link to an area */
-	var linkToArea = function(){
-		var hash = window.location.hash,
-			area = null;
-
-		if (!hash) return;
-
-		if (hash) {
-			area = $('area[href="' + hash + '"]');
-		}
-
-		if (!area.length) return;
-
-		area.trigger('focus');
-		area.trigger('mousedown');
-
-		/* Calculate where the image and area are on the page */
-		var map = area.parents('map'),
-			mapRef = map.attr('name'),
-			img = $('img[usemap="#' + mapRef + '"]'),
-			imgTop = img.offset().top,
-			coords = area.attr('coords').split(','),
-			yCoords = [];
-
-		for (var i=0; i<coords.length; i++) {
-			if (i%2 != 0) {
-				yCoords.push(coords[i]);
-			}
-		}
-
-		var areaImgTop  = Math.min.apply(Math, yCoords),
-			areaImgBottom = Math.max.apply(Math, yCoords),
-			windowHeight = $(window).height(),
-			windowBottom = imgTop + windowHeight,
-			areaBottom = imgTop + areaImgBottom,
-			areaTop = imgTop + areaImgTop,
-			padding = 50,
-			scrollCoord;
-
-		// Scroll to the area to be sure it's in the view
-		if (areaBottom > windowBottom) {
-			scrollCoord = imgTop + (areaBottom - windowBottom) + padding;
-			if ((areaBottom - areaTop) > windowHeight) {
-				scrollCoord = areaTop - padding;
-			}
-		} else {
-			scrollCoord = imgTop - padding;
-		}
-
-		setTimeout(function(){
-			window.scrollTo(0, scrollCoord);
-		}, 1);
-	}
-
-
-	/* Set up the information update when interacting with the image */
-	var daInitialize = function(){
-		var ua = window.navigator.userAgent,
-			isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
-			isWebkit = !!ua.match(/WebKit/i),
-			isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
-
 		$('.da-error').hide();
 		$('.hotspot-info').addClass('da-hidden');
 
-		var containers = $('.hotspots-container');
+		$('img.hotspots-image').each(function(){
+			var img = $(this);
 
-		// Follow URLs for touch screens
-		containers.find('area.url-area').on('click', function(e){e.preventDefault()}).off('active.responsilight').on('active.responsilight', function(e){
-			var link = $(this),
-				href = link.attr('href'),
-				target = link.attr('target');
+			var tester = new Image();
 
-			if (target == '_new' && !isMobileSafari) {
-				window.open(href, '_blank');
-			} else {
-				window.location = href;
-			}
+			tester.onload = function(){
+				markLoaded(img);
+				moreInfoSetup(img);
+				leafletSetup(img);
+			};
+			tester.src = img.attr('src');
 		});
-		// Show tooltips for URL areas
-		containers.find('area.url-area').each(function(){
-			showUrlTooltip($(this));
-		});
-
-		var clickContainers = containers.filter('.event-click');
-		clickContainers.find('area.more-info-area').each(function(){
-			showUrlTooltip($(this));
-		});
-
-
-		// Prevent default action when clicking more info areas
-		containers.find('area.more-info-area').on('click', function(e){
-			e.preventDefault();
-		});
-
-		// Sort containers into more info types, call setup
-		containers.each(function(index){
-			var container = $(this);
-			if (container.hasClass('layout-tooltip')) {
-				tooltipSetup(container.find('area.more-info-area'), container);
-			} else if (container.hasClass('layout-lightbox')) {
-				lightboxSetup(container.find('area.more-info-area'), container);
-			} else {
-				container.find('.hotspot-initial').addClass('visible');
-				infoboxSetup(container.find('area.more-info-area'), container);
-			}
-		});
-		linkToArea();
 
 		if (isMobileSafari) {
 			window.onpageshow = function(event){
@@ -391,8 +38,390 @@
 		}
 	};
 
+	var markLoaded = function(img) {
+		img.data('status', 'loaded');
+		var container = img.parents('.hotspots-container').addClass('loaded');
+	};
 
-	/* Fix compatibility with common plugins/addons */
+	var moreInfoSetup = function(img) {
+		var container = img.parents('.hotspots-container');
+
+		if (container.data('layout') == 'tooltip') {
+			return;
+		}
+
+		if (container.data('layout') == 'lightbox') {
+			lightboxSetup(container, img);
+			return;
+		}
+
+		infoboxSetup(container, img);
+	};
+
+	var infoboxSetup = function(container, img) {
+		var initial = container.find('.hotspot-initial');
+		var content = container.find('.hotspots-placeholder');
+		initial.addClass('visible');
+		container.on('active.responsilight inactive.responsilight', function(e){
+			var data = $(e.target).data('areaData');
+			var info;
+			if (e.type === 'active') {
+				info = $(data.href);
+			} else {
+				info = initial;
+			}
+
+			content.children('.visible').removeClass('visible');
+			info.removeClass('da-hidden').addClass('visible').appendTo(content);
+
+			// Check for an embedded video player
+			var video = info.find('.wp-video');
+			if (video.length) {
+				if (!info.data('video-resized')) {
+					info.data('video-resized', true);
+					window.dispatchEvent(new Event('resize'));
+				}
+			}
+		});
+	};
+
+	var lightboxSetup = function(container, img) {
+		container.on('active.responsilight', function(e){
+			var data = $(e.target).data('areaData'),
+				info = $(data.href),
+				target = $(e.target),
+				currentLightbox = $('.featherlight');
+
+			if (e.type === 'active' && currentLightbox.length === 0) {
+				$.featherlight(info, {
+					afterContent: function(){
+						var content = $('.hotspot-info.featherlight-inner'),
+							lb = $('.featherlight-content'),
+							mapId = container.find('map').attr('name'),
+							mapNo = mapId.match(/\d+/)[0];
+
+						content.show();
+						lb.addClass('lightbox-' + mapNo);
+
+						setTimeout(function(){
+							var img = content.find('img'),
+								contentHeight = content.get(0).scrollHeight,
+								imgHeight = img.height(),
+								lbHeight = lb.outerHeight();
+
+							if (contentHeight > lbHeight) {
+								var diff = contentHeight - lbHeight + 50,
+									newHeight = imgHeight - diff,
+									minHeight = $(window).innerHeight()/2;
+
+								newHeight = newHeight < minHeight ? minHeight : newHeight;
+
+								img.css({'width': 'auto'});
+								img.animate({
+									'height': newHeight
+								}, 200);
+							}
+						}, 100);
+					},
+					afterClose: function(){
+						target.removeClass('hotspot-active');
+					}
+				});
+			}
+		});
+	};
+
+	var showTooltip = function(shape, areaData) {
+		var container = $(shape._map._container);
+		var content = $(areaData.href).html();
+
+		var tip = new L.Rrose({
+			offset: new L.Point(0,0),
+			autoPan: false,
+			maxHeight: container.height() - 48,
+			closeButton: areaData.trigger == 'click'
+		});
+
+		tip.setContent(content);
+		shape.bindPopup(tip);
+
+		if (areaData.trigger === 'click') {
+			shape.on('click', function(e){
+				if (shape._path.classList.contains('hotspot-active')) {
+					shape.closePopup()
+				} else {
+					shape.openPopup();
+				}
+			});
+		} else {
+			shape.on('mouseover', function(){
+				shape.openPopup();
+			});
+			shape.on('mouseout', function(){
+				shape.closePopup();
+			});
+		}
+
+		container.on('click', function(e){
+			e.stopPropagation();
+		});
+		$(document).on('click', function(e){
+			shape.closePopup();
+			shape._path.classList.remove('hotspot-active');
+		});
+	};
+
+	var leafletSetup = function(img) {
+		var id = img.data('id');
+		var container = $('<div id="hotspots-map-container-' + id + '" class="hotspots-map-container"></div>');
+		var imgWidth = img.width();
+		var imgHeight = img.height();
+
+		container.css({
+			'width': imgWidth + 'px',
+			'height': imgHeight + 'px'
+		});
+		img.after(container);
+
+		var map = L.map('hotspots-map-container-' + id, {
+			crs: L.CRS.Simple,
+			zoomControl: false,
+			attributionControl: false,
+			minZoom: -20,
+			zoomSnap: 0
+		});
+
+		map.dragging.disable();
+		map.touchZoom.disable();
+		map.doubleClickZoom.disable();
+		map.scrollWheelZoom.disable();
+
+		var domImg = img.get(0);
+		var natHeight = domImg.naturalHeight;
+		var natWidth = domImg.naturalWidth;
+		img.data('natW', natWidth);
+		img.data('natH', natHeight);
+		var bounds = [[0,0], [natHeight, natWidth]];
+		var imageLayer = L.imageOverlay(img.attr('src'), bounds).addTo(map);
+		map.fitBounds(bounds);
+
+		leaflets.push({
+			map: map,
+			img: img
+		});
+
+		drawSpots(img, map);
+	};
+
+	var drawSpots = function(img, map) {
+		var id = img.data('id');
+		var mapName = img.attr('usemap').replace('#', '');
+		var imageMap = $('map[name="' + mapName + '"]');
+		var areas = imageMap.find('area');
+		var container = img.parents('.hotspots-container');
+
+		areas.each(function(){
+			var area = $(this);
+			var shape = area.attr('shape');
+			var coords = area.attr('coords').split(',');
+			var areaData = {
+				style: area.data('color-scheme') ? area.data('color-scheme') : 'default',
+				title: area.attr('title'),
+				href: area.attr('href'),
+				target: area.attr('target'),
+				action: area.data('action'),
+				layout: container.data('layout'),
+				trigger: container.data('trigger')
+			};
+			switch(shape) {
+				case 'circle':
+					renderCircle(coords, map, img, areaData);
+					break;
+				case 'rect':
+					renderPoly(coords, map, img, areaData);
+					break
+				case 'poly':
+					renderPoly(coords, map, img, areaData);
+					break;
+			}
+		});
+		// Link to area after all the spots are drawn
+		linkToArea();
+	};
+
+	var renderCircle = function(coords, map, img, areaData) {
+		var x = coords[0];
+		var y = img.data('natH') - coords[1];
+		var rad = coords[2];
+		var circle = L.circle([y,x], {
+			radius: rad,
+			className: 'hotspot-' + areaData.style,
+			title: areaData.title
+		}).addTo(map)
+		shapeEvents(circle, areaData);
+	};
+
+	var renderPoly = function (coords, map, img, areaData) {
+		var xCoords = [];
+		var yCoords = [];
+		for (var i = 0; i < coords.length; i++) {
+			if (i % 2 == 0) {
+				xCoords.push(coords[i]);
+			} else {
+				yCoords.push(coords[i]);
+			}
+		}
+
+		var polyCoords = yCoords.map(function(coord, index) {
+			return [img.data('natH') - coord, xCoords[index]];
+		});
+
+		var poly = L.polygon(polyCoords, {
+			className: 'hotspot-' + areaData.style,
+			title: areaData.title
+		}).addTo(map)
+
+		// If this is a more info hotspot, add it to the infoSpots object
+		if (areaData.href.charAt(0) === '#') {
+			var spotName = areaData.href.replace('#', '');
+			infoSpots[spotName] = poly;
+		}
+
+		shapeEvents(poly, areaData);
+	};
+
+	var shapeOver = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('over.responsilight');
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart') {
+			$shape.addClass('hotspot-active');
+			$shape.trigger('active.responsilight');
+		}
+	};
+
+	var shapeOut = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('out.responsilight');
+		if (areaData.trigger === 'hover') {
+			$shape.removeClass('hotspot-active');
+			$shape.trigger('inactive.responsilight');
+		}
+	};
+
+	var shapeClick = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('areaClick.responsilight');
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart' && !isMobileSafari) {
+			return;
+		}
+		$shape.toggleClass('hotspot-active');
+		if ($shape.hasClass('hotspot-active')) {
+			$shape.trigger('active.responsilight');
+		} else {
+			$shape.trigger('inactive.responsilight');
+		}
+		var oldActive = $shape.siblings('.hotspot-active');
+		if (oldActive.length) {
+			oldActive.removeClass('hotspot-active');
+		}
+	};
+
+	var shapeEvents = function(shape, areaData) {
+		// Handle URL spots
+		if (areaData.action == 'url') {
+			shape.bindTooltip(areaData.title);
+			shape.on('click', function(e) {
+				if (areaData.target == '_new' && !isMobileSafari) {
+					window.open(areaData.href, '_blank');
+				} else {
+					window.location = areaData.href;
+				}
+			});
+			return;
+		}
+
+		// Handle tooltip spots
+		if (areaData.layout === 'tooltip') {
+			showTooltip(shape, areaData);
+		}
+
+		// Add styled tooltip to all non-hover areas
+		if (areaData.action === 'url' || areaData.trigger === 'click' && areaData.layout !== 'tooltip') {
+			shape.bindTooltip(areaData.title);
+		}
+
+		// Handle all other spots
+		var moved = false;
+
+		shape.on('touchstart touchmove touchend click mouseover mouseout', function(e){
+			switch(e.type) {
+				case 'touchstart':
+					moved = false;
+					break;
+				case 'touchmove':
+					moved = true;
+					break;
+				case 'touchend':
+					if (moved) {
+						return;
+					}
+					shapeOver(shape, areaData, e);
+					shapeClick(shape, areaData, e);
+					break;
+				case 'click':
+					shapeClick(shape, areaData, e);
+					break;
+				case 'mouseover':
+					shapeOver(shape, areaData, e);
+					break;
+				case 'mouseout':
+					shapeOut(shape, areaData, e);
+					break;
+			}
+		});
+	};
+
+	var linkToArea = function(){ // Called after the shapes are drawn
+		var hash = window.location.hash,
+			area = null;
+
+		if (!hash) return;
+
+		area = $('area[href="' + hash + '"]');
+
+		if (!area.length) return;
+
+		var spotName = hash.replace('#', '');
+		infoSpots[spotName].fire('click')
+	};
+
+	hotspots.setup = function(){
+		mapSetup();
+	};
+
+	hotspots.resizeTimer = null;
+	hotspots.resizing = false;
+
+	hotspots.init = function(){ // For backward compatibility - resets the size of the leaflet on demand
+		leaflets.forEach(function(item){
+			var isLoaded = item.img.data('status') === 'loaded';
+
+			if (!isLoaded) {
+				return;
+			}
+
+			item.img.next('.hotspots-map-container').css({
+				'width': item.img.width() + 'px',
+				'height': item.img.height() + 'px'
+			});
+			item.map.invalidateSize(true);
+			item.map.fitBounds([[0,0], [item.img.data('natH'), item.img.data('natW')]]);
+		});
+	};
+
 	hotspots.compatibilityFixes = function(){
 		if (window.Foundation) { /* Fix for Foundation firing tag change event indiscriminately when some items are clicked on the page */
 			$(window).on('change.zf.tabs', function(e){
@@ -405,7 +434,6 @@
 			hotspots.init();
 		});
 		$(window).on('load', function(){
-			$('#canvas-undefined').remove();
 			hotspots.init();
 		});
 		$('.et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
@@ -433,17 +461,32 @@
 		});
 	};
 
-
-	/* Initialize */
-	hotspots.init = function() {
-		mapSetup();
-		daInitialize();
-	};
-
-
 }(jQuery, window.hotspots = window.hotspots || {}));
 
 jQuery(function(){
-	hotspots.init();
+	hotspots.setup();
 	hotspots.compatibilityFixes();
 });
+
+jQuery(window).on('resize orientationchange', function(e){
+	var $window = jQuery(this);
+	if (!hotspots.resizing) {
+		$window.trigger('resizeStart.responsilight');
+		hotspots.resizing = true;
+	}
+	clearTimeout(hotspots.resizeTimer);
+	hotspots.resizeTimer = setTimeout(function(){
+		hotspots.init();
+		$window.trigger('resizeComplete.responsilight');
+		hotspots.resizing = false;
+	}, 250);
+});
+
+window.onerror = function(errorMsg, url, lineNumber) { // This should be a fun little experiement!
+	var errorBox = jQuery('.da-error').show();
+	if (errorBox.length) {
+		var contents = errorBox.html();
+		errorBox.html(contents + '<br/><br/><strong>Error:</strong> ' + errorMsg + '<br/>Line ' + lineNumber + ': ' + url);
+	}
+	return false;
+}

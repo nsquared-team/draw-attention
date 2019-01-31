@@ -84,10 +84,6 @@ class DrawAttention_Pro {
 			'id' => ''
 		), $atts);
 
-		// Enqueue CSS and Scripts
-		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
-		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
-
 		// Begin settings array
 		$settings = array(
 			'image_id' => $a['id'],
@@ -160,7 +156,7 @@ class DrawAttention_Pro {
 			if ( empty( $style['title'] ) ) {
 				$style['title'] = 'Custom';
 			}
-			
+
 			$style_slug = array_search($style['title'], $map_style_names_to_titles);
 			$new_style = array(
 				'name' => $style_slug ? $style_slug : $style['title'],
@@ -185,6 +181,12 @@ class DrawAttention_Pro {
 					'borderOpacity' => $settings['border_opacity'],
 				);
 			} else {
+				$new_style['display'] = array(
+					'fillColor' => '#ffffff',
+					'fillOpacity' => 0,
+					'borderColor' => '#ffffff',
+					'borderOpacity' => 0,
+				);
 				$new_style['hover'] = array(
 					'fillColor' => $style['map_highlight_color'],
 					'fillOpacity' => $style['map_highlight_opacity'],
@@ -206,14 +208,12 @@ class DrawAttention_Pro {
 			$settings['img_alt'] = get_the_title( $settings['img_post'] );
 		}
 
-		// Enqueue any extra needed scripts
-		if ( $settings['layout'] == 'lightbox' ) {
-			wp_enqueue_script( $this->parent->plugin_slug . '-featherlight' );
-		}
-		if ( $settings['event_trigger'] == 'hover' || $settings['layout'] == 'tooltip' || count( $settings['url_hotspots'] ) > 0 ) {
-			wp_enqueue_script( $this->parent->plugin_slug . '-imagesloaded' );
-			wp_enqueue_script( $this->parent->plugin_slug . '-qtip' );
-		}
+
+		// TODO: Figure out how to enqueue lightbox and tooltip scripts only when needed.
+
+		// Enqueue CSS and Scripts
+		wp_enqueue_style( $this->parent->plugin_slug . '-plugin-styles' );
+		wp_enqueue_script( $this->parent->plugin_slug . '-plugin-script' );
 
 		// Remove Photon filter
 		if ( $settings['has_photon'] ) {

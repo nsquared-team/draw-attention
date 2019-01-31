@@ -3,11 +3,14 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 5.0
-Stable tag: 1.8.15
+Stable tag: 1.9
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
 == Description ==
+
+### New in 1.9: Frontend Rendering ###
+The frontend rendering of the interactive image is completely rewritten from the ground up, now using SVG for wider browser support and better performance
 
 ### Responsive Design ###
 Interactive images resize to fit your theme and the available screen size
@@ -43,22 +46,29 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Installation ==
 
-= Uploading in WordPress Dashboard =
-
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
 3. Select `draw-attention.zip` from your computer
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
-= Using FTP =
+= Manual installation =
 
 1. Download `draw-attention.zip`
 2. Extract the `draw-attention` directory to your computer
 3. Upload the `draw-attention` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
+= After installing =
+
+1. You'll see a new Draw Attention menu item on the left menu.
+1. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
+
 == Changelog ==
+
+= 1.9 =
+* Improved: Brand new front-end rendering using SVG
+* Fixed: Updated troubleshooting link for JavaScript errors
 
 = 1.8.15 =
 * Fixed: Removed possible PHP notice on new image styles
