@@ -518,16 +518,6 @@
 		"sC": 3,
 		"tS": 0
 		},
-	"/js/leaflet.rrose.js": {
-		"ft": 64,
-		"ma": 0,
-		"mi": 1,
-		"oA": 0,
-		"oAP": "/js/leaflet.rrose-min.js",
-		"oF": 0,
-		"sC": 3,
-		"tS": 0
-		},
 	"/js/public.js": {
 		"ft": 64,
 		"ma": 0,
