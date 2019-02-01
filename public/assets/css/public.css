@@ -751,7 +751,10 @@ a.leaflet-rrose-close-button:hover {
     top: 0; }
 
 .layout-left .hotspots-interaction {
-  flex-direction: row; }
+  flex-direction: column-reverse; }
+  @media screen and (min-width: 600px) {
+    .layout-left .hotspots-interaction {
+      flex-direction: row; } }
 
 @media screen and (min-width: 600px) {
   .layout-left .hotspots-placeholder {
