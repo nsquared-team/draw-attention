@@ -27,21 +27,13 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 		background: <?php echo $settings['img_bg']; ?>
 	}
 
-	#<?php echo $settings['spot_id']; ?> .hotspots-placeholder,
-	.featherlight .featherlight-content.lightbox-<?php echo $settings['image_id']; ?>,
-	.qtip.tooltip-<?php echo $settings['image_id']; ?> {
+	#<?php echo $settings['spot_id']; ?> .hotspots-placeholder {
 		background: <?php echo $settings['more_info_bg']; ?>;
 		border: 0 <?php echo $settings['more_info_bg']; ?> solid;
 		color: <?php echo $settings['more_info_text']; ?>;
 	}
 
-	.qtip.tooltip-<?php echo $settings['image_id']; ?> .qtip-icon .ui-icon {
-		color: <?php echo $settings['more_info_title']; ?>;
-	}
-
-	#<?php echo $settings['spot_id']; ?> .hotspot-title,
-	.featherlight .featherlight-content.lightbox-<?php echo $settings['image_id']; ?> .hotspot-title,
-	.qtip.tooltip-<?php echo $settings['image_id']; ?> .hotspot-title {
+	#<?php echo $settings['spot_id']; ?> .hotspot-title {
 		color: <?php echo $settings['more_info_title']; ?>;
 	}
 

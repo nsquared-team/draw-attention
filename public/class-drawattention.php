@@ -414,6 +414,14 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			$settings['event_trigger'] = 'click';
 			$settings['always_visible'] = 'false';
 
+			// Add styles to settings
+			$settings['border_width'] = $settings['img_settings'][$this->custom_fields->prefix.'map_border_width'][0];
+			$settings['border_opacity'] = $settings['img_settings'][$this->custom_fields->prefix.'map_border_opacity'][0];
+			$settings['more_info_bg'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_background_color'][0] : '';
+			$settings['more_info_text'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_text_color'][0] : '';
+			$settings['more_info_title'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_title_color'][0] : '';
+			$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'image_background_color'][0] : '#efefef';
+
 			// Create hotspot style
 			if ( empty( $settings['styles'] ) ) {
 				$settings['styles'] = array();
