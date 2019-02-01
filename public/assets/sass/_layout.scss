@@ -1,0 +1,83 @@
+.hotspots-interaction {
+	display: flex;
+	margin: 1em 0;
+	width: 100%;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.hotspots-placeholder {
+	padding: 1em;
+	position: relative;
+	.event-hover & {
+		pointer-events: none;
+	}
+	& > div {
+		display: none;
+		overflow: hidden;
+		position: absolute;
+		&.visible {
+			animation-name: fadeIn;
+			animation-duration: 500ms;
+			display: block;
+			position: static;
+		}
+	}
+}
+
+.hotspots-image-container {
+	background: #efefef;
+	margin: 0 auto;
+	position: relative;
+	img {
+		border-radius: 0;
+		box-shadow: none;
+		display: block;
+		height: auto;
+		margin: 0 auto;
+		max-width: 100%;
+		padding: 0 !important;
+	}
+	.hotspots-map-container {
+		left: 0;
+		margin: auto;
+		max-width: 100%;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+.layout-left {
+	.hotspots-interaction {
+		flex-direction: column-reverse;
+		@include bp(small) {
+			flex-direction: row;
+		}
+	}
+	.hotspots-placeholder {
+		@include bp(small) {
+			flex: 0 0 34%;
+			max-width: 34%;
+		}
+		@include bp(medium) {
+			flex: 0 0 25%;
+			max-width: 25%;
+		}
+	}
+	.hotspots-image-container {
+		@include bp(small) {
+			flex: 0 0 66%;
+		}
+		@include bp(medium) {
+			flex: 0 0 75%;
+		}
+	}
+}

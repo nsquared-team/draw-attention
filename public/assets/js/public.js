@@ -1,319 +1,492 @@
 ;(function ($, hotspots, undefined) {
 	"use strict";
 
-	/* Private: get settings and set up each map */
-	var mapSetup  = function() {
-		$('img.hotspots-image').responsilight();
-	};
+	var ua = window.navigator.userAgent,
+		isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
+		isWebkit = !!ua.match(/WebKit/i),
+		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
 
-	/* Private: show lightbox */
-	var showLightbox = function(container, isSticky, info, area) {
-		var mapId, mapNo;
-		if (isSticky) {
-			$.featherlight(info, {
-				afterContent: function(){
-					var content = $('.hotspot-info.featherlight-inner'),
-						lb = $('.featherlight-content');
-					mapId = container.attr('id');
-					mapNo = mapId.match(/\d+/)[0];
+	// Store all the leaflets on the page in an array for access later
+	var leaflets = [];
 
-					content.show();
-					lb.addClass('lightbox-' + mapNo);
+	// Store all the more info area hotspots in an object for access later
+	var infoSpots = {};
 
-					var img = content.find('img'),
-						imgHeight = img.height(),
-						lbHeight = lb.height(),
-						maxImgHeight = lbHeight * 0.8;
+	var mapSetup = function(){
+		$('.da-error').hide();
+		$('.hotspot-info').addClass('da-hidden');
 
-					if ( imgHeight > maxImgHeight ) {
-						img.height(maxImgHeight);
-						img.css({'width': 'auto'});
-					}
-				},
-				afterClose: function() {
-					area.data('stickyCanvas', false);
-					$('#' + mapId).find('canvas').fadeOut('slow', function(){
-						$(this).remove();
-					});
+		$('img.hotspots-image').each(function(){
+			var img = $(this);
+
+			var tester = new Image();
+
+			tester.onload = function(){
+				markLoaded(img);
+				moreInfoSetup(img);
+				leafletSetup(img);
+			};
+			tester.src = img.attr('src');
+		});
+
+		if (isMobileSafari) {
+			window.onpageshow = function(event){
+				if (event.persisted) {
+					window.location.reload();
 				}
-			});
+			};
 		}
 	};
 
-	/* Private: show tooltip */
-	var showTooltip = function(area, newInfo, container, tooSmall) {
-		if (tooSmall) {
-			area.qtip({
-					content: {
-						text: newInfo,
-						button: true
-					},
-					show: {
-						event: 'stickyHighlight',
-						modal: {
-							on: true,
-							blur: false
-						}
-					},
-					hide: {
-						fixed: true,
-						delay: 300,
-						event: 'unstickyHighlight unfocus'
-					},
-					position: {
-						my: 'center',
-						at: 'center',
-						target: $(window),
-						adjust: {
-							scroll: false,
-							mouse: false
-						}
-					},
-					style: {
-						classes: 'qtip-da-custom'
-					},
-					events: {
-						render: function(event, api) {
-							var tooltip = api.elements.tooltip,
-								mapId = container.attr('id'),
-								mapNo = mapId.match(/\d+/)[0];
+	var markLoaded = function(img) {
+		img.data('status', 'loaded');
+		var container = img.parents('.hotspots-container').addClass('loaded');
+	};
 
-							tooltip.addClass('tooltip-'+ mapNo);
-						},
-						visible: function(event, api) {
-							var tooltip = api.elements.tooltip,
-								winHeight = $(window).height(),
-								tipHeight = tooltip.height(),
-								img = tooltip.find('img'),
-								imgHeight = img.height();
+	var moreInfoSetup = function(img) {
+		var container = img.parents('.hotspots-container');
 
-							if (tipHeight > winHeight) {
-								var textHeight = tipHeight - imgHeight;
-								if (textHeight < winHeight) {
-									img.css({
-										'width': 'auto',
-										'maxHeight': winHeight - textHeight + 'px'
-									});
-									api.reposition();
-								}
-							}
-						},
-						hide: function(event, api) {
-							var mapId = container.attr('id');
-							area.data('stickyCanvas', false);
-							$('#' + mapId).find('canvas').fadeOut('slow', function(){
-								$(this).remove();
-							});
-						}
-					}
-				});
-		} else {
-			area.qtip({
-				content: {
-					text: newInfo,
-					title: '&nbsp;',
-					button: true
-				},
-				show: {
-					solo: true,
-					event: 'stickyHighlight',
-					effect: function() {
-						$(this).fadeTo(300, 1);
-					}
-				},
-				hide: {
-					fixed: true,
-					delay: 300,
-					event: 'unstickyHighlight unfocus'
-				},
-				position: {
-					target: 'mouse',
-					viewport: $(window),
-					adjust: {
-						mouse: false,
-						method: 'shift'
-					}
-				},
-				style: {
-					classes: 'qtip-da-custom'
-				},
-				events: {
-					render: function(event, api) {
-						var tooltip = api.elements.tooltip,
-							mapId = container.attr('id'),
+		if (container.data('layout') == 'tooltip') {
+			return;
+		}
+
+		if (container.data('layout') == 'lightbox') {
+			lightboxSetup(container, img);
+			return;
+		}
+
+		infoboxSetup(container, img);
+	};
+
+	var infoboxSetup = function(container, img) {
+		var initial = container.find('.hotspot-initial');
+		var content = container.find('.hotspots-placeholder');
+		initial.addClass('visible');
+		container.on('active.responsilight inactive.responsilight', function(e){
+			var data = $(e.target).data('areaData');
+			var info;
+			if (e.type === 'active') {
+				info = $(data.href);
+			} else {
+				info = initial;
+			}
+
+			content.children('.visible').removeClass('visible');
+			info.removeClass('da-hidden').addClass('visible').appendTo(content);
+
+			// Check for an embedded video player
+			var video = info.find('.wp-video');
+			if (video.length) {
+				if (!info.data('video-resized')) {
+					info.data('video-resized', true);
+					window.dispatchEvent(new Event('resize'));
+				}
+			}
+		});
+	};
+
+	var lightboxSetup = function(container, img) {
+		container.on('active.responsilight', function(e){
+			var data = $(e.target).data('areaData'),
+				info = $(data.href),
+				target = $(e.target),
+				currentLightbox = $('.featherlight');
+
+			if (e.type === 'active' && currentLightbox.length === 0) {
+				$.featherlight(info, {
+					afterContent: function(){
+						var content = $('.hotspot-info.featherlight-inner'),
+							lb = $('.featherlight-content'),
+							mapId = container.find('map').attr('name'),
 							mapNo = mapId.match(/\d+/)[0];
 
-						tooltip.addClass('tooltip-'+ mapNo);
+						content.show();
+						lb.addClass('lightbox-' + mapNo);
+
+						setTimeout(function(){
+							var img = content.find('img'),
+								contentHeight = content.get(0).scrollHeight,
+								imgHeight = img.height(),
+								lbHeight = lb.outerHeight();
+
+							if (contentHeight > lbHeight) {
+								var diff = contentHeight - lbHeight + 50,
+									newHeight = imgHeight - diff,
+									minHeight = $(window).innerHeight()/2;
+
+								newHeight = newHeight < minHeight ? minHeight : newHeight;
+
+								img.css({'width': 'auto'});
+								img.animate({
+									'height': newHeight
+								}, 200);
+							}
+						}, 100);
 					},
-					hide: function(event, api) {
-						var mapId = container.attr('id');
-						area.data('stickyCanvas', false);
-						$('#' + mapId).find('canvas').fadeOut('slow', function(){
-							$(this).remove();
-						});
+					afterClose: function(){
+						target.removeClass('hotspot-active');
 					}
-				}
-			});
-		}
-	};
-
-	/* Private: show URL tooltip */
-	var showUrlTooltip = function(area, container){
-		area.qtip({
-			position: {
-				target: 'mouse',
-				viewport: $(window),
-				adjust: {
-					x: 10
-				}
-			},
-			style: {
-				classes: 'qtip-da-custom tip-title-only'
-			},
-			events: {
-				render: function(event, api) {
-					var tooltip = api.elements.tooltip,
-						mapId = container.attr('id'),
-						mapNo = mapId.match(/\d+/)[0];
-
-					tooltip.addClass('tooltip-'+ mapNo);
-				}
+				});
 			}
 		});
 	};
 
-	/* Private: show info area */
-	var showNewInfo = function(container, isSticky, info) {
-		var infoContainer = container.find('.hotspots-placeholder'),
-			infoContent = infoContainer.find('.hotspots-content');
+	var showTooltip = function(shape, areaData) {
+		var container = $(shape._map._container);
+		var content = $(areaData.href).html();
 
-		if ( infoContent.length == 0 ) {
-			infoContainer.wrapInner('<div class="hotspots-content"></div>');
-			infoContent = infoContainer.find('.hotspots-content');
-		}
-
-		infoContainer.addClass('loading');
-		infoContent.fadeOut('fast', function(){
-			infoContent.children().hide().end().append(info);
-			info.show();
-			infoContainer.removeClass('loading');
-			infoContent.fadeIn('fast', function(){
-				// Check for an embedded video player
-				var video = infoContent.find('.wp-video');
-				if (video.length) {
-					if (!infoContent.data('video-resized')) {
-						infoContent.data('video-resized', true);
-						window.dispatchEvent(new Event('resize'));
-					}
-				}
-			});
+		var tip = new L.Rrose({
+			offset: new L.Point(0,0),
+			autoPan: false,
+			maxHeight: container.height() - 48,
+			closeButton: areaData.trigger == 'click'
 		});
 
+		tip.setContent(content);
+		shape.bindPopup(tip);
 
-	}
-
-	/* Private: set up the information update when clicking on a map area */
-	var daInitialize = function() {
-		$('.da-error').hide();
-		$('.hotspot-info').hide();
-
-		var container = $('.hotspots-container');
-
-		container.each(function(){
-			var container = $(this);
-			container.on('touchstart click', 'area.url-area', function(e){
-				e.preventDefault();
-
-				var $this = $(this),
-					href = $this.attr('href'),
-					target = $this.attr('target');
-
-				if (target == '_new') { /* If the link is being opened in a new window */
-					if (null == window.open(href) ) {
-						window.location.href = href;
-					}
-				} else if ((this.host == '' || this.pathname == window.location.pathname) && this.hash != '') { /* If the link is on the current page */
-					window.location.href = href;
+		if (areaData.trigger === 'click') {
+			shape.on('click', function(e){
+				if (shape._path.classList.contains('hotspot-active')) {
+					shape.closePopup()
 				} else {
-					window.location.href = href;
+					shape.openPopup();
 				}
 			});
+		} else {
+			shape.on('mouseover', function(){
+				shape.openPopup();
+			});
+			shape.on('mouseout', function(){
+				shape.closePopup();
+			});
+		}
 
-			if (container.hasClass('event-hover')) {
-				container.find('area.url-area').each(function(){
-					var $this = $(this);
+		container.on('click', function(e){
+			e.stopPropagation();
+		});
+		$(document).on('click', function(e){
+			shape.closePopup();
+			shape._path.classList.remove('hotspot-active');
+		});
+	};
 
-					showUrlTooltip($this, container);
-				});
+	var leafletSetup = function(img) {
+		var id = img.data('id');
+		var container = $('<div id="hotspots-map-container-' + id + '" class="hotspots-map-container"></div>');
+		var imgWidth = img.width();
+		var imgHeight = img.height();
+
+		container.css({
+			'width': imgWidth + 'px',
+			'height': imgHeight + 'px'
+		});
+		img.after(container);
+
+		var map = L.map('hotspots-map-container-' + id, {
+			crs: L.CRS.Simple,
+			zoomControl: false,
+			attributionControl: false,
+			minZoom: -20,
+			zoomSnap: 0
+		});
+
+		map.dragging.disable();
+		map.touchZoom.disable();
+		map.doubleClickZoom.disable();
+		map.scrollWheelZoom.disable();
+
+		var domImg = img.get(0);
+		var natHeight = domImg.naturalHeight;
+		var natWidth = domImg.naturalWidth;
+		img.data('natW', natWidth);
+		img.data('natH', natHeight);
+		var bounds = [[0,0], [natHeight, natWidth]];
+		var imageLayer = L.imageOverlay(img.attr('src'), bounds).addTo(map);
+		map.fitBounds(bounds);
+
+		leaflets.push({
+			map: map,
+			img: img
+		});
+
+		drawSpots(img, map);
+	};
+
+	var drawSpots = function(img, map) {
+		var id = img.data('id');
+		var mapName = img.attr('usemap').replace('#', '');
+		var imageMap = $('map[name="' + mapName + '"]');
+		var areas = imageMap.find('area');
+		var container = img.parents('.hotspots-container');
+
+		areas.each(function(){
+			var area = $(this);
+			var shape = area.attr('shape');
+			var coords = area.attr('coords').split(',');
+			var areaData = {
+				style: area.data('color-scheme') ? area.data('color-scheme') : 'default',
+				title: area.attr('title'),
+				href: area.attr('href'),
+				target: area.attr('target'),
+				action: area.data('action'),
+				layout: container.data('layout'),
+				trigger: container.data('trigger')
+			};
+			switch(shape) {
+				case 'circle':
+					renderCircle(coords, map, img, areaData);
+					break;
+				case 'rect':
+					renderPoly(coords, map, img, areaData);
+					break
+				case 'poly':
+					renderPoly(coords, map, img, areaData);
+					break;
 			}
+		});
+		// Link to area after all the spots are drawn
+		linkToArea();
+	};
 
-			if (container.hasClass('layout-tooltip')) {
-				var screenWidth = $(window).width(),
-					daWidth = container.width(),
-					tipWidth = 280 * 3,
-					tooSmall = false;
+	var renderCircle = function(coords, map, img, areaData) {
+		var x = coords[0];
+		var y = img.data('natH') - coords[1];
+		var rad = coords[2];
+		var circle = L.circle([y,x], {
+			radius: rad,
+			className: 'hotspot-' + areaData.style,
+			title: areaData.title
+		}).addTo(map)
+		shapeEvents(circle, areaData);
+	};
 
-				if ((screenWidth < tipWidth) && ((daWidth/screenWidth) > 0.75)) {
-					tooSmall = true;
-				}
-
-				container.find('area.more-info-area').each(function(){
-					var $this = $(this),
-						newInfo = $($this.attr('href'));
-
-					if (typeof jQuery.qtip === 'function') {
-						showTooltip($this, newInfo, container, tooSmall);
-					}
-				});
+	var renderPoly = function (coords, map, img, areaData) {
+		var xCoords = [];
+		var yCoords = [];
+		for (var i = 0; i < coords.length; i++) {
+			if (i % 2 == 0) {
+				xCoords.push(coords[i]);
 			} else {
-				container.on('stickyHighlight unstickyHighlight', 'area.more-info-area', function(e){
-					var $this = $(this),
-					container = $this.parents('.hotspots-container'),
-					isSticky = $this.data('stickyCanvas') || '',
-					newInfo = $($this.attr('href'));
+				yCoords.push(coords[i]);
+			}
+		}
 
-					if (container.hasClass('layout-lightbox')) {
-						showLightbox(container, isSticky, newInfo, $this);
-					} else {
-						newInfo = isSticky ? $($this.attr('href')) : container.find('.hotspot-initial');
-						showNewInfo(container, isSticky, newInfo);
+		var polyCoords = yCoords.map(function(coord, index) {
+			return [img.data('natH') - coord, xCoords[index]];
+		});
+
+		var poly = L.polygon(polyCoords, {
+			className: 'hotspot-' + areaData.style,
+			title: areaData.title
+		}).addTo(map)
+
+		// If this is a more info hotspot, add it to the infoSpots object
+		if (areaData.href.charAt(0) === '#') {
+			var spotName = areaData.href.replace('#', '');
+			infoSpots[spotName] = poly;
+		}
+
+		shapeEvents(poly, areaData);
+	};
+
+	var shapeOver = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('over.responsilight');
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart') {
+			$shape.addClass('hotspot-active');
+			$shape.trigger('active.responsilight');
+		}
+	};
+
+	var shapeOut = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('out.responsilight');
+		if (areaData.trigger === 'hover') {
+			$shape.removeClass('hotspot-active');
+			$shape.trigger('inactive.responsilight');
+		}
+	};
+
+	var shapeClick = function(shape, areaData, e) {
+		var $shape = $(e.target.getElement());
+		$shape.data('areaData', areaData);
+		$shape.trigger('areaClick.responsilight');
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart' && !isMobileSafari) {
+			return;
+		}
+		$shape.toggleClass('hotspot-active');
+		if ($shape.hasClass('hotspot-active')) {
+			$shape.trigger('active.responsilight');
+		} else {
+			$shape.trigger('inactive.responsilight');
+		}
+		var oldActive = $shape.siblings('.hotspot-active');
+		if (oldActive.length) {
+			oldActive.removeClass('hotspot-active');
+		}
+	};
+
+	var shapeEvents = function(shape, areaData) {
+		// Handle URL spots
+		if (areaData.action == 'url') {
+			shape.bindTooltip(areaData.title);
+			shape.on('click', function(e) {
+				if (areaData.target == '_new' && !isMobileSafari) {
+					window.open(areaData.href, '_blank');
+				} else {
+					window.location = areaData.href;
+				}
+			});
+			return;
+		}
+
+		// Handle tooltip spots
+		if (areaData.layout === 'tooltip') {
+			showTooltip(shape, areaData);
+		}
+
+		// Add styled tooltip to all non-hover areas
+		if (areaData.action === 'url' || areaData.trigger === 'click' && areaData.layout !== 'tooltip') {
+			shape.bindTooltip(areaData.title);
+		}
+
+		// Handle all other spots
+		var moved = false;
+
+		shape.on('touchstart touchmove touchend click mouseover mouseout', function(e){
+			switch(e.type) {
+				case 'touchstart':
+					moved = false;
+					break;
+				case 'touchmove':
+					moved = true;
+					break;
+				case 'touchend':
+					if (moved) {
+						return;
 					}
-				});
+					shapeOver(shape, areaData, e);
+					shapeClick(shape, areaData, e);
+					break;
+				case 'click':
+					shapeClick(shape, areaData, e);
+					break;
+				case 'mouseover':
+					shapeOver(shape, areaData, e);
+					break;
+				case 'mouseout':
+					shapeOut(shape, areaData, e);
+					break;
 			}
 		});
 	};
 
-	/* Public: initialize */
-	hotspots.init = function() {
-	  mapSetup();
-	  daInitialize();
+	var linkToArea = function(){ // Called after the shapes are drawn
+		var hash = window.location.hash,
+			area = null;
+
+		if (!hash) return;
+
+		area = $('area[href="' + hash + '"]');
+
+		if (!area.length) return;
+
+		var spotName = hash.replace('#', '');
+		infoSpots[spotName].fire('click')
+	};
+
+	hotspots.setup = function(){
+		mapSetup();
+	};
+
+	hotspots.resizeTimer = null;
+	hotspots.resizing = false;
+
+	hotspots.init = function(){ // For backward compatibility - resets the size of the leaflet on demand
+		leaflets.forEach(function(item){
+			var isLoaded = item.img.data('status') === 'loaded';
+
+			if (!isLoaded) {
+				return;
+			}
+
+			item.img.next('.hotspots-map-container').css({
+				'width': item.img.width() + 'px',
+				'height': item.img.height() + 'px'
+			});
+			item.map.invalidateSize(true);
+			item.map.fitBounds([[0,0], [item.img.data('natH'), item.img.data('natW')]]);
+		});
+	};
+
+	hotspots.compatibilityFixes = function(){
+		if (window.Foundation) { /* Fix for Foundation firing tag change event indiscriminately when some items are clicked on the page */
+			$(window).on('change.zf.tabs', function(e){
+				if (e.target.tagName !== 'INPUT') {
+					hotspots.init();
+				}
+			});
+		}
+		$(window).on('pageloaded', function(){
+			hotspots.init();
+		});
+		$(window).on('load', function(){
+			hotspots.init();
+		});
+		$('.et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
+		$('.ui-tabs-anchor, .nav-tabs > li').on('click', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 750);
+		});
+		$('.responsive-tabs').on('click', '.responsive-tabs__list__item', function(){
+			hotspots.init();
+		});
+		$(window).on('et_hashchange', function() {
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
+		$('.vc_tta-tabs-container').on('click', '.vc_tta-tab', function(){
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
 	};
 
 }(jQuery, window.hotspots = window.hotspots || {}));
 
-
 jQuery(function(){
-	hotspots.init();
-	jQuery(window).on('pageloaded', function() {
+	hotspots.setup();
+	hotspots.compatibilityFixes();
+});
+
+jQuery(window).on('resize orientationchange', function(e){
+	var $window = jQuery(this);
+	if (!hotspots.resizing) {
+		$window.trigger('resizeStart.responsilight');
+		hotspots.resizing = true;
+	}
+	clearTimeout(hotspots.resizeTimer);
+	hotspots.resizeTimer = setTimeout(function(){
 		hotspots.init();
-	});
-	jQuery('.et_pb_tabs .et_pb_tabs_controls li').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});
-	jQuery('.ui-tabs-anchor').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 750);
-	});
-	jQuery('.et_pb_toggle_title').on('click', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});
-	jQuery(window).on('et_hashchange', function() {
-		setTimeout(function() {
-			hotspots.init();
-		}, 1000);
-	});});
+		$window.trigger('resizeComplete.responsilight');
+		hotspots.resizing = false;
+	}, 250);
+});
+
+window.onerror = function(errorMsg, url, lineNumber) { // This should be a fun little experiement!
+	var errorBox = jQuery('.da-error').show();
+	if (errorBox.length) {
+		var contents = errorBox.html();
+		errorBox.html(contents + '<br/><br/><strong>Error:</strong> ' + errorMsg + '<br/>Line ' + lineNumber + ': ' + url);
+	}
+	return false;
+}

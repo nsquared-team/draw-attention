@@ -3,13 +3,16 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.0
-Stable tag: 1.7.7
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Create interactive images in WordPress. Perfect for floor plans and real estate photos, trade show booths, group photos, product features, annotated image tutorials, or any image map.
 
 == Description ==
+
+### New in 1.8: Improved interactive image rendering ###
+We re-wrote the display of the plugin to use SVG for faster rendering and better browser support
 
 ### Responsive Design ###
 Interactive images resize to fit your theme and the available screen size
@@ -58,20 +61,23 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 == Installation ==
 
-= Using The WordPress Dashboard =
-
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Search for 'draw attention'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
-= Uploading in WordPress Dashboard =
+= Manual Install =
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
 3. Select `draw-attention.zip` from your computer
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
+
+= After Installation =
+
+1. You'll see a new Draw Attention menu item on the left menu
+1. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
 
 == Frequently Asked Questions ==
 
@@ -98,6 +104,9 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.8 =
+* Improved: New SVG-powered front-end rendering for better cross browser support and improved performance
 
 = 1.7.7 =
 * Improved: Default text color on new images
