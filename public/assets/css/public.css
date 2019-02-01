@@ -849,10 +849,16 @@ html.with-featherlight {
     top: 0; }
 
 .layout-left .hotspots-interaction {
-  flex-direction: row; }
+  flex-direction: column-reverse; }
+  @media screen and (min-width: 600px) {
+    .layout-left .hotspots-interaction {
+      flex-direction: row; } }
 
 .layout-right .hotspots-interaction {
-  flex-direction: row-reverse; }
+  flex-direction: column-reverse; }
+  @media screen and (min-width: 600px) {
+    .layout-right .hotspots-interaction {
+      flex-direction: row-reverse; } }
 
 @media screen and (min-width: 600px) {
   .layout-left .hotspots-placeholder,
