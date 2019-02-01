@@ -316,14 +316,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since    1.0.0
 		 */
 		public function enqueue_scripts() {
-			wp_register_script( $this->plugin_slug . '-responsilight', plugins_url( 'assets/js/jquery.responsilight.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-responsilight', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
+			wp_register_script( $this->plugin_slug . '-leaflet', plugins_url( 'assets/js/leaflet.js', __FILE__ ), array(), '1.3.4', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-leaflet-rrose', plugins_url( 'assets/js/leaflet.rrose-min.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), '0.2.0', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-rrose', 'jquery' ), self::VERSION, true );
 
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
 			if ( !empty( $enqueue ) ) {
-				wp_enqueue_script( $this->plugin_slug . '-responsilight' );
-				wp_enqueue_script( $this->plugin_slug . '-featherlight' );
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 			}
 		}
@@ -376,195 +374,119 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since    1.0.0
 		 */
 		public function shortcode( $atts ) {
-			wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
-			wp_enqueue_style( $this->plugin_slug . '-plugin-styles' );
+			// Begin settings array
+			$settings = array(
+				'has_photon' => class_exists( 'Jetpack_Photon' ),
+				'url_hotspots' => array(),
+				'urls_only' => false,
+				'urls_class' => '',
+			);
 
-			if ( class_exists( 'Jetpack_Photon' ) ) {
+			// Get the DA image ID
+			$latest_da = get_posts('post_type=' . $this->cpt->post_type . '&numberposts=1');
+			$settings['image_id'] = $latest_da[0]->ID;
+
+			// Get and set DA settings
+			$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
+			$settings['spot_id'] = 'hotspot-' . $settings['image_id'];
+
+			// Add hotspots to settings
+			$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->custom_fields->prefix . 'hotspots', true );
+			$settings['hotspots'] = apply_filters( 'da_render_hotspots', $settings['hotspots'], $settings['image_id'] );
+			if ( empty( $settings['hotspots'] ) ) {
+				$settings['url_hotspots'] = array();
+			} else {
+				$settings['url_hotspots'] = array_filter($settings['hotspots'], function($var){
+					if ( empty( $var['action'] ) ) {
+						return false;
+					}
+
+					return $var['action'] == 'url';
+				});
+				if ( count( $settings['hotspots'] ) == count( $settings['url_hotspots'] ) ) {
+					$settings['urls_only'] = true;
+					$settings['urls_class'] = 'links-only';
+				}
+			}
+
+			// Set default values for free settings
+			$settings['layout'] = 'left';
+			$settings['event_trigger'] = 'click';
+			$settings['always_visible'] = 'false';
+
+			// Create hotspot style
+			if ( empty( $settings['styles'] ) ) {
+				$settings['styles'] = array();
+			}
+			$settings['styles'][] = array(
+				'title' => 'default',
+				'map_highlight_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0],
+				'map_highlight_opacity' => $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0],
+				'map_border_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0],
+				'_da_map_hover_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0],
+				'_da_map_hover_opacity' => $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0]
+			);
+
+			// Create formatted array of styles
+			$formatted_styles = array();
+			foreach ($settings['styles'] as $key => $style) {
+				if ( empty( $style['title'] ) ) {
+					$style['title'] = 'Custom';
+				}
+
+				$new_style = array(
+					'name' => 'default',
+					'borderWidth' => $settings['border_width'],
+				);
+
+				$new_style['display'] = array(
+					'fillColor' => '#ffffff',
+					'fillOpacity' => 0,
+					'borderColor' => '#ffffff',
+					'borderOpacity' => 0,
+				);
+				$new_style['hover'] = array(
+					'fillColor' => $style['map_highlight_color'],
+					'fillOpacity' => $style['map_highlight_opacity'],
+					'borderColor' => $style['map_border_color'],
+					'borderOpacity' => $settings['border_opacity'],
+				);
+				array_push($formatted_styles, $new_style);
+			}
+
+			// Get image post, src, and meta
+			$settings['img_post'] = get_post($settings['image_id']);
+			$settings['img_src'] = wp_get_attachment_image_src( get_post_thumbnail_id( $settings['image_id'] ), 'full' );
+			$settings['img_url'] = $settings['img_src'][0];
+			$settings['img_width'] = $settings['img_src'][1];
+			$settings['img_height'] = $settings['img_src'][2];
+			$settings['img_alt'] = get_post_meta( get_post_thumbnail_id( $settings['img_post'] ), '_wp_attachment_image_alt', true );
+			if ( empty( $settings['img_alt'] ) ) {
+				$settings['img_alt'] = get_the_title( $settings['img_post'] );
+			}
+
+			// Enqueue CSS and Scripts
+			wp_enqueue_style( $this->plugin_slug . '-plugin-styles' );
+			wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
+
+			// Remove Photon filter
+			if ( $settings['has_photon'] ) {
 				$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
 			}
+			$this->photon_excluded_images[ $settings['image_id'] ] = $settings['img_url'];
 
-			$image_args = array(
-				'post_type' => $this->cpt->post_type,
-				'posts_per_page' => 1,
-			);
-			$image = new WP_Query($image_args);
-			if ($image->have_posts() ) {
-				$image->the_post();
-				$imageID = get_the_ID();
-			}
-			wp_reset_query();
+			// Create a new embed
+			$wp_embed = new WP_Embed();
 
-			$hotspots = get_post_meta( $imageID, $this->custom_fields->prefix.'hotspots', true );
-			$url_hotspots = array();
-			$urls_only = false;
-			$urls_class = '';
-			$html = '';
+			ob_start();
 
-			if ( empty( $hotspots ) || empty( $hotspots['0']['coordinates'] ) ) {
-				_e( 'You need to define some clickable areas for your image.', 'drawattention' );
-				echo ' ';
-				echo edit_post_link( __( 'Edit Image', 'drawattention' ), false, false, $imageID );
-			} else {
-				$img_src = wp_get_attachment_image_src( get_post_thumbnail_id( $imageID ), 'full' );
+			require( $this->get_plugin_dir() . '/public/views/shortcode_template.php' );
 
-				$img_url = $img_src[0];
-				$img_width = $img_src[1];
-				$img_height = $img_src[2];
-				if ( class_exists( 'Jetpack_Photon' ) ) {
-					$this->photon_excluded_images[$imageID] = $img_src[0];
-				}
-
-				$img_post = get_post( $imageID );
-
-				$settings = get_metadata( 'post', $imageID, '', false );
-				$layout = ( !empty( $settings[$this->custom_fields->prefix.'map_layout'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_layout'][0] : 'left';
-
-				if ( !empty( $_GET['fl_builder'] ) || !empty( $_GET['elementor-preview'] ) || ( !empty( $_GET['action'] ) && $_GET['action'] == 'elementor' ) ) {
-					return '<div class="hotspots-image-container">
-						<img
-							width="'.$img_width.'"
-							height="'.$img_height.'"
-							src="'.$img_url.'"
-							alt="'.$img_alt.'"
-							class="hotspots-image skip-lazy"
-							data-id="'.$image_id.'"
-							data-no-lazy="1"
-							data-lazy="false"
-							>
-					</div>';
-				}
-
-				$spot_id = 'hotspot-' . $imageID;
-				$bg_color = ( !empty( $settings[$this->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_background_color'][0] : '';
-				$text_color = ( !empty( $settings[$this->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_text_color'][0] : '';
-				$title_color = ( !empty( $settings[$this->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings[$this->custom_fields->prefix.'map_title_color'][0] : '';
-				$image_background_color = ( !empty( $settings[$this->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings[$this->custom_fields->prefix.'image_background_color'][0] : '';
-				if ( empty( $image_background_color ) ) {
-					$image_background_color = '#efefef';
-				}
-
-				$custom_css = "
-					#{$spot_id} .hotspots-image-container {
-						background: {$image_background_color};
-					}
-
-					#{$spot_id} .hotspots-placeholder,
-					.featherlight .featherlight-content.lightbox{$imageID} {
-						background: {$bg_color};
-						color: {$text_color};
-					}
-
-					#{$spot_id} .hotspot-title,
-					.featherlight .featherlight-content.lightbox{$imageID} .hotspot-title {
-						color: {$title_color};
-					}";
-				wp_add_inline_style( $this->plugin_slug . '-plugin-styles', $custom_css );
-
-				$wp_embed = new WP_Embed();
-				$image_html = '';
-				$image_html .=    '<div class="hotspots-image-container">';
-				$image_html .=      '<img width="' . $img_width . '" height= "' . $img_height . '" src="' . $img_url . '" class="hotspots-image skip-lazy" usemap="#hotspots-image-' . $imageID . '" data-event-trigger="click" data-highlight-color="' . $settings[$this->custom_fields->prefix.'map_highlight_color'][0] . '" data-highlight-opacity="' . $settings[$this->custom_fields->prefix.'map_highlight_opacity'][0] . '" data-highlight-border-color="' . $settings[$this->custom_fields->prefix.'map_border_color'][0] . '" data-highlight-border-width="' . $settings[$this->custom_fields->prefix.'map_border_width'][0] . '" data-highlight-border-opacity="' . $settings[$this->custom_fields->prefix.'map_border_opacity'][0] . '" data-no-lazy="1" data-lazy="false" />';
-				$image_html .=    '</div>';
-
-				$info_html = '';
-				$info_html .=    '<div class="hotspots-placeholder" id="content-hotspot-' . $imageID . '">';
-				$info_html .=      '<div class="hotspot-initial">';
-				$info_html .=        '<h2 class="hotspot-title">' . get_the_title( $imageID ) . '</h2>';
-				$more_info_html = ( !empty( $settings[$this->custom_fields->prefix.'map_more_info'][0]) ) ? apply_filters( 'da_description', do_shortcode( $wp_embed->run_shortcode( $settings[$this->custom_fields->prefix.'map_more_info'][0] ) ) ) : '';
-				$info_html .=        '<div class="hostspot-content">' . $more_info_html . '</div>';
-				$info_html .=      '</div>';
-				$info_html .=    '</div>';
-
-				$map_html = '';
-				$map_html .=    '<map name="hotspots-image-' . $imageID . '" class="hotspots-map">';
-				foreach ($hotspots as $key => $hotspot) {
-					if ( empty( $hotspot['coordinates'] ) ) { continue; }
-					$target = '';
-					if( !empty( $hotspot[ 'action' ] ) ) {
-						$target = $hotspot['action'];
-					}
-					$new_window = '';
-					$target_window = '';
-					if ( !empty( $hotspot[ 'action-url-open-in-window' ] ) ) {
-						$new_window = $hotspot[ 'action-url-open-in-window' ];
-						$target_window = ( $new_window == 'on' ? '_new' : '' );
-					}
-					$target_url = '';
-					if ( !empty( $hotspot[ 'action-url-url' ] ) ) {
-						$target_url = $hotspot[ 'action-url-url' ];
-					}
-
-					$area_class = ( $target == 'url' ) ? 'url-area' : 'more-info-area';
-
-					$href = ( $target == 'url' ) ? $target_url : '#hotspot-' . $spot_id . '-' . $key;
-
-					$href = ( ! empty($href) ) ? $href : '#';
-
-					$coords = $hotspot['coordinates'];
-					if ( empty( $hotspot['title'] ) ) {
-						$hotspot['title'] = '';
-					}
-					$map_html .= '<area shape="poly" coords="' . $coords . '" href="' . $href . '" title="' . $hotspot['title'] . '" data-action="'. $target . '" target="' . $target_window . '" class="' . $area_class . '">';
-					if ( $target == 'url' ) {
-						$url_hotspots[] = $hotspot;
-					}
-				}
-
-				if ( count( $hotspots ) == count( $url_hotspots ) ) {
-					$urls_only = true;
-					$urls_class = 'links-only';
-				}
-
-				$map_html .=    '</map>';
-
-				$html .=  '<div class="hotspots-container ' . $urls_class . ' layout-' . $layout . ' event-click' .'" id="' . $spot_id . '">';
-				$html .=		'<div class="hotspots-interaction">';
-
-				if ( $urls_only ) {
-					$html .= $image_html;
-				} else {
-					$html .= $info_html;
-					$html .= $image_html;
-				}
-
-				$html .=		'</div>'; /* End of interaction div that wraps the text area and image only */
-
-				$html .= $map_html;
-
-				if ( current_user_can( 'manage_options' ) ) :
-					$html .= '<div id="error-' . $spot_id . '" class="da-error"><p>It looks like there is a JavaScript error in a plugin or theme that is causing a conflict with Draw Attention. For more information on troubleshooting this issue, please see our <a href="https://wpdrawattention.com/document/troubleshooting-conflicts-themes-plugins/" target="_new">help page</a>.</div>';
-				endif;
-
-				foreach ($hotspots as $key => $hotspot) {
-					$html .=  '<div class="hotspot-info" id="hotspot-' . $spot_id . '-' . $key . '">';
-					if ( !empty( $hotspot['title'] ) ) {
-						$html .=    '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>';
-					}
-					if ( !empty( $hotspot['detail_image_id'] ) ) {
-						$html .=  '<div class="hotspot-thumb">';
-						$html .=    wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'medium', $hotspot, $img_post, $settings ) );
-						$html .=  '</div>';
-					} elseif ( empty( $hotspot['detail_image_id'] ) && ! empty( $hotspot[ 'detail_image' ] ) ) {
-						$html .=  '<div class="hotspot-thumb">';
-						$html .=  '<img src="' . $hotspot[ 'detail_image' ] . '"/>';
-						$html .=  '</div>';
-					}
-					$description_html = ( !empty( $hotspot['description'] ) ) ? apply_filters( 'da_description', do_shortcode ( $wp_embed->run_shortcode( $hotspot['description'] ) ) ) : '';
-					$html .=    '<div class="hotspot-content">' . $description_html . '</div>';
-					$html .=  '</div>';
-				}
-
-				$html .=  '</div>';
-			}
-
-			if ( class_exists( 'Jetpack_Photon' ) && $photon_removed ) {
+			if ( $settings['has_photon'] && $photon_removed ) {
 				add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
 			}
 
-
-			return $html;
-
-
+			return ob_get_clean();
 		}
 
 		function add_shortcode_metabox() {
