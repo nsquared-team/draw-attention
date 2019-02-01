@@ -57,13 +57,19 @@
 
 .layout-left {
 	.hotspots-interaction {
-		flex-direction: row;
+		flex-direction: column-reverse;
+		@include bp(small) {
+			flex-direction: row;
+		}
 	}
 }
 
 .layout-right {
 	.hotspots-interaction {
-		flex-direction: row-reverse;
+		flex-direction: column-reverse;
+		@include bp(small) {
+			flex-direction: row-reverse;
+		}
 	}
 }
 
