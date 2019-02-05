@@ -95,6 +95,18 @@
 	}
 }
 
+.layout-left.links-only,
+.layout-right.links-only {
+	.hotspots-image-container {
+		@include bp(small) {
+			flex: 0 0 100%;
+		}
+		@include bp(medium) {
+			flex: 0 0 100%;
+		}
+	}
+}
+
 .layout-bottom {
 	.hotspots-interaction {
 		flex-direction: column-reverse;
