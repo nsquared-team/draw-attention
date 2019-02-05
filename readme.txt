@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, image maps, highlightable areas, highlight images, product images, trade shows, floor plans, virtual tour, call to action
 Requires at least: 3.5.1
 Tested up to: 5.0
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 
 Create interactive images in WordPress. Perfect for floor plans, trade shows, photo tagging, product features, and tutorials.
 
@@ -65,6 +65,11 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 1. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
 
 == Changelog ==
+
+= 1.9.2 =
+* Improved: Prevent hover tooltips from requiring scrolling to view content
+* Fixed: Image size too small in some cases
+* Fixed: Image background color not applying as expected
 
 = 1.9.1 =
 * Improved: Use minified JS file for RRose
