@@ -774,6 +774,16 @@ a.leaflet-rrose-close-button:hover {
   .layout-left .hotspots-image-container {
     flex: 0 0 75%; } }
 
+@media screen and (min-width: 600px) {
+  .layout-left.links-only .hotspots-image-container,
+  .layout-right.links-only .hotspots-image-container {
+    flex: 0 0 100%; } }
+
+@media screen and (min-width: 900px) {
+  .layout-left.links-only .hotspots-image-container,
+  .layout-right.links-only .hotspots-image-container {
+    flex: 0 0 100%; } }
+
 .hotspot-title,
 .entry-content .hotspot-title {
   margin-top: 0;
