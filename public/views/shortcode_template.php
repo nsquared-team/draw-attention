@@ -23,7 +23,8 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 <?php else : ?>
 
 <style>
-	#<?php echo $settings['spot_id']; ?> .hotspots-image-container {
+	#<?php echo $settings['spot_id']; ?> .hotspots-image-container,
+	#<?php echo $settings['spot_id']; ?> .leaflet-container {
 		background: <?php echo $settings['img_bg']; ?>
 	}
 
