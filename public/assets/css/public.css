@@ -484,8 +484,13 @@
 
 .leaflet-popup-scrolled {
   overflow: auto;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd; }
+  border-bottom: 1px solid rgba(221, 221, 221, 0.5);
+  border-top: 1px solid rgba(221, 221, 221, 0.5); }
+
+.event-hover .leaflet-popup-scrolled[style] {
+  border-bottom: 0 none;
+  border-top: 0 none;
+  height: auto !important; }
 
 .leaflet-oldie .leaflet-popup-content-wrapper {
   zoom: 1; }
