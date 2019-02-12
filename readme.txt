@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.0
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,9 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.8.3 =
+* Fixed: PHP Notice on some images
 
 = 1.8.2 =
 * Fixed: Background color setting not applying
