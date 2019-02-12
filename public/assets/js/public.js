@@ -10,7 +10,7 @@
 	var leaflets = [];
 
 	// Store all the more info area hotspots in an object for access later
-	var infoSpots = {};
+	hotspots.infoSpots = {};
 
 	var mapSetup = function(){
 		$('.da-error').hide();
@@ -284,7 +284,7 @@
 		// If this is a more info hotspot, add it to the infoSpots object
 		if (areaData.href.charAt(0) === '#') {
 			var spotName = areaData.href.replace('#', '');
-			infoSpots[spotName] = poly;
+			hotspots.infoSpots[spotName] = poly;
 		}
 
 		shapeEvents(poly, areaData);
@@ -395,7 +395,7 @@
 		if (!area.length) return;
 
 		var spotName = hash.replace('#', '');
-		infoSpots[spotName].fire('click')
+		hotspots.infoSpots[spotName].fire('click')
 	};
 
 	hotspots.setup = function(){
