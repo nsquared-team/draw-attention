@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.8.2';
+		const VERSION = '1.8.3';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -428,11 +428,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			}
 			$settings['styles'][] = array(
 				'title' => 'default',
-				'map_highlight_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0],
-				'map_highlight_opacity' => $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0],
-				'map_border_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0],
-				'_da_map_hover_color' => $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0],
-				'_da_map_hover_opacity' => $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0]
+				'map_highlight_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0] : '',
+				'map_highlight_opacity' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0] : '',
+				'map_border_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0] : '',
+				'_da_map_hover_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0] : '',
+				'_da_map_hover_opacity' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0] : ''
 			);
 
 			// Create formatted array of styles
