@@ -188,7 +188,8 @@
 			zoomControl: false,
 			attributionControl: false,
 			minZoom: -20,
-			zoomSnap: 0
+			zoomSnap: 0,
+			tap: false
 		});
 
 		map.dragging.disable();
@@ -376,6 +377,9 @@
 					break;
 				case 'mouseover':
 					shapeOver(shape, areaData, e);
+					if (isMobileSafari) {
+						shapeClick(shape, areaData, e);
+					}
 					break;
 				case 'mouseout':
 					shapeOut(shape, areaData, e);
