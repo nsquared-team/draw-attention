@@ -498,6 +498,16 @@
 		"oAP": "/js/index.php",
 		"oF": 0
 		},
+	"/js/leaflet.js": {
+		"ft": 64,
+		"ma": 0,
+		"mi": 1,
+		"oA": 0,
+		"oAP": "/js/leaflet-min.js",
+		"oF": 0,
+		"sC": 3,
+		"tS": 0
+		},
 	"/js/leaflet.rrose-min.js": {
 		"ft": 64,
 		"ma": 0,
