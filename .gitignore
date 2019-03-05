@@ -144,3 +144,4 @@ php_errorlog
 wp-config.php
 
 wp-content/plugins/akismet/.htaccess
+public/assets/config.codekit3
