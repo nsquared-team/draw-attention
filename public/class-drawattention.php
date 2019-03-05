@@ -320,6 +320,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-leaflet-rrose', plugins_url( 'assets/js/leaflet.rrose-min.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), '0.2.0', $in_footer = true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-rrose', 'jquery' ), self::VERSION, true );
 
+			wp_localize_script( $this->plugin_slug . '-plugin-script', 'drawattentionData', array(
+				'isLoggedIn' => is_user_logged_in(),
+				'isAdmin' => current_user_can( 'administrator' )
+			) );
+
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
 			if ( !empty( $enqueue ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
