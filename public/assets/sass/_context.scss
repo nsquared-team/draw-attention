@@ -1,0 +1,22 @@
+.da-address-wrapper {
+	background: #efefef;
+	color: black;
+	font-size: 0.75em;
+	opacity: 1;
+	padding: 1em;
+	position: absolute;
+	z-index: 999999;
+	p {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.da-address-close {
+	cursor: pointer;
+	font-size: 1.333em;
+	line-height: 1;
+	position: absolute;
+	right: 0;
+	top: 0;
+}

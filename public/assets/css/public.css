@@ -172,6 +172,7 @@
 
 .leaflet-fade-anim .leaflet-popup {
   opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear; }
 
 .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
@@ -185,12 +186,14 @@
   will-change: transform; }
 
 .leaflet-zoom-anim .leaflet-zoom-animated {
+  -webkit-transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1);
   transition: transform 0.25s cubic-bezier(0, 0, 0.25, 1), -webkit-transform 0.25s cubic-bezier(0, 0, 0.25, 1); }
 
 .leaflet-zoom-anim .leaflet-tile,
 .leaflet-pan-anim .leaflet-tile {
+  -webkit-transition: none;
   transition: none; }
 
 .leaflet-zoom-anim .leaflet-zoom-hide {
@@ -591,6 +594,7 @@
   border-right-color: #fff; }
 
 path[class^='hotspot-'] {
+  -webkit-transition: stroke 300ms, stroke-opacity 300ms, fill 300ms, fill-opacity 300ms;
   transition: stroke 300ms, stroke-opacity 300ms, fill 300ms, fill-opacity 300ms; }
 
 /* Rrose layout */
@@ -800,6 +804,8 @@ html.with-featherlight {
     display: none; } }
 
 .hotspots-interaction {
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
   margin: 1em 0;
   width: 100%; }
@@ -854,54 +860,84 @@ html.with-featherlight {
     top: 0; }
 
 .layout-left .hotspots-interaction {
-  flex-direction: column-reverse; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
   @media screen and (min-width: 600px) {
     .layout-left .hotspots-interaction {
-      flex-direction: row; } }
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: row;
+              flex-direction: row; } }
 
 .layout-right .hotspots-interaction {
-  flex-direction: column-reverse; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
   @media screen and (min-width: 600px) {
     .layout-right .hotspots-interaction {
-      flex-direction: row-reverse; } }
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+      -webkit-flex-direction: row-reverse;
+              flex-direction: row-reverse; } }
 
 @media screen and (min-width: 600px) {
   .layout-left .hotspots-placeholder,
   .layout-right .hotspots-placeholder {
-    flex: 0 0 34%;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 34%;
+            flex: 0 0 34%;
     max-width: 34%; } }
 
 @media screen and (min-width: 900px) {
   .layout-left .hotspots-placeholder,
   .layout-right .hotspots-placeholder {
-    flex: 0 0 25%;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 25%;
+            flex: 0 0 25%;
     max-width: 25%; } }
 
 @media screen and (min-width: 600px) {
   .layout-left .hotspots-image-container,
   .layout-right .hotspots-image-container {
-    flex: 0 0 66%; } }
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 66%;
+            flex: 0 0 66%; } }
 
 @media screen and (min-width: 900px) {
   .layout-left .hotspots-image-container,
   .layout-right .hotspots-image-container {
-    flex: 0 0 75%; } }
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 75%;
+            flex: 0 0 75%; } }
 
 @media screen and (min-width: 600px) {
   .layout-left.links-only .hotspots-image-container,
   .layout-right.links-only .hotspots-image-container {
-    flex: 0 0 100%; } }
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100%;
+            flex: 0 0 100%; } }
 
 @media screen and (min-width: 900px) {
   .layout-left.links-only .hotspots-image-container,
   .layout-right.links-only .hotspots-image-container {
-    flex: 0 0 100%; } }
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100%;
+            flex: 0 0 100%; } }
 
 .layout-bottom .hotspots-interaction {
-  flex-direction: column-reverse; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
 
 .layout-top .hotspots-interaction {
-  flex-direction: column; }
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column; }
 
 .layout-tooltip .leaflet-container {
   overflow: visible; }
@@ -933,6 +969,26 @@ html.with-featherlight {
 .hotspot-info.da-hidden {
   display: none; }
 
+.da-address-wrapper {
+  background: #efefef;
+  color: black;
+  font-size: 0.75em;
+  opacity: 1;
+  padding: 1em;
+  position: absolute;
+  z-index: 999999; }
+  .da-address-wrapper p {
+    margin: 0;
+    padding: 0; }
+
+.da-address-close {
+  cursor: pointer;
+  font-size: 1.333em;
+  line-height: 1;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
 .hotspots-container {
   position: relative;
   width: 100%; }
@@ -941,6 +997,7 @@ html.with-featherlight {
   .hotspots-container .hotspots-placeholder,
   .hotspots-container .hotspots-image-container {
     opacity: 0.1;
+    -webkit-transition: opacity 500ms ease-in-out;
     transition: opacity 500ms ease-in-out; }
     .hotspots-container .hotspots-placeholder > div.hotspot-initial,
     .hotspots-container .hotspots-image-container > div.hotspot-initial {

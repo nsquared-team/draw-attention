@@ -214,6 +214,32 @@
 		drawSpots(img, map);
 	};
 
+	var showContextMenu = function(shape, areaData, e) {
+		var hash = areaData.href;
+		var container = $(shape._map._container);
+
+		if (!hash) {
+			return;
+		}
+
+		$('.da-address-wrapper').remove();
+
+		var windowAddress = window.location.href.split('#')[0];
+		var shapeAddress = windowAddress + hash;
+    var div = $('<div class="da-address-wrapper"></div>')
+        .css({
+            'left': e.originalEvent.pageX + 'px',
+            'top': e.originalEvent.pageY + 'px'
+        })
+        .append('<p>' + shapeAddress + '</p>')
+        .append('<span class="da-address-close">&times;</span>')
+        .appendTo(document.body);
+
+    div.find('.da-address-close').on('click', function(){
+    	div.remove();
+    });
+	};
+
 	var drawSpots = function(img, map) {
 		var id = img.data('id');
 		var mapName = img.attr('usemap').replace('#', '');
@@ -342,6 +368,13 @@
 				}
 			});
 			return;
+		}
+
+		// Show right-click context menu for logged-in admins only
+		if (drawattentionData.isLoggedIn && drawattentionData.isAdmin) {
+			shape.on('contextmenu', function(e){
+				showContextMenu(shape, areaData, e);
+			});
 		}
 
 		// Handle tooltip spots

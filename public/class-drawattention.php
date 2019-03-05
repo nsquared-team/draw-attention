@@ -329,6 +329,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-featherlight', plugins_url( 'assets/js/featherlight.min.js', __FILE__ ), array(), '1.7.13', $in_footer = true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-rrose', 'jquery', $this->plugin_slug . '-featherlight' ), self::VERSION, true );
 
+			wp_localize_script( $this->plugin_slug . '-plugin-script', 'drawattentionData', array(
+				'isLoggedIn' => is_user_logged_in(),
+				'isAdmin' => current_user_can( 'administrator' )
+			) );
+
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
 			if ( !empty( $enqueue ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
