@@ -189,7 +189,7 @@
 			attributionControl: false,
 			minZoom: -20,
 			zoomSnap: 0,
-			tap: false
+			tap: !isMobileSafari
 		});
 
 		map.dragging.disable();
