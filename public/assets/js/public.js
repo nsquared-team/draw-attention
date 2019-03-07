@@ -4,6 +4,7 @@
 	var ua = window.navigator.userAgent,
 		isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
 		isWebkit = !!ua.match(/WebKit/i),
+		isWebkitiOS = isiOS && isWebkit,
 		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
 
 	// Store all the leaflets on the page in an array for access later
@@ -189,7 +190,7 @@
 			attributionControl: false,
 			minZoom: -20,
 			zoomSnap: 0,
-			tap: !isMobileSafari
+			tap: !isWebkitiOS
 		});
 
 		map.dragging.disable();
@@ -410,7 +411,7 @@
 					break;
 				case 'mouseover':
 					shapeOver(shape, areaData, e);
-					if (isMobileSafari) {
+					if (isWebkitiOS) {
 						shapeClick(shape, areaData, e);
 					}
 					break;
