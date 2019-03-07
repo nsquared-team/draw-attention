@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.1
-Stable tag: 1.8.4
+Stable tag: 1.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 1. You'll see a new Draw Attention menu item on the left menu
 1. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
+1. After your image is created, you can embed it into any page or post with the `[drawattention]` shortcode.
 
 == Frequently Asked Questions ==
 
@@ -104,6 +105,10 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.8.5 =
+* Improved: Add smooth scrolling for URL action to an element on the same page
+* Fixed: Unable to scroll or zoom page over image on Chrome on iOS
 
 = 1.8.4 =
 * Improved: Add right-click to get link to hotspot for logged-in admins
