@@ -362,10 +362,20 @@
 		if (areaData.action == 'url') {
 			shape.bindTooltip(areaData.title);
 			shape.on('click', function(e) {
-				if (areaData.target == '_new' && !isMobileSafari) {
+				if (areaData.target == '_new' && !isMobileSafari) { // new window
 					window.open(areaData.href, '_blank');
-				} else {
-					window.location = areaData.href;
+				} else { // same window
+					var first = areaData.href.charAt(0);
+					var targetElem = $(areaData.href);
+					if (targetElem.length) { // hash link to existing target
+						$('html, body').animate({
+							scrollTop: targetElem.offset().top - 50
+						}, 750, function(){ // callback after scrolling
+							history.pushState({}, '', areaData.href);
+						})
+					} else {
+						window.location = areaData.href;
+					}
 				}
 			});
 			return;
