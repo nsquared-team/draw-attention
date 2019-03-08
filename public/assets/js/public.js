@@ -366,8 +366,8 @@
 					window.open(areaData.href, '_blank');
 				} else { // same window
 					var first = areaData.href.charAt(0);
-					var targetElem = $(areaData.href);
-					if (targetElem.length) { // hash link to existing target
+					var targetElem = first === '#' ? $(areaData.href) : null;
+					if (targetElem && targetElem.length) { // hash link to existing target
 						$('html, body').animate({
 							scrollTop: targetElem.offset().top - 50
 						}, 750, function(){ // callback after scrolling
