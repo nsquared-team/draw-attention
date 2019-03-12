@@ -360,7 +360,9 @@
 	var shapeEvents = function(shape, areaData) {
 		// Handle URL spots
 		if (areaData.action == 'url') {
-			shape.bindTooltip(areaData.title);
+			if (areaData.title) {
+				shape.bindTooltip(areaData.title);
+			}
 			shape.on('click', function(e) {
 				if (areaData.target == '_new' && !isMobileSafari) { // new window
 					window.open(areaData.href, '_blank');
@@ -395,7 +397,9 @@
 
 		// Add styled tooltip to all non-hover areas
 		if (areaData.action === 'url' || areaData.trigger === 'click' && areaData.layout !== 'tooltip') {
-			shape.bindTooltip(areaData.title);
+			if (areaData.title) {
+				shape.bindTooltip(areaData.title);
+			}
 		}
 
 		// Handle all other spots
