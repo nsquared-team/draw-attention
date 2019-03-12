@@ -107,7 +107,7 @@ We have a video walkthrough of creating your first image available in [our docum
 == Changelog ==
 
 = 1.8.6 =
-* Fixed: Broken URL hotspots
+* Fixed: Broken URL hotspots (introduced in v1.8.5)
 
 = 1.8.5 =
 * Improved: Add smooth scrolling for URL action to an element on the same page
