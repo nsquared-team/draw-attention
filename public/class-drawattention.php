@@ -391,6 +391,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			$latest_da = get_posts('post_type=' . $this->cpt->post_type . '&numberposts=1');
 			$settings['image_id'] = $latest_da[0]->ID;
 
+			// WPML Support
+			if ( function_exists ( 'icl_object_id' ) ) {
+				$settings['image_id'] = icl_object_id($latest_da[0]->ID, 'da_image', true);
+			}
+
 			// Get and set DA settings
 			$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
 			$settings['spot_id'] = 'hotspot-' . $settings['image_id'];
