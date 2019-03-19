@@ -56,7 +56,7 @@ class DrawAttention_CustomFields {
 
 	public function add_hotspot_area_details_table_metabox() {
 		add_meta_box( 'hotspot_area_details_table',
-			__('Hotspot Areas', 'drawattention'),
+			__('Hotspot Areas', 'draw-attention' ),
 			array( $this, 'hotspot_area_details_table_metabox_callback' ),
 			$page,
 			'normal',
