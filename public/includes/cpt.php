@@ -42,7 +42,7 @@ class DrawAttention_CPT {
 				'not_found_in_trash' => __('Nothing found in Trash', 'drawattention'), /* This displays if there is nothing in the trash */
 				'parent_item_colon' => ''
 				), /* end of arrays */
-				'description' => __( 'Stores '.$this->post_type.'s in the database', 'drawattention' ), /* CPT_SINGULAR_NAME Description */
+				'description' => __( 'Stores '.$this->post_type.'s in the database', 'draw-attention' ), /* CPT_SINGULAR_NAME Description */
 				'public' => true,
 				'publicly_queryable' => true,
 				'exclude_from_search' => true,
@@ -127,7 +127,7 @@ class DrawAttention_CPT {
 
 		$new_columns          = array();
 		$new_columns['cb']    = $defaults['cb'];
-		$new_columns['image'] = __( 'Image', 'drawattention' );
+		$new_columns['image'] = __( 'Image', 'draw-attention' );
 
 		$last_item = '';
 
