@@ -19,15 +19,15 @@ class DrawAttention_Pro {
 	function add_layout_metabox( $metaboxes ) {
 		$metaboxes['da_layout'] = array(
 			'id' => 'da_layout_metabox',
-			'title' => __( 'Layout', 'drawattention' ),
+			'title' => __( 'Layout', 'draw-attention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'context'       => 'side',
 			'priority'      => 'low',
 			'fields' => array(
 
 				array(
-					'name'    => __( '', 'drawattention' ),
-					'desc'    => __( '', 'drawattention' ),
+					'name'    => __( '', 'draw-attention' ),
+					'desc'    => __( '', 'draw-attention' ),
 					'id'      => $this->parent->custom_fields->prefix . 'map_layout',
 					'type'    => 'radio',
 					'options' => array(
@@ -42,8 +42,8 @@ class DrawAttention_Pro {
 				),
 
 				array(
-					'name'    => __( 'Show more info on', 'drawattention' ),
-					'desc'    => __( 'Click is recommended for best results. If you use Hover, please test carefully with your image', 'drawattention' ),
+					'name'    => __( 'Show more info on', 'draw-attention' ),
+					'desc'    => __( 'Click is recommended for best results. If you use Hover, please test carefully with your image', 'draw-attention' ),
 					'id'      => $this->parent->custom_fields->prefix . 'event_trigger',
 					'type'    => 'select',
 					'options' => array(

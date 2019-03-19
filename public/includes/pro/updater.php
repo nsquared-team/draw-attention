@@ -21,7 +21,7 @@ class DrawAttention_Updater {
 	public function admin_menu() {
 		global $submenu;
 
-		add_submenu_page( 'edit.php?post_type=da_image', __( 'License & Support', 'drawattention' ), __( 'License & Support', 'drawattention' ), 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
+		add_submenu_page( 'edit.php?post_type=da_image', __( 'License & Support', 'draw-attention' ), __( 'License & Support', 'draw-attention' ), 'manage_options', 'da_license', array( $this, 'output_license_page' ) );
 	}
 
 	public function add_action_links( $links ) {
@@ -30,7 +30,7 @@ class DrawAttention_Updater {
 
 		return array_merge(
 			array(
-				'license' => '<a href="'.admin_url( 'edit.php?post_type=da_image&page=da_license' ).'">' . __( 'Enter License Key', 'drawattention' ) . '</a>'
+				'license' => '<a href="'.admin_url( 'edit.php?post_type=da_image&page=da_license' ).'">' . __( 'Enter License Key', 'draw-attention' ) . '</a>'
 			),
 			$links
 		);
@@ -38,22 +38,22 @@ class DrawAttention_Updater {
 	}
 
 	function output_license_page() {
-		echo '<h2>'.__('Draw Attention Pro - License & Updates', 'drawattention' ).'</h2>';
+		echo '<h2>'.__('Draw Attention Pro - License & Updates', 'draw-attention' ).'</h2>';
 		echo $this->license_key_html();
 	}
 
 	function license_key_html() {
 		$license_key_status = get_option( 'da_license_key_status' );
 		if ( empty( $license_key_status ) ) {
-			$license_key_status_html = '<p class="notice-yellow">'.__( 'Please enter your license key to receive support & updates', 'drawattention' ).'. <a href="https://wpdrawattention.com" target="_blank">'.__( 'Click here to purchase or renew a license', 'drawattention' ).'</a></p>';
+			$license_key_status_html = '<p class="notice-yellow">'.__( 'Please enter your license key to receive support & updates', 'draw-attention' ).'. <a href="https://wpdrawattention.com" target="_blank">'.__( 'Click here to purchase or renew a license', 'draw-attention' ).'</a></p>';
 		} elseif ( $license_key_status == 'valid' ) {
-			$license_key_status_html = '<p class="notice-green">'.__( 'Valid license', 'drawattention' ).'</p>';
+			$license_key_status_html = '<p class="notice-green">'.__( 'Valid license', 'draw-attention' ).'</p>';
 		} elseif ( $license_key_status == 'invalid' ) {
 			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="https://wpdrawattention.com" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'drawattention');
 		}
 
 		$html  = '<form>';
-		$html .= '<label for="da_license_key">'.__( 'License Key', 'drawattention' ).'</label><br />';
+		$html .= '<label for="da_license_key">'.__( 'License Key', 'draw-attention' ).'</label><br />';
 		$html .= '<input type="hidden" name="post_type" value="da_image" />';
 		$html .= '<input type="hidden" name="page" value="da_license" />';
 		if ( $license_key = get_option( 'da_license_key' ) ) {
@@ -62,7 +62,7 @@ class DrawAttention_Updater {
 			$html .= '<input type="text" name="da_license_key" id="da_license_key" size="32" />';
 		}
 		$html .= $license_key_status_html;
-		$html .= '<input type="submit" value="'.__( 'Update', 'drawattention' ).'" />';
+		$html .= '<input type="submit" value="'.__( 'Update', 'draw-attention' ).'" />';
 		$html .= '</form>';
 
 		return $html;

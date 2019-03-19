@@ -16,7 +16,7 @@ get_header(); ?>
 					<?php the_content(); ?>
 				<?php endif ?>
 				<?php if ( current_user_can( 'edit_posts' ) ): ?>
-					<?php edit_post_link( __( 'Edit Interactive Image', 'drawattention' ) ); ?>
+					<?php edit_post_link( __( 'Edit Interactive Image', 'draw-attention' ) ); ?>
 				<?php endif ?>
 			<?php endwhile; // end of the loop. ?>
 

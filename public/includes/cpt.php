@@ -30,10 +30,10 @@ class DrawAttention_CPT {
 			array('labels' => array(
 				'name' => __('Draw Attention', $this->post_type.' general name', 'drawattention'), /* This is the Title of the Group */
 				'singular_name' => __('Image', $this->post_type.' singular name', 'drawattention'), /* This is the individual type */
-				'all_items' => __( 'All Images', 'drawattention' ), /* the all items menu item */
+				'all_items' => __( 'All Images', 'draw-attention' ), /* the all items menu item */
 				'add_new' => __('Add New', 'drawattention'), /* The add new menu item */
 				'add_new_item' => __('Add New Image', 'drawattention'), /* Add New Display Title */
-				'edit' => __( 'Edit', 'drawattention' ), /* Edit Dialog */
+				'edit' => __( 'Edit', 'draw-attention' ), /* Edit Dialog */
 				'edit_item' => __('Edit Image', 'drawattention'), /* Edit Display Title */
 				'new_item' => __('New Image', 'drawattention'), /* New Display Title */
 				'view_item' => __('View Image', 'drawattention'), /* View Display Title */
@@ -42,7 +42,7 @@ class DrawAttention_CPT {
 				'not_found_in_trash' => __('Nothing found in Trash', 'drawattention'), /* This displays if there is nothing in the trash */
 				'parent_item_colon' => ''
 				), /* end of arrays */
-				'description' => __( 'Stores '.$this->post_type.'s in the database', 'drawattention' ), /* CPT_SINGULAR_NAME Description */
+				'description' => __( 'Stores '.$this->post_type.'s in the database', 'draw-attention' ), /* CPT_SINGULAR_NAME Description */
 				'public' => true,
 				'publicly_queryable' => true,
 				'exclude_from_search' => true,
@@ -128,7 +128,7 @@ class DrawAttention_CPT {
 
 		$new_columns          = array();
 		$new_columns['cb']    = $defaults['cb'];
-		$new_columns['image'] = __( 'Image', 'drawattention' );
+		$new_columns['image'] = __( 'Image', 'draw-attention' );
 
 		$last_item = '';
 
@@ -147,7 +147,7 @@ class DrawAttention_CPT {
 				break;
 			}
 		}
-		$defaults['shortcode-string'] = __( 'Shortcode', 'drawattention' );
+		$defaults['shortcode-string'] = __( 'Shortcode', 'draw-attention' );
 
 		return $defaults;
 	} // End register_custom_column_headings()
