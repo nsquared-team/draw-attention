@@ -12,7 +12,7 @@ Description:       Create interactive images in WordPress
 Version:           1.8.8
 Author:            N Squared
 Author URI:        https://nsqua.red
-Text Domain:       drawattention
+Text Domain:       draw-attention
 License:           GPL-2.0+
 License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 Domain Path:       /languages
