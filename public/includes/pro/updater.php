@@ -49,7 +49,7 @@ class DrawAttention_Updater {
 		} elseif ( $license_key_status == 'valid' ) {
 			$license_key_status_html = '<p class="notice-green">'.__( 'Valid license', 'draw-attention' ).'</p>';
 		} elseif ( $license_key_status == 'invalid' ) {
-			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="https://wpdrawattention.com" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'drawattention');
+			$license_key_status_html = '<p class="notice-red">'.__( 'Invalid license. Please verify the license key, you may need to <a href="https://wpdrawattention.com" target="_blank">renew your license</a> or <a href="mailto:support@tylerdigital.com">contact support</a></p>', 'draw-attention' );
 		}
 
 		$html  = '<form>';
