@@ -19,36 +19,36 @@ class DrawAttention_Pro {
 	function add_layout_metabox( $metaboxes ) {
 		$metaboxes['da_layout'] = array(
 			'id' => 'da_layout_metabox',
-			'title' => __( 'Layout', 'drawattention' ),
+			'title' => __( 'Layout', 'draw-attention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'context'       => 'side',
 			'priority'      => 'low',
 			'fields' => array(
 
 				array(
-					'name'    => __( '', 'drawattention' ),
-					'desc'    => __( '', 'drawattention' ),
+					'name'    => __( '', 'draw-attention' ),
+					'desc'    => __( '', 'draw-attention' ),
 					'id'      => $this->parent->custom_fields->prefix . 'map_layout',
 					'type'    => 'radio',
 					'options' => array(
-						'left' => __('Left', 'drawattention'),
-						'right' => __('Right', 'drawattention'),
-						'bottom' => __('Bottom', 'drawattention'),
-						'top'		=> __('Top', 'drawattention'),
-						'lightbox' => __('Lightbox', 'drawattention'),
-						'tooltip' => __('Tooltip', 'drawattention'),
+						'left' => __('Left', 'draw-attention' ),
+						'right' => __('Right', 'draw-attention' ),
+						'bottom' => __('Bottom', 'draw-attention' ),
+						'top'		=> __('Top', 'draw-attention' ),
+						'lightbox' => __('Lightbox', 'draw-attention' ),
+						'tooltip' => __('Tooltip', 'draw-attention' ),
 					),
 					'default' => 'left',
 				),
 
 				array(
-					'name'    => __( 'Show more info on', 'drawattention' ),
-					'desc'    => __( 'Click is recommended for best results. If you use Hover, please test carefully with your image', 'drawattention' ),
+					'name'    => __( 'Show more info on', 'draw-attention' ),
+					'desc'    => __( 'Click is recommended for best results. If you use Hover, please test carefully with your image', 'draw-attention' ),
 					'id'      => $this->parent->custom_fields->prefix . 'event_trigger',
 					'type'    => 'select',
 					'options' => array(
-						'click' => __('Click', 'drawattention'),
-						'hover' => __('Hover', 'drawattention'),
+						'click' => __('Click', 'draw-attention' ),
+						'hover' => __('Hover', 'draw-attention' ),
 					),
 					'default' => 'click',
 				),
@@ -237,7 +237,7 @@ class DrawAttention_Pro {
 
 	function add_shortcode_metabox() {
 		remove_meta_box( 'da_shortcode', $this->parent->cpt->post_type, 'side', 'low' );
-		add_meta_box( 'da_shortcode_pro', __('Copy Shortcode', 'drawattention'), array( $this, 'display_shortcode_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
+		add_meta_box( 'da_shortcode_pro', __('Copy Shortcode', 'draw-attention' ), array( $this, 'display_shortcode_metabox' ), $this->parent->cpt->post_type, 'side', 'low');
 	}
 
 	function display_shortcode_metabox() {

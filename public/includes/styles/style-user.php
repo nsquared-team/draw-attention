@@ -26,7 +26,7 @@ class DrawAttention_User_Style extends DrawAttention_Style {
 		$user_styles = $this->get_saved_styles();
 		
 		foreach ($user_styles as $user_key => $label) {
-			$group_details['fields'][0]['fields']['style']['options'][$user_key] = __( $label, 'drawattention' );
+			$group_details['fields'][0]['fields']['style']['options'][$user_key] = __( $label, 'draw-attention' );
 		}
 
 		return $group_details;
