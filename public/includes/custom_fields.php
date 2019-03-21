@@ -56,7 +56,7 @@ class DrawAttention_CustomFields {
 
 	public function add_hotspot_area_details_table_metabox() {
 		add_meta_box( 'hotspot_area_details_table',
-			__('Hotspot Areas', 'drawattention'),
+			__('Hotspot Areas', 'draw-attention' ),
 			array( $this, 'hotspot_area_details_table_metabox_callback' ),
 			$page,
 			'normal',
@@ -67,21 +67,21 @@ class DrawAttention_CustomFields {
 	function highlight_styling_metabox( array $metaboxes ) {
 		$metaboxes['highlight_styling'] = array(
 			'id' => 'highlight_styling_metabox',
-			'title' => __( 'Highlight Styling', 'drawattention' ),
+			'title' => __( 'Highlight Styling', 'draw-attention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'context'       => 'normal',
 			'priority'      => 'high',
 			'fields' => array(
 
 				array(
-					'name'    => __( 'Highlight Color', 'drawattention' ),
+					'name'    => __( 'Highlight Color', 'draw-attention' ),
 					'desc'    => '',
 					'id'      => $this->prefix . 'map_highlight_color',
 					'type'    => 'colorpicker',
 					'default' => '#ffffff'
 				),
 				array(
-					'name'    => __( 'Highlight Opacity', 'drawattention' ),
+					'name'    => __( 'Highlight Opacity', 'draw-attention' ),
 					'desc'    => '',
 					'id'      => $this->prefix . 'map_highlight_opacity',
 					'type'    => 'opacity',
@@ -89,21 +89,21 @@ class DrawAttention_CustomFields {
 					'escape_cb' => array( $this, 'cmb2_allow_0_value' ),
 				),
 				array(
-					'name'    => __( 'Border Color', 'drawattention' ),
+					'name'    => __( 'Border Color', 'draw-attention' ),
 					'desc'    => '',
 					'id'      => $this->prefix . 'map_border_color',
 					'type'    => 'colorpicker',
 					'default' => '#ffffff'
 				),
 				array(
-					'name'    => __( 'Border Opacity', 'drawattention' ),
+					'name'    => __( 'Border Opacity', 'draw-attention' ),
 					'desc'    => '',
 					'id'      => $this->prefix . 'map_border_opacity',
 					'type'    => 'opacity',
 					'default' => '0.81'
 				),
 				array(
-					'name'    => __( 'Border Width', 'drawattention' ),
+					'name'    => __( 'Border Width', 'draw-attention' ),
 					'desc'    => '',
 					'id'      => $this->prefix . 'map_border_width',
 					'type'    => 'text_number',
@@ -123,47 +123,47 @@ class DrawAttention_CustomFields {
 	function moreinfo_metabox( array $metaboxes ) {
 		$metaboxes['moreinfo'] = array(
 			'id' => 'moreinfo_metabox',
-			'title' => __( 'More Info Box Styling', 'drawattention' ),
+			'title' => __( 'More Info Box Styling', 'draw-attention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'context'       => 'normal',
 			'priority'      => 'high',
 			'fields' => array(
 
 				array(
-					'name'    => __( 'Image Background Color', 'drawattention' ),
-					'desc'    => __( 'Set the background color of behind the image', 'drawattention' ),
+					'name'    => __( 'Image Background Color', 'draw-attention' ),
+					'desc'    => __( 'Set the background color of behind the image', 'draw-attention' ),
 					'id'      => $this->prefix . 'image_background_color',
 					'type'    => 'colorpicker',
 					'default' => '#efefef'
 				),
 
 				array(
-					'name'    => __( 'Title Color', 'drawattention' ),
-					'desc'    => __( 'Set the color of titles in More Info box', 'drawattention' ),
+					'name'    => __( 'Title Color', 'draw-attention' ),
+					'desc'    => __( 'Set the color of titles in More Info box', 'draw-attention' ),
 					'id'      => $this->prefix . 'map_title_color',
 					'type'    => 'colorpicker',
 					'default' => '#000000'
 				),
 
 				array(
-					'name'    => __( 'Text Color', 'drawattention' ),
-					'desc'    => __( 'Set the color of body text in More Info box', 'drawattention' ),
+					'name'    => __( 'Text Color', 'draw-attention' ),
+					'desc'    => __( 'Set the color of body text in More Info box', 'draw-attention' ),
 					'id'      => $this->prefix . 'map_text_color',
 					'type'    => 'colorpicker',
 					'default' => '#000000'
 				),
 
 				array(
-					'name'    => __( 'More Info Background Color', 'drawattention' ),
-					'desc'    => __( 'Set the background color of the More Info box', 'drawattention' ),
+					'name'    => __( 'More Info Background Color', 'draw-attention' ),
+					'desc'    => __( 'Set the background color of the More Info box', 'draw-attention' ),
 					'id'      => $this->prefix . 'map_background_color',
 					'type'    => 'colorpicker',
 					'default' => '#ffffff'
 				),
 
 				array(
-					'name'    => __( 'Default More Info', 'drawattention' ),
-					'desc'    => __( 'Set the text to show up in the more info box (when no area is selected)', 'drawattention' ),
+					'name'    => __( 'Default More Info', 'draw-attention' ),
+					'desc'    => __( 'Set the text to show up in the more info box (when no area is selected)', 'draw-attention' ),
 					'id'      => $this->prefix . 'map_more_info',
 					'type'    => 'textarea_small',
 				),
@@ -183,23 +183,23 @@ class DrawAttention_CustomFields {
 
 		$metaboxes['field_group'] = apply_filters( 'da_hotspot_area_group_details', array(
 			'id'           => 'field_group',
-			'title'        => __( 'Hotspot Areas', 'drawattention' ),
+			'title'        => __( 'Hotspot Areas', 'draw-attention' ),
 			'object_types' => array( $this->parent->cpt->post_type, ),
 			'fields'       => array(
 				array(
 					'id'          => $this->prefix . 'hotspots',
 					'type'        => 'group',
-					'description' => __( 'Draw the clickable areas of your image', 'drawattention' ),
+					'description' => __( 'Draw the clickable areas of your image', 'draw-attention' ),
 					'options'     => array(
-						'group_title'   => __( 'Clickable Area #{#}', 'drawattention' ), // {#} gets replaced by row number
-						'add_button'    => __( 'Add Another Area', 'drawattention' ),
-						'remove_button' => __( 'Remove Area', 'drawattention' ),
+						'group_title'   => __( 'Clickable Area #{#}', 'draw-attention' ), // {#} gets replaced by row number
+						'add_button'    => __( 'Add Another Area', 'draw-attention' ),
+						'remove_button' => __( 'Remove Area', 'draw-attention' ),
 						'sortable'      => false, // beta
 					),
 					// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
 					'fields'      => array(
 						'coordinates' => array(
-							'name' => __( 'Coordinates', 'drawattention' ),
+							'name' => __( 'Coordinates', 'draw-attention' ),
 							'id'   => 'coordinates',
 							'type' => 'text',
 							'attributes' => array(
@@ -207,12 +207,12 @@ class DrawAttention_CustomFields {
 							),
 						),
 						'title' => array(
-							'name' => __('Title', 'drawattention' ),
+							'name' => __('Title', 'draw-attention' ),
 							'id'   => 'title',
 							'type' => 'text',
 						),
 						'action' => array(
-							'name' => __('Action', 'drawattention' ),
+							'name' => __('Action', 'draw-attention' ),
 							'description' => '',
 							'id'   => 'action',
 							'attributes' => array(
@@ -225,7 +225,7 @@ class DrawAttention_CustomFields {
 							),
 						),
 						'description' => array(
-							'name' => __('Description', 'drawattention' ),
+							'name' => __('Description', 'draw-attention' ),
 							'description' => '',
 							'id'   => 'description',
 							// 'type' => 'textarea_small',
@@ -248,8 +248,8 @@ class DrawAttention_CustomFields {
 							),
 						),
 						'detail_image' => array(
-							'name' => __( 'Detail Image', 'drawattention' ),
-							'desc' => __( 'Upload an image or enter a URL to show in the more info box', 'drawattention' ),
+							'name' => __( 'Detail Image', 'draw-attention' ),
+							'desc' => __( 'Upload an image or enter a URL to show in the more info box', 'draw-attention' ),
 							'id'   => 'detail_image',
 							'type' => 'file',
 							'attributes' => array(

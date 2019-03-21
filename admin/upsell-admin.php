@@ -16,7 +16,7 @@ class DrawAttention_Upsell {
 	}
 
 	public function admin_menu() {
-        add_submenu_page( 'edit.php?post_type=da_image', __( 'Upgrade to Pro', 'drawattention' ), __( 'Upgrade to Pro', 'drawattention' ), 'edit_others_posts', 'da_upgrade_to_pro', array( $this, 'display_plugin_admin_page' ) );
+        add_submenu_page( 'edit.php?post_type=da_image', __( 'Upgrade to Pro', 'draw-attention' ), __( 'Upgrade to Pro', 'draw-attention' ), 'edit_others_posts', 'da_upgrade_to_pro', array( $this, 'display_plugin_admin_page' ) );
     }
 
 	function redirect_pro_link() {
@@ -31,7 +31,7 @@ class DrawAttention_Upsell {
 		return array_merge(
 			$links,
 			array(
-				'upgrade' => '<strong><a href="http://wpdrawattention.com/" target="_blank">' . __( 'Upgrade to Pro', 'drawattention' ) . '</a></strong>'
+				'upgrade' => '<strong><a href="http://wpdrawattention.com/" target="_blank">' . __( 'Upgrade to Pro', 'draw-attention' ) . '</a></strong>'
 			)
 		);
 

@@ -28,21 +28,21 @@ class DrawAttention_CPT {
 		$result = register_post_type( $this->post_type, /* (http://codex.wordpress.org/Function_Reference/register_post_type) */
 		 	// let's now add all the options for this post type
 			array('labels' => array(
-				'name' => __('Draw Attention', $this->post_type.' general name', 'drawattention'), /* This is the Title of the Group */
-				'singular_name' => __('Image', $this->post_type.' singular name', 'drawattention'), /* This is the individual type */
-				'all_items' => __('All Images', 'drawattention'), /* the all items menu item */
-				'add_new' => __('Add New', 'custom '.$this->post_type.' item', 'drawattention'), /* The add new menu item */
-				'add_new_item' => __('Add New Image', 'drawattention'), /* Add New Display Title */
+				'name' => __('Draw Attention', $this->post_type.' general name', 'draw-attention' ), /* This is the Title of the Group */
+				'singular_name' => __('Image', $this->post_type.' singular name', 'draw-attention' ), /* This is the individual type */
+				'all_items' => __('All Images', 'draw-attention' ), /* the all items menu item */
+				'add_new' => __('Add New', 'custom '.$this->post_type.' item', 'draw-attention' ), /* The add new menu item */
+				'add_new_item' => __('Add New Image', 'draw-attention' ), /* Add New Display Title */
 				'edit' => __( 'Edit' ), /* Edit Dialog */
-				'edit_item' => __('Edit Image', 'drawattention'), /* Edit Display Title */
-				'new_item' => __('New Image', 'drawattention'), /* New Display Title */
-				'view_item' => __('View Image', 'drawattention'), /* View Display Title */
-				'search_items' => __('Search Images', 'drawattention'), /* Search CPT_SINGULAR_NAME Title */
-				'not_found' =>  __('Nothing found in the Database.', 'drawattention'), /* This displays if there are no entries yet */
-				'not_found_in_trash' => __('Nothing found in Trash', 'drawattention'), /* This displays if there is nothing in the trash */
+				'edit_item' => __('Edit Image', 'draw-attention' ), /* Edit Display Title */
+				'new_item' => __('New Image', 'draw-attention' ), /* New Display Title */
+				'view_item' => __('View Image', 'draw-attention' ), /* View Display Title */
+				'search_items' => __('Search Images', 'draw-attention' ), /* Search CPT_SINGULAR_NAME Title */
+				'not_found' =>  __('Nothing found in the Database.', 'draw-attention' ), /* This displays if there are no entries yet */
+				'not_found_in_trash' => __('Nothing found in Trash', 'draw-attention' ), /* This displays if there is nothing in the trash */
 				'parent_item_colon' => ''
 				), /* end of arrays */
-				'description' => __( 'Stores '.$this->post_type.'s in the database', 'drawattention' ), /* CPT_SINGULAR_NAME Description */
+				'description' => __( 'Stores '.$this->post_type.'s in the database', 'draw-attention' ), /* CPT_SINGULAR_NAME Description */
 				'public' => true,
 				'publicly_queryable' => true,
 				'exclude_from_search' => true,
@@ -127,7 +127,7 @@ class DrawAttention_CPT {
 
 		$new_columns          = array();
 		$new_columns['cb']    = $defaults['cb'];
-		$new_columns['image'] = __( 'Image', 'drawattention' );
+		$new_columns['image'] = __( 'Image', 'draw-attention' );
 
 		$last_item = '';
 

@@ -202,8 +202,8 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			 *   For reference: http://codex.wordpress.org/Roles_and_Capabilities
 			 */
 			$this->plugin_screen_hook_suffix = add_options_page(
-				__( 'DrawAttention', $this->plugin_slug ),
-				__( 'DrawAttention', $this->plugin_slug ),
+				__( 'DrawAttention', 'draw-attention' ),
+				__( 'DrawAttention', 'draw-attention' ),
 				'manage_options',
 				$this->plugin_slug,
 				array( $this, 'display_plugin_admin_page' )
@@ -232,7 +232,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			return array_merge(
 				array(
-					'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
+					'settings' => '<a href="' . admin_url( 'options-general.php?page=' . $this->plugin_slug ) . '">' . __( 'Settings', 'draw-attention' ) . '</a>'
 				),
 				$links
 			);
@@ -244,7 +244,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			remove_submenu_page( 'edit.php?post_type=da_image', 'post-new.php?post_type=da_image'  );
 			remove_submenu_page( 'edit.php?post_type=da_image', 'edit.php?post_type=da_image'  );
-			add_submenu_page( 'edit.php?post_type=da_image', __('Edit Image', 'drawattention'), __('Edit Image', 'drawattention'), 'edit_others_posts', 'edit.php?post_type=da_image' );
+			add_submenu_page( 'edit.php?post_type=da_image', __('Edit Image', 'draw-attention' ), __('Edit Image', 'draw-attention' ), 'edit_others_posts', 'edit.php?post_type=da_image' );
 		}
 
 		public function admin_init() {

@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.8.7';
+		const VERSION = '1.8.9';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -293,7 +293,14 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 */
 		public function load_plugin_textdomain() {
 
-			$domain = $this->plugin_slug;
+
+			$domain = 'drawattention';
+			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+
+			load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+			load_plugin_textdomain( $domain, FALSE, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/languages/' );
+			
+			$domain = 'draw-attention';
 			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 			load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
@@ -508,7 +515,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 		function add_shortcode_metabox() {
-			add_meta_box( 'da_shortcode', __('Copy Shortcode', 'drawattention'), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low');
+			add_meta_box( 'da_shortcode', __('Copy Shortcode', 'draw-attention' ), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low');
 		}
 
 		function display_shortcode_metabox() {
