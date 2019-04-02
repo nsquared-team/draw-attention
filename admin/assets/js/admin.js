@@ -307,6 +307,7 @@
 		styleCloning();
 	}
 
+	/* Reset the drawable canvas areas */
 	hotspotAdmin.reset = function() {
 		var coordsInputs = $('input[data-image-url]');
 		coordsInputs.off('change').siblings('div, button, canvas').remove();
