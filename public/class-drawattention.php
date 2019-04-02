@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.8.9';
+		const VERSION = '1.8.10';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -299,7 +299,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
 			load_plugin_textdomain( $domain, FALSE, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/languages/' );
-			
+
 			$domain = 'draw-attention';
 			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
