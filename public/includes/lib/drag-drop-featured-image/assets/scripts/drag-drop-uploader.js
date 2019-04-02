@@ -1,5 +1,7 @@
 jQuery(document).ready(function($){
 
+	var uploadContainer = $('#drag_to_upload');
+
 	// Media Library button hook (WP >= 3.5):
 	$('a#dgd_library_button').click(function(e){
 
@@ -28,32 +30,13 @@ jQuery(document).ready(function($){
 
 
 	// Set as featured image hook (WP < 3.5):
-	$('a.wp-post-thumbnail').live('click', function(e){
+	$('body').on('click', 'a.wp-post-thumbnail', function(e){
 		parent.tb_remove();
 		parent.location.reload(1);
 	});
 
-
-	// Set as featured image handler (WP >= 3.5):
-	$('a#insert-media-button').live('click', function(){
-		if (typeof wp !== 'undefined'){
-			var editor_id = $('.wp-media-buttons:eq(0) .add_media').attr('data-editor');
-			var frame = wp.media.editor.get(editor_id);
-			frame = 'undefined' != typeof(frame) ? frame : wp.media.editor.add(editor_id);
-			if (frame){
-				frame.on('select', function(){
-					var currentState = frame.state();
-					if (currentState.id === 'featured-image'){
-						doFetchFeaturedImage();
-					}
-				});
-			}
-		}
-	});
-
-
 	// Remove featured image:
-	$('#remove-post-thumbnail').live('click', function(){
+	uploadContainer.on('click', '#remove-post-thumbnail', function (){
 		$('#current-uploaded-image').slideUp('medium');
 		updateHotspotImages('');
 	});
@@ -101,12 +84,14 @@ jQuery(document).ready(function($){
 				$('#current-uploaded-image').slideUp('medium', function(){
 
 					// Update image with new info:
-					var imageObject = $('#drag_to_upload div.inside img.attachment-full');
-					imageObject.attr('src', response.response_content);
+					var imageObject = uploadContainer.find('div.inside img.attachment-full');
 					imageObject.removeAttr('width');
 					imageObject.removeAttr('height');
 					imageObject.removeAttr('title');
 					imageObject.removeAttr('alt');
+					imageObject.removeAttr('srcset');
+					imageObject.removeAttr('sizes');
+					imageObject.attr('src', response.response_content);
 
 					// Hide container:
 					imageObject.load(function(){
@@ -134,8 +119,9 @@ jQuery(document).ready(function($){
 
 		fields.each(function(){
 			$(this).attr('data-image-url', src);
-			hotspotAdmin.reset();
 		});
+
+		hotspotAdmin.reset();
 	}
 
 });
