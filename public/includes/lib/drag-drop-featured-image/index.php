@@ -393,11 +393,13 @@
 
 									// Update image with new info:
 									var imageObject = $('#drag_to_upload div.inside img.attachment-full');
-									imageObject.attr('src', response.image);
 									imageObject.removeAttr('width');
 									imageObject.removeAttr('height');
 									imageObject.removeAttr('title');
 									imageObject.removeAttr('alt');
+									imageObject.removeAttr('srcset');
+									imageObject.removeAttr('sizes');
+									imageObject.attr('src', response.image);
 
 									// Hide container:
 									imageObject.load(function(){
@@ -413,6 +415,12 @@
 										if (uploader.files.length >= 1){
 											uploader.splice(0, (uploader.files.length - 1));
 										}
+
+										var fields = $('input[name$="[coordinates]"]');
+										fields.each(function(){
+											$(this).attr('data-image-url', response.image);
+										});
+										hotspotAdmin.reset();
 
 									});
 

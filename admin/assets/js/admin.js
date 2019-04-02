@@ -307,6 +307,12 @@
 		styleCloning();
 	}
 
+	hotspotAdmin.reset = function() {
+		var coordsInputs = $('input[data-image-url]');
+		coordsInputs.off('change').siblings('div, button, canvas').remove();
+		coordsInputs.canvasAreaDraw();
+	}
+
 }(jQuery, window.hotspotAdmin = window.hotspotAdmin || {}));
 
 jQuery(function() {
