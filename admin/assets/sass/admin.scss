@@ -30,6 +30,11 @@ input[name$='[coordinates]'] {
 	}
 }
 
+#field_group .cmb-row[class*='coordinates'] .cmb-td {
+  overflow: auto;
+  padding-bottom: 2rem;
+}
+
 #cmb2-metabox-highlight_styling_metabox,
 #cmb2-metabox-moreinfo_metabox {
 	@include display-flex;
