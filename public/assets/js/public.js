@@ -493,7 +493,7 @@
 		$(window).on('load', function(){
 			hotspots.init();
 		});
-		$('.et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
+		$('a[data-vc-accordion], .et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
 			setTimeout(function() {
 				hotspots.init();
 			}, 1000);
