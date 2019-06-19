@@ -108,7 +108,7 @@ We have a video walkthrough of creating your first image available in [our docum
 
 = 1.8.13 =
 * Improved: Increased allowed hotspots to 50 (was 20)
-* Fixed: Hid misleading buttons that appeared to allow you to add more than one image
+* Improved: Cleaned up confusing buttons in UI
 
 = 1.8.12 =
 * Improved: Added support for embedding Draw Attention in Visual Composer accordions

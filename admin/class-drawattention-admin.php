@@ -80,6 +80,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			add_action( 'wp_before_admin_bar_render', array( $this, 'remove_add_new_submenu' ) );
 
 			add_action( 'admin_notices', array( $this, 'display_third_party_js_conflict_notice' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'store_enqueued_scripts' ), 1 );
@@ -245,6 +246,11 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			remove_submenu_page( 'edit.php?post_type=da_image', 'post-new.php?post_type=da_image'  );
 			remove_submenu_page( 'edit.php?post_type=da_image', 'edit.php?post_type=da_image'  );
 			add_submenu_page( 'edit.php?post_type=da_image', __('Edit Image', 'draw-attention' ), __('Edit Image', 'draw-attention' ), 'edit_others_posts', 'edit.php?post_type=da_image' );
+		}
+
+		public function remove_add_new_submenu() {
+			global $wp_admin_bar;
+			$wp_admin_bar->remove_menu( 'new-da_image' );
 		}
 
 		public function admin_init() {
