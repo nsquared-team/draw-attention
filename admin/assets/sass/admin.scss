@@ -14,6 +14,12 @@
   }
 }
 
+body.post-type-da_image {
+	.wrap .wp-heading-inline + .page-title-action {
+		display: none;
+	}
+}
+
 /* Hide the post slug editor */
 .post-type-hotspot #edit-slug-box,
 .post-type-hotspot #slugdiv,

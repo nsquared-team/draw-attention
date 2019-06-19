@@ -1,7 +1,7 @@
 ;(function ( $, hotspotAdmin, undefined ) {
 	"use strict";
 
-	var hotspots = 20;
+	var hotspots = 50;
 
 	/* Enable drawing hotspots on the full-size image */
 	var canvasDraw = function(container) {
