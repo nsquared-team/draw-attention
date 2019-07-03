@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.8.14';
+		const VERSION = '1.8.13';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -120,6 +120,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			include_once( 'includes/class-block-image.php' );
 			$this->block_image = new DrawAttention_Block_Image( $this );
 
+			include_once( 'includes/import-export.php' );
+			$this->import_export = new DrawAttention_ImportExport( $this );
 		}
 
 		/**

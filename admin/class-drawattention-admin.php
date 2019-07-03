@@ -260,8 +260,10 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			
 			global $pagenow;
 			if (
-				$pagenow == 'edit.php' && $_GET['post_type'] == $this->da->cpt->post_type
-				|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->da->cpt->post_type
+				( $pagenow == 'edit.php' && $_GET['post_type'] == $this->da->cpt->post_type
+				|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->da->cpt->post_type )
+				&& 
+				( empty( $_GET['page'] ) || $_GET['page'] != 'import_export' )
 			) {
 				$image_args = array(
 					'post_status' => 'any',
