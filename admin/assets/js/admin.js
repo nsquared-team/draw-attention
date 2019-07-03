@@ -199,6 +199,15 @@
 		$('.da-disable-third-party-js').hide();
 	}
 
+	var sortHotspots = function() {
+		var hotspots = $('#_da_hotspots_repeat');
+		if (hotspots.length) {
+			hotspots.sortable({
+				items: '.cmb-repeatable-grouping',
+				handle: '.cmbhandle-title'
+			});
+		}
+	};
 
 	hotspotAdmin.init = function() {
 		accordion();
@@ -211,6 +220,7 @@
 		areaLimit();
 		saveAlert();
 		hideNotice();
+		sortHotspots();
 	}
 
 	/* Reset the drawable canvas areas */
