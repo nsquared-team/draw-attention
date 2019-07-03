@@ -598,7 +598,7 @@
 		"oA": 1,
 		"oAP": "/css/_content.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/_context.scss": {
@@ -611,7 +611,7 @@
 		"oA": 1,
 		"oAP": "/css/_context.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/_layout.scss": {
@@ -624,7 +624,7 @@
 		"oA": 1,
 		"oAP": "/css/_layout.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/_leaflet.scss": {
@@ -637,7 +637,7 @@
 		"oA": 1,
 		"oAP": "/css/_leaflet.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/_loading.scss": {
@@ -650,7 +650,7 @@
 		"oA": 1,
 		"oAP": "/css/_loading.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/_mixins.scss": {
@@ -663,7 +663,7 @@
 		"oA": 1,
 		"oAP": "/css/_mixins.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"/sass/public.scss": {
@@ -676,7 +676,7 @@
 		"oA": 0,
 		"oAP": "/css/public.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		}
 	},
@@ -696,7 +696,7 @@
 	"alwaysUseExternalServer": 0,
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
-	"autoprefixerEnableIEGrid": 0,
+	"autoprefixerEnableIEGrid": 1,
 	"babel7PresetType": 1,
 	"babelAllowRCFiles": 0,
 	"babelAuxiliaryCommentAfter": "",
@@ -975,7 +975,7 @@
 	"bowerSaveDevDependencies": 0,
 	"bowerUseExactVersion": 0,
 	"browserRefreshDelay": 0,
-	"browserslistString": ">0.2%, last 2 versions, Firefox ESR, not dead",
+	"browserslistString": "cover 99.5%",
 	"buildFolderActive": 0,
 	"buildFolderName": "build",
 	"cleanBuild": 1,
@@ -2669,7 +2669,7 @@
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
-		"outputStyle": 0,
+		"outputStyle": 3,
 		"shouldRunAutoprefixer": 1,
 		"shouldRunBless": 0,
 		"useLibsass": 1
