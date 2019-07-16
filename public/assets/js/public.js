@@ -5,7 +5,17 @@
 		isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
 		isWebkit = !!ua.match(/WebKit/i),
 		isWebkitiOS = isiOS && isWebkit,
-		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i);
+		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i),
+		isBrowserVersion12Up = function(){
+			var temp,
+				M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+
+			M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+    	if ((temp = ua.match(/version\/(\d+)/i)) != null) {
+    		M.splice(1, 1, temp[1]);
+    	}
+    	return parseInt(M[1]) >= 12;
+		};
 
 	// Store all the leaflets on the page in an array for access later
 	var leaflets = [];
@@ -430,7 +440,7 @@
 					break;
 				case 'mouseover':
 					shapeOver(shape, areaData, e);
-					if (isWebkitiOS) {
+					if (isMobileSafari && !isBrowserVersion12Up()) {
 						shapeClick(shape, areaData, e);
 					}
 					break;
