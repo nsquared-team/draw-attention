@@ -1,6 +1,7 @@
 .hotspots-container {
 	position: relative;
 	width: 100%;
+	z-index: 0;
 	.hotspots-image-container {
 		& > img {
 			opacity: 0.1;
