@@ -16,6 +16,7 @@ if ( empty( $settings['hotspots']['0']['coordinates'] ) ) : ?>
 			class="hotspots-image skip-lazy"
 			data-id="<?php echo $settings['image_id']; ?>"
 			data-no-lazy="1"
+			data-lazy-src=""
 			data-lazy="false"
 			>
 	</div>

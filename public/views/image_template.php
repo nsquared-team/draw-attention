@@ -10,6 +10,7 @@
 		data-always-visible="<?php echo $settings['always_visible']; ?>"
 		data-id="<?php echo $settings['image_id']; ?>"
 		data-no-lazy="1"
+		data-lazy-src=""
 		data-lazy="false"
 		>
 </div>
