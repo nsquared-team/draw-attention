@@ -269,6 +269,8 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 					'post_status' => 'any',
 					'post_type' => $this->da->cpt->post_type,
 					'posts_per_page' => 1,
+					'order' => 'DESC',
+					'orderby' => 'ID',
 					);
 				$image = new WP_Query($image_args);
 				if ($image->have_posts() ) {
@@ -285,7 +287,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 					) );
 					DrawAttention_Themes::apply_theme( $imageID, 'drawattention' );
 				}
-				if ( empty( $imageID ) ) die( 'An error occurred setting up DrawAttention, please contact support@tylerdigital.com');
+				if ( empty( $imageID ) ) die( 'An error occurred setting up DrawAttention, please contact support@wpdrawattention.com');
 
 				wp_redirect( get_edit_post_link( $imageID, 'raw' ) );
 				exit();
