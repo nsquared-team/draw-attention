@@ -106,6 +106,9 @@ We have a video walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
+= 1.8.19 =
+* Fixed: Compatibility with the "lazy-load" plugin
+
 = 1.8.18 =
 * Fixed: Prevent potential overlapping between Draw Attention and fixed elements in some themes
 
