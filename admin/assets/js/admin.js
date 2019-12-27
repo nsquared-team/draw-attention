@@ -217,7 +217,6 @@
 		themeSelect();
 		opacityLabelSync();
 		confirmDelete();
-		areaLimit();
 		saveAlert();
 		hideNotice();
 		sortHotspots();
