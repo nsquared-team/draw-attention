@@ -166,6 +166,16 @@ if ( empty( $has_hotspots ) ) : ?>
 				$color_scheme_class = 'da-style-' . $hotspot['style'];
 			} ?>
 			<div class="hotspot-info <?php echo $color_scheme_class; ?>" id="hotspot-<?php echo $settings['spot_id']; ?>-<?php echo $key; ?>">
+				<?php
+				if ( !empty( $hotspot['action'] ) ) {
+					if ( 'bigcommerce' === $hotspot['action'] ) {
+						echo DrawAttention_BigCommerce_Action::render_hotspot_content( $hotspot, $settings );
+						echo '</div>';
+						continue;
+					}
+				}
+				?>
+
 				<?php echo apply_filters( 'drawattention_hotspot_title', '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>', $hotspot ); ?>
 				<?php if ( !empty($hotspot['detail_image_id'])) : ?>
 					<div class="hotspot-thumb">

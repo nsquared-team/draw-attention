@@ -1,6 +1,10 @@
 <?php
 class DrawAttention_URL_Action extends DrawAttention_Action {
 	function add_action_fields( $group_details ) {
+		if ( ! $this->is_active() ) {
+			return $group_details;
+		}
+		
 		$group_details['fields'][0]['fields']['action']['options']['url'] = __( 'Go to URL', 'draw-attention' );
 
 		$group_details['fields'][0]['fields']['action-url-url'] = array(

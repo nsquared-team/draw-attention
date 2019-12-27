@@ -16,6 +16,8 @@ class DrawAttention_CustomFields {
 		if ( !class_exists( 'cmb2_bootstrap_208', false ) ) return;
 
 		include_once __DIR__ . '/actions/action.php';
+		include_once __DIR__ . '/actions/action-bigcommerce.php';
+		$this->actions['bigcommerce'] = new DrawAttention_BigCommerce_Action();
 		include_once __DIR__ . '/actions/action-url.php';
 		$this->actions['url'] = new DrawAttention_URL_Action();
 
