@@ -1,18 +1,18 @@
 === Draw Attention ===
 Contributors: tylerdigital, nataliemac, croixhaug
-Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, conventions, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
+Tags: interactive images, floor plans, image maps, real estate, highlightable areas, highlight images, hotspots, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.3
 Stable tag: 1.8.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images in WordPress. Perfect for floor plans and real estate photos, trade show booths, group photos, product features, annotated image tutorials, or any image map.
+Create interactive images with clickable hotspots in WordPress. Perfect for floor plans and real estate photos, trade show booths, group photos, product features, annotated image tutorials, or any image map.
 
 == Description ==
 
 ### New in 1.8: Improved interactive image rendering ###
-We re-wrote the display of the plugin to use SVG for faster rendering and better browser support
+We re-wrote the display of the plugin to use SVG for faster rendering of hotspots and better browser support
 
 ### Responsive Design ###
 Interactive images resize to fit your theme and the available screen size
@@ -27,7 +27,7 @@ Your annotations & content are accessible even to users who have JavaScript disa
 Choose your own custom color scheme to match your site
 
 ### Highlight on Hover ###
-Highlight different areas of your image when your site visitor moves their mouse over the interactive image
+Highlight different hotspot areas of your image when your site visitor moves their mouse over the interactive image
 
 ### Easy to Draw ###
 Easy to draw the highlightable areas of your image - and easy to edit the shapes later too!
@@ -36,7 +36,7 @@ Easy to draw the highlightable areas of your image - and easy to edit the shapes
 When a highlighted area is clicked, show more information. Great to highlight points of interest on your image.
 
 ### Go to a URL ###
-Optionally send a site visitor to another URL when clicking a highlightable area of the image map.
+Optionally send a site visitor to another URL when clicking highlightable hotspots on your image
 
 [vimeo https://vimeo.com/138407309]
 
