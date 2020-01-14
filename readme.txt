@@ -106,6 +106,9 @@ We have a video walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
+= 1.8.24 =
+* Fixed: Conflict with Sections page template in Genesis Lifestyle theme
+
 = 1.8.23 =
 * Improved: Removed warning about number of hotspots
 
