@@ -164,7 +164,13 @@ if ( empty( $has_hotspots ) ) : ?>
 				$color_scheme_class = '';
 			} else {
 				$color_scheme_class = 'da-style-' . $hotspot['style'];
-			} ?>
+			}
+			
+			if ( empty( $hotspot['title'] ) ) {
+				$hotspot['title'] = '';
+			}
+
+			?>
 			<div class="hotspot-info <?php echo $color_scheme_class; ?>" id="hotspot-<?php echo $settings['spot_id']; ?>-<?php echo $key; ?>">
 				<?php
 				if ( !empty( $hotspot['action'] ) ) {
