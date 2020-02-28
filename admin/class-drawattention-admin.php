@@ -89,6 +89,9 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			add_action( 'cmb2_save_post_fields', array( $this, 'save_hotspots_json' ), 10, 4 );
 			add_action( 'current_screen', array( $this, 'load_from_hotspots_json' ) );
 
+			add_action('add_meta_boxes', array( $this, 'remove_wp_seo_meta_box' ), 100);
+
+
 			// Add the options page and menu item.
 			// add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 
@@ -108,6 +111,10 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			}
 
 			return $can_edit;
+		}
+
+		public function remove_wp_seo_meta_box() {
+			remove_meta_box( 'wpseo_meta', $this->da->cpt->post_type, 'normal' );
 		}
 
 		/**
