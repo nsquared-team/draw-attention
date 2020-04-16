@@ -526,7 +526,10 @@
 				hotspots.init();
 			}, 1000);
 		});
-	};
+		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){
+			hotspots.init();
+		});
+};
 
 }(jQuery, window.hotspots = window.hotspots || {}));
 
