@@ -23,13 +23,19 @@ class DrawAttention_BigCommerce_Action extends DrawAttention_Action {
 
 		$group_details['fields'][0]['fields']['action']['options']['bigcommerce'] = __( 'Display BigCommerce Product', 'draw-attention' );
 
-		$products = new WP_Query(array(
-			'post_type' => 'bigcommerce_product',
-			'posts_per_page' => -1,
-		) );
+		$product_options = get_transient( 'da_bc_product_options' );
+		if ( empty( $product_options ) ) {
+			$products = new WP_Query(array(
+				'post_type' => 'bigcommerce_product',
+				'posts_per_page' => -1,
+			) );
+			$product_options = wp_list_pluck( $products->posts, 'post_title', 'ID' );
 
+			set_transient( 'da_bc_product_options', $product_options, 3600 );
+		}
+		
 		$select_options = array( '' => 'Select a Product...' );
-		$select_options = array_replace( $select_options, wp_list_pluck( $products->posts, 'post_title', 'ID' ) );
+		$select_options = array_replace( $select_options, $product_options );
 
 		$group_details['fields'][0]['fields']['action-bigcommerce-product-id'] = array(
 			'name' => __('Big Commerce Product', 'draw-attention' ),
