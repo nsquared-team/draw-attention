@@ -21,7 +21,7 @@
 	var leaflets = [];
 
 	// Store all the more info area hotspots in an object for access later
-	var infoSpots = {};
+	hotspots.infoSpots = {};
 
 	var mapSetup = function(){
 		$('.da-error').hide();
@@ -127,12 +127,17 @@
 
 								newHeight = newHeight < minHeight ? minHeight : newHeight;
 
-								img.css({'width': 'auto'});
-								img.animate({
-									'height': newHeight
-								}, 200);
+								var naturalHeight = img.prop('naturalHeight');
+
+								if (newHeight < naturalHeight) {
+									img.css({'width': 'auto'});
+									img.animate({
+										'height': newHeight
+									}, 200);
+								}
 							}
 						}, 100);
+
 					},
 					afterClose: function(){
 						target.removeClass('hotspot-active');
@@ -146,11 +151,12 @@
 		var container = $(shape._map._container);
 		var content = $(areaData.href).html();
 
-		var tip = new L.Rrose({
-			offset: new L.Point(0,0),
+		var tip = L.responsivePopup({
 			autoPan: false,
-			maxHeight: container.height() - 48,
-			closeButton: areaData.trigger == 'click'
+			closeButton: areaData.trigger == 'click',
+			hasTip: container.width() > 840,
+			maxHeight: container.height() * .9,
+			offset: new L.Point(0,0)
 		});
 
 		tip.setContent(content);
@@ -195,18 +201,19 @@
 		img.after(container);
 
 		var map = L.map('hotspots-map-container-' + id, {
-			crs: L.CRS.Simple,
-			zoomControl: false,
 			attributionControl: false,
+			boxZoom: false,
+			crs: L.CRS.Simple,
+			doubleClickZoom: false,
+			dragging: false,
+			keyboard: false,
 			minZoom: -20,
+			scrollWheelZoom: false,
+			tap: !isWebkitiOS,
+			touchZoom: false,
+			zoomControl: false,
 			zoomSnap: 0,
-			tap: !isWebkitiOS
 		});
-
-		map.dragging.disable();
-		map.touchZoom.disable();
-		map.doubleClickZoom.disable();
-		map.scrollWheelZoom.disable();
 
 		var domImg = img.get(0);
 		var natHeight = domImg.naturalHeight;
@@ -322,7 +329,7 @@
 		// If this is a more info hotspot, add it to the infoSpots object
 		if (areaData.href.charAt(0) === '#') {
 			var spotName = areaData.href.replace('#', '');
-			infoSpots[spotName] = poly;
+			hotspots.infoSpots[spotName] = poly;
 		}
 
 		shapeEvents(poly, areaData);
@@ -462,7 +469,7 @@
 		if (!area.length) return;
 
 		var spotName = hash.replace('#', '');
-		infoSpots[spotName].fire('click')
+		hotspots.infoSpots[spotName].fire('click')
 	};
 
 	hotspots.setup = function(){
@@ -529,7 +536,7 @@
 		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){
 			hotspots.init();
 		});
-};
+	};
 
 }(jQuery, window.hotspots = window.hotspots || {}));
 
