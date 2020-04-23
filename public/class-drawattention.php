@@ -368,6 +368,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 		public function cmb2_meta_box_url( $url ) {
+			if ( ! function_exists( 'get_current_screen' ) ) {
+				return $url;
+			}
+
 			$screen = get_current_screen();
 			if ( 'page' == $screen->post_type ) {
 				return $url;
