@@ -100,18 +100,21 @@
 		container.on('active.responsilight', function(e){
 			var data = $(e.target).data('areaData'),
 				info = $(data.href),
+				container = info.parent(),
 				target = $(e.target),
 				currentLightbox = $('.featherlight');
 
+			console.log(container);
+
 			if (e.type === 'active' && currentLightbox.length === 0) {
-				$.featherlight(info, {
+				$.featherlight('<div class="hotspot-info"></div>', {
 					afterContent: function(){
-						var content = $('.hotspot-info.featherlight-inner'),
+						var content = $('.featherlight-inner'),
 							lb = $('.featherlight-content'),
 							mapId = container.find('map').attr('name'),
 							mapNo = mapId.match(/\d+/)[0];
 
-						content.show();
+						info.appendTo(content).show();
 						lb.addClass('lightbox-' + mapNo);
 
 						setTimeout(function(){
@@ -141,6 +144,9 @@
 					},
 					afterClose: function(){
 						target.removeClass('hotspot-active');
+					},
+					beforeClose: function(){
+						info.hide().appendTo(container);
 					}
 				});
 			}
