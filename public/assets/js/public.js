@@ -6,7 +6,7 @@
 		isWebkit = !!ua.match(/WebKit/i),
 		isWebkitiOS = isiOS && isWebkit,
 		isMobileSafari = isiOS && isWebkit && !ua.match(/CriOS/i),
-		isBrowserVersion12Up = function(){
+		getBrowserVersion = function(){
 			var temp,
 				M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
 
@@ -14,8 +14,8 @@
     	if ((temp = ua.match(/version\/(\d+)/i)) != null) {
     		M.splice(1, 1, temp[1]);
     	}
-    	return parseInt(M[1]) >= 12;
-		};
+    	return parseInt(M[1]);
+		}
 
 	// Store all the leaflets on the page in an array for access later
 	var leaflets = [];
@@ -206,6 +206,13 @@
 		});
 		img.after(container);
 
+		// Check to be sure the container is on the page
+		// To prevent errors when loaded in Elementor popup
+		var containerTest = $('#hotspots-map-container-' + id);
+		if (!containerTest.length) {
+			return
+		}
+
 		var map = L.map('hotspots-map-container-' + id, {
 			attributionControl: false,
 			boxZoom: false,
@@ -215,7 +222,8 @@
 			keyboard: false,
 			minZoom: -20,
 			scrollWheelZoom: false,
-			tap: !isWebkitiOS,
+			// tap: !isWebkitiOS,
+			tap: true,
 			touchZoom: false,
 			zoomControl: false,
 			zoomSnap: 0,
@@ -452,8 +460,10 @@
 					shapeClick(shape, areaData, e);
 					break;
 				case 'mouseover':
-					shapeOver(shape, areaData, e);
-					if (isMobileSafari && !isBrowserVersion12Up()) {
+					if (!isMobileSafari || (isMobileSafari && getBrowserVersion < 13)) {
+						shapeOver(shape, areaData, e);
+					}
+					if (isMobileSafari && !(getBrowserVersion() >= 12)) {
 						shapeClick(shape, areaData, e);
 					}
 					break;
@@ -547,6 +557,11 @@
 }(jQuery, window.hotspots = window.hotspots || {}));
 
 jQuery(function(){
+	hotspots.setup();
+	hotspots.compatibilityFixes();
+});
+
+jQuery(document).on('elementor/popup/show', function(){
 	hotspots.setup();
 	hotspots.compatibilityFixes();
 });
