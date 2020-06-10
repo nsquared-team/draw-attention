@@ -31,9 +31,9 @@ class DrawAttention_CustomFields {
 		add_filter( 'cmb2_override_meta_value', array( $this, 'hotspot_area_override_title_and_content' ), 10, 4 );
 		add_action( 'wp_ajax_hotspot_update_custom_fields', array( $this, 'update_hotspot_area_details' ) );
 
-		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ) );
-		add_filter( 'cmb2_meta_boxes', array( $this, 'moreinfo_metabox' ) );
-		add_filter( 'cmb2_meta_boxes', array( $this, 'hotspot_area_group_details_metabox' ), 11 );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'highlight_styling_metabox' ), 1000 );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'moreinfo_metabox' ), 1000 );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'hotspot_area_group_details_metabox' ), 2000 );
 	}
 
 	function cmb2_render_text_number( $field_object, $escaped_value, $object_id, $object_type, $field_type_object ) {
@@ -66,7 +66,11 @@ class DrawAttention_CustomFields {
 		) ;
 	}
 
-	function highlight_styling_metabox( array $metaboxes ) {
+	function highlight_styling_metabox( $metaboxes ) {
+		if ( ! is_array( $metaboxes ) ) {
+			$metaboxes = array();
+		}
+		
 		$metaboxes['highlight_styling'] = array(
 			'id' => 'highlight_styling_metabox',
 			'title' => __( 'Highlight Styling', 'draw-attention' ),
@@ -122,7 +126,11 @@ class DrawAttention_CustomFields {
 	// 	return $meta_value;
 	// }
 
-	function moreinfo_metabox( array $metaboxes ) {
+	function moreinfo_metabox( $metaboxes ) {
+		if ( ! is_array( $metaboxes ) ) {
+			$metaboxes = array();
+		}
+		
 		$metaboxes['moreinfo'] = array(
 			'id' => 'moreinfo_metabox',
 			'title' => __( 'More Info Box Styling', 'draw-attention' ),
@@ -176,7 +184,11 @@ class DrawAttention_CustomFields {
 		return $metaboxes;
 	}
 
-	function hotspot_area_group_details_metabox( array $metaboxes ) {
+	function hotspot_area_group_details_metabox( $metaboxes ) {
+		if ( ! is_array( $metaboxes ) ) {
+			$metaboxes = array();
+		}
+		
 		if ( empty( $_REQUEST['post'] ) && empty( $_POST ) ) { return $metaboxes; }
 
 		if ( !empty( $_REQUEST['post'] ) ) {
