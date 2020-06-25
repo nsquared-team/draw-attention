@@ -28,6 +28,8 @@ if ( empty( $has_hotspots ) ) : ?>
 			data-no-lazy="1"
 			data-lazy-src=""
 			data-lazy="false"
+			loading="eager"
+			data-skip-lazy="1"
 			>
 	</div>
 <?php // There are hotspots! Show the interactive image ?>

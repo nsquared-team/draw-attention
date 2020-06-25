@@ -12,5 +12,7 @@
 		data-no-lazy="1"
 		data-lazy-src=""
 		data-lazy="false"
+		loading="eager"
+		data-skip-lazy="1"
 		>
 </div>
