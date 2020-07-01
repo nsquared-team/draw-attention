@@ -1,5 +1,5 @@
 .single-da_image .wp-post-image { // Attempt to hide featured image on DA image preview
-	display: none;
+	display: none !important;
 }
 
 .da-address-wrapper {
