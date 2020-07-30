@@ -1,7 +1,7 @@
 <?php
 /*
 @package   DrawAttention
-@author    Nathan Tyler <support@tylerdigital.com>
+@author    Nathan Tyler <support@wpdrawattention.com>
 @license   GPL-2.0+
 @link      http://wpdrawattention.com
 @copyright 2015 Tyler Digital

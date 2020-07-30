@@ -3,7 +3,7 @@
  * Plugin Name.
  *
  * @package   DrawAttention
- * @author    Nathan Tyler <support@tylerdigital.com>
+ * @author    Nathan Tyler <support@wpdrawattention.com>
  * @license   GPL-2.0+
  * @link      http://example.com
  * @copyright 2014 Tyler Digital
@@ -19,7 +19,7 @@
  * @TODO: Rename this class to a proper name for your plugin.
  *
  * @package DrawAttention
- * @author  Nathan Tyler <support@tylerdigital.com>
+ * @author  Nathan Tyler <support@wpdrawattention.com>
  */
 if ( !class_exists( 'DrawAttention' ) ) {
 	class DrawAttention {
@@ -355,7 +355,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 				<h3>Please contact your hosting company and ask to be upgraded to PHP 5.3 or higher</h3>
 				<p>Most hosts run PHP 5.5+, there shouldn't be any charge for this upgrade. If your host won't upgrade your PHP version, it's worth considering another host since there are
-				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@tylerdigital.com'>support@tylerdigital.com</a> we'll be happy to provide
+				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@wpdrawattention.com'>support@wpdrawattention.com</a> we'll be happy to provide
 				you with a list of hosts who run PHP 5.3+ and will help you migrate your site from your current hosting provider.</p>
 				<h4>Additional info:</h4>
 				<ul>

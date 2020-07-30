@@ -3,7 +3,7 @@
  * Plugin Name.
  *
  * @package   DrawAttention_Admin
- * @author    Nathan Tyler <support@tylerdigital.com>
+ * @author    Nathan Tyler <support@wpdrawattention.com>
  * @license   GPL-2.0+
  * @link      http://example.com
  * @copyright 2014 Tyler Digital
@@ -19,7 +19,7 @@
  * @TODO: Rename this class to a proper name for your plugin.
  *
  * @package DrawAttention_Admin
- * @author  Nathan Tyler <support@tylerdigital.com>
+ * @author  Nathan Tyler <support@wpdrawattention.com>
  */
 if ( !class_exists( 'DrawAttention_Admin' ) ) {
 	class DrawAttention_Admin {
@@ -316,7 +316,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				$message = "
 				<h3>3rd party scripts disabled</h3>
 				<p>
-					Draw Attention is currently disabling 3rd party scripts on this page. If you still have trouble using Draw Attention, please contact us at <a href='mailto:support@tylerdigital.com'>support@tylerdigital.com</a>
+					Draw Attention is currently disabling 3rd party scripts on this page. If you still have trouble using Draw Attention, please contact us at <a href='mailto:support@wpdrawattention.com'>support@wpdrawattention.com</a>
 				</p>
 				";
 				echo"<div class=\"$class\">$message</div>";

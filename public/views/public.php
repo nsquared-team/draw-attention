@@ -6,7 +6,7 @@
  * frontend of the theme when the plugin is activated.
  *
  * @package   DrawAttention
- * @author    Nathan Tyler <support@tylerdigital.com>
+ * @author    Nathan Tyler <support@wpdrawattention.com>
  * @license   GPL-2.0+
  * @link      http://example.com
  * @copyright 2014 Tyler Digital
