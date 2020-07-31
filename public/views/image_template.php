@@ -6,6 +6,8 @@
 		alt="<?php echo esc_attr( $settings['img_alt'] ); ?>"
 		class="hotspots-image skip-lazy"
 		usemap="#hotspots-image-<?php echo $settings['image_id']; ?>"
+		data-image-title="<?php echo get_the_title( $settings['image_id'] ); ?>"
+		data-image-description="<?php echo wp_strip_all_tags( $settings['img_settings'][$this->parent->custom_fields->prefix.'map_more_info'][0] ); ?>"
 		data-event-trigger="<?php echo $settings['event_trigger']; ?>"
 		data-always-visible="<?php echo $settings['always_visible']; ?>"
 		data-id="<?php echo $settings['image_id']; ?>"

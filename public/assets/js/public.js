@@ -20,6 +20,9 @@
 	// Store all the leaflets on the page in an array for access later
 	var leaflets = [];
 
+	// Store all image maps on the page in an object for access later
+	var imageMaps = {};
+
 	// Store all the more info area hotspots in an object for access later
 	hotspots.infoSpots = {};
 
@@ -111,8 +114,7 @@
 					afterContent: function(){
 						var content = $('.featherlight-inner'),
 							lb = $('.featherlight-content'),
-							mapId = container.find('map').attr('name'),
-							mapNo = mapId.match(/\d+/)[0];
+							mapNo = img.data('id');
 
 						info.appendTo(content).show();
 						lb.addClass('lightbox-' + mapNo);
@@ -274,8 +276,17 @@
 
 	var drawSpots = function(img, map) {
 		var id = img.data('id');
-		var mapName = img.attr('usemap').replace('#', '');
-		var imageMap = $('map[name="' + mapName + '"]');
+
+		/* If the image has a usemap attribute, detach the map and store it in the imageMaps object */
+		if (img[0].hasAttribute('usemap')) {
+			var mapName = img.attr('usemap').replace('#', '');
+			var imageMap = $('map[name="' + mapName + '"]');
+			imageMaps[id] = imageMap.detach();
+			img.removeAttr('usemap');
+		} else { /* Else we've already removed the image map, so we just need to get it */
+			var imageMap = imageMaps[id];
+		}
+
 		var areas = imageMap.find('area');
 		var container = img.parents('.hotspots-container');
 
@@ -287,6 +298,7 @@
 				style: area.data('color-scheme') ? area.data('color-scheme') : 'default',
 				title: area.attr('title'),
 				href: area.attr('href'),
+				spot: area.data('id'),
 				target: area.attr('target'),
 				action: area.data('action'),
 				layout: container.data('layout'),
@@ -304,6 +316,9 @@
 					break;
 			}
 		});
+		// A11y fixes after all the spots are drawn
+		a11yFixes(img, map);
+
 		// Link to area after all the spots are drawn
 		linkToArea();
 	};
@@ -338,7 +353,17 @@
 		var poly = L.polygon(polyCoords, {
 			className: 'hotspot-' + areaData.style,
 			title: areaData.title
-		}).addTo(map)
+		});
+
+		// Attach the area data to the path as soon as it's added to the map, a11y attributes
+		poly.on('add', function(e) {
+			var $poly = $(e.target.getElement());
+			$poly.data('areaData', areaData);
+			$poly.attr('tabindex', '0');
+			$poly.attr('aria-label', areaData.title);
+		});
+
+		poly.addTo(map);
 
 		// If this is a more info hotspot, add it to the infoSpots object
 		if (areaData.href.charAt(0) === '#') {
@@ -351,9 +376,8 @@
 
 	var shapeOver = function(shape, areaData, e) {
 		var $shape = $(e.target.getElement());
-		$shape.data('areaData', areaData);
 		$shape.trigger('over.responsilight');
-		if (areaData.trigger === 'hover' && e.type !== 'touchstart') {
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart' & e.type !== 'keypress') {
 			$shape.addClass('hotspot-active');
 			$shape.trigger('active.responsilight');
 		}
@@ -361,9 +385,8 @@
 
 	var shapeOut = function(shape, areaData, e) {
 		var $shape = $(e.target.getElement());
-		$shape.data('areaData', areaData);
 		$shape.trigger('out.responsilight');
-		if (areaData.trigger === 'hover') {
+		if (areaData.trigger === 'hover' && e.type !== 'keypress') {
 			$shape.removeClass('hotspot-active');
 			$shape.trigger('inactive.responsilight');
 		}
@@ -371,9 +394,8 @@
 
 	var shapeClick = function(shape, areaData, e) {
 		var $shape = $(e.target.getElement());
-		$shape.data('areaData', areaData);
 		$shape.trigger('areaClick.responsilight');
-		if (areaData.trigger === 'hover' && e.type !== 'touchstart' && !isMobileSafari) {
+		if (areaData.trigger === 'hover' && e.type !== 'touchstart' && e.type !== 'keypress' && !isMobileSafari) {
 			return;
 		}
 		$shape.toggleClass('hotspot-active');
@@ -441,7 +463,7 @@
 		// Handle all other spots
 		var moved = false;
 
-		shape.on('touchstart touchmove touchend click mouseover mouseout', function(e){
+		shape.on('touchstart touchmove touchend click mouseover mouseout keypress focus blur', function(e){
 			switch(e.type) {
 				case 'touchstart':
 					moved = false;
@@ -459,6 +481,13 @@
 				case 'click':
 					shapeClick(shape, areaData, e);
 					break;
+				case 'keypress':
+					var key = e.originalEvent.which;
+					if ( key == 13 || key == 32) {
+						e.originalEvent.preventDefault();
+						shapeClick(shape, areaData, e);
+					}
+					break;
 				case 'mouseover':
 					if (!isMobileSafari || (isMobileSafari && getBrowserVersion < 13)) {
 						shapeOver(shape, areaData, e);
@@ -467,11 +496,63 @@
 						shapeClick(shape, areaData, e);
 					}
 					break;
+				case 'focus':
+					shapeOver(shape, areaData, e);
+					break;
+				case 'blur':
+					shapeOut(shape, areaData, e);
+					break;
 				case 'mouseout':
 					shapeOut(shape, areaData, e);
 					break;
 			}
 		});
+	};
+
+	var a11yFixes = function(img, map){
+		let svg = img.siblings('.leaflet-container').find('.leaflet-overlay-pane svg');
+		let id = img.data('id');
+
+		// Add title and description to SVG
+		svg.prepend('<description id="img-desc-' + id + '">' + img.data('image-description') + '</description');
+		svg.prepend('<title id="img-title-' + id + '">' + img.data('image-title') + '</title>');
+
+		// Use title and desc to describe the svg
+		svg.attr('aria-labelled-by', 'img-title-' + id);
+		svg.attr('aria-described-by', 'img-desc-' + id);
+
+		// Make svg screen reader traversable
+		svg.attr('role', 'group');
+
+		// Create a traversable list
+		var group = svg.find('g').attr('role', 'list');
+		group.children().attr('role', 'listitem');
+
+		// Handle tooltips for the map
+		map.on('popupopen',function(popup) {
+		  // shift focus to the popup when it opens
+		  $(popup.popup._container).find('.leaflet-rrose-content').attr('tabindex','-1').focus();
+
+		  // move the close button to the end of the popup content so screen readers reach it
+		  // after the main popup content, not before
+		  var close = $(popup.popup._container).find('.leaflet-rrose-close-button').detach();
+		  close.attr('aria-label','Close item');
+		  $(popup.popup._container).append(close);
+
+			$(document).on('keydown', function(e){
+				if (e.which == 27) {
+					map.closePopup();
+				}
+			});
+
+		});
+
+		// return focus to the icon we started from before opening the pop up
+		map.on('popupclose',function(popup) {
+			$(document).off('keydown');
+			$(popup.popup._source._path).focus();
+		});
+
 	};
 
 	var linkToArea = function(){ // Called after the shapes are drawn
@@ -551,6 +632,12 @@
 		});
 		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){
 			hotspots.init();
+		});
+
+		jQuery('.ult_tabs').on('click', '.ult_tab a', function(){
+			setTimeout(function() {
+				hotspots.init();
+			}, 2000);
 		});
 	};
 

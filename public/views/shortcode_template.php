@@ -2,7 +2,7 @@
 
 // No hotspots are defined
 $has_hotspots = false;
-if ( ! empty( $settings['hotspots']['0'] ) ) {	
+if ( ! empty( $settings['hotspots']['0'] ) ) {
 	foreach ($settings['hotspots'] as $key => $hotspot) {
 		if ( ! empty( $hotspot['coordinates'] ) ) {
 			$has_hotspots = true;
@@ -60,6 +60,7 @@ if ( empty( $has_hotspots ) ) : ?>
 			stroke-opacity: <?php echo $style['display']['borderOpacity']; ?>;
 		}
 		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:hover,
+		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:focus,
 		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>.hotspot-active {
 			fill: <?php echo $style['hover']['fillColor']; ?>;
 			fill-opacity: <?php echo $style['hover']['fillOpacity']; ?>;
@@ -167,7 +168,7 @@ if ( empty( $has_hotspots ) ) : ?>
 			} else {
 				$color_scheme_class = 'da-style-' . $hotspot['style'];
 			}
-			
+
 			if ( empty( $hotspot['title'] ) ) {
 				$hotspot['title'] = '';
 			}
