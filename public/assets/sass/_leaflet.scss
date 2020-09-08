@@ -771,3 +771,17 @@ a.leaflet-rrose-close-button:hover {
 .leaflet-rrose-content {
     font: 12px/1.4 "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
+
+/**
+ * Avoid conflicts with themes that apply unexpected styles to SVGs
+ */
+
+.hotspots-interaction .leaflet-pane svg {
+	display: block;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+	width: auto;
+}
+
