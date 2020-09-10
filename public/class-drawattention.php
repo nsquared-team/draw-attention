@@ -505,22 +505,13 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-styles' );
 			wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 
-			// Remove Photon filter
-			if ( $settings['has_photon'] ) {
-				$photon_removed = remove_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ) );
-			}
 			$this->photon_excluded_images[ $settings['image_id'] ] = $settings['img_url'];
-
 			// Create a new embed
 			$wp_embed = new WP_Embed();
 
 			ob_start();
 
 			require( $this->get_plugin_dir() . '/public/views/shortcode_template.php' );
-
-			if ( $settings['has_photon'] && $photon_removed ) {
-				add_filter( 'image_downsize', array( Jetpack_Photon::instance(), 'filter_image_downsize' ), 10, 3 );
-			}
 
 			return ob_get_clean();
 		}
