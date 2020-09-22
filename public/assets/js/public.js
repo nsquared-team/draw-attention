@@ -61,7 +61,6 @@
     var iframe = el.querySelector( 'iframe[src*=youtube]');
     var video = el.querySelector( 'video' );
     if (iframe) {
-    	console.log('there is an iframe');
     	var iframeSrc = iframe.src;
     	iframe.src = iframeSrc;
     }
