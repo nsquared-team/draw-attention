@@ -57,6 +57,19 @@
 		var container = img.parents('.hotspots-container').addClass('loaded');
 	};
 
+	var stopVideo = function(el) {
+    var iframe = el.querySelector( 'iframe[src*=youtube]');
+    var video = el.querySelector( 'video' );
+    if (iframe) {
+    	console.log('there is an iframe');
+    	var iframeSrc = iframe.src;
+    	iframe.src = iframeSrc;
+    }
+    if (video) {
+    	video.pause();
+    }
+	}
+
 	var moreInfoSetup = function(img) {
 		var container = img.parents('.hotspots-container');
 
@@ -85,8 +98,11 @@
 				info = initial;
 			}
 
-			content.children('.visible').removeClass('visible');
+			var visibleContent = content.children('.visible');
+			stopVideo(visibleContent.get(0));
+			visibleContent.removeClass('visible');
 			info.removeClass('da-hidden').addClass('visible').appendTo(content);
+
 
 			// Check for an embedded video player
 			var video = info.find('.wp-video');
@@ -107,10 +123,9 @@
 				target = $(e.target),
 				currentLightbox = $('.featherlight');
 
-			console.log(container);
-
 			if (e.type === 'active' && currentLightbox.length === 0) {
 				$.featherlight('<div class="hotspot-info"></div>', {
+					closeSpeed: 250,
 					afterContent: function(){
 						var content = $('.featherlight-inner'),
 							lb = $('.featherlight-content'),
@@ -143,6 +158,7 @@
 							}
 						}, 100);
 
+						lightboxAnchorLinks(content, target);
 					},
 					afterClose: function(){
 						target.removeClass('hotspot-active');
@@ -152,6 +168,24 @@
 					}
 				});
 			}
+		});
+	};
+
+	var lightboxAnchorLinks = function(content, hotspot){
+		var links = content.find('.hotspot-content a[href^="#"]');
+		links.on('click', function(e){
+			e.preventDefault();
+			var targetEl = $(e.target.hash);
+			var current = $.featherlight.current();
+			if (!current) return
+			current.afterClose = function(){
+				hotspot.removeClass('hotspot-active');
+				$('html').removeClass('with-featherlight');
+				$('html, body').animate({
+					scrollTop: targetEl.offset().top
+				}, 500);
+			}
+			current.close();
 		});
 	};
 
