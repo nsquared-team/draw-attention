@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive hotspot images, floor plans hotspots, image maps, real estate, highlightable areas, highlight images, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.5
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,7 +53,7 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 ### What could you make with Draw Attention? ###
 * Showcase real estate or a new property development. Give your visitors a virtual tour where they can explore floor plans and photos
-* Sell booths to exhibitors at your tradeshow/conference by showing them an interactive map of the trade show floor
+* Sell booths to exhibitors at your tradeshow/conference by showing them an engaging interactive map of the trade show floor
 * Make a product tour or great help documentation - explain your product by highlighting features in a visual way
 * Interactive infographic - annotate/callout important areas on your infographic and show more information about those points of interest
 * If you're familiar with HTML image maps, we help you make those in a modern way that's compatible with today's devices & browsers
@@ -105,6 +105,10 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.9.2 =
+* Improved: Jetpack compatibility
+* Improved: Sop videos automatically when switching hotspots
 
 = 1.9.1 =
 * Improved: Attempt to avoid conflicts with themes that apply unexpected CSS styles to SVGs
