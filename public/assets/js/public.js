@@ -353,7 +353,7 @@
 		a11yFixes(img, map);
 
 		// Link to area after all the spots are drawn
-		linkToArea();
+		hotspots.linkToArea();
 	};
 
 	var renderCircle = function(coords, map, img, areaData) {
@@ -588,17 +588,17 @@
 
 	};
 
-	var linkToArea = function(){ // Called after the shapes are drawn
+	hotspots.linkToArea = function(e){ // Called after the shapes are drawn
+		e.preventDefault();
 		var hash = window.location.hash,
 			area = null;
 
 		if (!hash) return;
 
-		area = $('area[href="' + hash + '"]');
-
-		if (!area.length) return;
-
 		var spotName = hash.replace('#', '');
+
+		if (!hotspots.infoSpots.hasOwnProperty(spotName)) return;
+
 		hotspots.infoSpots[spotName].fire('click')
 	};
 
@@ -607,7 +607,7 @@
 	};
 
 	hotspots.resizeTimer = null;
-	hotspots.resizing = false;
+	hotspots.resizing = false;``
 
 	hotspots.init = function(){ // For backward compatibility - resets the size of the leaflet on demand
 		leaflets.forEach(function(item){
@@ -698,6 +698,10 @@ jQuery(window).on('resize orientationchange', function(e){
 		$window.trigger('resizeComplete.responsilight');
 		hotspots.resizing = false;
 	}, 250);
+});
+
+jQuery(window).on('hashchange', function(){
+	hotspots.linkToArea();
 });
 
 window.onerror = function(errorMsg, url, lineNumber) { // This should be a fun little experiement!
