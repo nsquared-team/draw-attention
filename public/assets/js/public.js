@@ -588,8 +588,7 @@
 
 	};
 
-	hotspots.linkToArea = function(e){ // Called after the shapes are drawn
-		e.preventDefault();
+	hotspots.linkToArea = function(){ // Called after the shapes are drawn
 		var hash = window.location.hash,
 			area = null;
 
