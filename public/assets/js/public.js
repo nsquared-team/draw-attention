@@ -163,6 +163,7 @@
 						target.removeClass('hotspot-active');
 					},
 					beforeClose: function(){
+						stopVideo(document.querySelector('.featherlight-content'));
 						info.hide().appendTo(container);
 					}
 				});
