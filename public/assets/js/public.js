@@ -607,7 +607,7 @@
 	};
 
 	hotspots.resizeTimer = null;
-	hotspots.resizing = false;``
+	hotspots.resizing = false;
 
 	hotspots.init = function(){ // For backward compatibility - resets the size of the leaflet on demand
 		leaflets.forEach(function(item){
