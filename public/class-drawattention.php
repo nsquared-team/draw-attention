@@ -416,6 +416,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// Get and set DA settings
 			$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
+			if ( empty( $settings['img_settings']['_da_map_more_info'] ) ) {
+				$settings['img_settings']['_da_map_more_info'] = array( '' );
+			}
 			$settings['spot_id'] = 'hotspot-' . $settings['image_id'];
 
 			// Add hotspots to settings
