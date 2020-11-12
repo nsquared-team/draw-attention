@@ -125,6 +125,7 @@
 			if (e.type === 'active' && currentLightbox.length === 0) {
 				$.featherlight('<div class="hotspot-info"></div>', {
 					closeSpeed: 250,
+					closeOnEsc: false,
 					afterContent: function(){
 						var content = $('.featherlight-inner'),
 							lb = $('.featherlight-content'),
@@ -132,6 +133,10 @@
 
 						info.appendTo(content).show();
 						lb.addClass('lightbox-' + mapNo);
+
+						// Fix accessibility issue - links not focusable by keyboard
+						var untabbables = info.find('a[tabindex=-1]');
+						untabbables.attr('tabindex', 0);
 
 						setTimeout(function(){
 							var img = content.find('img'),
@@ -159,8 +164,12 @@
 
 						lightboxAnchorLinks(content, target);
 					},
+					afterOpen: function() {
+						$('body').on('keyup', documentEsc);
+					},
 					afterClose: function(){
 						target.removeClass('hotspot-active');
+						$('body').off('keyup', documentEsc);
 					},
 					beforeClose: function(){
 						stopVideo(document.querySelector('.featherlight-content'));
@@ -169,6 +178,12 @@
 				});
 			}
 		});
+	};
+
+	var documentEsc = function(e) {
+		if (e.keyCode === 27) {
+			$.featherlight.current().close();
+		}
 	};
 
 	var lightboxAnchorLinks = function(content, hotspot){
