@@ -406,8 +406,21 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			);
 
 			// Get the DA image ID
-			$latest_da = get_posts('post_type=' . $this->cpt->post_type . '&numberposts=1');
-			$settings['image_id'] = $latest_da[0]->ID;
+			$image_args = array(
+				'post_status' => 'any',
+				'post_type' => $this->cpt->post_type,
+				'posts_per_page' => 1,
+				'order' => 'DESC',
+				'orderby' => 'ID',
+			);
+			$image = new WP_Query($image_args);
+			if ( ! empty( $image->post ) ) {
+				$settings['image_id'] = $image->post->ID;
+			} else {
+				$latest_da = get_posts('post_type=' . $this->cpt->post_type . '&numberposts=1');
+				$settings['image_id'] = $latest_da[0]->ID;
+			}
+
 
 			// WPML Support
 			if ( function_exists ( 'icl_object_id' ) ) {
