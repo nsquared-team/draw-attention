@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.9.7';
+		const VERSION = '1.9.8';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -424,7 +424,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// WPML Support
 			if ( function_exists ( 'icl_object_id' ) ) {
-				$settings['image_id'] = icl_object_id($latest_da[0]->ID, 'da_image', true);
+				$settings['image_id'] = icl_object_id($settings['image_id'], 'da_image', true);
 			}
 
 			// Get and set DA settings
