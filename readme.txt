@@ -108,6 +108,7 @@ We have a video walkthrough of creating your first image available in [our docum
 
 = 1.9.9 =
 * Fixed: Bug affecting WPML-translated pages with Draw Attention images
+* WP 5.6 Compatibility
 
 = 1.9.7 =
 * Fixed: Bug when importing multiple times
