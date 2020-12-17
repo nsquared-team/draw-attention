@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: interactive hotspot images, floor plans hotspots, image maps, real estate, highlightable areas, highlight images, trade shows, virtual tour, product images, conferences, call to action, responsive, responsive image map, infographic
 Requires at least: 3.5.1
 Tested up to: 5.6
-Stable tag: 1.9.8
+Stable tag: 1.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,7 +106,7 @@ We have a video walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
-= 1.9.8 =
+= 1.9.9 =
 * Fixed: Bug affecting WPML-translated pages with Draw Attention images
 
 = 1.9.7 =
