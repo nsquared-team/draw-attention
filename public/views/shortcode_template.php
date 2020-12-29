@@ -188,7 +188,13 @@ if ( empty( $has_hotspots ) ) : ?>
 				<?php echo apply_filters( 'drawattention_hotspot_title', '<h2 class="hotspot-title">' . $hotspot['title'] . '</h2>', $hotspot ); ?>
 				<?php if ( !empty($hotspot['detail_image_id'])) : ?>
 					<div class="hotspot-thumb">
-						<?php echo wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $settings['img_post'], $settings['img_settings'] ) ); ?>
+						<?php
+						$detail_image_img_tag = wp_get_attachment_image( $hotspot['detail_image_id'], apply_filters( 'da_detail_image_size', 'large', $hotspot, $settings['img_post'], $settings['img_settings'] ) );
+						if ( empty( $detail_image_img_tag ) && ! empty( $hotspot['detail_image'] ) ) {
+							$detail_image_img_tag = '<img src="'.$hotspot['detail_image'].'" />';
+						}
+						echo $detail_image_img_tag;
+						?>
 					</div>
 				<?php elseif( empty( $hotspot['detail_image_id'] ) && ! empty( $hotspot[ 'detail_image' ] ) ) : ?>
 					<div class="hotspot-thumb">
