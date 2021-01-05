@@ -11,9 +11,6 @@ Create interactive images with clickable hotspots in WordPress. Perfect for floo
 
 == Description ==
 
-### New in 1.8: Improved interactive image rendering ###
-We re-wrote the display of the plugin to use SVG for faster rendering of hotspots and better browser support
-
 ### Responsive Design ###
 Interactive images resize to fit your theme and the available screen size
 
