@@ -173,7 +173,9 @@
 					},
 					beforeClose: function(){
 						stopVideo(document.querySelector('.featherlight-content'));
-						info.hide().appendTo(container);
+						setTimeout(function(){
+							info.hide().appendTo(container);
+						}, 500); // delay hiding content and moving it back outside the lightbox
 					}
 				});
 			}
