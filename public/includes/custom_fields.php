@@ -208,6 +208,7 @@ class DrawAttention_CustomFields {
 						'add_button'    => __( 'Add Another Area', 'draw-attention' ),
 						'remove_button' => __( 'Remove Area', 'draw-attention' ),
 						'sortable'      => false, // beta
+				        'remove_confirm' => esc_html__( 'Are you sure you want to delete this? There is no undo.', 'draw-attention' ), // Performs confirmation before removing group
 					),
 					// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
 					'fields'      => array(
