@@ -178,7 +178,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			$screen = get_current_screen();
 			if ( $this->da->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
 				wp_register_script( $this->plugin_slug . '-canvasareadraw', plugins_url( 'assets/js/jquery.canvasAreaDraw.js', __FILE__ ), array( 'jquery' ), DrawAttention::VERSION );
-				wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-canvasareadraw' ), DrawAttention::VERSION );
+				wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-canvasareadraw', 'cmb2-scripts' ), DrawAttention::VERSION );
 				do_action( 'da_register_admin_script' );
 				wp_localize_script( $this->plugin_slug . '-admin-script', 'hotspotAdminVars', array(
 					'ajaxURL' => admin_url( 'admin-ajax.php' ),
@@ -264,12 +264,12 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			if ( empty( $_GET['post_type'] ) ) {
 				return;
 			}
-			
+
 			global $pagenow;
 			if (
 				( $pagenow == 'edit.php' && $_GET['post_type'] == $this->da->cpt->post_type
 				|| $pagenow == 'post-new.php' && $_GET['post_type'] == $this->da->cpt->post_type )
-				&& 
+				&&
 				( empty( $_GET['page'] ) || $_GET['page'] != 'import_export' )
 			) {
 				$image_args = array(
@@ -388,7 +388,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			if ( empty( $_GET['post'] ) ) {
 				return;
 			}
-			
+
 			$post_id = $_GET['post'];
 
 			$deserialized_hotspots = get_post_meta( $post_id, '_da_hotspots', true );
