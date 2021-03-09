@@ -607,14 +607,17 @@
 	};
 
 	hotspots.linkToArea = function(){ // Called after the shapes are drawn
-		var hash = window.location.hash,
-			area = null;
-
+		var hash = window.location.hash;
 		if (!hash) return;
 
 		var spotName = hash.replace('#', '');
-
 		if (!hotspots.infoSpots.hasOwnProperty(spotName)) return;
+
+		console.log('imageMaps', imageMaps);
+
+		Object.keys(hotspots.infoSpots).forEach(function(key) {
+			hotspots.infoSpots[key].closeTooltip()
+		})
 
 		hotspots.infoSpots[spotName].fire('click')
 	};
