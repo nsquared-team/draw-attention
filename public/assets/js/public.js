@@ -613,8 +613,6 @@
 		var spotName = hash.replace('#', '');
 		if (!hotspots.infoSpots.hasOwnProperty(spotName)) return;
 
-		console.log('imageMaps', imageMaps);
-
 		Object.keys(hotspots.infoSpots).forEach(function(key) {
 			hotspots.infoSpots[key].closeTooltip()
 		})
