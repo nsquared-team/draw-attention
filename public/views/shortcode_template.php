@@ -126,6 +126,10 @@ if ( empty( $has_hotspots ) ) : ?>
 					$new_window = !empty( $hotspot['action-url-open-in-window'] ) ? $hotspot['action-url-open-in-window'] : '';
 					$target_window = $new_window == 'on' ? '_new' : '';
 					$target_url = !empty( $hotspot['action-url-url'] ) ? $hotspot['action-url-url'] : '';
+					$rel = '';
+					if ( ! empty( $hotspot['rel'] ) ) {
+						$rel = $hotspot['rel'];
+					}
 					$area_class = $target == 'url' ? 'url-area' : 'more-info-area';
 					$href = $target == 'url' ? $target_url : '#hotspot-' . $settings['spot_id'] . '-' . $key;
 					$href = !empty($href) ? $href : '#';
@@ -144,6 +148,7 @@ if ( empty( $has_hotspots ) ) : ?>
 					shape="poly"
 					coords="<?php echo $coords; ?>"
 					href="<?php echo $href; ?>"
+					rel="<?php echo $rel; ?>"
 					title="<?php echo $title; ?>"
 					alt="<?php echo esc_attr( $title ); ?>"
 					data-action="<?php echo $target; ?>"
