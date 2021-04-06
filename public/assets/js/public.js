@@ -681,7 +681,7 @@
 				hotspots.init();
 			}, 1000);
 		});
-		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){
+		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){ // Elementor tabs
 			hotspots.init();
 		});
 
@@ -691,8 +691,14 @@
 			}, 2000);
 		});
 
-		$('.fl-tabs').on('click', 'a.fl-tabs-label', function(){
+		$('.fl-tabs').on('click', 'a.fl-tabs-label', function(){ // Beaver Builder tabs
 			hotspots.init();
+		});
+
+		jQuery('.fl-accordion-button').on('click', function(){ // Beaver Builder accordion
+			setTimeout(function() {
+				hotspots.init();
+			}, 500);
 		});
 	};
 
