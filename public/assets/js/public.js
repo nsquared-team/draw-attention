@@ -30,7 +30,9 @@
 		$('.da-error').hide();
 		$('.hotspot-info').addClass('da-hidden');
 
-		$('img.hotspots-image').each(function(){
+		var images = $('img.hotspots-image, picture.hotspots-image img'); // Select images as well as images inside picture elements
+
+		images.each(function(){
 			var img = $(this);
 
 			var tester = new Image();
