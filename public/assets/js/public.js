@@ -648,59 +648,68 @@
 
 	hotspots.compatibilityFixes = function(){
 		if (window.Foundation) { /* Fix for Foundation firing tag change event indiscriminately when some items are clicked on the page */
-			$(window).on('change.zf.tabs', function(e){
+			$(window).on('change.zf.tabs', function(e) {
 				if (e.target.tagName !== 'INPUT') {
 					hotspots.init();
 				}
 			});
 		}
-		$(window).on('pageloaded', function(){
-			hotspots.init();
-		});
-		$(window).on('load', function(){
-			hotspots.init();
-		});
-		$('a[data-vc-accordion], .et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() {
-			setTimeout(function() {
-				hotspots.init();
-			}, 1000);
-		});
-		$('.ui-tabs-anchor, .nav-tabs > li').on('click', function() {
-			setTimeout(function() {
-				hotspots.init();
-			}, 750);
-		});
-		$('.responsive-tabs').on('click', '.responsive-tabs__list__item', function(){
-			hotspots.init();
-		});
-		$(window).on('et_hashchange', function() {
-			setTimeout(function() {
-				hotspots.init();
-			}, 1000);
-		});
-		$('.vc_tta-tabs-container').on('click', '.vc_tta-tab', function(){
-			setTimeout(function() {
-				hotspots.init();
-			}, 1000);
-		});
-		$('.elementor-tabs').on('click', '.elementor-tab-title', function(){ // Elementor tabs
+
+		$(window).on('pageloaded load', function() { /* Listen for pageloaded and load events on the window */
 			hotspots.init();
 		});
 
-		jQuery('.ult_tabs').on('click', '.ult_tab a', function(){
+		$(window).on('et_hashchange', function() { /* Listen for Divi hashchange */
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
+
+		$('.ult_tabs').on('click', '.ult_tab a', function() { /* Ultimate tabs */
 			setTimeout(function() {
 				hotspots.init();
 			}, 2000);
 		});
 
-		$('.fl-tabs').on('click', 'a.fl-tabs-label', function(){ // Beaver Builder tabs
-			hotspots.init();
+		$('a[data-vc-accordion], .et_pb_tabs .et_pb_tabs_controls li, .et_pb_toggle_title').on('click', function() { /* Divi tabs, accordion, toggle */
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
+		$('.vc_tta-tabs-container').on('click', '.vc_tta-tab', function() { /* Visual composer tabs */
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
 		});
 
-		jQuery('.fl-accordion-button').on('click', function(){ // Beaver Builder accordion
+		$('.ui-tabs-anchor, .nav-tabs > li').on('click', function() { /* UI Tabs */
+			setTimeout(function() {
+				hotspots.init();
+			}, 750);
+		});
+
+		$('.fl-accordion-button').on('click', function() { /* Beaver Builder accordion */
 			setTimeout(function() {
 				hotspots.init();
 			}, 500);
+		});
+
+		$('.responsive-tabs').on('click', '.responsive-tabs__list__item', function() { /* Responsive tabs */
+			hotspots.init();
+		});
+
+		$('.elementor-tabs').on('click', '.elementor-tab-title', function() { /* Elementor tabs */
+			hotspots.init();
+		});
+
+		$('.fl-tabs').on('click', 'a.fl-tabs-label', function() { /* Beaver Builder tabs */
+			hotspots.init();
+		});
+
+		$('.uabb-adv-accordion-button .uabb-tabs').on('click', function() { /* Ultimate Beaver Builder addons accordion and tabs */
+			setTimeout(function() {
+				hotspots.init();
+			}, 250);
 		});
 	};
 
