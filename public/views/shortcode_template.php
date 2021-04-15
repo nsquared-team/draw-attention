@@ -168,6 +168,8 @@ if ( empty( $has_hotspots ) ) : ?>
 
 		<?php /* Loop through the hotspots and output the more info content for each */
 		foreach( $settings['hotspots'] as $key => $hotspot ) : ?>
+			<?php if ($hotspot['action'] === 'url' ) { continue; } // Skip writing out hotspots for URL only hotspots ?>
+
 			<?php if ( empty( $settings['img_settings']['_da_has_multiple_styles']['0'] ) || $settings['img_settings']['_da_has_multiple_styles']['0'] != 'on' || empty( $hotspot['style'] ) ) {
 				$color_scheme_class = '';
 			} else {
