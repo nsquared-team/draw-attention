@@ -104,6 +104,9 @@ We have a video walkthrough of creating your first image available in [our docum
 == Changelog ==
 
 = 1.9.17 =
+* Fixed: Undefined index notice
+
+= 1.9.16 =
 * Improved: Don't output unneeded HTML for hotspots that link to a URL
 * New: Support for image optimization plugins that use the webp image format
 * New: Support for embedding interactive images in Beaver Builder Ultimate Add-ons Accordions and Tabs
