@@ -59,15 +59,19 @@
 		var container = img.parents('.hotspots-container').addClass('loaded');
 	};
 
-	var stopVideo = function(el) {
+	var stopAudioVideo = function(el) {
     var iframe = el.querySelector( 'iframe[src*=youtube]');
     var video = el.querySelector( 'video' );
+    var audio = el.querySelector( 'audio' );
     if (iframe) {
     	var iframeSrc = iframe.src;
     	iframe.src = iframeSrc;
     }
     if (video) {
     	video.pause();
+    }
+    if (audio) {
+    	audio.pause();
     }
 	}
 
@@ -100,7 +104,7 @@
 			}
 
 			var visibleContent = content.children('.visible');
-			stopVideo(visibleContent.get(0));
+			stopAudioVideo(visibleContent.get(0));
 			visibleContent.removeClass('visible');
 			info.removeClass('da-hidden').addClass('visible').appendTo(content);
 
@@ -174,7 +178,7 @@
 						$('body').off('keyup', documentEsc);
 					},
 					beforeClose: function(){
-						stopVideo(document.querySelector('.featherlight-content'));
+						stopAudioVideo(document.querySelector('.featherlight-content'));
 						setTimeout(function(){
 							info.hide().appendTo(container);
 						}, 500); // delay hiding content and moving it back outside the lightbox
