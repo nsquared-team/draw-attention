@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: image maps, real estate, interactive images, clickable images, hotspots
 Requires at least: 3.5.1
 Tested up to: 5.7
-Stable tag: 1.9.17
+Stable tag: 1.9.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,9 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.9.18 =
+* Improved: Pause playing audio/video when changing hotspots
 
 = 1.9.17 =
 * Fixed: Undefined index notice
