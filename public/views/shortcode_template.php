@@ -149,7 +149,7 @@ if ( empty( $has_hotspots ) ) : ?>
 					coords="<?php echo $coords; ?>"
 					href="<?php echo $href; ?>"
 					rel="<?php echo $rel; ?>"
-					title="<?php echo $title; ?>"
+					title="<?php echo esc_attr( $title ); ?>"
 					alt="<?php echo esc_attr( $title ); ?>"
 					data-action="<?php echo $target; ?>"
 					data-color-scheme="<?php echo $color_scheme; ?>"
