@@ -715,6 +715,11 @@
 				hotspots.init();
 			}, 250);
 		});
+		$('.w-tabs-item').on('click', function() { /* Custom Woocommerce tabs */
+			setTimeout(function() {
+				hotspots.init();
+			}, 1000);
+		});
 	};
 
 }(jQuery, window.hotspots = window.hotspots || {}));
