@@ -10,6 +10,7 @@ class DrawAttention_CPT {
 		// add_action( 'manage_' . $this->post_type .'_posts_custom_column', array( $this, 'register_custom_columns' ), 10, 2 );
 
 		add_action( 'init', array( $this, 'load_drag_drop_featured_image' ) );
+		remove_filter( 'post_type_link', array('MWCPPost', 'post_type_link'), 10, 4 );
 	}
 
 	function load_drag_drop_featured_image() {

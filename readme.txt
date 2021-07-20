@@ -103,8 +103,11 @@ We have a video walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
+= 1.9.22 =
+* Fixed: Conflict with unmaintainted plugin: WP Category Permalink
+
 = 1.9.21 =
-* Fix: CMB2 deprecation error
+* Fixed: CMB2 deprecation error
 
 = 1.9.20 =
 * Improved: Compatibility with WooCommerce tabs
