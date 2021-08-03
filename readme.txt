@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug
 Tags: image maps, real estate, interactive images, clickable images, hotspots
 Requires at least: 3.5.1
 Tested up to: 5.8
-Stable tag: 1.9.22
+Stable tag: 1.9.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,9 @@ We have a video walkthrough of creating your first image available in [our docum
 5.
 
 == Changelog ==
+
+= 1.9.23 =
+* Fixed: Remove blank H2 if Draw Attention image has no title
 
 = 1.9.22 =
 * Fixed: Conflict with unmaintainted plugin: WP Category Permalink
