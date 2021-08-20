@@ -88,7 +88,7 @@ class DrawAttention_ImportExport {
 	public function admin_menu() {
 		global $submenu;
 
-		add_submenu_page( 'edit.php?post_type=da_image', __( 'Import / Export', 'draw-attention' ), __( 'Import / Export', 'draw-attention' ), 'manage_options', 'import_export', array( $this, 'output_import_export_page' ) );
+		add_submenu_page( 'edit.php?post_type=da_image', __( 'Import / Export', 'draw-attention' ), __( 'Import / Export', 'draw-attention' ), 'edit_posts', 'import_export', array( $this, 'output_import_export_page' ) );
 	}
 
 	public function output_import_export_page() {
