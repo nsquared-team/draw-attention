@@ -35,7 +35,7 @@
 
 
 			// Set default options
-			add_option('drag-drop-file-types', array('jpg', 'jpeg', 'png', 'gif'));
+			add_option('drag-drop-file-types', array('jpg', 'jpeg', 'png', 'gif', 'webp'));
 			add_option('drag-drop-page-reload', 0);
 
 			// Bind plugin actions:
@@ -78,7 +78,7 @@
 		 * @return array
 		 */
 		public function get_option_file_types(){
-			return array('jpg', 'jpeg', 'png', 'gif');
+			return array('jpg', 'jpeg', 'png', 'gif', 'webp');
 		}
 
 		/**
