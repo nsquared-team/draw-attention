@@ -11,10 +11,16 @@ if ( ! empty( $settings['hotspots']['0'] ) ) {
 	}
 }
 
-if ( empty( $has_hotspots ) ) : ?>
-	<p><?php _e( 'You need to define some clickable areas for your image.', 'draw-attention' ); ?></p>
-	<p><?php echo edit_post_link( __( 'Edit Image', 'draw-attention' ), false, false, $settings['image_id'] ); ?></p>
-
+if ( empty( $settings['img_url'] ) ) : ?>
+	<?php if ( current_user_can( 'edit_posts' ) ): ?>
+		<p><em><?php _e( 'This interactive image doesn\'t have an image selected from the media library.', 'draw-attention' ); ?></em></p>
+		<p><?php echo edit_post_link( 'Edit Image', '', '', $settings['image_id'] ); ?></p>
+	<?php endif ?>
+<?php elseif ( empty( $has_hotspots ) ) : ?>
+	<?php if ( current_user_can( 'edit_posts' ) ): ?>
+		<p><em><?php _e( 'You need to define some clickable areas for your image.', 'draw-attention' ); ?></em></p>
+		<p><?php echo edit_post_link( __( 'Edit Image', 'draw-attention' ), false, false, $settings['image_id'] ); ?></p>
+	<?php endif ?>
 <?php // In page builder edit mode - just display the image ?>
 <?php elseif ( !empty( $_GET['fl_builder'] ) || !empty( $_GET['elementor-preview'] ) || ( !empty( $_GET['action'] ) && $_GET['action'] == 'elementor' ) ): ?>
 	<div class="hotspots-image-container">
