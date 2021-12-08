@@ -331,7 +331,8 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			wp_localize_script( $this->plugin_slug . '-plugin-script', 'drawattentionData', array(
 				'isLoggedIn' => is_user_logged_in(),
-				'isAdmin' => current_user_can( 'administrator' )
+				'isAdmin' => current_user_can( 'administrator' ),
+				'closeLabel' => __('Close', 'draw-attention'),
 			) );
 
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );

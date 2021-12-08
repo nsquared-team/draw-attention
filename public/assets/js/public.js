@@ -130,6 +130,7 @@
 
 			if (e.type === 'active' && currentLightbox.length === 0) {
 				$.featherlight('<div class="hotspot-info"></div>', {
+					closeLabel: drawattentionData.closeLabel,
 					closeSpeed: 250,
 					closeOnEsc: false,
 					afterContent: function(){
