@@ -1,20 +1,20 @@
-=== Draw Attention ===
+=== Draw Attention: Interactive Image Map Plugin ===
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
-Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, image hotspot, sketch map, sketch annotation, interactive floor plan, image with hotspots
+Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, interactive learning
 Requires at least: 3.5.1
 Tested up to: 5.9
 Stable tag: 1.9.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive image maps with clickable hotspots for WordPress. Perfect for floor plans, infographics, sketch annotations, or product features.
+Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, sketch annotations, or interactive learning.
 
 == Description ==
 Draw Attention makes it easy to create interactive image maps. Highlight sections of your images with hotspots so that users can click/tap or hover to read more information about each image map area. Show more content or direct the user to another URL upon clicking or hovering your hotspot.
 
 The image map can contain more information such as images, text, shortcodes, gallery, video, audio, and more. Reveal more information on click/tap or hover.  Create custom shapes for interactive hotspots directly on your original image.
 
-Perfect for sketch maps, interactive floor plans for real estate, infographics, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
+Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
 
 Image Map Features:
 
@@ -30,10 +30,10 @@ Interactive image maps resize to fit your theme and the available screen size. D
 ### Accessible ###
 Image maps are accessible to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
 
-### SEO Friendly Annotations ###
+### SEO Friendly Clickable Annotations ###
 Your annotations & content are accessible even to users who have JavaScript disabled - SEO friendly too! Draw Attention uses canvas elements in modern browsers, and falls back to image maps in older browsers.
 
-### Easy to Draw and Manage Image Maps ###
+### Easy to Draw Image Maps ###
 Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. Place your interactive image map into any page or post with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
 
 [vimeo https://vimeo.com/592696264]
