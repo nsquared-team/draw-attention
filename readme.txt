@@ -18,9 +18,9 @@ Perfect for sketch maps, interactive floor plans for real estate, clickable info
 
 Image Map Features:
 
-- **Draw Unlimited Hotspots**: Highlight as many sections as you want in your image maps
+- **Draw Unlimited Hotspots**: Highlight as many sections as you want in your image map
 - **Highlight on Hover**: Highlight different image hotspot areas when your site visitor moves their mouse over the interactive image
-- **Customizable Colors**: Choose your own custom color scheme for the image maps to match your site
+- **Customizable Colors**: Choose your own custom color scheme for the image map to match your site
 - **More Info on Click**: When a highlighted area is clicked, show more information. Great to highlight points of interest on your image map
 - **Go to a URL**: Optionally send a site visitor to another URL when clicking highlightable hotspots on your image map
 
@@ -31,7 +31,8 @@ Interactive image maps resize to fit your theme and the available screen size. D
 Image maps are accessible to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
 
 ### SEO Friendly Clickable Annotations ###
-Your annotations & content are accessible even to users who have JavaScript disabled - SEO friendly too! Draw Attention uses canvas elements in modern browsers, and falls back to image maps in older browsers.
+Draw Attention is built with the principles of progressive enhancement in mind, so your content is accessible even to users who have JavaScript disabled and is SEO friendly, too! Draw Attention draws SVG shapes in modern browsers and falls back to a standard image map if JavaScript is disabled.
+
 
 ### Easy to Draw Image Maps ###
 Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. Place your interactive image map into any page or post with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
