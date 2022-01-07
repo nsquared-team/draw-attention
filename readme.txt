@@ -107,6 +107,7 @@ We have a video walkthrough of creating your first image available in [our docum
 
 = 1.9.28 =
 * Fixed: Plugin URI
+* Fixed: Accessibility typo
 
 = 1.9.27 =
 * Improved: Translation support
