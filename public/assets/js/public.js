@@ -576,8 +576,8 @@
 		svg.prepend('<title id="img-title-' + id + '">' + img.data('image-title') + '</title>');
 
 		// Use title and desc to describe the svg
-		svg.attr('aria-labelled-by', 'img-title-' + id);
-		svg.attr('aria-described-by', 'img-desc-' + id);
+		svg.attr('aria-labelledby', 'img-title-' + id);
+		svg.attr('aria-describedby', 'img-desc-' + id);
 
 		// Make svg screen reader traversable
 		svg.attr('role', 'group');
