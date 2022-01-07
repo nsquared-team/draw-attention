@@ -1,60 +1,62 @@
-=== Draw Attention ===
-Contributors: tylerdigital, nataliemac, croixhaug
-Tags: image maps, real estate, interactive images, clickable images, hotspots
+=== Draw Attention: Interactive Image Map Plugin ===
+Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
+Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, interactive learning
 Requires at least: 3.5.1
 Tested up to: 5.9
 Stable tag: 1.9.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images with clickable hotspots in WordPress. Perfect for floor plans and real estate photos, trade show booths, group photos, product features, annotated image tutorials, or any image map.
+Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, sketch annotations, or interactive learning.
 
 == Description ==
+Draw Attention makes it easy to create interactive image maps. Highlight sections of your images with hotspots so that users can click/tap or hover to read more information about each image map area. Show more content or direct the user to another URL upon clicking or hovering your hotspot.
+
+The image map can contain more information such as images, text, shortcodes, gallery, video, audio, and more. Reveal more information on click/tap or hover.  Create custom shapes for interactive hotspots directly on your original image.
+
+Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
+
+Image Map Features:
+
+- **Draw Unlimited Hotspots**: Highlight as many sections as you want in your image maps
+- **Highlight on Hover**: Highlight different image hotspot areas when your site visitor moves their mouse over the interactive image
+- **Customizable Colors**: Choose your own custom color scheme for the image maps to match your site
+- **More Info on Click**: When a highlighted area is clicked, show more information. Great to highlight points of interest on your image map
+- **Go to a URL**: Optionally send a site visitor to another URL when clicking highlightable hotspots on your image map
 
 ### Responsive Design ###
-Interactive images resize to fit your theme and the available screen size
+Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, too!
 
 ### Accessible ###
-Image info is accessible to everyone who visits your site, regardless of device or capabilities.
+Image maps are accessible to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
 
-### Progressively Enhanced ###
+### SEO Friendly Clickable Annotations ###
 Your annotations & content are accessible even to users who have JavaScript disabled - SEO friendly too! Draw Attention uses canvas elements in modern browsers, and falls back to image maps in older browsers.
 
-### Customizable Colors ###
-Choose your own custom color scheme to match your site
+### Easy to Draw Image Maps ###
+Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. Place your interactive image map into any page or post with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
 
-### Highlight on Hover ###
-Highlight different hotspot areas of your image when your site visitor moves their mouse over the interactive image
+[vimeo https://vimeo.com/592696264]
 
-### Easy to Draw ###
-Easy to draw the highlightable areas of your image - and easy to edit the shapes later too!
+[Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization options:
 
-### More Info on Click ###
-When a highlighted area is clicked, show more information. Great to highlight points of interest on your image.
+### Create Multiple Interactive Image Maps (Pro only) ###
+Need more than one interactive image map on your site? The Pro version allows unlimited highlightable areas on unlimited interactive images.
 
-### Go to a URL ###
-Optionally send a site visitor to another URL when clicking highlightable hotspots on your image
-
-[vimeo https://vimeo.com/138407309]
-
-[Upgrade to Draw Attention Pro](http://wpdrawattention.com/) to get more features and customization:
-
-### Have Multiple Interactive Images (Pro only) ###
-Need more than one interactive image on your site? The Pro version allows unlimited highlightable areas on unlimited interactive images
-
-### Layout Options (Pro only) ###
-Show more info about highlighted map areas in a variety of different layouts, including lightbox and tooltip.
+### Annotation Layout Options (Pro only) ###
+Show more info about highlighted image map areas in a variety of different layouts, including lightbox and tooltip.
 
 ### 20 Pre-Defined Color Palettes (Pro only) ###
-Choose from one of 20 pre-defined color palettes or use your own custom color scheme
+Choose from one of 20 pre-defined color palettes or use your own custom color scheme on the image maps.
 
 ### What could you make with Draw Attention? ###
-* Showcase real estate or a new property development. Give your visitors a virtual tour where they can explore floor plans and photos
-* Sell booths to exhibitors at your tradeshow/conference by showing them an engaging interactive map of the trade show floor
-* Make a product tour or great help documentation - explain your product by highlighting features in a visual way
-* Interactive infographic - annotate/callout important areas on your infographic and show more information about those points of interest
-* If you're familiar with HTML image maps, we help you make those in a modern way that's compatible with today's devices & browsers
 
+* Showcase real estate or a new property development. Give your visitors a virtual tour where they can explore floor plans and photos.
+* Sell booths to exhibitors at your trade show or conference by showing them an engaging interactive map of the trade show floor.
+* Make a product tour or tutorial documentation - explain your product by highlighting features in a visual way.
+* Interactive infographic - annotate and call out important areas on your infographic and show more information about those points of interest.
+* If you're familiar with HTML image maps, we help you make those in a modern way that's compatible with today's devices & browsers.
+* Add another dimension to your Blog content by using interactive images to explain concepts or display affiliate links in an engaging way.
 
 == Installation ==
 
@@ -73,9 +75,9 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 
 = After Installation =
 
-1. You'll see a new Draw Attention menu item on the left menu
-1. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
-1. After your image is created, you can embed it into any page or post with the `[drawattention]` shortcode.
+1. You'll see a new Draw Attention menu item on the left sidebar of the Wordpress Dashboard
+2. Create your interactive image. We have a [video walkthrough](https://wpdrawattention.com/document/create-your-first-draw-attention-image/) showing how to create the image.
+3. After your image is created, you can embed it into any page or post with the `[drawattention]` shortcode.
 
 == Frequently Asked Questions ==
 
@@ -95,11 +97,11 @@ We have tutorials, videos and other helpful information on the [Draw Attention w
 We have a video walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/document/create-your-first-draw-attention-image/).
 
 == Screenshots ==
-1. Draw your highlightable areas right in the dasbhoard
+1. Draw your highlightable areas right in the dashboard
 2. Site visitors can click to learn more about your highlighted areas
 3. Upload a floor plan and show detail photos for each room
 4. Customize the colors and appearance of the highlighted areas
-5.
+5. Add in unlimited hotspot areas to your interactive image
 
 == Changelog ==
 
