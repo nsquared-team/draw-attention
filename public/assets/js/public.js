@@ -447,6 +447,10 @@
 		if (areaData.trigger === 'hover' && e.type !== 'keypress') {
 			$shape.removeClass('hotspot-active');
 			$shape.trigger('inactive.responsilight');
+			// If mouse user, blur hover spots when mouse moves out
+			if (e.type === 'mouseout') {
+				$shape.trigger('blur');
+			}
 		}
 	};
 
