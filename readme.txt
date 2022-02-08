@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, interactive learning
 Requires at least: 3.5.1
 Tested up to: 5.9
-Stable tag: 1.9.28
+Stable tag: 1.9.29
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,9 @@ We have a video walkthrough of creating your first image available in [our docum
 5. Add in unlimited hotspot areas to your interactive image
 
 == Changelog ==
+
+= 1.9.29 =
+* Fixed: Unexpected behavior on hover
 
 = 1.9.28 =
 * Fixed: Plugin URI
