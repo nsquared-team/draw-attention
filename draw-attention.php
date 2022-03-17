@@ -1,10 +1,10 @@
 <?php
 /*
 @package   DrawAttention
-@author    Nathan Tyler <support@wpdrawattention.com>
+@author    N Squared <support@wpdrawattention.com>
 @license   GPL-2.0+
-@link      http://wpdrawattention.com
-@copyright 2015 Tyler Digital
+@link      https://wpdrawattention.com
+@copyright 2022 N Squared
 @wordpress-plugin
 Plugin Name:       Draw Attention
 Plugin URI:        https://wpdrawattention.com

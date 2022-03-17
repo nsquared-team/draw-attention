@@ -9,7 +9,7 @@
  * @author    Nathan Tyler <support@wpdrawattention.com>
  * @license   GPL-2.0+
  * @link      http://example.com
- * @copyright 2014 Tyler Digital
+ * @copyright 2022 N Squared
  */
 ?>
 
