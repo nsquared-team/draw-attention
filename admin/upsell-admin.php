@@ -21,7 +21,7 @@ class DrawAttention_Upsell {
 
 	function redirect_pro_link() {
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'da_upgrade_to_pro' ) {
-			wp_redirect( 'http://wpdrawattention.com' );
+			wp_redirect( 'https://wpdrawattention.com?utm_source=plugin&utm_medium=ads&utm_campaign=upgrade-pro&utm_content=admin-menu' );
 			exit();
 		}
 	}
@@ -31,7 +31,7 @@ class DrawAttention_Upsell {
 		return array_merge(
 			$links,
 			array(
-				'upgrade' => '<strong><a href="http://wpdrawattention.com/" target="_blank">' . __( 'Upgrade to Pro', 'draw-attention' ) . '</a></strong>'
+				'upgrade' => '<strong><a href="https://wpdrawattention.com?utm_source=plugin&utm_medium=ads&utm_campaign=upgrade-pro&utm_content=plugin-list" target="_blank">' . __( 'Upgrade to Pro', 'draw-attention' ) . '</a></strong>'
 			)
 		);
 
