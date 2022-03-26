@@ -1,6 +1,6 @@
 === Draw Attention: Interactive Image Map Plugin ===
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
-Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, interactive learning
+Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
 Requires at least: 3.5.1
 Tested up to: 5.9
 Stable tag: 1.9.30
