@@ -365,6 +365,25 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				</ul>
 				</p>";
 				echo"<div class=\"$class\"> <p>$message</p></div>";
+			} else if ( version_compare( phpversion(), '5.5.99' ) <= 0 ) {
+				$class = "error";
+				$message = "<p>
+				<h3>Your server is out of date</h3>
+				Draw Attention (and many other WP plugins) <strong>requires PHP version 5.6 or higher</strong>. PHP 5.5 support was officially terminated in 2016, and to use Draw Attention you need to at least upgrade to PHP 5.6. We recommend PHP 7.1 or higher for best performance.
+				</p>
+				<p>
+
+				<h3>Please contact your hosting company and ask to be upgraded to PHP 7.1 or higher</h3>
+				<p>Most hosts run PHP 7.1+, there shouldn't be any charge for this upgrade. If your host won't upgrade your PHP version, it's worth considering another host since there are
+				also security implications to running outdated PHP versions. If you contact us at <a href='mailto: support@wpdrawattention.com'>support@wpdrawattention.com</a> we'll be happy to provide
+				you with a list of hosts who run PHP 7.1+ and will help you migrate your site from your current hosting provider.</p>
+				<h4>Additional info:</h4>
+				<ul>
+					<li><a href='http://w3techs.com/technologies/details/pl-php/5/all'>http://w3techs.com/technologies/details/pl-php/5/all</a></li>
+					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
+				</ul>
+				</p>";
+				echo"<div class=\"$class\"> <p>$message</p></div>";
 			}
 		}
 
