@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
 Requires at least: 3.5.1
 Tested up to: 6.0
-Stable tag: 1.9.32
+Stable tag: 1.9.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,8 +106,11 @@ We have a video walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
+= 1.9.33 =
+* Fixed: Conflict with MainWP bug
+
 = 1.9.32 =
-* Improved: Compatibility with WP 6.0
+* Improved: Added notice to warn about minimum PHP version 5.6
 
 = 1.9.31 =
 * Improved: Compatibility with WP 6.0

@@ -103,6 +103,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			$this->upsell = new DrawAttention_Upsell( $this );
 
 			add_filter( 'gutenberg_can_edit_post_type', array( $this, 'exclude_cpt_from_gutenberg' ), 10, 2 );
+			add_action('admin_init', array($this, 'fix_mainwp_conflict'), 100);
 		}
 
 		public function exclude_cpt_from_gutenberg( $can_edit, $post_type ) {
@@ -186,6 +187,16 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-admin-script' );
 			}
 
+		}
+
+		public function fix_mainwp_conflict()
+		{
+			// MainWP removes the scripts version which breaks our plugin (and many others) when a site has a caching plugin active
+			// MainWP needs to update their code to instead output a hash of the version so it's obfuscated but not removed
+			if (class_exists('\MainWP\Child\MainWP_Security')) {
+				\MainWP\Child\MainWP_Security::update_security_option('scripts_version', false);
+				\MainWP\Child\MainWP_Security::update_security_option('styles_version', false);
+			}
 		}
 
 		/**
