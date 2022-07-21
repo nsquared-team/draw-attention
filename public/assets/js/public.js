@@ -369,7 +369,10 @@
 				case 'rect':
 					renderPoly(coords, map, img, areaData);
 					break
-				case 'poly':
+				case 'polygon':
+					renderPoly(coords, map, img, areaData);
+					break;
+				case 'poly': // Leaving this here for backward compatibility
 					renderPoly(coords, map, img, areaData);
 					break;
 			}
@@ -389,7 +392,24 @@
 			radius: rad,
 			className: 'hotspot-' + areaData.style,
 			title: areaData.title
-		}).addTo(map)
+		});
+
+		circle.on('add', function(e) {
+			var $circle = $(e.target.getElement());
+			$circle.data('areaData', areaData);
+			$circle.attr('tabindex', '0');
+			$circle.attr('aria-label', areaData.title);
+			$circle.attr('name', areaData.title);
+		});
+
+		circle.addTo(map);
+
+		// If this is a more info hotspot, add it to the infoSpots object
+		if (areaData.href.charAt(0) === '#') {
+			var spotName = areaData.href.replace('#', '');
+			hotspots.infoSpots[spotName] = circle;
+		}
+
 		shapeEvents(circle, areaData);
 	};
 
@@ -419,6 +439,7 @@
 			$poly.data('areaData', areaData);
 			$poly.attr('tabindex', '0');
 			$poly.attr('aria-label', areaData.title);
+			$poly.attr('name', areaData.title);
 		});
 
 		poly.addTo(map);
