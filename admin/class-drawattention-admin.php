@@ -178,13 +178,14 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			$screen = get_current_screen();
 			if ( $this->da->cpt->post_type==$screen->post_type || $this->plugin_screen_hook_suffix == $screen->id ) {
-				wp_register_script( $this->plugin_slug . '-canvasareadraw', plugins_url( 'assets/js/jquery.canvasAreaDraw.js', __FILE__ ), array( 'jquery' ), DrawAttention::VERSION );
-				wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', $this->plugin_slug . '-canvasareadraw', 'cmb2-scripts' ), DrawAttention::VERSION );
+				wp_register_script( $this->plugin_slug . '-leaflet', plugins_url( 'public/assets/js/leaflet.js', dirname( __FILE__ ) ), array(), DrawAttention::VERSION, $in_footer = true );
+				wp_register_script( $this->plugin_slug . '-leaflet-draw', plugins_url( 'assets/js/leaflet.draw.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), DrawAttention::VERSION );
+				wp_register_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', 'cmb2-scripts', $this->plugin_slug . '-leaflet-draw' ), DrawAttention::VERSION );
 				do_action( 'da_register_admin_script' );
 				wp_localize_script( $this->plugin_slug . '-admin-script', 'hotspotAdminVars', array(
 					'ajaxURL' => admin_url( 'admin-ajax.php' ),
 				) );
-				wp_enqueue_script( $this->plugin_slug . '-admin-script' );
+				wp_enqueue_script( $this->plugin_slug . '-admin-script', array(),  DrawAttention::VERSION );
 			}
 
 		}
