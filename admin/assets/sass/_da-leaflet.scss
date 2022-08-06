@@ -1,0 +1,19 @@
+.hotspots-drawing-wrapper {
+	max-width: 100%;
+	position: relative;
+
+	& > img {
+		display: block;
+		height: auto;
+		max-width: 100%;
+		opacity: 0;
+	}
+}
+
+.hotspots-drawing-container {
+	background: #f7fafb;
+	border: 1px solid #ecf1f6;
+	left: 0;
+	position: absolute;
+	top: 0;
+}

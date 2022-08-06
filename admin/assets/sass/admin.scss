@@ -1,6 +1,6 @@
 /* This stylesheet is used to style the admin option form of the plugin. */
 
-@import "compass";
+@use 'sass:math';
 
 @mixin bp($point) {
   @if $point == m {
@@ -30,25 +30,23 @@ body.post-type-da_image {
 /* Hide the coordinates input */
 input[name$='[coordinates]'] {
 	display: none;
-	/* Contain big images */
-	& + div {
-		overflow: auto;
-	}
 }
 
-#field_group .cmb-row[class*='coordinates'] .cmb-td {
-  overflow: auto;
-  padding-bottom: 2rem;
+/* Hide the shape input */
+.cmb-row.cmb-type-text {
+	&[class*='shape'] {
+		display: none;
+	}
 }
 
 #cmb2-metabox-highlight_styling_metabox,
 #cmb2-metabox-moreinfo_metabox {
-	@include display-flex;
-	@include flex-wrap(wrap);
+	display: flex;
+	flex-wrap: wrap;
 	.cmb-row {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		border-bottom: 0 none;
-		@include display-flex;
+		display: flex;
 		padding: 0.5em;
 		&:after {
 			width: auto;
@@ -57,7 +55,7 @@ input[name$='[coordinates]'] {
 	.cmb-th {
 		border: 1px solid #e9e9e9;
 		border-right: 0 none;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		float: none;
 		padding: 1em 0 1em 1em;
 		width: 45%;
@@ -68,7 +66,7 @@ input[name$='[coordinates]'] {
 	.cmb-td {
 		border: 1px solid #e9e9e9;
 		border-left: 0 none;
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		float: none;
 		padding: 1em 1em 1em 0;
 		width: 55%;
@@ -78,7 +76,7 @@ input[name$='[coordinates]'] {
 	}
 	.cmb2-id--hotspot-map-highlight-color,
 	.cmb2-id--hotspot-map-highlight-opacity {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		width: 100%;
 		@include bp(m) {
 			width: 50%;
@@ -87,7 +85,7 @@ input[name$='[coordinates]'] {
 	.cmb2-id--hotspot-map-border-color,
 	.cmb2-id--hotspot-map-border-opacity,
 	.cmb2-id--hotspot-map-border-width {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		width: 100%;
 		@include bp(m) {
 			width: 50%;
@@ -99,7 +97,7 @@ input[name$='[coordinates]'] {
 	.cmb2-id--hotspot-map-title-color,
 	.cmb2-id--hotspot-map-text-color,
 	.cmb2-id--hotspot-map-background-color {
-		@include box-sizing(border-box);
+		box-sizing: border-box;
 		width: 100%;
 		@include bp(m) {
 			width: 50%;
@@ -120,3 +118,7 @@ input[name$='[coordinates]'] {
 .wp-picker-container {
 	white-space: nowrap;
 }
+
+@import 'leaflet';
+@import 'leaflet-draw';
+@import 'da-leaflet';
