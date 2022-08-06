@@ -220,6 +220,12 @@ class DrawAttention_CustomFields {
 								'data-image-url' => ( !empty( $thumbnail_src[0] ) ) ? $thumbnail_src[0] : '',
 							),
 						),
+						'shape' => array(
+							'name' => __( 'Shape', 'draw-attention' ),
+							'id'   => 'shape',
+							'type' => 'text',
+							'default' => 'polygon'
+						),
 						'title' => array(
 							'name' => __('Title', 'draw-attention' ),
 							'id'   => 'title',
