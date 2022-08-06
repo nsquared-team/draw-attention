@@ -151,7 +151,7 @@ if ( empty( $settings['img_url'] ) ) : ?>
 
 				?>
 				<area
-					shape="poly"
+					shape="<?php echo $hotspot['shape'] == 'circle' ? 'circle' : 'polygon'; ?>"
 					coords="<?php echo $coords; ?>"
 					href="<?php echo $href; ?>"
 					rel="<?php echo $rel; ?>"
