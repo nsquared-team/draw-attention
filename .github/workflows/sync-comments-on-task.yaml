@@ -3,15 +3,15 @@ on:
     types: [created, edited, deleted]
 
 jobs:
-  create-comment-in-asana-task-job:
+  sync-comment-in-asana-task-job:
     runs-on: ubuntu-latest
-    name: Create a comment in Asana Task
+    name: Sync a comment in Asana Task
     steps:
-      - name: Create a comment
+      - name: Sync a comment
         uses: nsquared-team/asana-comment-on-task-github-action@main
-        id: createComment
+        id: syncComment
         with:
           asana-secret: ${{ secrets.ASANA_SECRET }}
           comment-text: "PR #{{PR_ID}} {{PR_NAME}} is {{PR_STATE}} -> {{PR_URL}}"
       - name: Get status
-        run: echo "Status is ${{ steps.createComment.outputs.status }}"
+        run: echo "Status is ${{ steps.syncComment.outputs.status }}"
