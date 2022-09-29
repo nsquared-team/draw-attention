@@ -109,6 +109,9 @@ We have a video walkthrough of creating your first image available in [our docum
 = 2.0.0 =
 * Improved: New drawing tool for hotspots
 
+= 1.9.34 =
+* Improved: SEO attribute support for Google Search Console
+
 = 1.9.33 =
 * Fixed: Conflict with MainWP bug
 
