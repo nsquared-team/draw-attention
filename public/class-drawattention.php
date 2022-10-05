@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.9.34';
+		const VERSION = '2.0.0';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -325,7 +325,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 * @since    1.0.0
 		 */
 		public function enqueue_scripts() {
-			wp_register_script( $this->plugin_slug . '-leaflet', plugins_url( 'assets/js/leaflet.js', __FILE__ ), array(), '1.5.1', $in_footer = true );
+			wp_register_script( $this->plugin_slug . '-leaflet', plugins_url( 'assets/js/leaflet.js', __FILE__ ), array(), self::VERSION, $in_footer = true );
 			wp_register_script( $this->plugin_slug . '-leaflet-responsive-popup', plugins_url( 'assets/js/leaflet.responsive.popup-min.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), '0.6.4', $in_footer = true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-responsive-popup', 'jquery' ), self::VERSION, true );
 
@@ -456,6 +456,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// Add hotspots to settings
 			$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->custom_fields->prefix . 'hotspots', true );
+			foreach( $settings['hotspots'] as $hotspot_key => $hotspot ) {
+				if ( empty( $settings['hotspots'][$hotspot_key]['shape'] ) ) {
+					$settings['hotspots'][$hotspot_key]['shape'] = 'polygon';
+				}
+			}
 			$settings['hotspots'] = apply_filters( 'da_render_hotspots', $settings['hotspots'], $settings['image_id'] );
 			if ( empty( $settings['hotspots'] ) ) {
 				$settings['url_hotspots'] = array();

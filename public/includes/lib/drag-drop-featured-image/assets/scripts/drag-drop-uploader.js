@@ -121,7 +121,6 @@ jQuery(document).ready(function($){
 			$(this).attr('data-image-url', src);
 		});
 
-		hotspotAdmin.reset();
 	}
 
 });
