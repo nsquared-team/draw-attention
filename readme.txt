@@ -110,6 +110,9 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 == Changelog ==
 
+= 2.0.1 =
+* WP 6.1 Compatibility
+
 = 2.0.0 =
 * Improved: New drawing tool for hotspots
 
