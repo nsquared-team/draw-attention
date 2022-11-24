@@ -118,7 +118,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			remove_meta_box( 'wpseo_meta', $this->da->cpt->post_type, 'normal' );
 		}
 
-		/**
+		/** testing syncing
 		 * Return an instance of this class.
 		 *
 		 * @since     1.0.0
