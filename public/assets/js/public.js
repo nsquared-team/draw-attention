@@ -57,6 +57,7 @@
 	var markLoaded = function(img) {
 		img.data('status', 'loaded');
 		var container = img.parents('.hotspots-container').addClass('loaded');
+		img.attr('aria-hidden', true);
 	};
 
 	var stopAudioVideo = function(el) {
