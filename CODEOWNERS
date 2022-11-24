@@ -13,5 +13,5 @@
 .github/code-review/require-person/NatalieMac/PR-* @NatalieMac
 .github/code-review/require-person/tylerdigital/PR-* @tylerdigital
 
-# .github/code-review/require-team/backend-development/PR-* @nsquared-team/backend-development
-# .github/code-review/require-team/frontend-development/PR-* @nsquared-team/frontend-development
+.github/code-review/require-team/backend-development/PR-* @nsquared-team/backend-development
+.github/code-review/require-team/frontend-development/PR-* @nsquared-team/frontend-development
