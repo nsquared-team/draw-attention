@@ -1,7 +1,9 @@
 # Any change inside the `/` directory
-# will require approval from @tylerdigital and @NatalieMac.
-# * @tylerdigital
-# * @NatalieMac
+# will require approval from @nataliemac.
+* @nataliemac
+
+# Except for any PHP files
+*.php @tylerdigital
 
 # Explicitly required reviewers can be set for each PR by modifying something in the following paths
 .github/code-review/require-person/aminabdulkhalek/PR-* @aminabdulkhalek
@@ -15,3 +17,5 @@
 
 .github/code-review/require-team/backend-development/PR-* @nsquared-team/backend-development
 .github/code-review/require-team/frontend-development/PR-* @nsquared-team/frontend-development
+.github/code-review/require-team/quality-assurance/PR-* @nsquared-team/quality-assurance
+.github/code-review/require-team/customer-support/PR-* @nsquared-team/customer-support
