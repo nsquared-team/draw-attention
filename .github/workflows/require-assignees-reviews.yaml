@@ -1,0 +1,72 @@
+name: Require Assignees Reviews
+on:
+  pull_request:
+    types:
+      - assigned
+      - unassigned
+# Should cancel outdated workflows on clearing or assigning several people at once, and only let last instance of this workflow run
+concurrency: 
+      group: required-reviewers-${{ github.event.pull_request.head.ref }}
+      cancel-in-progress: true
+env:
+  LIST: ${{ toJSON(github.event.pull_request.assignees.*.login) }}
+
+jobs:
+  update-requested-reviewers:
+    runs-on: ubuntu-latest
+    name: Update requested reviewers
+
+    steps:
+      # get the repo / files to work on
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ssh-key: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set git user information
+        run: |
+
+          git config --global user.email "otto@nsquared.io"
+          git config --global user.name "otto-bot-git"
+
+      - name: Cleanup old review files
+        run: |
+
+          echo Removing old file
+          rm ./.github/code-review/require-person/**/PR-${{ github.event.number }} -f
+          echo Removed old files successfully
+
+        # the below bash script uses jq to iterate on comma separated array [ 'string1', 'string2' ] (not same as a bash array)
+        # it has two main parts
+        # first: looping over assignees creating code ownership files for each
+        # second: takes effect only if the run removed all assignees and the list was empty, in this case it commits the deletion of files
+      - name: Create corresponding review files
+        run: |
+          jq -rc '.[]' <<< "$LIST" | while read i; do
+          
+          echo "Creating file for $i to review PR-${{ github.event.number }}"
+          mkdir -p "./.github/code-review/require-person/$i/" && touch "./.github/code-review/require-person/$i/PR-${{ github.event.number }}"
+          echo "Successfully created file for $i to review PR-${{ github.event.number }}"
+
+          git add -A
+          echo "Successfully staged any changes"
+         
+          git commit -m "Requiring review from '$i' ci bypass" || true
+          echo "Commit step done"
+         
+          git push
+          echo "Successfully pushed to remote"
+          
+          sleep 9
+          echo "Successfully woke up"
+
+          echo Success
+          done
+
+          git add -A
+          echo "Successfully staged"
+          git commit -m "Removed required reviewers ci bypass" || true
+          echo "Successfully made commit"
+          git push
+          echo "Successfully pushed to remote"
