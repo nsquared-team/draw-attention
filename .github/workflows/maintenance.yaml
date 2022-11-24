@@ -1,0 +1,23 @@
+name: "Maintenance"
+on:
+  push:
+    branches:
+      - master
+  pull_request_target:
+    types: [synchronize]
+
+concurrency: 
+  group: maintenance-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if PRs Have Conflicts
+        uses: eps1lon/actions-label-merge-conflict@releases/2.x
+        with:
+          dirtyLabel: "resolve-conflicts"
+          repoToken: "${{ secrets.OTTO_GITHUB_PAT }}"
+          commentOnDirty: "This pull request has conflicts, please resolve those before we can evaluate the pull request."
+          commentOnClean: "Conflicts have been resolved. A maintainer will review the pull request shortly."
