@@ -598,7 +598,7 @@
 		let id = img.data('id');
 
 		// Add title and description to SVG
-		svg.prepend('<description id="img-desc-' + id + '">' + img.data('image-description') + '</description');
+		svg.prepend('<desc id="img-desc-' + id + '">' + img.data('image-description') + '</desc>');
 		svg.prepend('<title id="img-title-' + id + '">' + img.data('image-title') + '</title>');
 
 		// Use title and desc to describe the svg
