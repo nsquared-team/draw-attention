@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create pull request attachments
-        uses: Asana/create-app-attachment-github-action@latest
+        uses: Asana/create-app-attachment-github-action@main
         id: postAttachment
         with:
           asana-secret: ${{ secrets.OTTO_ASANA_SECRET_TOKEN }}
