@@ -1,0 +1,103 @@
+# trigger manually or on CRON
+# validate inputs
+# checkout repository at master
+# bump version
+# generate and update changelog
+# update master
+# merges new master to release
+# create a GitHub release
+name: draw-attention Official Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version type (major, minor, or leave empty to release current master branch)"
+        required: false
+        default: ""
+      changelog:
+        description: "Enter changelog lines separated by a hyphen ' - ' "
+        required: false
+        default: ""
+jobs:
+  bump-version:
+    name: Bump Version (if necessary) and Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      # - name: "Validate Inputs"
+      #   run: |
+      #     echo "Validating Inputs"
+      #     if [[ -n "$version_type" ]] && [[ -z "$changelog" ]]; then
+      #       echo "Inputs are missing a required value"
+      #       exit 1
+      #     fi
+      #     if [[ -z "$version_type" ]] && [[ -n "$changelog" ]]; then
+      #       echo "Inputs are missing a required value"
+      #       exit 1
+      #     fi
+      #     echo "Inputs are valid"
+      - name: "Checkout repository"
+        uses: actions/checkout@v2
+        with:
+          ssh-key: ${{ secrets.GH_ACTIONS_SSH_KEY }}
+          ref: master
+
+      # - name: "Check defined version type"
+      #   id: version
+      #   run: |
+      #     if [ "${{ github.event.inputs.version_type }}" == "major" ]; then
+      #       echo "version=major" >> $GITHUB_OUTPUT
+      #     elif [ "${{ github.event.inputs.version_type }}" == "minor" ]; then
+      #       echo "version=minor" >> $GITHUB_OUTPUT
+      #     else
+      #       echo "version=current" >> $GITHUB_OUTPUT
+      #     fi
+
+      - name: "Bump package.json version number"
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
+          git config --global user.email "nathan@tylerdigital.com"
+          git config --global user.name "tylerdigital"
+          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+
+      - name: "Get Package Version"
+        id: package-version
+        if: ${{ steps.version.outputs.version != 'current' }}
+        uses: martinbeentjes/npm-get-version-action@master
+
+      # - name: Update version on php and readme files
+      #   if: ${{ steps.version.outputs.version != 'current' }}
+      #   run: |
+      #     npm install grunt
+      #     grunt increment-version
+      #     git add -A .
+      #     git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
+      #     git push origin master
+
+      - name: "Build Changelog"
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3.6.0
+  
+      - name: Write changelog to console
+        run: |
+          echo "${{toJSON(steps.build_changelog.outputs)}}"
+
+        # TODO append changelog to readme
+
+      # - name: "Merge master -> release"
+      #   id: merge-master-release
+      #   run: |
+      #     git fetch origin --unshallow
+      #     git checkout -b release origin/release
+      #     git merge master
+      #     git push origin release -f
+
+      - name: "Create GitHub Release"
+        # if: ${{ steps.version.outputs.version != 'current' }}
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.OTTO_GITHUB_PAT }}
+          automatic_release_tag: ${{ steps.package-version.outputs.current-version }}
+          prerelease: false
+          title: ${{ steps.package-version.outputs.current-version }}
