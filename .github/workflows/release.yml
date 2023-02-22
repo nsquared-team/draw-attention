@@ -54,12 +54,12 @@ jobs:
       #       echo "version=current" >> $GITHUB_OUTPUT
       #     fi
 
-      - name: "Bump package.json version number"
-        if: ${{ steps.version.outputs.version != 'current' }}
-        run: |
-          git config --global user.email "nathan@tylerdigital.com"
-          git config --global user.name "tylerdigital"
-          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+      # - name: "Bump package.json version number"
+      #   if: ${{ steps.version.outputs.version != 'current' }}
+      #   run: |
+      #     git config --global user.email "nathan@tylerdigital.com"
+      #     git config --global user.name "tylerdigital"
+      #     npm version ${{ steps.version.outputs.version }} --no-git-tag-version
 
       - name: "Get Package Version"
         id: package-version
@@ -98,6 +98,6 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.OTTO_GITHUB_PAT }}
-          automatic_release_tag: ${{ steps.package-version.outputs.current-version }}
+          automatic_release_tag: "${{ steps.package-version.outputs.current-version }}${{ github.run_id }}"
           prerelease: false
           title: ${{ steps.package-version.outputs.current-version }}
