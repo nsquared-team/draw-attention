@@ -67,19 +67,7 @@ jobs:
       #     ASSETS_DIR: assets/repo/
       #     BUILD_DIR: /release/draw-attention
       #     SLUG: draw-attention
-      
-      # - name: WordPress Plugin Deploy
-      #   if: steps.release_download.outcome == 'success' && steps.release_unzip.outcome == 'success'
-      #   id: deploy
-      #   uses: 10up/action-wordpress-plugin-deploy@stable
-      #   with:
-      #     generate-zip: true
-      #   env:
-      #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-      #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-      #     ASSETS_DIR: assets/repo/
-      #     BUILD_DIR: release/svn/
-      #     SLUG: draw-attention
+
 
       - name: "Send Deploymnt Notification to Slack"
         # if: steps.deploy.outcome == 'success'
