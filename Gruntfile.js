@@ -96,7 +96,7 @@ module.exports = function( grunt ) {
 				} ]
 			},
 			version_readme: {
-				src: 'README.md',
+				src: 'readme.txt',
 				overwrite: true,
 				replacements: [ {
 						from: /^\*\*Stable tag:\*\*(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
