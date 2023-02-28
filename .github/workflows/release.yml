@@ -21,6 +21,8 @@ on:
         description: 'Version type (major, minor, patch or leave empty to release current master branch)'
         required: false
         default: ''
+  pull_request:
+    
 
 jobs:
   github-release:
