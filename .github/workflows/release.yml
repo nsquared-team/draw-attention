@@ -54,6 +54,9 @@ jobs:
           else
             echo "version=current" >> $GITHUB_OUTPUT
           fi
+          
+          # TODO remove
+          echo "version=patch" >> $GITHUB_OUTPUT
 
       # =====================================
       # Edit Release Version ================
