@@ -78,7 +78,7 @@ module.exports = function( grunt ) {
 			version_php: {
 				src: [
 					'**/*.php',
-					'!vendor/**',
+					'!public/includes/lib/**',
 				],
 				overwrite: true,
 				replacements: [ {
