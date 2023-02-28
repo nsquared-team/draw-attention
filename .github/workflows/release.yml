@@ -120,7 +120,7 @@ jobs:
       - name: "Update readme.txt from CHANGELOG.md"
         run: |
           # delete current changelog
-          sed -i '/== Changelog/,${d}' readme.txt
+          sed -i '/# Changelog/,${d}' readme.txt
           # get top N lines from CHANGELOG.md and append in readme.txt
           echo "$( head -70 CHANGELOG.md )" >> readme.txt
           # append some empty lines

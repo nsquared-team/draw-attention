@@ -70,7 +70,7 @@ jobs:
 
 
       - name: "Send Deploymnt Notification to Slack"
-        # if: steps.deploy.outcome == 'success'
+        if: steps.deploy.outcome == 'success'
         uses: slackapi/slack-github-action@v1.23.0
         with:
           payload: |
@@ -95,7 +95,7 @@ jobs:
             }
 
       - name: "Send WP Deployment Failure Warning to Slack"
-        # if: steps.deploy.outcome != 'success'
+        if: steps.deploy.outcome != 'success'
         uses: slackapi/slack-github-action@v1.23.0
         with:
           payload: |

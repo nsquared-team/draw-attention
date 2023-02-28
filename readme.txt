@@ -108,7 +108,7 @@ We have a guide walkthrough of creating your first image available in [our docum
 4. Customize the colors and appearance of the highlighted areas
 5. Add in unlimited hotspot areas to your interactive image
 
-## Changelog
+# Changelog
 
 = 2.0.4 =
 * Fixed: SVG desc markup
