@@ -20,8 +20,6 @@ module.exports = function( grunt ) {
 	grunt.initConfig( {
 
 		pkg: pkg,
-
-
 		watch:  {
 			styles: {
 				files: ['assets/**/*.css','assets/**/*.scss'],
@@ -99,21 +97,21 @@ module.exports = function( grunt ) {
 				src: 'readme.txt',
 				overwrite: true,
 				replacements: [ {
-						from: /^Stable tag:(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
-						to: 'Stable tag:$1<%= pkg.version %>$2'
+					from: /^Stable tag:(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
+					to: 'Stable tag:$1<%= pkg.version %>$2'
 				} ]
 			},
 			readme_txt: {
-				src: 'README.md',
-				dest: 'release/' + pkg.version + '/readme.txt',
+				src: 'readme.txt',
+				dest:  'release/' + pkg.version + '/readme.txt',
 				replacements: [ {
 						from: /^# (.*?)( #+)?$/mg,
 						to: '=== $1 ==='
 					}, {
-						from: /^## (.*?)( #+)?$/mg,
+						from: /^## (.*?)( ##+)?$/mg,
 						to: '== $1 =='
 					}, {
-						from: /^### (.*?)( #+)?$/mg,
+						from: /^### (.*?)( ###+)?$/mg,
 						to: '= $1 ='
 					}, {
 						from: /^\*\*(.*?):\*\*/mg,
@@ -126,49 +124,18 @@ module.exports = function( grunt ) {
 			release: {
 				src: [
 					'**',
-					'!deploy.sh',
-					'!build.sh',
-					'!assets/js/components/**',
-					'!assets/css/sass/**',
-					'!assets/repo/**',
-					'!bin/**',
-					'!build-translations.php',
-					'!release/**',
-					'!tests/**',
-					'!node_modules/**',
-					'!**/*.md',
-					'!.travis.yml',
-					'!.bowerrc',
+					'!.git',
+					'!.github',
 					'!.gitignore',
-					'!bower.json',
-					'!Dockunit.json',
+					'!CHANGELOG.md',
+					'!CODEOWNERS',
 					'!Gruntfile.js',
-					'!Gulpfile.js',
 					'!package.json',
 					'!package-lock.json',
-					'!phpunit.xml',
-					'!phpcs.xml',
+					
+					'!assets/repo/**',
 
-					'!troubleshoot/assets/js/components/**',
-					'!troubleshoot/assets/css/sass/**',
-					'!troubleshoot/assets/repo/**',
-					'!troubleshoot/bin/**',
-					'!troubleshoot/release/**',
-					'!troubleshoot/tests/**',
-					'!troubleshoot/node_modules/**',
-					'!troubleshoot/**/*.md',
-					'!troubleshoot/.travis.yml',
-					'!troubleshoot/.bowerrc',
-					'!troubleshoot/.gitignore',
-					'!troubleshoot/bower.json',
-					'!troubleshoot/Dockunit.json',
-					'!troubleshoot/Gruntfile.js',
-					'!troubleshoot/Gulpfile.js',
-					'!troubleshoot/package.json',
-					'!troubleshoot/phpunit.xml',
-					'!troubleshoot/phpcs.xml',
-
-					'!**/*.map',
+					'!**/*.scss',
 					'!**/node_modules/**'
 
 				],

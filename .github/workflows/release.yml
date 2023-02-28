@@ -56,23 +56,22 @@ jobs:
       # =====================================
       # Edit Release Version ================
       # =====================================
-      # - name: 'Bump package.json version number'
-      #   if: ${{ steps.version.outputs.version != 'current' }}
-      #   run: |
-      #     git config --global user.email "nathan@tylerdigital.com"
-      #     git config --global user.name "tylerdigital"
-      #     npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+      - name: 'Bump package.json version number'
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
+          git config --global user.email "nathan@tylerdigital.com"
+          git config --global user.name "tylerdigital"
+          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
 
       - name: "Get Package Version"
         id: package-version
         if: ${{ steps.version.outputs.version != 'current' }}
         uses: martinbeentjes/npm-get-version-action@master
 
-      # TODO
       - name: "Update version on php and readme files"
         if: ${{ steps.version.outputs.version != 'current' }}
         run: |
-          npm install grunt
+          npm install
           grunt increment-version
 
       # =====================================
@@ -142,12 +141,11 @@ jobs:
       #     git push origin release -f
 
       # =====================================
-      # Remove unwanted files ===============
+      # Prepare Pre-release Asset ===========
       # =====================================
-      - name: 'Build the App'
+      - name: 'Package the App'
         run: |
-          npm install grunt
-          grunt increment-version
+          grunt wporg
 
       - name: 'List Files Included In Release'
         run: |
@@ -163,9 +161,6 @@ jobs:
           zip -r $ZIP_FILENAME draw-attention
           echo "-Listing files in working directory-"
           ls
-      # =====================================
-      # Prepare Pre-release Asset ===========
-      # =====================================
 
       # =====================================
       # Create GitHub release ===============
