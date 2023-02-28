@@ -163,7 +163,7 @@ jobs:
       - name: "Package Included Files to Upload to GitHub Release"
         id: zip_build
         env:
-          ZIP_FILENAME: "{{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
+          ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
         run: |
           mv release/svn draw-attention
           zip -r $ZIP_FILENAME draw-attention
