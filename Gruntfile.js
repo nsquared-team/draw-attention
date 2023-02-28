@@ -99,8 +99,8 @@ module.exports = function( grunt ) {
 				src: 'readme.txt',
 				overwrite: true,
 				replacements: [ {
-						from: /^\*\*Stable tag:\*\*(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
-						to: '**Stable tag:**$1<%= pkg.version %>$2'
+						from: /^Stable tag:(\s*?)[a-zA-Z0-9.-]+(\s*?)$/mi,
+						to: 'Stable tag:$1<%= pkg.version %>$2'
 				} ]
 			},
 			readme_txt: {
