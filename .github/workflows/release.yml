@@ -14,6 +14,8 @@ name: DA GitHub Release
 
 env:
   OTTO_TOKEN: ${{ secrets.OTTO_GITHUB_PAT }}
+  SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+  
 on:
   workflow_dispatch:
     inputs:
@@ -157,6 +159,7 @@ jobs:
           echo "-Listing included files-"
           ls release/svn
           echo "-Finished listing included files-"
+
       - name: "Package Included Files to Upload to GitHub Release"
         id: zip_build
         env:
@@ -189,8 +192,6 @@ jobs:
       - name: "Send Dev Changelog Notification to Slack"
         if: success()
         uses: slackapi/slack-github-action@v1.23.0
-        env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
         with:
           payload: |
             {
@@ -218,8 +219,6 @@ jobs:
       - name: "Send Failure Warning to Slack"
         if: failure()
         uses: slackapi/slack-github-action@v1.23.0
-        env:
-          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
         with:
           payload: |
             {
