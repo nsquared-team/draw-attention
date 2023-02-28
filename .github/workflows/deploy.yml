@@ -14,7 +14,7 @@ on:
     types: [released]
 
 env:
-  SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   deploy:
