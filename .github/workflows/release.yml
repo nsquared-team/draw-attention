@@ -18,9 +18,9 @@ on:
   workflow_dispatch:
     inputs:
       version_type:
-        description: 'Version type (major, minor, patch or leave empty to release current master branch)'
+        description: "Version type (major, minor, patch or leave empty to release current master branch)"
         required: false
-        default: ''
+        default: ""
   pull_request:
     
 
@@ -58,7 +58,7 @@ jobs:
       # =====================================
       # Edit Release Version ================
       # =====================================
-      - name: 'Bump package.json version number'
+      - name: "Bump package.json version number"
         if: ${{ steps.version.outputs.version != 'current' }}
         run: |
           git config --global user.email "nathan@tylerdigital.com"
@@ -79,40 +79,40 @@ jobs:
       # =====================================
       # Build Dev Changelog =================
       # =====================================
-      - name: 'Build Dev Changelog'
+      - name: "Build Dev Changelog"
         uses: mikepenz/release-changelog-builder-action@v3
         id: build_dev_changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           toTag: ${{ github.ref }}
-          configuration: './.github/config/dev_changelog_configuration.json'
+          configuration: "./.github/config/dev_changelog_configuration.json"
 
       # =====================================
       # Build Changelog =====================
       # =====================================
-      - name: 'Build Changelog'
+      - name: "Build Changelog"
         uses: mikepenz/release-changelog-builder-action@v3
         id: build_changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           toTag: ${{ github.ref }}
-          configuration: './.github/config/changelog_configuration.json'
+          configuration: "./.github/config/changelog_configuration.json"
 
-      - name: 'Write changelog step outputs to console'
+      - name: "Write changelog step outputs to console"
         env:
           CHANGELOG: ${{ toJson(steps.build_changelog.outputs) }}
         run: |
           echo "$CHANGELOG"
 
-      - name: 'Update Changelog'
+      - name: "Update Changelog"
         uses: stefanzweifel/changelog-updater-action@v1
         with:
-          latest-version: '${{ steps.package-version.outputs.current-version }}'
+          latest-version: "${{ steps.package-version.outputs.current-version }}"
           release-notes: ${{steps.build_changelog.outputs.changelog}}
 
-      - name: 'Update readme.txt from CHANGELOG.md'
+      - name: "Update readme.txt from CHANGELOG.md"
         run: |
           # delete current changelog
           sed -i '/== Changelog/,${d}' readme.txt
@@ -145,19 +145,19 @@ jobs:
       # =====================================
       # Prepare Pre-release Asset ===========
       # =====================================
-      - name: 'Package the App'
+      - name: "Package the App"
         run: |
           grunt wporg
 
-      - name: 'List Files Included In Release'
+      - name: "List Files Included In Release"
         run: |
           echo "-Listing included files-"
           ls release/svn
           echo "-Finished listing included files-"
-      - name: 'Package Included Files to Upload to GitHub Release'
+      - name: "Package Included Files to Upload to GitHub Release"
         id: zip_build
         env:
-          ZIP_FILENAME: '${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip'
+          ZIP_FILENAME: "{{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
         run: |
           mv release/svn draw-attention
           zip -r $ZIP_FILENAME draw-attention
@@ -167,27 +167,27 @@ jobs:
       # =====================================
       # Create GitHub release ===============
       # =====================================
-      - name: 'GH Release'
+      - name: "GH Release"
         if: ${{ steps.version.outputs.version != 'current' }}
         uses: softprops/action-gh-release@v0.1.15
         env:
-          ZIP_FILENAME: '${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip'
+          ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
         with:
           prerelease: true
           token: ${{ env.OTTO_TOKEN }}
           body: ${{steps.build_changelog.outputs.changelog}}
-          tag_name: '${{ steps.package-version.outputs.current-version }}'
+          tag_name: "${{ steps.package-version.outputs.current-version }}"
           files: |
             ${{ env.ZIP_FILENAME }}
 
       # =====================================
       # Send Dev Changelog Notification =====
       # =====================================
-      - name: 'Send Dev Changelog Notification to Slack'
+      - name: "Send Dev Changelog Notification to Slack"
         if: success()
         uses: slackapi/slack-github-action@v1.23.0
         env:
-          SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
         with:
           payload: |
             {
@@ -212,11 +212,11 @@ jobs:
       # =====================================
       # Send Failure Warning to Slack =====
       # =====================================
-      - name: 'Send Failure Warning to Slack'
+      - name: "Send Failure Warning to Slack"
         if: failure()
         uses: slackapi/slack-github-action@v1.23.0
         env:
-          SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
         with:
           payload: |
             {
