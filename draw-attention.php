@@ -82,3 +82,33 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 	add_action( 'plugins_loaded', array( 'DrawAttention_Admin', 'get_instance' ) );
 
 }
+
+
+
+/**
+ * Responsive Image Maps plugin attempts to take over any image map on the page, which interferes with our plugin’s ability to resize and place hotspots correctly.
+ * Please check your list of active plugins to see if you have the Responsive Image Maps plugin installed and activated. If so, we regretfully recommend deactivating this plugin.
+ * It has been abandoned and has not been updated in over 8 years.
+ * Here is a link to our public ticket asking the plugin author to update their plugin: https://wordpress.org/support/topic/conflict-with-draw-attention-plugin-2/
+ * 
+ * Our final solution is to dequeue the Responsive Image Maps plugin’s script if it is active.
+ * And tell WordPress to not load RIM plugin
+ * 
+ */
+function dequeue_outdated_conflicting_scripts(){
+
+	if (!function_exists( 'is_plugin_active' ) ) {
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	}
+
+	if ( is_plugin_active( 'responsive-image-maps/responsive-image-maps.php' ) ) {
+		wp_dequeue_script( 'jQuery.rwd_image_maps' );
+	}
+}
+
+function temporarily_disable_my_plugin(){
+	remove_action( 'wp_head', 'pn_rim_header_scripts' );
+}
+
+add_action('init', 'temporarily_disable_my_plugin');
+add_action('wp_enqueue_scripts', 'dequeue_outdated_conflicting_scripts', 999 );
