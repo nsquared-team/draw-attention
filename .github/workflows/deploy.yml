@@ -65,7 +65,7 @@ jobs:
       #     SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
       #     SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
       #     ASSETS_DIR: assets/repo/
-      #     BUILD_DIR: /release/draw-attention
+      #     BUILD_DIR: release/draw-attention
       #     SLUG: draw-attention
 
 
