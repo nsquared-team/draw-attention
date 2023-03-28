@@ -1,0 +1,17 @@
+{
+  "categories": [
+    {
+      "title": "## Fixes",
+      "labels": ["bugfix", "bug"],
+      "empty_content": ""
+    },
+    {
+      "title": "## Features and Improvements",
+      "labels": ["feature"],
+      "empty_content": ""
+    }
+  ],
+  "template": "${{CHANGELOG}}",
+  "pr_template": "PR:#${{NUMBER}} - ${{TITLE}}\n",
+  "empty_template": ""
+}

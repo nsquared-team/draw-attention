@@ -1,0 +1,120 @@
+# this is part 2 of the official release process, is triggered after publishing a release
+# find part 1 inside release.yml workflow, or alternatively create a manual release
+
+# This workflow runs whenever a GitHub release is published
+# It checks out the latest release branch commit
+# It builds the plugin as suitable
+# and deploys it to WP.org, under the tag of the triggering release
+
+name: PD deploy to WordPress.org
+
+# keeping the trigger at released gives us the chance to skip deploying any releases we don't like or whatever
+on:
+  release:
+    types: [released]
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  deploy:
+    name: "Deploy to WordPress.org"
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+        with:
+          ref: 'release'
+      
+      - name: "Dump GitHub Context"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+
+      - name: release-downloader
+        uses: robinraju/release-downloader@v1.7
+        id: release_download
+        with:
+          tag: ${{ github.event.release.tag_name }}
+          out-file-path: .
+          fileName: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}-prerelease.zip
+          
+      - name: "Unzip the downloaded release ZIP"
+        id: release_unzip
+        run: |
+          unzip ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}-prerelease.zip -d release
+
+      - name: "Check downloaded files"
+        run: |
+          echo "-Listing plugin files-"
+          ls release/draw-attention
+          echo "-Finished listing plugin files-"
+          echo "-Listing repo assets-"
+          ls assets/repo/
+          echo "-Finished listing repo assets-"
+
+      - name: WordPress Plugin Deploy
+        if: steps.release_download.outcome == 'success' && steps.release_unzip.outcome == 'success'
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          ASSETS_DIR: assets/repo/
+          BUILD_DIR: release/draw-attention
+          SLUG: draw-attention
+
+
+      - name: "Send Deploymnt Notification to Slack"
+        if: steps.deploy.outcome == 'success'
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          payload: |
+            {
+              "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :white_check_mark: :white_check_mark: :white_check_mark:\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n.",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                      "type": "plain_text",
+                      "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :white_check_mark: :white_check_mark: :white_check_mark:"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n."
+                  }
+                }
+              ]
+            }
+
+      - name: "Send WP Deployment Failure Warning to Slack"
+        if: steps.deploy.outcome != 'success'
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          payload: |
+            {
+              "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :red_circle: :red_circle: :red_circle:\nFailed to deploy.\n\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n.",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                      "type": "plain_text",
+                      "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :red_circle: :red_circle: :red_circle:"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Failed to deploy.\n\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n."
+                  }
+                }
+              ]
+            }

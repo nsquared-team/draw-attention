@@ -9,7 +9,7 @@
 Plugin Name:       Draw Attention
 Plugin URI:        https://wpdrawattention.com
 Description:       Create interactive images in WordPress
-Version:           2.0.4
+Version:           2.0.5
 Author:            N Squared
 Author URI:        https://nsqua.red
 Text Domain:       draw-attention
@@ -82,3 +82,36 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 	add_action( 'plugins_loaded', array( 'DrawAttention_Admin', 'get_instance' ) );
 
 }
+
+
+
+/**
+ * Responsive Image Maps plugin attempts to take over any image map on the page, which interferes with our plugin’s ability to resize and place hotspots correctly.
+ * Please check your list of active plugins to see if you have the Responsive Image Maps plugin installed and activated. If so, we regretfully recommend deactivating this plugin.
+ * It has been abandoned and has not been updated since 2015.
+ * Here is a link to our public ticket asking the plugin author to update their plugin: https://wordpress.org/support/topic/conflict-with-draw-attention-plugin-2/
+ * 
+ * Our final solution is to dequeue the Responsive Image Maps plugin’s script if it is active.
+ * And tell WordPress to not load RIM plugin
+ * 
+ */
+function da_dequeue_conflicting_rim_scripts(){
+	
+	if ( ! function_exists( 'pn_rim_enqueue_scripts' ) ) {
+		return;
+	}
+
+	wp_dequeue_script( 'jQuery.rwd_image_maps' );
+}
+
+function da_disable_rim_plugin(){
+	
+	if ( ! function_exists( 'pn_rim_enqueue_scripts' ) ) {
+		return;
+	}
+	
+	remove_action( 'wp_head', 'pn_rim_header_scripts' );
+}
+
+add_action('init', 'da_disable_rim_plugin');
+add_action('wp_enqueue_scripts', 'da_dequeue_conflicting_rim_scripts', 999 );
