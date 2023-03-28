@@ -6,7 +6,7 @@
 # It builds the plugin as suitable
 # and deploys it to WP.org, under the tag of the triggering release
 
-name: PD deploy to WordPress.org
+name: DA deploy to WordPress.org
 
 # keeping the trigger at released gives us the chance to skip deploying any releases we don't like or whatever
 on:
