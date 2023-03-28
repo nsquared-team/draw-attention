@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.5 - 2023-03-28
+
+### Fixes
+
+### Features and Improvements
+
 ## 2.0.4
 
 - Fixed: SVG desc markup
@@ -235,7 +241,8 @@
 
 ## 1.8.9
 
-# Warning for WPML and Non-English users: please test before updating #
+# Warning for WPML and Non-English users: please test before updating
+
 - Improved: Internationalization using new text domain matching plugin slug (draw-attention instead of drawattention). We made this change to allow translators to use wordpress.org's translation system. If this breaks any existing translations for people using WPML or other approaches, please contact us at support@wpdrawattention.com so we can help you resolve it as quickly as possible.
 
 ## 1.8.7
@@ -378,7 +385,6 @@
 
 - Fixed: PHP warnings when WP_DEBUG was on
 - Fixed: Scrolling issue with deep-linked hotspots
-
 
 ## 1.5
 
