@@ -132,20 +132,20 @@ jobs:
       # =====================================
       # Update branches =====================
       # =====================================
-      # - name: 'Update branch master'
-      #   if: ${{ steps.version.outputs.version != 'current' }}
-      #   run: |
-      #     git add -A .
-      #     git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
-      #     git push origin master
+      - name: 'Update branch master'
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
+          git add -A .
+          git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
+          git push origin master
 
-      # - name: 'Merge master -> release'
-      #   id: merge-master-release
-      #   run: |
-      #     git fetch origin --unshallow
-      #     git checkout -b release origin/release
-      #     git merge master
-      #     git push origin release -f
+      - name: 'Merge master -> release'
+        id: merge-master-release
+        run: |
+          git fetch origin --unshallow
+          git checkout -b release origin/release
+          git merge master
+          git push origin release -f
 
       # =====================================
       # Prepare Pre-release Asset ===========
