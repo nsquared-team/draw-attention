@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.6 - 2023-03-28
+
+### Fixes
+
+### Features and Improvements
+
 ## 2.0.5 - 2023-03-28
 
 ### Fixes
