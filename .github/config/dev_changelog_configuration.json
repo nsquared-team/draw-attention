@@ -1,0 +1,22 @@
+{
+  "categories": [
+    {
+      "title": "## 🐛 Fixes",
+      "labels": ["bugfix", "bug"],
+      "empty_content": "- No bugfixes for this release 🐛🐛"
+    },
+    {
+      "title": "## 🚀 Features",
+      "labels": ["feature"],
+      "empty_content": "- No new features yet"
+    },
+    {
+      "title": "## 📦 Uncategorized",
+      "labels": [],
+      "empty_content": "- No additional changes"
+    }
+  ],
+  "template": "${{CHANGELOG}}",
+  "pr_template": "PR:#${{NUMBER}} - ${{TITLE}}\n",
+  "empty_template": ""
+}
