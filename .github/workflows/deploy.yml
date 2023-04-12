@@ -72,49 +72,15 @@ jobs:
       - name: "Send Deploymnt Notification to Slack"
         if: steps.deploy.outcome == 'success'
         uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
         with:
-          payload: |
-            {
-              "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :white_check_mark: :white_check_mark: :white_check_mark:\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n.",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                      "type": "plain_text",
-                      "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :white_check_mark: :white_check_mark: :white_check_mark:"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n."
-                  }
-                }
-              ]
-            }
-
+          payload: ${{ env.JSON }}
+            
       - name: "Send WP Deployment Failure Warning to Slack"
         if: steps.deploy.outcome != 'success'
         uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\nFailed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
         with:
-          payload: |
-            {
-              "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :red_circle: :red_circle: :red_circle:\nFailed to deploy.\n\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n.",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                      "type": "plain_text",
-                      "text": ".\n\n\nDraw Attention ${{ github.event.release.tag_name }} :red_circle: :red_circle: :red_circle:"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Failed to deploy.\n\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\n\n\n."
-                  }
-                }
-              ]
-            }
+          payload: ${{ env.JSON }}
