@@ -2,8 +2,8 @@
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
 Requires at least: 3.5.1
-Tested up to: 6.1
-Stable tag: 2.0.7
+Tested up to: 6.2
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,18 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.9 - 2023-04-11
+
+### Fixes
+
+### Features and Improvements
+
+## 2.0.8 - 2023-03-28
+
+### Fixes
+
+### Features and Improvements
+
 ## 2.0.7 - 2023-03-28
 
 - no changes
@@ -165,18 +177,5 @@ We have a guide walkthrough of creating your first image available in [our docum
 ## 1.9.30
 
 - Improved: Updated plugin author contact details
-
-## 1.9.29
-
-- Fixed: Unexpected behavior on hover
-
-## 1.9.28
-
-- Fixed: Plugin URI
-- Fixed: Accessibility typo
-
-## 1.9.27
-
-- Improved: Translation support
 
 

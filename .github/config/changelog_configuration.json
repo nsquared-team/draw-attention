@@ -2,13 +2,11 @@
   "categories": [
     {
       "title": "## Fixes",
-      "labels": ["bugfix", "bug"],
-      "empty_content": ""
+      "labels": ["bugfix", "bug"]
     },
     {
       "title": "## Features and Improvements",
-      "labels": ["feature"],
-      "empty_content": ""
+      "labels": ["feature"]
     }
   ],
   "template": "${{CHANGELOG}}",
