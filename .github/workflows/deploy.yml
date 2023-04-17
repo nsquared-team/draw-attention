@@ -12,7 +12,12 @@ name: DA deploy to WordPress.org
 on:
   release:
     types: [released]
-
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Example '1.2.8' - if this tag does not exist on GitHub this release will fail without affecting WP.org repository"
+        required: false
+        default: ""
 env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
@@ -32,19 +37,46 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
+          
+      - name: "Set Tag Name for release"
+        id: set_tag_name
+        run: |
+          if [ -z "${{ github.event.inputs.tag_name }}" ]; then
+            echo "tag_name=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag_name="${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+          fi
 
+      # step to validate github output tag_name not empty
+      - name: "Validate Tag Name"
+        id: validate_tag_name
+        run: |
+          if [ -z "${{ steps.set_tag_name.outputs.tag_name }}" ]; then
+            echo "Error: tag_name is empty!"
+            exit 1
+          fi
+          
       - name: release-downloader
         uses: robinraju/release-downloader@v1.7
         id: release_download
         with:
-          tag: ${{ github.event.release.tag_name }}
+          tag: ${{ steps.set_tag_name.outputs.tag_name }}
           out-file-path: .
-          fileName: ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}-prerelease.zip
-          
+          fileName: ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip
+
+      # step to confirm the file was downloaded, otherwise exit
+      - name: "Confirm Release Downloaded"
+        id: confirm_release_downloaded
+        run: |
+          if [ ! -f ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip ]; then
+            echo "Error: Release not downloaded! Confirm that a GitHub release with tag ${{ steps.set_tag_name.outputs.tag_name }} exists and has the prerelease ZIP attached"
+            exit 1
+          fi
+
       - name: "Unzip the downloaded release ZIP"
         id: release_unzip
         run: |
-          unzip ${{ github.event.repository.name }}-${{ github.event.release.tag_name }}-prerelease.zip -d release
+          unzip ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip -d release
 
       - name: "Check downloaded files"
         run: |
