@@ -23,7 +23,6 @@ on:
         description: "Version type (major, minor, patch or leave empty to release current master branch)"
         required: false
         default: ""
-  pull_request:
     
 
 jobs:
@@ -40,9 +39,9 @@ jobs:
 
       - name: "Checkout repository"
         uses: actions/checkout@v3.3.0
-        # with:
-        #   ssh-key: ${{ secrets.GH_ACTIONS_SSH_KEY }}
-        #   ref: master
+        with:
+          ssh-key: ${{ secrets.GH_ACTIONS_SSH_KEY }}
+          ref: master
 
       - name: "Check defined version type"
         id: version
@@ -56,18 +55,18 @@ jobs:
           else
             echo "version=current" >> $GITHUB_OUTPUT
           fi
-          
-          # TODO remove
-          echo "version=patch" >> $GITHUB_OUTPUT
 
       # =====================================
       # Edit Release Version ================
       # =====================================
-      - name: "Bump package.json version number"
-        if: ${{ steps.version.outputs.version != 'current' }}
+      - name: "Git Configuration"
         run: |
           git config --global user.email "nathan@tylerdigital.com"
           git config --global user.name "tylerdigital"
+          
+      - name: "Bump package.json version number"
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
           npm version ${{ steps.version.outputs.version }} --no-git-tag-version
 
       - name: "Get Package Version"
@@ -169,12 +168,22 @@ jobs:
           zip -r $ZIP_FILENAME draw-attention
           echo "-Listing files in working directory-"
           ls
-
+          
+      # =====================================
+      # Cleanup if Needed ===============
+      # =====================================
+      - name: "If releasing current, delete tag to avoid conflict"
+        uses: dev-drprasad/delete-tag-and-release@v1.0
+        if: ${{ steps.version.outputs.version != 'current' }}
+        with:
+          tag_name: "${{ steps.package-version.outputs.current-version }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          delete_release: false
+          
       # =====================================
       # Create GitHub release ===============
       # =====================================
       - name: "GH Release"
-        if: ${{ steps.version.outputs.version != 'current' }}
         uses: softprops/action-gh-release@v0.1.15
         env:
           ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
@@ -192,51 +201,18 @@ jobs:
       - name: "Send Dev Changelog Notification to Slack"
         if: success()
         uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\"}}]}"
         with:
-          payload: |
-            {
-              "text": ".\n\n\nDraw Attention ${{ steps.package-version.outputs.current-version }} :large_green_circle: :large_green_circle: :large_green_circle:\nSuccessfully Prepared GitHub release.:fox-dance:\n\n-Changelog:\n${{steps.build_dev_changelog.outputs.changelog}}\n\n\n.",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                      "type": "plain_text",
-                      "text": ".\n\n\nDraw Attention ${{ steps.package-version.outputs.current-version }} :large_green_circle: :large_green_circle: :large_green_circle:"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Successfully Prepared GitHub release.:fox-dance:\n\n*Changelog:*\n${{steps.build_dev_changelog.outputs.changelog}}\n\n\n."
-                  }
-                }
-              ]
-            }
+          payload: ${{ env.JSON }}
+            
       # =====================================
       # Send Failure Warning to Slack =====
       # =====================================
       - name: "Send Failure Warning to Slack"
         if: failure()
-        uses: slackapi/slack-github-action@v1.23.0
+        uses: slackapi/slack-github-action@v1.23.
+        env:
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
         with:
-          payload: |
-            {
-              "text": ".\n\n\nDraw Attention ${{ steps.package-version.outputs.current-version }} :red_circle: :red_circle: :red_circle:\nFailed to Prepare GitHub release.\n\nKindly check what went wrong, or try triggering the release workflow again.\n\n\n.",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                      "type": "plain_text",
-                      "text": ".\n\n\nDraw Attention ${{ steps.package-version.outputs.current-version }} :red_circle: :red_circle: :red_circle:"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Failed to Prepare GitHub release.\n\nKindly check what went wrong, or try triggering the release workflow again.\n\n\n."
-                  }
-                }
-              ]
-            }
+          payload: ${{ env.JSON }}
