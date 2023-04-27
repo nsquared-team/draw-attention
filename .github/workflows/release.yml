@@ -111,12 +111,14 @@ jobs:
           echo "$CHANGELOG"
 
       - name: "Update Changelog"
+        if: steps.build_changelog.outputs.changelog != ''
         uses: stefanzweifel/changelog-updater-action@v1
         with:
           latest-version: "${{ steps.package-version.outputs.current-version }}"
           release-notes: ${{steps.build_changelog.outputs.changelog}}
 
       - name: "Update readme.txt from CHANGELOG.md"
+        if: steps.build_changelog.outputs.changelog != ''
         run: |
           # delete current changelog
           sed -i '/# Changelog/,${d}' readme.txt
