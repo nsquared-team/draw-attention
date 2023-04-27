@@ -198,11 +198,20 @@ jobs:
       # =====================================
       # Send Dev Changelog Notification =====
       # =====================================
+      - name: "Format changelog for slack"
+        id: format-changelog
+        env:
+          CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
+        run: |
+          no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
+          single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
+          
       - name: "Send Dev Changelog Notification to Slack"
         if: success()
         uses: slackapi/slack-github-action@v1.23.0
         env:
-          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\"}}]}"
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\"}}]}"
         with:
           payload: ${{ env.JSON }}
             
