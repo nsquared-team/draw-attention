@@ -196,6 +196,17 @@ jobs:
             ${{ env.ZIP_FILENAME }}
 
       # =====================================
+      # Send Failure Warning to Slack =====
+      # =====================================
+      - name: "Send Failure Warning to Slack"
+        if: failure()
+        uses: slackapi/slack-github-action@v1.23.
+        env:
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
+          
+      # =====================================
       # Send Dev Changelog Notification =====
       # =====================================
       - name: "Format changelog for slack"
@@ -215,13 +226,3 @@ jobs:
         with:
           payload: ${{ env.JSON }}
             
-      # =====================================
-      # Send Failure Warning to Slack =====
-      # =====================================
-      - name: "Send Failure Warning to Slack"
-        if: failure()
-        uses: slackapi/slack-github-action@v1.23.
-        env:
-          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
-        with:
-          payload: ${{ env.JSON }}
