@@ -44,7 +44,7 @@ jobs:
           if [ -z "${{ github.event.inputs.tag_name }}" ]; then
             echo "tag_name=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
           else
-            echo "tag_name="${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+            echo "tag_name=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
           fi
 
       # step to validate github output tag_name not empty
