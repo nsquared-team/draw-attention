@@ -111,12 +111,14 @@ jobs:
           echo "$CHANGELOG"
 
       - name: "Update Changelog"
+        if: steps.build_changelog.outputs.changelog != ''
         uses: stefanzweifel/changelog-updater-action@v1
         with:
           latest-version: "${{ steps.package-version.outputs.current-version }}"
           release-notes: ${{steps.build_changelog.outputs.changelog}}
 
       - name: "Update readme.txt from CHANGELOG.md"
+        if: steps.build_changelog.outputs.changelog != ''
         run: |
           # delete current changelog
           sed -i '/# Changelog/,${d}' readme.txt
@@ -196,23 +198,33 @@ jobs:
             ${{ env.ZIP_FILENAME }}
 
       # =====================================
-      # Send Dev Changelog Notification =====
-      # =====================================
-      - name: "Send Dev Changelog Notification to Slack"
-        if: success()
-        uses: slackapi/slack-github-action@v1.23.0
-        env:
-          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.build_dev_changelog.outputs.changelog}}\\n\"}}]}"
-        with:
-          payload: ${{ env.JSON }}
-            
-      # =====================================
       # Send Failure Warning to Slack =====
       # =====================================
       - name: "Send Failure Warning to Slack"
         if: failure()
-        uses: slackapi/slack-github-action@v1.23.
+        uses: slackapi/slack-github-action@v1.23.0
         env:
           JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
         with:
           payload: ${{ env.JSON }}
+          
+      # =====================================
+      # Send Dev Changelog Notification =====
+      # =====================================
+      - name: "Format changelog for slack"
+        id: format-changelog
+        env:
+          CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
+        run: |
+          no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
+          single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
+          
+      - name: "Send Dev Changelog Notification to Slack"
+        if: success()
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
+            
