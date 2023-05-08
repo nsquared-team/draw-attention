@@ -171,6 +171,7 @@
 						}, 100);
 
 						lightboxAnchorLinks(content, target);
+						window.dispatchEvent(new Event('resize')); // Trigger window resize event for [video] shortcode JS
 					},
 					afterOpen: function() {
 						$('body').on('keyup', documentEsc);
@@ -787,3 +788,13 @@ window.onerror = function(errorMsg, url, lineNumber) { // This should be a fun l
 	}
 	return false;
 }
+
+/* Fix for Elementor bug - duplicating DA images when popup opens */
+jQuery(document).on('elementor/popup/show', () => {
+	setTimeout(function(){
+		var imageContainers = jQuery('.hotspots-image-container');
+		imageContainers.each(function(){
+			var extraMapContainers = jQuery(this).find('.hotspots-map-container:not(:first)').remove(); // find all but the first one and remove them
+		});
+	}, 250);
+} );
