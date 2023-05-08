@@ -1,0 +1,73 @@
+name: Test
+
+on:
+  pull_request:
+  release:
+    types: [released]
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  deploy:
+    name: 'Test'
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3.3.0
+
+      - name: 'Get Package Version'
+        id: package-version
+        if: ${{ steps.version.outputs.version != 'current' }}
+        uses: martinbeentjes/npm-get-version-action@master
+
+      # =====================================
+      # Build Dev Changelog =================
+      # =====================================
+      - name: 'Build Dev Changelog'
+        uses: mikepenz/release-changelog-builder-action@v3
+        id: build_dev_changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          toTag: ${{ github.ref }}
+          configuration: './.github/config/dev_changelog_configuration.json'
+      # =====================================
+      # Build Changelog =====================
+      # =====================================
+      - name: 'Build Changelog'
+        uses: mikepenz/release-changelog-builder-action@v3
+        id: build_changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fromTag: '2.0.9'
+          toTag: ${{ github.ref }}
+          configuration: './.github/config/changelog_configuration.json'
+
+      - name: 'Write changelog step outputs to console'
+        env:
+          CHANGELOG: ${{ toJson(steps.build_changelog.outputs.changelog) }}
+        run: |
+          echo "$CHANGELOG"
+
+        # =====================================
+        # Send Dev Changelog Notification =====
+        # =====================================
+      - name: 'Format changelog for slack'
+        id: format-changelog
+        env:
+          CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
+        run: |
+          no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
+          single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
+
+      - name: 'Send Dev Changelog Notification to Slack'
+        if: success()
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
