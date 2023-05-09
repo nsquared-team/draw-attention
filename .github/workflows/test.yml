@@ -62,6 +62,7 @@ jobs:
           CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
         run: |
           no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
+          echo -e "-$no_newline_string-""
           single_quote_string=$(echo "$no_newline_string" | tr -d '\"')
           echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
 
