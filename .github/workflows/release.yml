@@ -218,6 +218,7 @@ jobs:
         run: |
           no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
           single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          single_quote_string=$(echo "$single_quote_string" | sed 's/\\\([^n]\)/\1/g')
           echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
           
       - name: "Send Dev Changelog Notification to Slack"
