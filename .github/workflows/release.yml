@@ -172,7 +172,7 @@ jobs:
           ls
           
       # =====================================
-      # Cleanup if Needed ===============
+      # Cleanup if Needed ===================
       # =====================================
       - name: "If releasing current, delete tag to avoid conflict"
         uses: dev-drprasad/delete-tag-and-release@v1.0
