@@ -110,6 +110,12 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.11 - 2023-05-10
+
+### Fixes
+
+- Categorize PRs test
+
 ## 2.0.9 - 2023-04-11
 
 ### Fixes
@@ -171,11 +177,5 @@ We have a guide walkthrough of creating your first image available in [our docum
 - Improved: Added notice to warn about minimum PHP version 5.6
 
 ## 1.9.31
-
-- Improved: Compatibility with WP 6.0
-
-## 1.9.30
-
-- Improved: Updated plugin author contact details
 
 
