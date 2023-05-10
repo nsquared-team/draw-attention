@@ -133,7 +133,7 @@ jobs:
       # Update branches =====================
       # =====================================
       - name: 'Update branch master'
-        if: ${{ steps.version.outputs.version != 'current' }}
+        if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
         run: |
           git add -A .
           git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
@@ -176,7 +176,6 @@ jobs:
       # =====================================
       - name: "If releasing current, delete tag to avoid conflict"
         uses: dev-drprasad/delete-tag-and-release@v1.0
-        if: ${{ steps.version.outputs.version != 'current' }}
         with:
           tag_name: "${{ steps.package-version.outputs.current-version }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
