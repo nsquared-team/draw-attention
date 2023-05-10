@@ -197,7 +197,7 @@ jobs:
             ${{ env.ZIP_FILENAME }}
 
       # =====================================
-      # Send Failure Warning to Slack =====
+      # Send Failure Warning to Slack =======
       # =====================================
       - name: "Send Failure Warning to Slack"
         if: failure()
