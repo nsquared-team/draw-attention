@@ -1,11 +1,5 @@
 # Changelog
 
-## 2.0.11 - 2023-05-10
-
-### Fixes
-
-- Categorize PRs test
-
 ## 2.0.9 - 2023-04-11
 
 ### Fixes

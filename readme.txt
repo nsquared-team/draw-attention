@@ -110,8 +110,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
-## 2.0.11 - 2023-05-10
-
 ### Fixes
 
 - Categorize PRs test
