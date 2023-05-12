@@ -127,7 +127,7 @@ jobs:
           echo "" >> readme.txt
           echo "" >> readme.txt
           # append link to the complete changelog
-          echo "For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin." >> README.md
+          echo "For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin." >> readme.txt
 
       # =====================================
       # Update branches =====================
