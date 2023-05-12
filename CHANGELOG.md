@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.11 - 2023-05-12
+
+### Fixes
+
+- Fix Elementor popup duplicating DA images
+
+### Features and Improvements
+
+- Update gutenberg block to use api version 2
+
 ## 2.0.9 - 2023-04-11
 
 ### Fixes

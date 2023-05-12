@@ -110,9 +110,15 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.11 - 2023-05-12
+
 ### Fixes
 
-- Categorize PRs test
+- Fix Elementor popup duplicating DA images
+
+### Features and Improvements
+
+- Update gutenberg block to use api version 2
 
 ## 2.0.9 - 2023-04-11
 
@@ -172,8 +178,5 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 ## 1.9.32
 
-- Improved: Added notice to warn about minimum PHP version 5.6
 
-## 1.9.31
-
-
+For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
