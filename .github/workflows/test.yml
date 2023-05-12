@@ -52,7 +52,7 @@ jobs:
         uses: stefanzweifel/changelog-updater-action@v1
         with:
           latest-version: '${{ steps.package-version.outputs.current-version }}'
-          release-notes: "${{steps.build_changelog.outputs.changelog}}\n\n\n-."
+          release-notes: "${{steps.build_changelog.outputs.changelog}}\\n\\n\\n\\n"
           
       - name: 'Write changelog step outputs to console'
         run: |
