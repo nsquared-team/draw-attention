@@ -4,6 +4,8 @@
 
 # Except for any PHP files
 *.php @tylerdigital
+.github/ @tylerdigital
+.gitignore @tylerdigital
 
 # Explicitly required reviewers can be set for each PR by modifying something in the following paths
 .github/code-review/require-person/aminabdulkhalek/PR-* @aminabdulkhalek

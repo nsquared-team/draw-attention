@@ -71,7 +71,6 @@ jobs:
 
       - name: "Get Package Version"
         id: package-version
-        if: ${{ steps.version.outputs.version != 'current' }}
         uses: martinbeentjes/npm-get-version-action@master
 
       - name: "Update version on php and readme files"
@@ -111,14 +110,14 @@ jobs:
           echo "$CHANGELOG"
 
       - name: "Update Changelog"
-        if: steps.build_changelog.outputs.changelog != ''
+        if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
         uses: stefanzweifel/changelog-updater-action@v1
         with:
           latest-version: "${{ steps.package-version.outputs.current-version }}"
           release-notes: ${{steps.build_changelog.outputs.changelog}}
 
       - name: "Update readme.txt from CHANGELOG.md"
-        if: steps.build_changelog.outputs.changelog != ''
+        if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
         run: |
           # delete current changelog
           sed -i '/# Changelog/,${d}' readme.txt
@@ -134,7 +133,7 @@ jobs:
       # Update branches =====================
       # =====================================
       - name: 'Update branch master'
-        if: ${{ steps.version.outputs.version != 'current' }}
+        if:  steps.version.outputs.version != 'current' || ( steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != '' )
         run: |
           git add -A .
           git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
@@ -153,6 +152,7 @@ jobs:
       # =====================================
       - name: "Package the App"
         run: |
+          npm install
           grunt wporg
 
       - name: "List Files Included In Release"
@@ -172,11 +172,10 @@ jobs:
           ls
           
       # =====================================
-      # Cleanup if Needed ===============
+      # Cleanup if Needed ===================
       # =====================================
-      - name: "If releasing current, delete tag to avoid conflict"
+      - name: "If tag exists - delete tag to avoid conflict"
         uses: dev-drprasad/delete-tag-and-release@v1.0
-        if: ${{ steps.version.outputs.version != 'current' }}
         with:
           tag_name: "${{ steps.package-version.outputs.current-version }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -198,7 +197,7 @@ jobs:
             ${{ env.ZIP_FILENAME }}
 
       # =====================================
-      # Send Failure Warning to Slack =====
+      # Send Failure Warning to Slack =======
       # =====================================
       - name: "Send Failure Warning to Slack"
         if: failure()
@@ -218,6 +217,7 @@ jobs:
         run: |
           no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
           single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          single_quote_string=$(echo "$single_quote_string" | sed 's/\\\([^n]\)/\1/g')
           echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
           
       - name: "Send Dev Changelog Notification to Slack"
