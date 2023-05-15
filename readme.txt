@@ -98,6 +98,12 @@ Choose from one of 20 pre-defined color palettes or use your own custom color sc
 = Where can I find documentation and learn how to use the plugin? =
 We have tutorials, videos and other helpful information on the [Draw Attention website](https://wpdrawattention.com/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=docs-question)
 
+= I have a question or need help with the plugin, how do I contact your support team? =
+
+To contact our support team, send us an email through the `License & Support` tab within the plugin. Or, submit your message thoruhg our website's [Contact page](https://wpdrawattention.com/contact/).
+
+ [https://vimeo.com/827031888]
+
 = How do I draw my first image? =
 We have a guide walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/guides/first-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=first-interactive-image).
 
