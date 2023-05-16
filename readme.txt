@@ -100,7 +100,9 @@ We have tutorials, videos and other helpful information on the [Draw Attention w
 
 = I have a question or need help with the plugin, how do I contact your support team? =
 
-To contact our support team, send us an email through the `License & Support` tab within the plugin. Or, submit your message thoruhg our website's [Contact page](https://wpdrawattention.com/contact/).
+To contact our support team, submit your message through our [WordPress support forum](https://wordpress.org/support/plugin/draw-attention/#new-topic-0). Or, visit our website's [Contact page](https://wpdrawattention.com/contact/).
+
+If you're using our Premium plugin, you can also use the `License & Support` tab within the Draw Attention Pro plugin settings to send us a direct email.
 
  [https://vimeo.com/827031888]
 
