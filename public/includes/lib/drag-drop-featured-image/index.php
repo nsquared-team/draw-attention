@@ -500,19 +500,25 @@
 		public function ajax_set_featured_image(){
 			$postID = isset($_POST['postID']) ? (int) $_POST['postID'] : false;
 			$attachmentID = isset($_POST['attachmentID']) ? (int) $_POST['attachmentID'] : false;
-			if ($postID && $attachmentID){
-
-				// Update / add post meta:
-				if ($status = get_post_meta($postID, '_thumbnail_id', true)){
-					update_post_meta($postID, '_thumbnail_id', $attachmentID);
+			if ($postID && $attachmentID ){
+				if( current_user_can( 'edit_post', $postID ) ){
+					// Update / add post meta:
+					if ($status = get_post_meta($postID, '_thumbnail_id', true)){
+						update_post_meta($postID, '_thumbnail_id', $attachmentID);
+					} else {
+						add_post_meta($postID, '_thumbnail_id', $attachmentID);
+					}
+	
+					$response = array(
+						'response_code' => 200,
+						'response_content' => 'success'
+					);
 				} else {
-					add_post_meta($postID, '_thumbnail_id', $attachmentID);
+					$response = array(
+						'response_code' => 403,
+						'response_content' => __('Drag & Drop Feaured image: You do not have permission to edit this post!', $this->plugin_locale)
+					);
 				}
-
-				$response = array(
-					'response_code' => 200,
-					'response_content' => 'success'
-				);
 
 			} else {
 				$response = array(
