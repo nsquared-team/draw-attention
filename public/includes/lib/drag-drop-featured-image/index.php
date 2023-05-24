@@ -107,6 +107,7 @@
 				echo '
 					<script type="text/javascript">
 						var dgd_post_id = '.$post->ID.';
+						var dgd_set_featured_image_nonce = "'.wp_create_nonce('dgd_set_featured_image_nonce').'";
 						var dgd_page_reload = '.$this->get_option_page_reload().';
 					</script>
 				';
@@ -500,8 +501,9 @@
 		public function ajax_set_featured_image(){
 			$postID = isset($_POST['postID']) ? (int) $_POST['postID'] : false;
 			$attachmentID = isset($_POST['attachmentID']) ? (int) $_POST['attachmentID'] : false;
+			$dgd_set_featured_image_nonce = isset($_POST['nonce']) ? $_POST['nonce'] : false;
 			if ($postID && $attachmentID ){
-				if( current_user_can( 'edit_post', $postID ) ){
+				if( current_user_can( 'edit_post', $postID ) && wp_verify_nonce( $dgd_set_featured_image_nonce, "dgd_set_featured_image_nonce" ) ){
 					// Update / add post meta:
 					if ($status = get_post_meta($postID, '_thumbnail_id', true)){
 						update_post_meta($postID, '_thumbnail_id', $attachmentID);
