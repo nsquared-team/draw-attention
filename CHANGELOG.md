@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.12 - 2023-05-26
+
+### Features and Improvements
+
+- Improved nonce verification and capability checks
+
 ## 2.0.11 - 2023-05-12
 
 ### Fixes
