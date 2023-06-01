@@ -136,7 +136,8 @@ module.exports = function( grunt ) {
 					'!assets/repo/**',
 
 					'!**/*.scss',
-					'!**/node_modules/**'
+					'!**/node_modules/**',
+					'!release/**'
 
 				],
 				dest: 'release/' + pkg.version + '/'
