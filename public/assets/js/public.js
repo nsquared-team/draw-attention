@@ -1,6 +1,8 @@
 ;(function ($, hotspots, undefined) {
 	"use strict";
 
+	var Leaflet = L.noConflict();
+
 	var ua = window.navigator.userAgent,
 		isiOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i),
 		isWebkit = !!ua.match(/WebKit/i),
@@ -219,12 +221,12 @@
 		var container = $(shape._map._container);
 		var content = $(areaData.href).html();
 
-		var tip = L.responsivePopup({
+		var tip = Leaflet.responsivePopup({
 			autoPan: false,
 			closeButton: areaData.trigger == 'click',
 			hasTip: container.width() > 840,
 			maxHeight: container.height() * .9,
-			offset: new L.Point(0,0)
+			offset: new Leaflet.Point(0,0)
 		});
 
 		tip.setContent(content);
@@ -275,10 +277,10 @@
 			return
 		}
 
-		var map = L.map('hotspots-map-container-' + id, {
+		var map = Leaflet.map('hotspots-map-container-' + id, {
 			attributionControl: false,
 			boxZoom: false,
-			crs: L.CRS.Simple,
+			crs: Leaflet.CRS.Simple,
 			doubleClickZoom: false,
 			dragging: false,
 			keyboard: false,
@@ -297,7 +299,7 @@
 		img.data('natW', natWidth);
 		img.data('natH', natHeight);
 		var bounds = [[0,0], [natHeight, natWidth]];
-		var imageLayer = L.imageOverlay(img.attr('src'), bounds).addTo(map);
+		var imageLayer = Leaflet.imageOverlay(img.attr('src'), bounds).addTo(map);
 		map.fitBounds(bounds);
 
 		leaflets.push({
@@ -390,7 +392,7 @@
 		var x = coords[0];
 		var y = img.data('natH') - coords[1];
 		var rad = coords[2];
-		var circle = L.circle([y,x], {
+		var circle = Leaflet.circle([y,x], {
 			radius: rad,
 			className: 'hotspot-' + areaData.style,
 			title: areaData.title
@@ -430,7 +432,7 @@
 			return [img.data('natH') - coord, xCoords[index]];
 		});
 
-		var poly = L.polygon(polyCoords, {
+		var poly = Leaflet.polygon(polyCoords, {
 			className: 'hotspot-' + areaData.style,
 			title: areaData.title
 		});
