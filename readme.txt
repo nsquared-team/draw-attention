@@ -104,7 +104,7 @@ To contact our support team, submit your message through our [WordPress support 
 
 If you're using our Premium plugin, you can also use the `License & Support` tab within the Draw Attention Pro plugin settings to send us a direct email.
 
- [https://vimeo.com/827031888]
+ [vimeo https://vimeo.com/827031888]
 
 = How do I draw my first image? =
 We have a guide walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/guides/first-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=first-interactive-image).
