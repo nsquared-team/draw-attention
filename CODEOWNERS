@@ -1,0 +1,23 @@
+# Any change inside the `/` directory
+# will require approval from @nataliemac.
+* @nataliemac
+
+# Except for any PHP files
+*.php @tylerdigital
+.github/ @tylerdigital
+.gitignore @tylerdigital
+
+# Explicitly required reviewers can be set for each PR by modifying something in the following paths
+.github/code-review/require-person/aminabdulkhalek/PR-* @aminabdulkhalek
+.github/code-review/require-person/cynhu92/PR-* @cynhu92
+.github/code-review/require-person/Hamze-Ammar/PR-* @Hamze-Ammar
+.github/code-review/require-person/hsein-bitar/PR-* @hsein-bitar
+.github/code-review/require-person/MariamElZaatari/PR-* @MariamElZaatari
+.github/code-review/require-person/gnarza/PR-* @gnarza
+.github/code-review/require-person/NatalieMac/PR-* @NatalieMac
+.github/code-review/require-person/tylerdigital/PR-* @tylerdigital
+
+.github/code-review/require-team/backend-development/PR-* @nsquared-team/backend-development
+.github/code-review/require-team/frontend-development/PR-* @nsquared-team/frontend-development
+.github/code-review/require-team/quality-assurance/PR-* @nsquared-team/quality-assurance
+.github/code-review/require-team/customer-support/PR-* @nsquared-team/customer-support

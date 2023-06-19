@@ -31,7 +31,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '2.0.0';
+		const VERSION = '2.0.12';
 		const file = __FILE__;
 		const name = 'Draw Attention';
 		const slug = 'drawattention';
@@ -456,9 +456,11 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// Add hotspots to settings
 			$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->custom_fields->prefix . 'hotspots', true );
-			foreach( $settings['hotspots'] as $hotspot_key => $hotspot ) {
-				if ( empty( $settings['hotspots'][$hotspot_key]['shape'] ) ) {
-					$settings['hotspots'][$hotspot_key]['shape'] = 'polygon';
+			if ( ! empty( $settings['hotspots']) ) {				
+				foreach( $settings['hotspots'] as $hotspot_key => $hotspot ) {
+					if ( empty( $settings['hotspots'][$hotspot_key]['shape'] ) ) {
+						$settings['hotspots'][$hotspot_key]['shape'] = 'polygon';
+					}
 				}
 			}
 			$settings['hotspots'] = apply_filters( 'da_render_hotspots', $settings['hotspots'], $settings['image_id'] );

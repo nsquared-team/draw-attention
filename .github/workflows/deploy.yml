@@ -1,0 +1,118 @@
+# this is part 2 of the official release process, is triggered after publishing a release
+# find part 1 inside release.yml workflow, or alternatively create a manual release
+
+# This workflow runs whenever a GitHub release is published
+# It checks out the latest release branch commit
+# It builds the plugin as suitable
+# and deploys it to WP.org, under the tag of the triggering release
+
+name: DA deploy to WordPress.org
+
+# keeping the trigger at released gives us the chance to skip deploying any releases we don't like or whatever
+on:
+  release:
+    types: [released]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Example '1.2.8' - if this tag does not exist on GitHub this release will fail without affecting WP.org repository"
+        required: false
+        default: ""
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  deploy:
+    name: "Deploy to WordPress.org"
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+        with:
+          ref: 'release'
+      
+      - name: "Dump GitHub Context"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+          
+      - name: "Set Tag Name for release"
+        id: set_tag_name
+        run: |
+          if [ -z "${{ github.event.inputs.tag_name }}" ]; then
+            echo "tag_name=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag_name=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+          fi
+
+      # step to validate github output tag_name not empty
+      - name: "Validate Tag Name"
+        id: validate_tag_name
+        run: |
+          if [ -z "${{ steps.set_tag_name.outputs.tag_name }}" ]; then
+            echo "Error: tag_name is empty!"
+            exit 1
+          fi
+          
+      - name: release-downloader
+        uses: robinraju/release-downloader@v1.7
+        id: release_download
+        with:
+          tag: ${{ steps.set_tag_name.outputs.tag_name }}
+          out-file-path: .
+          fileName: ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip
+
+      # step to confirm the file was downloaded, otherwise exit
+      - name: "Confirm Release Downloaded"
+        id: confirm_release_downloaded
+        run: |
+          if [ ! -f ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip ]; then
+            echo "Error: Release not downloaded! Confirm that a GitHub release with tag ${{ steps.set_tag_name.outputs.tag_name }} exists and has the prerelease ZIP attached"
+            exit 1
+          fi
+
+      - name: "Unzip the downloaded release ZIP"
+        id: release_unzip
+        run: |
+          unzip ${{ github.event.repository.name }}-${{ steps.set_tag_name.outputs.tag_name }}-prerelease.zip -d release
+
+      - name: "Check downloaded files"
+        run: |
+          echo "-Listing plugin files-"
+          ls release/draw-attention
+          echo "-Finished listing plugin files-"
+          echo "-Listing repo assets-"
+          ls assets/repo/
+          echo "-Finished listing repo assets-"
+
+      - name: WordPress Plugin Deploy
+        if: steps.release_download.outcome == 'success' && steps.release_unzip.outcome == 'success'
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          ASSETS_DIR: assets/repo/
+          BUILD_DIR: release/draw-attention
+          SLUG: draw-attention
+
+
+      - name: "Send Deploymnt Notification to Slack"
+        if: steps.deploy.outcome == 'success'
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
+            
+      - name: "Send WP Deployment Failure Warning to Slack"
+        if: steps.deploy.outcome != 'success'
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\nFailed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}

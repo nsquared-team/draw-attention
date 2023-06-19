@@ -1,0 +1,55 @@
+name: Sync with Asana
+
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+
+  pull_request_review_comment:
+    types: [created, edited, deleted]
+    
+  pull_request_review:
+    types: [submitted]
+
+  pull_request:
+    types: [opened, closed, reopened, ready_for_review, review_requested, edited]
+
+jobs:
+  # Create Attachment on PR opened, reopened, and edited 
+  create-asana-attachment-job:
+    name: Create pull request attachments on Asana tasks
+    if: github.event_name == 'pull_request' && ( github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'edited' )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create pull request attachments
+        uses: Asana/create-app-attachment-github-action@main
+        id: postAttachment
+        with:
+          asana-secret: ${{ secrets.OTTO_ASANA_SECRET_TOKEN }}
+      - name: Log output status
+        run: echo "Status is ${{ steps.postAttachment.outputs.status }}"
+  
+  # Create Comment Always Except On PR edited 
+  create-comment-in-asana-task-job:
+    name: Create a comment in Asana Task
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a comment
+        uses: nsquared-team/asana-comment-on-task-github-action@main
+        id: createComment
+        with:
+          github-pat: ${{ secrets.OTTO_GITHUB_PAT }}
+          asana-pat: ${{ secrets.OTTO_ASANA_PAT}}
+          asana-secret: ${{ secrets.OTTO_ASANA_SECRET_TOKEN }}
+          comment-text: "PR #{{PR_ID}} {{PR_NAME}} is {{PR_STATE}} -> {{PR_URL}}"
+      - name: Get Output
+        run: |
+          echo "Event:"
+          echo "${{ steps.createComment.outputs.event }}"
+          echo "Action:"
+          echo "${{ steps.createComment.outputs.action }}"
+          echo "Followers Status:"
+          echo "${{ steps.createComment.outputs.followersStatus }}"
+          echo "Comment Status:"
+          echo "${{ steps.createComment.outputs.commentStatus }}"
+          echo "Comment:"
+          echo "${{ steps.createComment.outputs.comment }}"

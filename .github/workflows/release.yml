@@ -1,0 +1,230 @@
+# trigger manually or on CRON
+# validate inputs
+# checkout repository at master
+# bump version
+# generate and update changelog
+# update master
+# merges new master to release
+# create a GitHub release
+
+# this workflow is expected to run on master branch when triggered manually, but should run fine in all cases
+# note that you are expected to enter major, minor, or patch whenever you plan on creating a release and deploying to SVN
+# the conditionals should preent creating a release unless the version was incremented, otherwise you may face conflicts with duplicate tags
+name: DA GitHub Release
+
+env:
+  OTTO_TOKEN: ${{ secrets.OTTO_GITHUB_PAT }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version type (major, minor, patch or leave empty to release current master branch)"
+        required: false
+        default: ""
+    
+
+jobs:
+  github-release:
+    name: "Create a GitHub Release"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: "Dump GitHub Context"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+
+      - name: "Checkout repository"
+        uses: actions/checkout@v3.3.0
+        with:
+          ssh-key: ${{ secrets.GH_ACTIONS_SSH_KEY }}
+          ref: master
+
+      - name: "Check defined version type"
+        id: version
+        run: |
+          if [ "${{ github.event.inputs.version_type }}" == "major" ]; then
+            echo "version=major" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.version_type }}" == "minor" ]; then
+            echo "version=minor" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.version_type }}" == "patch" ]; then
+            echo "version=patch" >> $GITHUB_OUTPUT
+          else
+            echo "version=current" >> $GITHUB_OUTPUT
+          fi
+
+      # =====================================
+      # Edit Release Version ================
+      # =====================================
+      - name: "Git Configuration"
+        run: |
+          git config --global user.email "nathan@tylerdigital.com"
+          git config --global user.name "tylerdigital"
+          
+      - name: "Bump package.json version number"
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
+          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
+
+      - name: "Get Package Version"
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+
+      - name: "Update version on php and readme files"
+        if: ${{ steps.version.outputs.version != 'current' }}
+        run: |
+          npm install
+          grunt increment-version
+
+      # =====================================
+      # Build Dev Changelog =================
+      # =====================================
+      - name: "Build Dev Changelog"
+        uses: mikepenz/release-changelog-builder-action@v3
+        id: build_dev_changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          toTag: ${{ github.ref }}
+          configuration: "./.github/config/dev_changelog_configuration.json"
+
+      # =====================================
+      # Build Changelog =====================
+      # =====================================
+      - name: "Build Changelog"
+        uses: mikepenz/release-changelog-builder-action@v3
+        id: build_changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          toTag: ${{ github.ref }}
+          configuration: "./.github/config/changelog_configuration.json"
+
+      - name: "Write changelog step outputs to console"
+        env:
+          CHANGELOG: ${{ toJson(steps.build_changelog.outputs) }}
+        run: |
+          echo "$CHANGELOG"
+
+      - name: "Update Changelog"
+        if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: "${{ steps.package-version.outputs.current-version }}"
+          release-notes: ${{steps.build_changelog.outputs.changelog}}
+
+      - name: "Update readme.txt from CHANGELOG.md"
+        if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
+        run: |
+          # delete current changelog
+          sed -i '/# Changelog/,${d}' readme.txt
+          # get top N lines from CHANGELOG.md and append in readme.txt
+          echo "$( head -70 CHANGELOG.md )" >> readme.txt
+          # append some empty lines
+          echo "" >> readme.txt
+          echo "" >> readme.txt
+          # append link to the complete changelog
+          echo "For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin." >> readme.txt
+
+      # =====================================
+      # Update branches =====================
+      # =====================================
+      - name: 'Update branch master'
+        if:  steps.version.outputs.version != 'current' || ( steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != '' )
+        run: |
+          git add -A .
+          git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
+          git push origin master
+
+      - name: 'Merge master -> release'
+        id: merge-master-release
+        run: |
+          git fetch origin --unshallow
+          git checkout -b release origin/release
+          git merge master
+          git push origin release -f
+
+      # =====================================
+      # Prepare Pre-release Asset ===========
+      # =====================================
+      - name: "Package the App"
+        run: |
+          npm install
+          grunt wporg
+
+      - name: "List Files Included In Release"
+        run: |
+          echo "-Listing included files-"
+          ls release/svn
+          echo "-Finished listing included files-"
+
+      - name: "Package Included Files to Upload to GitHub Release"
+        id: zip_build
+        env:
+          ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
+        run: |
+          mv release/svn draw-attention
+          zip -r $ZIP_FILENAME draw-attention
+          echo "-Listing files in working directory-"
+          ls
+          
+      # =====================================
+      # Cleanup if Needed ===================
+      # =====================================
+      - name: "If tag exists - delete tag to avoid conflict"
+        uses: dev-drprasad/delete-tag-and-release@v1.0
+        with:
+          tag_name: "${{ steps.package-version.outputs.current-version }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          delete_release: false
+          
+      # =====================================
+      # Create GitHub release ===============
+      # =====================================
+      - name: "GH Release"
+        uses: softprops/action-gh-release@v0.1.15
+        env:
+          ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
+        with:
+          prerelease: true
+          token: ${{ env.OTTO_TOKEN }}
+          body: ${{steps.build_changelog.outputs.changelog}}
+          tag_name: "${{ steps.package-version.outputs.current-version }}"
+          files: |
+            ${{ env.ZIP_FILENAME }}
+
+      # =====================================
+      # Send Failure Warning to Slack =======
+      # =====================================
+      - name: "Send Failure Warning to Slack"
+        if: failure()
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
+          
+      # =====================================
+      # Send Dev Changelog Notification =====
+      # =====================================
+      - name: "Format changelog for slack"
+        id: format-changelog
+        env:
+          CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
+        run: |
+          no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
+          single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
+          single_quote_string=$(echo "$single_quote_string" | sed 's/\\\([^n]\)/\1/g')
+          echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
+          
+      - name: "Send Dev Changelog Notification to Slack"
+        if: success()
+        uses: slackapi/slack-github-action@v1.23.0
+        env:
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\"}}]}"
+        with:
+          payload: ${{ env.JSON }}
+            

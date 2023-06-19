@@ -39,7 +39,7 @@ class DrawAttention_ImportExport {
 
 		foreach ($import_array as $key => $to_import) {
 			unset($to_import['post']['ID']);
-			$insert_id = wp_insert_post( $to_import['post'], $error );
+			$insert_id = wp_insert_post( $to_import['post'], false );
 			if ( !empty( $insert_id ) ) {
 				$imported[] = array(
 					'ID' => $insert_id,

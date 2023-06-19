@@ -1,0 +1,48 @@
+# Summary ==============================#
+# 
+# 1. Runs on every push to master (could be optimized to only run after a merge?)
+# 2. Remove any file matching .github/code-review/require-person/**/PR-*
+# 3. Commit the deletions and push
+# 
+# ======================================#
+
+name: Un-Assign PR Reviewers
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/**'
+env:
+  EVENT: ${{ toJSON(github.event) }}
+
+jobs:
+  cleanup-requested-reviewers:
+    runs-on: ubuntu-latest
+    name: Update requested reviewers
+    steps:
+      # get the repo / files to work on
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ssh-key: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set git user information
+        run: |
+
+          git config --global user.email "otto@nsquared.io"
+          git config --global user.name "otto-bot-git"
+
+      - name: Cleanup old review files
+        run: |
+          echo Removing old file
+          rm ./.github/code-review/require-person/**/PR-* -f
+          rm ./.github/code-review/require-team/**/PR-* -f
+          echo Removed old files successfully
+
+      - name: Commit and push changes
+        run: |
+          `git add -A && git commit -m "Cleanup of required reviewers files" > /dev/null  && git push` || true 
+    

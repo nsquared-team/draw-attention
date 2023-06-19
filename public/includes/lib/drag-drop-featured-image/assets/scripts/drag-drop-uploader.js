@@ -47,6 +47,7 @@ jQuery(document).ready(function($){
 		$.post(ajaxurl, {
 			action: 'dgd_set_featured_image',
 			postID: dgd_post_id,
+			nonce: dgd_set_featured_image_nonce,
 			attachmentID: attachmentID
 		}, function (response){
 			var response = $.parseJSON(response);
