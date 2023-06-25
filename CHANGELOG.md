@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.13 - 2023-06-25
+
+### Fixes
+
+- Fix PHP warning in CMB2 library
+
+### Features and Improvements
+
+- Prevent conflicts with other plugins that use the leaflet library
+
 ## 2.0.12 - 2023-05-26
 
 ### Features and Improvements
