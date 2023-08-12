@@ -70,6 +70,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public $themes;
 		public $block_image;
 		public $photon_excluded_images = array();
+		public $import_export;
 
 		/**
 		 * Initialize the plugin by setting localization and loading public scripts

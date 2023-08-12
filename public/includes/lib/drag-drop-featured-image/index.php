@@ -25,6 +25,15 @@
 
 	class WP_Drag_Drop_Featured_Image_Map {
 
+		public $plugin_locale;
+		public $plugin_options_slug;
+		public $plugin_dirname;
+		public $plugin_directory;
+		public $selected_post_types;
+		public $selected_file_types;
+		public $selected_page_reload;
+		public $wordpress_version;
+
 		/**
 		 * Plugin constructor.
 		 */
