@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.14 - 2023-08-12
+
+### Features and Improvements
+
+- Tested up to WP 6.3
+
 ## 2.0.13 - 2023-06-25
 
 ### Fixes
