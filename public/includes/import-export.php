@@ -92,9 +92,8 @@ class DrawAttention_ImportExport {
 	}
 
 	public function output_import_export_page() {
-		// only allow admins and editors
-		$user = wp_get_current_user();
-		if( ! array_intersect( array('administrator', 'editor' ), (array) $user->roles ) ) {
+		// only allow users with capability: "delete_others_posts"
+		if ( ! current_user_can( 'delete_others_posts' ) ) {
 			return;
 		}
 		?>
