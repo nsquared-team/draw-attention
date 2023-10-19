@@ -8,10 +8,7 @@
 
 name: DA deploy to WordPress.org
 
-# keeping the trigger at released gives us the chance to skip deploying any releases we don't like or whatever
 on:
-  release:
-    types: [released]
   workflow_dispatch:
     inputs:
       tag_name:
@@ -99,20 +96,43 @@ jobs:
           ASSETS_DIR: assets/repo/
           BUILD_DIR: release/draw-attention
           SLUG: draw-attention
-
+          VERSION: ${{ steps.set_tag_name.outputs.tag_name }}
 
       - name: "Send Deploymnt Notification to Slack"
         if: steps.deploy.outcome == 'success'
         uses: slackapi/slack-github-action@v1.23.0
         env:
-          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
+          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.set_tag_name.outputs.tag_name }}\\nSuccessfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.set_tag_name.outputs.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully deployed to <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
         with:
           payload: ${{ env.JSON }}
-            
+
+      - name: "Get release ID"
+        id: release-data
+        run: |
+          response=$(curl -s https://api.github.com/graphql -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d '{ "query": "query { repository(owner: \"nsquared-team\", name: \"draw-attention\") { release(tagName: \"${{ steps.set_tag_name.outputs.tag_name }}\") { databaseId createdAt } } }" }')
+          databaseId=$(echo "$response" | jq -r '.data.repository.release.databaseId')
+          if [[ -z "$databaseId" ]]; then
+            echo "Error: databaseId is empty"
+            exit 1
+          fi
+          echo "release-id=$databaseId" >> $GITHUB_OUTPUT
+          
+          
+      - name: "Update release to be latest"
+        if: steps.deploy.outcome == 'success'
+        run: |
+          curl -L \
+              -X PATCH \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"\
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/releases/${{ steps.release-data.outputs.release-id }} \
+              -d '{"make_latest":true}'
+
       - name: "Send WP Deployment Failure Warning to Slack"
         if: steps.deploy.outcome != 'success'
         uses: slackapi/slack-github-action@v1.23.0
         env:
-          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\nFailed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ github.event.release.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
+          JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.set_tag_name.outputs.tag_name }}\\nFailed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.set_tag_name.outputs.tag_name }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to deploy.\\n\\nKindly check if the official version is affected and attempt a fix / another release. <https://wordpress.org/plugins/draw-attention|WordPress.org>\\n\"}}]}"
         with:
           payload: ${{ env.JSON }}

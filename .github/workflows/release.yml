@@ -83,7 +83,7 @@ jobs:
       # Build Dev Changelog =================
       # =====================================
       - name: "Build Dev Changelog"
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4.0.0-b02
         id: build_dev_changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -95,7 +95,7 @@ jobs:
       # Build Changelog =====================
       # =====================================
       - name: "Build Changelog"
-        uses: mikepenz/release-changelog-builder-action@v3
+        uses: mikepenz/release-changelog-builder-action@v4.0.0-b02
         id: build_changelog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -196,6 +196,29 @@ jobs:
           files: |
             ${{ env.ZIP_FILENAME }}
 
+
+      - name: "Get release ID"
+        id: release-data
+        run: |
+          response=$(curl -s https://api.github.com/graphql -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d '{ "query": "query { repository(owner: \"nsquared-team\", name: \"draw-attention\") { release(tagName: \"${{ steps.package-version.outputs.current-version }}\") { databaseId createdAt } } }" }')
+          databaseId=$(echo "$response" | jq -r '.data.repository.release.databaseId')
+          if [[ -z "$databaseId" ]]; then
+              echo "Error: databaseId is empty"
+              exit 1
+          fi
+          echo "release-id=$databaseId" >> $GITHUB_OUTPUT
+    
+      - name: "Update release to be latest"
+        run: |
+          curl -L \
+              -X PATCH \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"\
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/releases/${{ steps.release-data.outputs.release-id }} \
+              -d '{"make_latest":true}'
+    
+    
       # =====================================
       # Send Failure Warning to Slack =======
       # =====================================
@@ -211,20 +234,20 @@ jobs:
       # Send Dev Changelog Notification =====
       # =====================================
       - name: "Format changelog for slack"
-        id: format-changelog
+        id: format-dev-changelog
         env:
-          CHANGELOG: ${{ toJson(steps.build_dev_changelog.outputs.changelog) }}
+          CHANGELOG_JSON: ${{ steps.build_dev_changelog.outputs.categorized }}
+          CHANGELOG_STRING: ${{ steps.build_dev_changelog.outputs.changelog }}
+          PROJECT: "Draw Attention"
         run: |
-          no_newline_string=$(echo "$CHANGELOG" | tr -d '\n')
-          single_quote_string=$(echo "$no_newline_string" | sed "s/\"/'/g")
-          single_quote_string=$(echo "$single_quote_string" | sed 's/\\\([^n]\)/\1/g')
-          echo "formatted_changelog=$single_quote_string" >> $GITHUB_OUTPUT
-          
+          php "external/actions-scripts/format-changelog.php" --version=${{ steps.package-version.outputs.current-version }} --repo=${{ github.repository }} --out="formatted-dev-changelog.json"
+
+      - name: "View JSON file"
+        run: |
+          cat "formatted-dev-changelog.json"
+  
       - name: "Send Dev Changelog Notification to Slack"
         if: success()
-        uses: slackapi/slack-github-action@v1.23.0
-        env:
-          JSON: "{\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nSuccessfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:large_green_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Successfully Prepared GitHub release.:fox-dance:\\nChangelog:\\n${{steps.format-changelog.outputs.formatted_changelog}}\\n\"}}]}"
-        with:
-          payload: ${{ env.JSON }}
-            
+        run: |
+          json_content=$(cat "formatted-dev-changelog.json")
+          curl -X POST -H "Content-type: application/json" --data "$json_content" "${{ env.SLACK_WEBHOOK_URL }}"
