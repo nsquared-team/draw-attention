@@ -99,7 +99,7 @@ jobs:
           ASSETS_DIR: assets/repo/
           BUILD_DIR: release/draw-attention
           SLUG: draw-attention
-
+          VERSION: ${{ steps.set_tag_name.outputs.tag_name }}
 
       - name: "Send Deploymnt Notification to Slack"
         if: steps.deploy.outcome == 'success'
