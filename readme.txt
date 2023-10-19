@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
 Requires at least: 3.5.1
 Tested up to: 6.3
-Stable tag: 2.0.14
+Stable tag: 2.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,6 +118,12 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.15 - 2023-10-19
+
+### Fixes
+
+- Fix disclosed vulnerability affecting Contributor-level users
+
 ## 2.0.14 - 2023-08-12
 
 ### Features and Improvements
@@ -179,12 +185,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 ### Features and Improvements
 
 ## 2.0.4
-
-- Fixed: SVG desc markup
-
-## 2.0.3
-
-- Fixed: PHP Warning in import function
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.

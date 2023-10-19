@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.15 - 2023-10-19
+
+### Fixes
+
+- Fix disclosed vulnerability affecting Contributor-level users
+
 ## 2.0.14 - 2023-08-12
 
 ### Features and Improvements
