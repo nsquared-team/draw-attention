@@ -126,6 +126,7 @@ module.exports = function( grunt ) {
 					'**',
 					'!.git',
 					'!.github',
+					'!external',
 					'!.gitignore',
 					'!CHANGELOG.md',
 					'!CODEOWNERS',
