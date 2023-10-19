@@ -109,7 +109,7 @@ jobs:
       - name: "Get release ID"
         id: release-data
         run: |
-          response=$(curl -s https://api.github.com/graphql -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d '{ "query": "query { repository(owner: \"nsquared-team\", name: \"ssa-plugin\") { release(tagName: \"${{ steps.set_tag_name.outputs.tag_name }}\") { databaseId createdAt } } }" }')
+          response=$(curl -s https://api.github.com/graphql -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" -d '{ "query": "query { repository(owner: \"nsquared-team\", name: \"draw-attention\") { release(tagName: \"${{ steps.set_tag_name.outputs.tag_name }}\") { databaseId createdAt } } }" }')
           databaseId=$(echo "$response" | jq -r '.data.repository.release.databaseId')
           if [[ -z "$databaseId" ]]; then
             echo "Error: databaseId is empty"
