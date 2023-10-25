@@ -25,6 +25,11 @@ class DrawAttention_ImportExport {
 			return;
 		}
 		
+		// verify nonce
+		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_import_nonce' ) ) {
+			return;
+		}
+		
 		if ( empty( $_POST['import_code'] ) ) {
 			return;
 		}
@@ -81,6 +86,10 @@ class DrawAttention_ImportExport {
 	}
 
 	public function get_export_json( $ids=array() ) {
+		// verify nonce
+		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_export_nonce' ) ) {
+			return;
+		}
 		$export_array = $this->get_export_array( $ids );
 		return json_encode( $export_array );
 	}
@@ -92,15 +101,17 @@ class DrawAttention_ImportExport {
 	}
 
 	public function output_import_export_page() {
-		// only allow users with capability: "delete_others_posts"
-		if ( ! current_user_can( 'delete_others_posts' ) ) {
-			return;
+		if( ! current_user_can( 'delete_others_posts' ) ){
+			status_header(403);
+			nocache_headers();
+			wp_die('Bad Request: You do not have permission to access this page');
 		}
 		?>
 		<div class="import">
 			<h3>Import</h3>
 			<p>If you've already exported from another site, paste the export code below:</p>
 			<form method="POST" name="import" action="edit.php?post_type=da_image&page=import_export">
+				<?php wp_nonce_field( 'da_import_nonce' ); ?>
 				<input type="hidden" name="action" value="import" />
 				<textarea name="import_code" cols="100" rows="5" placeholder=""></textarea><br />
 				<input type="submit" value="Import" />
@@ -124,6 +135,7 @@ class DrawAttention_ImportExport {
 			<p>Choose images to export</p>
 			<form method="POST" name="export" action="edit.php?post_type=da_image&page=import_export">
 				<input type="hidden" name="action" value="export" />
+				<?php wp_nonce_field( 'da_export_nonce' ); ?>
 				<?php
 				$da_images = new WP_Query( array(
 					'post_type' => 'da_image',
