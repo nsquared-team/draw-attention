@@ -25,14 +25,17 @@ class DrawAttention_ImportExport {
 			return;
 		}
 		
-		// verify nonce
-		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_import_nonce' ) ) {
-			return;
-		}
-		
 		if ( empty( $_POST['import_code'] ) ) {
 			return;
 		}
+		
+		// verify nonce
+		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_import_nonce' ) || ! current_user_can( 'delete_others_posts' ) ) {
+			status_header(403);
+			nocache_headers();
+			wp_die('Bad Request: You do not have permission to access this page');
+		}
+		
 		$import_code = stripslashes($_POST['import_code']);
 		$import_array = json_decode( $import_code, true );
 		if ( empty( $import_array['0']['post']['ID'] ) ) {
@@ -87,9 +90,12 @@ class DrawAttention_ImportExport {
 
 	public function get_export_json( $ids=array() ) {
 		// verify nonce
-		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_export_nonce' ) ) {
-			return;
+		if ( !wp_verify_nonce( $_POST['_wpnonce'], 'da_export_nonce' ) || ! current_user_can( 'delete_others_posts' ) ) {
+			status_header(403);
+			nocache_headers();
+			wp_die('Bad Request: You do not have permission to access this page');
 		}
+		
 		$export_array = $this->get_export_array( $ids );
 		return json_encode( $export_array );
 	}
