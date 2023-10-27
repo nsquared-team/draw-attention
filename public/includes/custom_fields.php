@@ -302,6 +302,12 @@ class DrawAttention_CustomFields {
 	function update_hotspot_area_details() {
 		if ( !isset( $_POST['_pid'] ) ) return;
 		check_ajax_referer( 'update-hotspot_'.$_POST['_pid'], 'ajaxnonce' );
+		
+		if( ! current_user_can( 'delete_others_posts' ) ){
+			status_header(403);
+			nocache_headers();
+			wp_die('Bad Request: You do not have permission to access this page');
+		}
 
 		if ( isset( $_POST['_title'] ) ) {
 			$_POST['_title'] = wp_filter_nohtml_kses( $_POST['_title'] ); // also expects & returns slashes

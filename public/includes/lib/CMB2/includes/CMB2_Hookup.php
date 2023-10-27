@@ -910,6 +910,8 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 			// check nonce.
 			&& isset( $_POST[ $this->cmb->nonce() ] )
 			&& wp_verify_nonce( $_POST[ $this->cmb->nonce() ], $this->cmb->nonce() )
+			// check permissions.
+			&& current_user_can( 'delete_others_posts' )
 			// check if autosave.
 			&& ! ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
 			// get the metabox types & compare it to this type.
