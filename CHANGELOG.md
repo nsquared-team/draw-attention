@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.16 - 2023-10-29
+
+### Features and Improvements
+
+- Add nonce checks for additional security
+
 ## 2.0.15 - 2023-10-19
 
 ### Fixes
