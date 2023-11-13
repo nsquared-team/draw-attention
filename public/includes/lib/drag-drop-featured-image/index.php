@@ -129,6 +129,7 @@
 		 */
 		public function toggle_meta_box_functionality(){
 
+			global $wp_meta_boxes;
 			// Fetch selected post types:
 			$selected = $this->get_option_post_types();
 
@@ -139,6 +140,10 @@
 			foreach ($selected as $post_type){
 				add_post_type_support($post_type, 'thumbnail');
 				remove_meta_box('postimagediv', $post_type, 'side');
+				// needed for reported conflict with plugin: conditionally-display-featured-image-on-singular-pages
+				if ( isset( $wp_meta_boxes[ $post_type ]['side']['low']['postimagediv'] ) && false === $wp_meta_boxes[ $post_type ]['side']['low']['postimagediv'] ) {
+					unset ( $wp_meta_boxes[ $post_type ]['side']['low']['postimagediv'] );
+				}
 				remove_meta_box('postimagediv', $post_type, 'normal');
 				remove_meta_box('postimagediv', $post_type, 'advanced');
 			}
