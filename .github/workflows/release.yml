@@ -17,6 +17,9 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   
 on:
+  schedule:
+    # release every Tuesday at 5pm UTC, LA time 9am
+    - cron: '0 17 * * 2'
   workflow_dispatch:
     inputs:
       version_type:
