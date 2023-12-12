@@ -17,19 +17,25 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   
 on:
+  schedule:
+    # release every Tuesday at 5pm UTC, LA time 9am
+    - cron: '0 17 * * 2'
   workflow_dispatch:
     inputs:
       version_type:
         description: "Version type (major, minor, patch or leave empty to release current master branch)"
         required: false
         default: ""
-    
+      deploy:
+          description: "Deploy to WordPress.org (true or false)"
+          required: false
+          default: "false"
 
 jobs:
   github-release:
     name: "Create a GitHub Release"
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: "Dump GitHub Context"
         env:
@@ -46,7 +52,9 @@ jobs:
       - name: "Check defined version type"
         id: version
         run: |
-          if [ "${{ github.event.inputs.version_type }}" == "major" ]; then
+          if [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "version=patch" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.version_type }}" == "major" ]; then
             echo "version=major" >> $GITHUB_OUTPUT
           elif [ "${{ github.event.inputs.version_type }}" == "minor" ]; then
             echo "version=minor" >> $GITHUB_OUTPUT
@@ -91,6 +99,16 @@ jobs:
           toTag: ${{ github.ref }}
           configuration: "./.github/config/dev_changelog_configuration.json"
 
+      # if scheduled and no pull requests caught in changelog, exit
+      - name: "Exit if no pull requests caught in changelog"
+        if: github.event_name == 'schedule' && steps.build_dev_changelog.outputs.pull_requests == ''
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "No pull requests caught in changelog. Exiting."
+          gh run cancel ${{ github.run_id }}
+          gh run watch ${{ github.run_id }}
+          
       # =====================================
       # Build Changelog =====================
       # =====================================
@@ -251,3 +269,15 @@ jobs:
         run: |
           json_content=$(cat "formatted-dev-changelog.json")
           curl -X POST -H "Content-type: application/json" --data "$json_content" "${{ env.SLACK_WEBHOOK_URL }}"
+          
+      # ===================================================================
+      # Trigger deploy workflow only if the workflow was triggered on cron
+      # ===================================================================
+      - name: "Trigger deploying to WordPress.org"
+        env:
+          GH_TOKEN: ${{ github.token }}
+        if: success() && ( github.event_name == 'schedule' || github.event.inputs.deploy == 'true' )
+        run: |
+          echo 'Sleeping for 5 minutes to allow GitHub to create the release'
+          sleep 300
+          gh workflow run deploy.yml -f tag_name="${{ steps.package-version.outputs.current-version }}"
