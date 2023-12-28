@@ -14,7 +14,7 @@ Draw Attention makes it easy to create interactive image maps for your website. 
 
 The image map can contain more information such as images, text, shortcodes, gallery, video, audio, and more. Reveal more information on click/tap or hover.  Create custom shapes for interactive hotspots directly on your original image.
 
-Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
+Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, interactive affiliate content, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
 
 Image Map Features:
 
@@ -25,7 +25,7 @@ Image Map Features:
 - **Go to a URL**: Optionally send a site visitor to another URL when clicking highlightable hotspots on your image map
 
 ### Responsive Design ###
-Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, too!
+Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, such as tablet and mobile, too!
 
 ### Accessible ###
 Image maps are accessible to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
@@ -37,7 +37,13 @@ Draw Attention is built with the principles of progressive enhancement in mind, 
 Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. Place your interactive image map into any page or post with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
 
 ### New and Improved Drawing Tool ###
-Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button.
+Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button. 
+
+The available drawing tools are:
+
+- **Polygon**: Create a custom polygon shape of your preference
+- **Rectangle**: – Create a rectangle shape of any size
+- **Circle**: Create a perfect circle
 
 [youtube https://youtu.be/NRHspIZjP-Q]
 
@@ -49,8 +55,16 @@ Need more than one interactive image map on your site? The Pro version allows un
 ### Annotation Layout Options (Pro only) ###
 Show more info about highlighted image map areas in a variety of different layouts, including lightbox and tooltip.
 
+### Always Show Hotspots (Pro only) ###
+Allow the image map hotspot areas to stay highlighted so visitors can see where they're located, even when they aren’t clicked yet. The perfect way to show off your hotspots and make it clear that your images are interactive.
+
+### Define Multiple Highlight Styles (Pro only) ###
+Use multiple highlight colors for the interactive image hotspots. If you choose to define multiple highlight styles, another section will pop up called, “Styles” where you can define your own color schemes within your image. Make each hotspot unique with it's own color, border, and opacity settings!
+
 ### 20 Pre-Defined Color Palettes (Pro only) ###
 Choose from one of 20 pre-defined color palettes or use your own custom color scheme on the image maps.
+
+[Upgrade to Draw Attention Pro Today!](https://wpdrawattention.com?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=pro-cta) to get more features and customization options:
 
 ### What could you make with Draw Attention? ###
 
