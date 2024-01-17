@@ -109,19 +109,19 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * Various functionality is separated into external files
 		 */
-			include_once( 'includes/cpt.php' );
+			include_once( dirname ( __FILE__ ) . '/includes/cpt.php' );
 			$this->cpt = new DrawAttention_CPT( $this );
 
-			include_once( 'includes/custom_fields.php' );
+			include_once( dirname ( __FILE__ ) . '/includes/custom_fields.php' );
 			$this->custom_fields = new DrawAttention_CustomFields( $this );
 
-			include_once( 'includes/themes.php' );
+			include_once(dirname ( __FILE__ ) .  '/includes/themes.php' );
 			$this->themes = new DrawAttention_Themes( $this );
 
-			include_once( 'includes/class-block-image.php' );
+			include_once( dirname ( __FILE__ ) . '/includes/class-block-image.php' );
 			$this->block_image = new DrawAttention_Block_Image( $this );
 
-			include_once( 'includes/import-export.php' );
+			include_once( dirname ( __FILE__ ) . '/includes/import-export.php' );
 			$this->import_export = new DrawAttention_ImportExport( $this );
 		}
 
