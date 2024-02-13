@@ -80,11 +80,13 @@ abstract class CMB2_Type_Counter_Base extends CMB2_Type_Base {
 		$markup .= '</p>';
 
 		// Enqueue the required JS.
-		$this->field->add_js_dependencies( array(
-			'word-count',
-			'wp-util',
-			'cmb2-char-counter',
-		) );
+		$this->field->add_js_dependencies(
+			array(
+				'word-count',
+				'wp-util',
+				'cmb2-char-counter',
+			)
+		);
 
 		$this->has_counter = true;
 
@@ -96,7 +98,7 @@ abstract class CMB2_Type_Counter_Base extends CMB2_Type_Base {
 	 *
 	 * @since  2.7.0
 	 *
-	 * @param  array  $attributes Array of parsed attributes.
+	 * @param  array $attributes Array of parsed attributes.
 	 *
 	 * @return array              Potentially modified attributes.
 	 */
@@ -134,5 +136,4 @@ abstract class CMB2_Type_Counter_Base extends CMB2_Type_Base {
 			? $char_max
 			: false;
 	}
-
 }

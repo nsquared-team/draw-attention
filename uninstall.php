@@ -19,7 +19,8 @@ global $wpdb;
 if ( is_multisite() ) {
 
 	$blogs = $wpdb->get_results( "SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A );
-		/* @TODO: delete all transient, options and files you may have added
+		/*
+		@TODO: delete all transient, options and files you may have added
 		delete_transient( 'TRANSIENT_NAME' );
 		delete_option('OPTION_NAME');
 		//info: remove custom file directory for main site
@@ -34,9 +35,10 @@ if ( is_multisite() ) {
 		*/
 	if ( $blogs ) {
 
-	 	foreach ( $blogs as $blog ) {
+		foreach ( $blogs as $blog ) {
 			switch_to_blog( $blog['blog_id'] );
-			/* @TODO: delete all transient, options and files you may have added
+			/*
+			@TODO: delete all transient, options and files you may have added
 			delete_transient( 'TRANSIENT_NAME' );
 			delete_option('OPTION_NAME');
 			//info: remove custom file directory for main site
@@ -55,9 +57,9 @@ if ( is_multisite() ) {
 			restore_current_blog();
 		}
 	}
-
 } else {
-	/* @TODO: delete all transient, options and files you may have added
+	/*
+	@TODO: delete all transient, options and files you may have added
 	delete_transient( 'TRANSIENT_NAME' );
 	delete_option('OPTION_NAME');
 	//info: remove custom file directory for main site

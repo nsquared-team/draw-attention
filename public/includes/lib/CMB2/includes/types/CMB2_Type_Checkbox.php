@@ -70,5 +70,4 @@ class CMB2_Type_Checkbox extends CMB2_Type_Text {
 			)
 		);
 	}
-
 }

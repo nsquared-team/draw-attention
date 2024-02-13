@@ -41,15 +41,19 @@ class CMB2_Type_Text extends CMB2_Type_Counter_Base {
 	 */
 	public function render( $args = array() ) {
 		$args = empty( $args ) ? $this->args : $args;
-		$a = $this->parse_args( $this->type, array(
-			'type'            => 'text',
-			'class'           => 'regular-text',
-			'name'            => $this->_name(),
-			'id'              => $this->_id(),
-			'value'           => $this->field->escaped_value(),
-			'desc'            => $this->_desc( true ),
-			'js_dependencies' => array(),
-		), $args );
+		$a    = $this->parse_args(
+			$this->type,
+			array(
+				'type'            => 'text',
+				'class'           => 'regular-text',
+				'name'            => $this->_name(),
+				'id'              => $this->_id(),
+				'value'           => $this->field->escaped_value(),
+				'desc'            => $this->_desc( true ),
+				'js_dependencies' => array(),
+			),
+			$args
+		);
 
 		// Add character counter?
 		$a = $this->maybe_update_attributes_for_char_counter( $a );
