@@ -17,6 +17,7 @@ jobs:
   # The installed coding standards are Zend, PEAR, PSR2, Squiz, PSR12, MySource, PSR1, PHPCompatibility, PHPCompatibilityParagonieRandomCompat, PHPCompatibilityParagonieSodiumCompat, PHPCompatibilityWP, WordPress, WordPress-Extra, WordPress-Core and WordPress-Docs
   static-code-analysis:
     name: Static Code Analysis
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
       phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*.min.* --extensions=php --runtime-set testVersion 7.2
@@ -75,14 +76,16 @@ jobs:
       - name: Format JS files
         run: prettier --write "**/*.js"
         
-      - name: Format Vue files
-        run: prettier --write "**/*.vue"
+      # No Vue files in this project at the moment
+      # - name: Format Vue files
+      #   run: prettier --write "**/*.vue"
         
       - name: Lint JS files
         run: eslint --fix "**/*.js" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*"
         
-      - name: Lint Vue files
-        run: eslint --fix "**/*.vue" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*"
+      # No Vue files in this project at the moment
+      # - name: Lint Vue files
+      #   run: eslint --fix "**/*.vue" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*"
 
       - name: Revert unwanted composer changes
         run: |
@@ -92,4 +95,6 @@ jobs:
       # The push below will not trigger a new workflow because it uses the default GITHUB_TOKEN
       - name: Commit and push changes
         run: |
+          # just a guard, we also should keep on excluding the minified files
+          git restore "*min.*"
           `git add -A && git commit -m "Automated code formatting on branch done." > /dev/null  && git push` || true
