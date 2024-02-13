@@ -20,7 +20,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
-      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*.min.* --extensions=php --runtime-set testVersion 7.2
+      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*min.* --extensions=php --runtime-set testVersion 7.2
     steps:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -81,7 +81,7 @@ jobs:
       #   run: prettier --write "**/*.vue"
         
       - name: Lint JS files
-        run: eslint --fix "**/*.js" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*"
+        run: eslint --fix "**/*.js" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*" --ignore-pattern "**/*min.*"
         
       # No Vue files in this project at the moment
       # - name: Lint Vue files
