@@ -32,9 +32,12 @@ class CMB2_Type_Taxonomy_Select_Hierarchical extends CMB2_Type_Taxonomy_Select {
 
 	public function render() {
 		return $this->rendered(
-			$this->types->select( array(
-				'options' => $this->get_term_options(),
-			), 'taxonomy_select_hierarchical' )
+			$this->types->select(
+				array(
+					'options' => $this->get_term_options(),
+				),
+				'taxonomy_select_hierarchical'
+			)
 		);
 	}
 
@@ -42,7 +45,7 @@ class CMB2_Type_Taxonomy_Select_Hierarchical extends CMB2_Type_Taxonomy_Select {
 		if ( $this->level > 0 ) {
 			$args['label'] = str_repeat( '&nbsp;&nbsp;&nbsp;&nbsp;', $this->level ) . $args['label'];
 		}
-		$option = parent::select_option( $args );
+		$option   = parent::select_option( $args );
 		$children = $this->build_children( $this->current_term, $this->saved_term );
 
 		if ( ! empty( $children ) ) {
@@ -63,11 +66,10 @@ class CMB2_Type_Taxonomy_Select_Hierarchical extends CMB2_Type_Taxonomy_Select {
 	 * @return string              Child option output.
 	 */
 	public function child_option_output( $terms, $saved ) {
-		$this->level++;
+		++$this->level;
 		$output = $this->loop_terms( $terms, $saved );
-		$this->level--;
+		--$this->level;
 
 		return $output;
 	}
-
 }

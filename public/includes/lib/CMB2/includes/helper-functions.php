@@ -41,7 +41,7 @@ function cmb2_autoload_classes( $class_name ) {
 		$path .= '/rest-api';
 	}
 
-	include_once( cmb2_dir( "$path/{$class_name}.php" ) );
+	include_once cmb2_dir( "$path/{$class_name}.php" );
 }
 
 /**
@@ -175,7 +175,7 @@ function cmb2_update_option( $option_key, $field_id, $value, $single = true ) {
 function cmb2_get_field( $meta_box, $field_id, $object_id = 0, $object_type = '' ) {
 
 	$object_id = $object_id ? $object_id : get_the_ID();
-	$cmb = $meta_box instanceof CMB2 ? $meta_box : cmb2_get_metabox( $meta_box, $object_id );
+	$cmb       = $meta_box instanceof CMB2 ? $meta_box : cmb2_get_metabox( $meta_box, $object_id );
 
 	if ( ! $cmb ) {
 		return;
@@ -295,20 +295,23 @@ function cmb2_get_metabox_form( $meta_box, $object_id = 0, $args = array() ) {
 function cmb2_print_metabox_form( $meta_box, $object_id = 0, $args = array() ) {
 
 	$object_id = $object_id ? $object_id : get_the_ID();
-	$cmb = cmb2_get_metabox( $meta_box, $object_id );
+	$cmb       = cmb2_get_metabox( $meta_box, $object_id );
 
 	// if passing a metabox ID, and that ID was not found.
 	if ( ! $cmb ) {
 		return;
 	}
 
-	$args = wp_parse_args( $args, array(
-		'form_format' => '<form class="cmb-form" method="post" id="%1$s" enctype="multipart/form-data" encoding="multipart/form-data"><input type="hidden" name="object_id" value="%2$s">%3$s<input type="submit" name="submit-cmb" value="%4$s" class="button-primary"></form>',
-		'save_button' => esc_html__( 'Save', 'cmb2' ),
-		'object_type' => $cmb->mb_object_type(),
-		'cmb_styles'  => $cmb->prop( 'cmb_styles' ),
-		'enqueue_js'  => $cmb->prop( 'enqueue_js' ),
-	) );
+	$args = wp_parse_args(
+		$args,
+		array(
+			'form_format' => '<form class="cmb-form" method="post" id="%1$s" enctype="multipart/form-data" encoding="multipart/form-data"><input type="hidden" name="object_id" value="%2$s">%3$s<input type="submit" name="submit-cmb" value="%4$s" class="button-primary"></form>',
+			'save_button' => esc_html__( 'Save', 'cmb2' ),
+			'object_type' => $cmb->mb_object_type(),
+			'cmb_styles'  => $cmb->prop( 'cmb_styles' ),
+			'enqueue_js'  => $cmb->prop( 'enqueue_js' ),
+		)
+	);
 
 	// Set object type explicitly (rather than trying to guess from context).
 	$cmb->object_type( $args['object_type'] );
@@ -346,7 +349,6 @@ function cmb2_print_metabox_form( $meta_box, $object_id = 0, $args = array() ) {
 	if ( isset( $format_parts[1] ) && $format_parts[1] ) {
 		printf( str_ireplace( '%4$s', '%1$s', $format_parts[1] ), esc_attr( $args['save_button'] ) );
 	}
-
 }
 
 /**

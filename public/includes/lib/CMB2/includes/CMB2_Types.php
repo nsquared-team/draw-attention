@@ -244,7 +244,7 @@ class CMB2_Types {
 	 */
 	public function get_new_render_type( $fieldtype, $render_class_name = null, $args = array(), $additional = '' ) {
 		$render_class_name = $this->get_render_type_class( $fieldtype, $render_class_name );
-		$this->type = new $render_class_name( $this, $args, $additional );
+		$this->type        = new $render_class_name( $this, $args, $additional );
 
 		return $this->type;
 	}
@@ -357,7 +357,7 @@ class CMB2_Types {
 	public function repeatable_rows() {
 		$meta_value = array_filter( (array) $this->field->escaped_value() );
 		// check for default content
-		$default    = $this->field->get_default();
+		$default = $this->field->get_default();
 
 		// check for saved data
 		if ( ! empty( $meta_value ) ) {
@@ -372,7 +372,7 @@ class CMB2_Types {
 			foreach ( (array) $meta_value as $val ) {
 				$this->field->escaped_value = $val;
 				$this->repeat_row();
-				$this->iterator++;
+				++$this->iterator;
 			}
 		} else {
 
@@ -385,7 +385,7 @@ class CMB2_Types {
 
 		// Then add an empty row
 		$this->field->escaped_value = $default;
-		$this->iterator = $this->iterator ? $this->iterator : 1;
+		$this->iterator             = $this->iterator ? $this->iterator : 1;
 		$this->repeat_row( 'empty-row hidden' );
 	}
 
@@ -433,7 +433,7 @@ class CMB2_Types {
 			return;
 		}
 
-		$tag = $paragraph ? 'p' : 'span';
+		$tag  = $paragraph ? 'p' : 'span';
 		$desc = sprintf( "\n" . '<%1$s class="cmb2-metabox-description">%2$s</%1$s>' . "\n", $tag, $desc );
 
 		if ( $echo ) {
@@ -498,7 +498,6 @@ class CMB2_Types {
 	/**
 	 * Begin Field Types
 	 */
-
 	public function text() {
 		return $this->input();
 	}
@@ -510,7 +509,7 @@ class CMB2_Types {
 			'class' => 'cmb2-hidden',
 		);
 		if ( $this->field->group ) {
-			$args['data-groupid'] = $this->field->group->id();
+			$args['data-groupid']  = $this->field->group->id();
 			$args['data-iterator'] = $this->iterator;
 		}
 
@@ -518,46 +517,75 @@ class CMB2_Types {
 	}
 
 	public function text_small() {
-		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Text', array(
-			'class' => 'cmb2-text-small',
-			'desc'  => $this->_desc(),
-		), 'input' )->render();
+		return $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Text',
+			array(
+				'class' => 'cmb2-text-small',
+				'desc'  => $this->_desc(),
+			),
+			'input'
+		)->render();
 	}
 
 	public function text_medium() {
-		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Text', array(
-			'class' => 'cmb2-text-medium',
-			'desc'  => $this->_desc(),
-		), 'input' )->render();
+		return $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Text',
+			array(
+				'class' => 'cmb2-text-medium',
+				'desc'  => $this->_desc(),
+			),
+			'input'
+		)->render();
 	}
 
 	public function text_email() {
-		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Text', array(
-			'class' => 'cmb2-text-email cmb2-text-medium',
-			'type'  => 'email',
-		), 'input' )->render();
+		return $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Text',
+			array(
+				'class' => 'cmb2-text-email cmb2-text-medium',
+				'type'  => 'email',
+			),
+			'input'
+		)->render();
 	}
 
 	public function text_url() {
-		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Text', array(
-			'class' => 'cmb2-text-url cmb2-text-medium regular-text',
-			'value' => $this->field->escaped_value( 'esc_url' ),
-		), 'input' )->render();
+		return $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Text',
+			array(
+				'class' => 'cmb2-text-url cmb2-text-medium regular-text',
+				'value' => $this->field->escaped_value( 'esc_url' ),
+			),
+			'input'
+		)->render();
 	}
 
 	public function text_money() {
-		$input = $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Text', array(
-			'class' => 'cmb2-text-money',
-			'desc'  => $this->_desc(),
-		), 'input' )->render();
+		$input = $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Text',
+			array(
+				'class' => 'cmb2-text-money',
+				'desc'  => $this->_desc(),
+			),
+			'input'
+		)->render();
 		return ( ! $this->field->get_param_callback_result( 'before_field' ) ? '$ ' : ' ' ) . $input;
 	}
 
 	public function textarea_small() {
-		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_Textarea', array(
-			'class' => 'cmb2-textarea-small',
-			'rows'  => 4,
-		) )->render();
+		return $this->get_new_render_type(
+			__FUNCTION__,
+			'CMB2_Type_Textarea',
+			array(
+				'class' => 'cmb2-textarea-small',
+				'rows'  => 4,
+			)
+		)->render();
 	}
 
 	public function textarea_code( $args = array() ) {
@@ -632,7 +660,7 @@ class CMB2_Types {
 	public function checkbox( $args = array(), $is_checked = null ) {
 		// Avoid get_new_render_type since we need a different default for the 3rd argument than ''.
 		$render_class_name = $this->get_render_type_class( __FUNCTION__, 'CMB2_Type_Checkbox' );
-		$this->type = new $render_class_name( $this, $args, $is_checked );
+		$this->type        = new $render_class_name( $this, $args, $is_checked );
 		return $this->type->render();
 	}
 
@@ -671,5 +699,4 @@ class CMB2_Types {
 	public function file( $args = array() ) {
 		return $this->get_new_render_type( __FUNCTION__, 'CMB2_Type_File', $args )->render();
 	}
-
 }

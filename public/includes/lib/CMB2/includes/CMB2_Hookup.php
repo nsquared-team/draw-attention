@@ -155,7 +155,7 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 		if ( $this->cmb->has_columns ) {
 			add_filter( 'manage_edit-comments_columns', array( $this, 'register_column_headers' ) );
 			add_action( 'manage_comments_custom_column', array( $this, 'column_display' ), 10, 3 );
-			add_filter( "manage_edit-comments_sortable_columns", array( $this, 'columns_sortable' ) );
+			add_filter( 'manage_edit-comments_sortable_columns', array( $this, 'columns_sortable' ) );
 			add_action( 'pre_get_posts', array( $this, 'columns_sortable_orderby' ) );
 		}
 
@@ -176,7 +176,7 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 		if ( $this->cmb->has_columns ) {
 			add_filter( 'manage_users_columns', array( $this, 'register_column_headers' ) );
 			add_filter( 'manage_users_custom_column', array( $this, 'return_column_display' ), 10, 3 );
-			add_filter( "manage_users_sortable_columns", array( $this, 'columns_sortable' ) );
+			add_filter( 'manage_users_sortable_columns', array( $this, 'columns_sortable' ) );
 			add_action( 'pre_get_posts', array( $this, 'columns_sortable_orderby' ) );
 		}
 
@@ -350,12 +350,12 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 			if ( false === $column['position'] ) {
 				$columns[ $field['id'] ] = $column['name'];
 			} else {
-				$before = array_slice( $columns, 0, absint( $column['position'] ) );
+				$before                 = array_slice( $columns, 0, absint( $column['position'] ) );
 				$before[ $field['id'] ] = $column['name'];
-				$columns = $before + $columns;
+				$columns                = $before + $columns;
 			}
 
-			$column['field'] = $field;
+			$column['field']               = $field;
 			$this->columns[ $field['id'] ] = $column;
 		}
 
@@ -372,12 +372,14 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 	 */
 	public function column_display( $column_name, $object_id ) {
 		if ( isset( $this->columns[ $column_name ] ) ) {
-			$field = new CMB2_Field( array(
-				'field_args'  => $this->columns[ $column_name ]['field'],
-				'object_type' => $this->object_type,
-				'object_id'   => $this->cmb->object_id( $object_id ),
-				'cmb_id'      => $this->cmb->cmb_id,
-			) );
+			$field = new CMB2_Field(
+				array(
+					'field_args'  => $this->columns[ $column_name ]['field'],
+					'object_type' => $this->object_type,
+					'object_id'   => $this->cmb->object_id( $object_id ),
+					'cmb_id'      => $this->cmb->cmb_id,
+				)
+			);
 
 			$this->cmb->get_field( $field )->render_column();
 		}
@@ -517,7 +519,7 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 		 * To output the fields 'naked' (without a postbox wrapper/style), then
 		 * add a `'remove_box_wrap' => true` to your metabox registration array.
 		 */
-		$add_wrap = ! empty( $title ) || ! $this->cmb->prop( 'remove_box_wrap' );
+		$add_wrap   = ! empty( $title ) || ! $this->cmb->prop( 'remove_box_wrap' );
 		$add_handle = $add_wrap && ! empty( $title );
 
 		// Open the context-box wrap.
@@ -616,7 +618,6 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 	 * Remove the specified default taxonomy metaboxes for a post-type.
 	 *
 	 * @since 2.2.3
-	 *
 	 */
 	public function remove_default_tax_metaboxes() {
 		$to_remove = array_filter( (array) $this->cmb->tax_metaboxes_to_remove, 'taxonomy_exists' );
@@ -1015,5 +1016,4 @@ class CMB2_Hookup extends CMB2_Hookup_Base {
 		self::register_js();
 		return true;
 	}
-
 }
