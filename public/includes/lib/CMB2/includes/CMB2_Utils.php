@@ -37,7 +37,7 @@ class CMB2_Utils {
 	 */
 	public static function image_id_from_url( $img_url ) {
 		$attachment_id = 0;
-		$dir = wp_upload_dir();
+		$dir           = wp_upload_dir();
 
 		// Is URL in uploads directory?
 		if ( false === strpos( $img_url, $dir['baseurl'] . '/' ) ) {
@@ -64,7 +64,7 @@ class CMB2_Utils {
 		if ( $query->have_posts() ) {
 
 			foreach ( $query->posts as $post_id ) {
-				$meta = wp_get_attachment_metadata( $post_id );
+				$meta                = wp_get_attachment_metadata( $post_id );
 				$original_file       = basename( $meta['file'] );
 				$cropped_image_files = isset( $meta['sizes'] ) ? wp_list_pluck( $meta['sizes'], 'file' ) : array();
 				if ( $original_file === $file || in_array( $file, $cropped_image_files ) ) {
@@ -123,7 +123,7 @@ class CMB2_Utils {
 		// Find the best match when '$size' is an array.
 		if ( is_array( $size ) ) {
 			$image_sizes = self::get_available_image_sizes();
-			$candidates = array();
+			$candidates  = array();
 
 			foreach ( $image_sizes as $_size => $data ) {
 
@@ -142,10 +142,10 @@ class CMB2_Utils {
 					 */
 					if ( $data['width'] > $size[0] ) {
 						$constrained_size = wp_constrain_dimensions( $data['width'], $data['height'], $size[0] );
-						$expected_size = array( $size[0], $size[1] );
+						$expected_size    = array( $size[0], $size[1] );
 					} else {
 						$constrained_size = wp_constrain_dimensions( $size[0], $size[1], $data['width'] );
-						$expected_size = array( $data['width'], $data['height'] );
+						$expected_size    = array( $data['width'], $data['height'] );
 					}
 
 					// If the image dimensions are within 1px of the expected size, we consider it a match.
@@ -204,7 +204,7 @@ class CMB2_Utils {
 
 			try {
 				$date_time_zone_selected = new DateTimeZone( $tzstring );
-				$tz_offset = timezone_offset_get( $date_time_zone_selected, date_create() );
+				$tz_offset               = timezone_offset_get( $date_time_zone_selected, date_create() );
 			} catch ( Exception $e ) {
 				self::log_if_debug( __METHOD__, __LINE__, $e->getMessage() );
 			}
@@ -591,7 +591,7 @@ class CMB2_Utils {
 			$empty    = false === $val && 'value' !== $attr;
 			if ( ! $excluded && ! $empty ) {
 				// if data attribute, use single quote wraps, else double.
-				$quotes = self::is_data_attribute( $attr ) ? "'" : '"';
+				$quotes      = self::is_data_attribute( $attr ) ? "'" : '"';
 				$attributes .= sprintf( ' %1$s=%3$s%2$s%3$s', $attr, $val, $quotes );
 			}
 		}
@@ -665,5 +665,4 @@ class CMB2_Utils {
 	public static function generate_hash( $string ) {
 		return substr( base_convert( md5( $string ), 16, 32 ), 0, 12 );
 	}
-
 }

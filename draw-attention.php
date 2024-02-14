@@ -24,7 +24,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-/*----------------------------------------------------------------------------*
+/*
+----------------------------------------------------------------------------*
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
 
@@ -34,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * - replace `class-drawattention.php` with the name of the plugin's class file
  *
  */
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-drawattention.php' );
+require_once plugin_dir_path( __FILE__ ) . 'public/class-drawattention.php';
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
@@ -56,7 +57,8 @@ register_deactivation_hook( __FILE__, array( 'DrawAttention', 'deactivate' ) );
  */
 add_action( 'plugins_loaded', array( 'DrawAttention', 'get_instance' ) );
 
-/*----------------------------------------------------------------------------*
+/*
+----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
  *----------------------------------------------------------------------------*/
 
@@ -78,7 +80,7 @@ add_action( 'plugins_loaded', array( 'DrawAttention', 'get_instance' ) );
  */
 if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 
-	require_once( plugin_dir_path( __FILE__ ) . 'admin/class-drawattention-admin.php' );
+	require_once plugin_dir_path( __FILE__ ) . 'admin/class-drawattention-admin.php';
 	add_action( 'plugins_loaded', array( 'DrawAttention_Admin', 'get_instance' ) );
 
 }
@@ -90,13 +92,12 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
  * Please check your list of active plugins to see if you have the Responsive Image Maps plugin installed and activated. If so, we regretfully recommend deactivating this plugin.
  * It has been abandoned and has not been updated since 2015.
  * Here is a link to our public ticket asking the plugin author to update their plugin: https://wordpress.org/support/topic/conflict-with-draw-attention-plugin-2/
- * 
+ *
  * Our final solution is to dequeue the Responsive Image Maps plugin’s script if it is active.
  * And tell WordPress to not load RIM plugin
- * 
  */
-function da_dequeue_conflicting_rim_scripts(){
-	
+function da_dequeue_conflicting_rim_scripts() {
+
 	if ( ! function_exists( 'pn_rim_enqueue_scripts' ) ) {
 		return;
 	}
@@ -104,14 +105,14 @@ function da_dequeue_conflicting_rim_scripts(){
 	wp_dequeue_script( 'jQuery.rwd_image_maps' );
 }
 
-function da_disable_rim_plugin(){
-	
+function da_disable_rim_plugin() {
+
 	if ( ! function_exists( 'pn_rim_enqueue_scripts' ) ) {
 		return;
 	}
-	
+
 	remove_action( 'wp_head', 'pn_rim_header_scripts' );
 }
 
-add_action('init', 'da_disable_rim_plugin');
-add_action('wp_enqueue_scripts', 'da_dequeue_conflicting_rim_scripts', 999 );
+add_action( 'init', 'da_disable_rim_plugin' );
+add_action( 'wp_enqueue_scripts', 'da_dequeue_conflicting_rim_scripts', 999 );

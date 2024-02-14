@@ -162,10 +162,8 @@ class CMB2_Show_Filters {
 						return true;
 					}
 				}
-			} else {
-				if ( $_GET['page'] == $show_on ) {
+			} elseif ( $_GET['page'] == $show_on ) {
 					return true;
-				}
 			}
 
 			return false;
@@ -175,5 +173,4 @@ class CMB2_Show_Filters {
 		// Allow options-page metaboxes to be displayed anywhere on the front-end.
 		return true;
 	}
-
 }

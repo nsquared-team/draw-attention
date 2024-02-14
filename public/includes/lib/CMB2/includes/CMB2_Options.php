@@ -75,7 +75,7 @@ class CMB2_Option {
 	 * @return mixed Delete success or failure
 	 */
 	public function delete_option() {
-		$deleted = $this->key ? delete_option( $this->key ) : true;
+		$deleted       = $this->key ? delete_option( $this->key ) : true;
 		$this->options = $deleted ? array() : $this->options;
 		return $this->options;
 	}

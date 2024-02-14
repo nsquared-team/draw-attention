@@ -312,9 +312,11 @@ class CMB2_Field extends CMB2_Base {
 	 * @return mixed
 	 */
 	public function update_data( $new_value, $single = true ) {
-		$a = $this->data_args( array(
-			'single' => $single,
-		) );
+		$a = $this->data_args(
+			array(
+				'single' => $single,
+			)
+		);
 
 		$a['value'] = $a['repeat'] ? array_values( $new_value ) : $new_value;
 
@@ -386,9 +388,11 @@ class CMB2_Field extends CMB2_Base {
 	 * @return mixed
 	 */
 	public function remove_data( $old = '' ) {
-		$a = $this->data_args( array(
-			'old' => $old,
-		) );
+		$a = $this->data_args(
+			array(
+				'old' => $old,
+			)
+		);
 
 		/**
 		 * Filter whether to override removing of meta value.
@@ -452,13 +456,16 @@ class CMB2_Field extends CMB2_Base {
 	 * @return array       Updated arguments
 	 */
 	public function data_args( $args = array() ) {
-		$args = wp_parse_args( $args, array(
-			'type'     => $this->object_type,
-			'id'       => $this->object_id,
-			'field_id' => $this->id( true ),
-			'repeat'   => $this->args( 'repeatable' ),
-			'single'   => ! $this->args( 'multiple' ),
-		) );
+		$args = wp_parse_args(
+			$args,
+			array(
+				'type'     => $this->object_type,
+				'id'       => $this->object_id,
+				'field_id' => $this->id( true ),
+				'repeat'   => $this->args( 'repeatable' ),
+				'single'   => ! $this->args( 'multiple' ),
+			)
+		);
 		return $args;
 	}
 
@@ -486,7 +493,7 @@ class CMB2_Field extends CMB2_Base {
 			return call_user_func( $cb, $meta_value, $this->args(), $this );
 		}
 
-		$sanitizer = new CMB2_Sanitize( $this, $meta_value );
+		$sanitizer  = new CMB2_Sanitize( $this, $meta_value );
 		$field_type = $this->type();
 
 		/**
@@ -557,7 +564,7 @@ class CMB2_Field extends CMB2_Base {
 			if ( ! empty( $new_value ) ) {
 				foreach ( $new_value as $add_new ) {
 					if ( $this->update_data( $add_new, false ) ) {
-						$count++;
+						++$count;
 					}
 				}
 			}
@@ -574,7 +581,7 @@ class CMB2_Field extends CMB2_Base {
 		}
 
 		if ( $updated ) {
-			$this->value = $this->get_data();
+			$this->value         = $this->get_data();
 			$this->escaped_value = null;
 		}
 
@@ -617,11 +624,14 @@ class CMB2_Field extends CMB2_Base {
 	 */
 	public function escaping_exception() {
 		// These types cannot be escaped.
-		return in_array( $this->type(), array(
-			'file_list',
-			'multicheck',
-			'text_datetime_timestamp_timezone',
-		) );
+		return in_array(
+			$this->type(),
+			array(
+				'file_list',
+				'multicheck',
+				'text_datetime_timestamp_timezone',
+			)
+		);
 	}
 
 	/**
@@ -685,16 +695,22 @@ class CMB2_Field extends CMB2_Base {
 			return $type_methods[ $type ];
 		}
 
-		$all_or_nothing_types = array_flip( apply_filters( 'cmb2_all_or_nothing_types', array(
-			'select',
-			'radio',
-			'radio_inline',
-			'taxonomy_select',
-			'taxonomy_select_hierarchical',
-			'taxonomy_radio',
-			'taxonomy_radio_inline',
-			'taxonomy_radio_hierarchical',
-		), $this ) );
+		$all_or_nothing_types = array_flip(
+			apply_filters(
+				'cmb2_all_or_nothing_types',
+				array(
+					'select',
+					'radio',
+					'radio_inline',
+					'taxonomy_select',
+					'taxonomy_select_hierarchical',
+					'taxonomy_radio',
+					'taxonomy_radio_inline',
+					'taxonomy_radio_hierarchical',
+				),
+				$this
+			)
+		);
 
 		if ( isset( $all_or_nothing_types[ $type ] ) ) {
 			return 'set_field_defaults_all_or_nothing_types';
@@ -987,14 +1003,17 @@ class CMB2_Field extends CMB2_Base {
 		 *
 		 * @param array $field_types The types of fields which should get the 'table-layout' class
 		 */
-		$repeat_table_rows_types = apply_filters( 'cmb2_repeat_table_row_types', array(
-			'text_url',
-			'text',
-		) );
+		$repeat_table_rows_types = apply_filters(
+			'cmb2_repeat_table_row_types',
+			array(
+				'text_url',
+				'text',
+			)
+		);
 
 		$conditional_classes = array(
 			'cmb-type-' . str_replace( '_', '-', sanitize_html_class( $this->type() ) ) => true,
-			'cmb2-id-' . str_replace( '_', '-', sanitize_html_class( $this->id() ) )    => true,
+			'cmb2-id-' . str_replace( '_', '-', sanitize_html_class( $this->id() ) ) => true,
 			'cmb-repeat'             => $this->args( 'repeatable' ),
 			'cmb-repeat-group-field' => $this->group,
 			'cmb-inline'             => $this->args( 'inline' ),
@@ -1105,10 +1124,12 @@ class CMB2_Field extends CMB2_Base {
 			return false;
 		}
 
-		return $this->get_field_clone( array(
-			'id' => $this->_id( '', false ) . $suffix,
-			'sanitization_cb' => false,
-		) );
+		return $this->get_field_clone(
+			array(
+				'id'              => $this->_id( '', false ) . $suffix,
+				'sanitization_cb' => false,
+			)
+		);
 	}
 
 	/**
@@ -1122,7 +1143,7 @@ class CMB2_Field extends CMB2_Base {
 			return;
 		}
 
-		$display = new CMB2_Field_Display( $this );
+		$display    = new CMB2_Field_Display( $this );
 		$field_type = $this->type();
 
 		/**
@@ -1336,7 +1357,7 @@ class CMB2_Field extends CMB2_Base {
 			return apply_filters( 'cmb2_default_filter', $default, $this );
 		}
 
-		$param = is_callable( $this->args['default_cb'] ) ? 'default_cb' : 'default';
+		$param   = is_callable( $this->args['default_cb'] ) ? 'default_cb' : 'default';
 		$default = $this->args['default'] = $this->get_param_callback_result( $param );
 
 		// Allow a filter override of the default value.
@@ -1401,7 +1422,7 @@ class CMB2_Field extends CMB2_Base {
 
 		$with_supporting = array(
 			// CMB2_Sanitize::_save_file_id_value()/CMB2_Sanitize::_get_group_file_value_array().
-			'file' => '_id',
+			'file'                             => '_id',
 			// See CMB2_Sanitize::_save_utc_value().
 			'text_datetime_timestamp_timezone' => '_utc',
 		);
@@ -1434,11 +1455,14 @@ class CMB2_Field extends CMB2_Base {
 	 * @return array        Modified field config array.
 	 */
 	protected function set_field_defaults_group( $args ) {
-		$args['options'] = wp_parse_args( $args['options'], array(
-			'add_button'     => esc_html__( 'Add Group', 'cmb2' ),
-			'remove_button'  => esc_html__( 'Remove Group', 'cmb2' ),
-			'remove_confirm' => '',
-		) );
+		$args['options'] = wp_parse_args(
+			$args['options'],
+			array(
+				'add_button'     => esc_html__( 'Add Group', 'cmb2' ),
+				'remove_button'  => esc_html__( 'Remove Group', 'cmb2' ),
+				'remove_confirm' => '',
+			)
+		);
 
 		return $args;
 	}
@@ -1452,7 +1476,7 @@ class CMB2_Field extends CMB2_Base {
 	 * @return array        Modified field config array.
 	 */
 	protected function set_field_defaults_wysiwyg( $args ) {
-		$args['id'] = strtolower( str_ireplace( '-', '_', $args['id'] ) );
+		$args['id']                       = strtolower( str_ireplace( '-', '_', $args['id'] ) );
 		$args['options']['textarea_name'] = $args['_name'];
 
 		return $args;
@@ -1471,7 +1495,7 @@ class CMB2_Field extends CMB2_Base {
 		$args['show_option_none'] = true === $args['show_option_none'] ? esc_html__( 'None', 'cmb2' ) : $args['show_option_none'];
 
 		if ( null === $args['show_option_none'] ) {
-			$off_by_default = in_array( $args['type'], array( 'select', 'radio', 'radio_inline' ), true );
+			$off_by_default           = in_array( $args['type'], array( 'select', 'radio', 'radio_inline' ), true );
 			$args['show_option_none'] = $off_by_default ? false : esc_html__( 'None', 'cmb2' );
 		}
 
@@ -1611,7 +1635,7 @@ class CMB2_Field extends CMB2_Base {
 				$this->deprecated_param( __CLASS__ . '::__construct()', '2.2.3', self::DEPRECATED_CB_PARAM, 'row_classes', 'classes_cb' );
 
 				$args['classes_cb'] = $args['row_classes'];
-				$args['classes'] = null;
+				$args['classes']    = null;
 			} else {
 
 				$args['classes'] = $args['row_classes'];
@@ -1626,7 +1650,7 @@ class CMB2_Field extends CMB2_Base {
 			$this->deprecated_param( __CLASS__ . '::__construct()', '2.2.3', self::DEPRECATED_CB_PARAM, 'default', 'default_cb' );
 
 			$args['default_cb'] = $args['default'];
-			$args['default'] = null;
+			$args['default']    = null;
 		}
 
 		// options param can be passed a callback as well.
@@ -1635,10 +1659,9 @@ class CMB2_Field extends CMB2_Base {
 			$this->deprecated_param( __CLASS__ . '::__construct()', '2.2.3', self::DEPRECATED_CB_PARAM, 'options', 'options_cb' );
 
 			$args['options_cb'] = $args['options'];
-			$args['options'] = array();
+			$args['options']    = array();
 		}
 
 		return $args;
 	}
-
 }

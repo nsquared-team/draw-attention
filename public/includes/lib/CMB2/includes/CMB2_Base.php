@@ -457,12 +457,10 @@ abstract class CMB2_Base {
 				} else {
 					trigger_error( sprintf( __( '%1$s was called with a parameter that is <strong>deprecated</strong> since version %2$s with no alternative available.', 'cmb2' ), $function, $version ) );
 				}
-			} else {
-				if ( ! is_null( $message ) ) {
+			} elseif ( ! is_null( $message ) ) {
 					trigger_error( sprintf( '%1$s was called with a parameter that is <strong>deprecated</strong> since version %2$s! %3$s', $function, $version, $message ) );
-				} else {
-					trigger_error( sprintf( '%1$s was called with a parameter that is <strong>deprecated</strong> since version %2$s with no alternative available.', $function, $version ) );
-				}
+			} else {
+				trigger_error( sprintf( '%1$s was called with a parameter that is <strong>deprecated</strong> since version %2$s with no alternative available.', $function, $version ) );
 			}
 		}
 	}
