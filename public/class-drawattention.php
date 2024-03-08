@@ -116,8 +116,8 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 
 			include_once __DIR__ . '/includes/custom_fields.php';
 			$this->custom_fields = new DrawAttention_CustomFields( $this );
-			
-			require_once plugin_dir_path(__FILE__) . '/includes/da-newsletter.php';
+
+			require_once plugin_dir_path( __FILE__ ) . '/includes/da-newsletter.php';
 			$this->da_newsletter = new DrawAttention_Newsletter( $this );
 
 			include_once __DIR__ . '/includes/themes.php';
