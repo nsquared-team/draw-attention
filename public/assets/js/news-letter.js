@@ -1,23 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.getElementById('_news_letter_modal');
   var closeButton = document.getElementById('closeModalButton'); 
+  var focusedElementBeforeModal;
 
   function openModal() {
+    focusedElementBeforeModal = document.activeElement;
     modal.style.display = 'flex';
     document.getElementById('email').focus();
     modal.addEventListener('keydown', trapTabKey);
     closeButton.addEventListener('click', closeModal);
-
-    var focusedElementBeforeModal = document.activeElement;
-    modal.focusedElementBeforeModal = focusedElementBeforeModal;
   }
 
   function closeModal() {
+    focusedElementBeforeModal.focus();
     modal.style.display = 'none';
     modal.removeEventListener('keydown', trapTabKey);
     closeButton.removeEventListener('click', closeModal);
-
-    modal.focusedElementBeforeModal.focus();
   }
 
   function trapTabKey(e) {
