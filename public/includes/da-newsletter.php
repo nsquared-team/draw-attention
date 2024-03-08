@@ -8,20 +8,20 @@ class DrawAttention_Newsletter {
         $this->plugin_directory     = DrawAttention::get_plugin_url() . '/public/';
 		$this->parent = $parent;
 
-        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
-        add_action( 'admin_footer', array( $this, 'output_modal_dialog' ) );
-        add_action('add_meta_boxes', array($this, 'add_dashboard_widget'));
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
+        add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ) );
+        add_action('add_meta_boxes', array($this, 'add_newsletter_widget'));
 
         // Order the meta boxes
-        add_action( 'do_meta_boxes', array( $this, 'custom_meta_boxes_order' ) );
+        add_action( 'do_meta_boxes', array( $this, 'set_meta_boxes_position' ) );
     }
 
-    public function enqueue_admin_styles() {
+    public function enqueue_assets() {
         wp_enqueue_style( 'custom-meta-box-styles', $this->plugin_directory.'/assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
         wp_enqueue_script( 'news-letter-js', $this->plugin_directory.'assets/js/news-letter.js', array(), DrawAttention::VERSION );
     }
 
-    public function custom_dashboard_widget_content() {
+    public function metabox_newsletter_component() {
         echo "
             <div class='news-letter-container hndle ui-sortable-handle'> 
 
@@ -44,7 +44,7 @@ class DrawAttention_Newsletter {
         ";
     }
 
-    public function output_modal_dialog() {
+    public function newsletter_modal_dialog() {
         echo "
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
                 <div class='modal-content'>
@@ -94,8 +94,8 @@ class DrawAttention_Newsletter {
         ";
     }
 
-    public function add_dashboard_widget() {
-		add_meta_box( 'DrawAttention_Newsletter', __( 'News Letter', 'draw-attention' ), array( $this, 'custom_dashboard_widget_content' ), $this->parent->cpt->post_type, 'side', 'low' );
+    public function add_newsletter_widget() {
+		add_meta_box( 'DrawAttention_Newsletter', __( 'News Letter', 'draw-attention' ), array( $this, 'metabox_newsletter_component' ), $this->parent->cpt->post_type, 'side', 'low' );
 
     }
 
@@ -104,7 +104,7 @@ class DrawAttention_Newsletter {
      *
      * @param string $post_type The post type to modify meta box order for.
      */
-    function custom_meta_boxes_order($post_type) {
+    function set_meta_boxes_position($post_type) {
 
         global $wp_meta_boxes;
 
