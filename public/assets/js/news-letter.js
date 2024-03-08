@@ -19,33 +19,40 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function trapTabKey(e) {
+    if (e.key === "Tab" || e.keyCode === 9) {
+      e.preventDefault();
 
-    if (e.key === 'Tab' || e.keyCode === 9) {
-        e.preventDefault();
+      var focusableElements = modal.querySelectorAll(
+        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select',
+      );
+      var firstElement = focusableElements[0];
+      var lastElement = focusableElements[focusableElements.length - 1];
 
-        var focusableElements = modal.querySelectorAll('a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select');
-        var firstElement = focusableElements[0];
-        var lastElement = focusableElements[focusableElements.length - 1];
-
-        if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-                lastElement.focus();
-            } else {
-                var index = Array.from(focusableElements).indexOf(document.activeElement);
-                focusableElements[index - 1].focus();
-            }
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement.focus();
         } else {
-            if (document.activeElement === lastElement) {
-                firstElement.focus();
-            } else {
-                var index = Array.from(focusableElements).indexOf(document.activeElement);
-                focusableElements[index + 1].focus();
-            }
+          var index = Array.from(focusableElements).indexOf(
+            document.activeElement,
+          );
+          focusableElements[index - 1].focus();
         }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement.focus();
+        } else {
+          var index = Array.from(focusableElements).indexOf(
+            document.activeElement,
+          );
+          focusableElements[index + 1].focus();
+        }
+      }
     }
   }
-  document.getElementById('openModalButton').addEventListener('click', function(event) {
+  document
+    .getElementById("openModalButton")
+    .addEventListener("click", function (event) {
       event.preventDefault();
       openModal();
-  });
+    });
 });
