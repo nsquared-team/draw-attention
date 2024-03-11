@@ -28,7 +28,17 @@
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.news-letter-container .dismiss-banner {
+.modal .modal-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal .modal-content .close-button-container {
+    position: relative;
+    z-index: 2;
+}
+
+.modal .modal-content .close-button-container .dismiss-banner {
     top: 6px;
     right: 6px;
     border: none;
@@ -37,6 +47,7 @@
     box-shadow: none;
     position: absolute;
     justify-content: flex-end; 
+    cursor: pointer;
     background-color: transparent;
 }
 
@@ -67,8 +78,14 @@
     justify-content: center; 
 }
 
-.modal-container form {
+form .modal-container .error-message-container{
     width: 100%;
+    display: flex;
+    align-items: flex-start !important;
+}
+
+form .modal-container .error-message-container p {
+    padding: 0;
 }
 
 .modal-container button{
@@ -79,7 +96,6 @@
 .news-letter-container .content-container p {
     margin: 0; 
     padding: 0 16px;
-    color: #92CAA4;
 }
 
 .news-letter-container .content-container .content-notice {
@@ -161,6 +177,7 @@
     width: 100%;
     color: #B7B7B7;
     font-weight: normal; 
+    padding: 11px 8px;
 }
 
 .modal {
@@ -186,6 +203,7 @@
     background-color: #fefefe;
     min-width: 350px;
     max-width: 600px;
+    color: #92CAA4;
 }
 
 .modal-content .news-letter-container {
@@ -248,4 +266,10 @@
     overflow: hidden;
     clip: rect(0,0,0,0);
     border: 0;
-  }
+}
+
+.modal-container .error-message{
+    font-size: 13px;
+    font-weight: 400;
+    display: none;
+}
