@@ -47,48 +47,51 @@ class DrawAttention_Newsletter {
 	public function newsletter_modal_dialog() {
 		echo "
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
-                <div class='modal-content'>
-                    <div class='news-letter-container'> 
+                <div class='modal-content modal-content-container'>
+                    <div class='close-button-container'>
                         <button id='closeModalButton' class='dismiss-banner' onClick='closeModal()' aria-label='Dismiss Notice'>
                             <img src='" . $this->plugin_directory . "/assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
                         </button>
+                    </div>
+                    <form method='POST' class='news-letter-container' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
                         <div class='content-container modal-container'>
                             <div class='modal-content'>
                                 <div class='modal-info'>
                                     <h2 id='weeklyNewsLetterHeader'> " . __( 'Get our weekly', 'draw-attention' ) . "</span></h2>
                                     <p class='headline'> " . __( 'newsletter', 'draw-attention' ) . "</p>
                                     <p class='modal-statement'> " . __( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) . "</p>
-                                    <p class='cta'> " . __( 'Subscribe now! Get 20% Coupon', 'draw-attention' ) . "</p>
+                                    <label for='email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
                                 </div>
                                 <img src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='News Letter Image'>
                             </div>
-                            <form method='POST' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
-                                <input type='hidden' name='u' value='65E1000B4D683' data-name='u'>
-                                <input type='hidden' name='f' value='1' data-name='f'>
-                                <input type='hidden' name='s' data-name='s'>
-                                <input type='hidden' name='c' value='0' data-name='c'>
-                                <input type='hidden' name='m' value='0' data-name='m'>
-                                <input type='hidden' name='act' value='sub' data-name='act'>
-                                <input type='hidden' name='v' value='2' data-name='v'>
-                                <input type='hidden' name='or' value='9f41f9016dc2e4b2b014589da6eb4bad' data-name='or'>
-                                <div class='_form-content'>
-                                    <div class='_form_element _x45964534 _full_width input-field'>
-                                        <div class='input-field-container'>
-                                            <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button></div>
-                                            <label for='email' class='sr-only'>Subscribe now! Get 20% Coupon</label>
-                                            <input type='text' id='email' name='email' placeholder='Your Email' required='' data-name='email'>
-                                        </div>
 
-                                    </div>
+                            <input type='hidden' name='u' value='65E1000B4D683' data-name='u'>
+                            <input type='hidden' name='f' value='1' data-name='f'>
+                            <input type='hidden' name='s' data-name='s'>
+                            <input type='hidden' name='c' value='0' data-name='c'>
+                            <input type='hidden' name='m' value='0' data-name='m'>
+                            <input type='hidden' name='act' value='sub' data-name='act'>
+                            <input type='hidden' name='v' value='2' data-name='v'>
+                            <input type='hidden' name='or' value='9f41f9016dc2e4b2b014589da6eb4bad' data-name='or'>
+
+                            <div class='_form_element _x45964534 _full_width input-field'>
+                                <div class='input-field-container'>
+                                    <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button></div>
+                                    <input type='text' id='email' name='email' placeholder='Your Email' required='' aria-describedby='error-message' data-name='email'>
                                 </div>
-                                <div class='_form-thank-you' style='display:none;'></div>
-                            </form>
+                            </div>
+                            
+                            <div class='error-message-container'>
+                                <p class='error-message' id='error-message'>Email address is required</p>
+                            </div>
 
+                            <div class='_form-thank-you' style='display:none;'></div>
+                            
                             <div class='content-notice md-content-notice'>
                                 <span>" . __( "Your email is safe with us, we don't spam.", 'draw-attention' ) . '</span>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         ';
