@@ -110,25 +110,29 @@ class DrawAttention_Newsletter {
 
 		global $wp_meta_boxes;
 
-		if ( 'da_image' == $post_type ) {
-			$custom_meta_boxes = $wp_meta_boxes[ $post_type ]['side']['low'];
-
-			$order = array(
-				'da_shortcode',
-				'DrawAttention_Newsletter',
-				'da_theme_pack',
-			);
-
-			$ordered_meta_boxes = array();
-
-			foreach ( $order as $box_id ) {
-				if ( isset( $custom_meta_boxes[ $box_id ] ) ) {
-					$ordered_meta_boxes[ $box_id ] = $custom_meta_boxes[ $box_id ];
-					unset( $custom_meta_boxes[ $box_id ] );
-				}
-			}
-
-			$wp_meta_boxes[ $post_type ]['side']['low'] = array_merge( $ordered_meta_boxes, $custom_meta_boxes );
+		if ( 'da_image' !== $post_type ) {
+            return;
 		}
+        
+		if ( empty( $wp_meta_boxes['da_image']['side']['low'] ) ) {
+            return;
+		}
+
+        $custom_meta_boxes = $wp_meta_boxes[ $post_type ]['side']['low'];
+
+        $order = array(
+            'da_shortcode',
+            'DrawAttention_Newsletter',
+            'da_theme_pack',
+        );
+        $ordered_meta_boxes = array();
+
+        foreach ( $order as $box_id ) {
+            if ( isset( $custom_meta_boxes[ $box_id ] ) ) {
+                $ordered_meta_boxes[ $box_id ] = $custom_meta_boxes[ $box_id ];
+                unset( $custom_meta_boxes[ $box_id ] );
+            }
+        }
+        $wp_meta_boxes[ $post_type ]['side']['low'] = array_merge( $ordered_meta_boxes, $custom_meta_boxes );
 	}
 }
