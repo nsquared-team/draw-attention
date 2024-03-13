@@ -17,13 +17,13 @@ class DrawAttention_Newsletter {
 	}
 
 	public function enqueue_meta_box_assets() {
-		wp_enqueue_style( 'custom-meta-box-styles', $this->plugin_directory . '/assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
-		wp_enqueue_script( 'news-letter-js', $this->plugin_directory . 'assets/js/news-letter.js', array(), DrawAttention::VERSION );
+		wp_enqueue_style( 'da-custom-meta-box-styles', $this->plugin_directory . '/assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
+		wp_enqueue_script( 'da-news-letter-js', $this->plugin_directory . 'assets/js/news-letter.js', array(), DrawAttention::VERSION );
 	}
 
 	public function metabox_newsletter_component() {
 		echo "
-            <div class='news-letter-container hndle ui-sortable-handle'> 
+            <div class='news-letter-container w-full hndle ui-sortable-handle'> 
 
                 <div class='content-container'>
                     <div>
@@ -76,7 +76,7 @@ class DrawAttention_Newsletter {
 
                             <div class='_form_element _x45964534 _full_width input-field'>
                                 <div class='input-field-container'>
-                                    <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button></div>
+                                    <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'Subscribe', 'draw-attention' ) . "</span> </button></div>
                                     <input type='text' id='email' name='email' placeholder='Your Email' required='' aria-describedby='error-message' data-name='email'>
                                 </div>
                             </div>
