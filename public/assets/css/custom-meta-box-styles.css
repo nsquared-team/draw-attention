@@ -28,6 +28,10 @@
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
+.w-full {
+    width: 100%;
+}
+
 .modal .modal-content-container {
     display: flex;
     flex-direction: column;
@@ -55,7 +59,8 @@
     border: none; 
     padding: 8px 16px;
     font-weight: 700; 
-    line-height: 24px; 
+    line-height: 24px;
+    text-transform: uppercase;
     background-color: #F5EC55; 
     box-shadow: 0px 1px 2px 0px #00000030;
 }
