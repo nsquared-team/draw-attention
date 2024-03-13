@@ -49,18 +49,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   }
-  document.getElementById("openModalButton").addEventListener("click", function (event) {
+  document
+    .getElementById("openModalButton")
+    .addEventListener("click", function (event) {
       event.preventDefault();
       openModal();
-  });
+    });
 
-  document.getElementById("_news_letter_modal").addEventListener("click", function (event) {
-    if (event.target === this) {
-      event.preventDefault();
-      modal.style.display = "none";
-    }
-  });
-  
+  document
+    .getElementById("_news_letter_modal")
+    .addEventListener("click", function (event) {
+      if (event.target === this) {
+        event.preventDefault();
+        modal.style.display = "none";
+      }
+    });
+
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape" || event.keyCode === 27) {
       event.preventDefault();
@@ -68,16 +72,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  document.getElementById("_form_65E1000B4D683_").addEventListener("submit", function (event) {
-    var email = document.getElementById("email");
-    var errorMessage = document.getElementById("error-message");
-    var inputValue = email.value;
+  document
+    .getElementById("_form_65E1000B4D683_")
+    .addEventListener("submit", function (event) {
+      var email = document.getElementById("email");
+      var errorMessage = document.getElementById("error-message");
+      var inputValue = email.value;
 
-    if (inputValue.trim() === "") {
-      event.preventDefault();
-      errorMessage.style.display = 'block';
-      email.focus();
-      email.style.border = "1px solid red";
-    }
-  });
+      if (inputValue.trim() === "") {
+        event.preventDefault();
+        errorMessage.style.display = "block";
+        email.focus();
+        email.style.border = "1px solid red";
+      }
+    });
 });
