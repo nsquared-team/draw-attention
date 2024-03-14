@@ -10,7 +10,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, sketch annotations, or interactive learning.
 
 == Description ==
-Draw Attention makes it easy to create interactive image maps for your website. Highlight sections of your images with hotspots so that users can click/tap or hover to read more information about each image map area. Show more content or direct the user to another URL upon clicking or hovering your hotspot.
+Draw Attention® makes it easy to create interactive image maps for your website. Highlight sections of your images with hotspots so that users can click/tap or hover to read more information about each image map area. Show more content or direct the user to another URL upon clicking or hovering your hotspot.
 
 The image map can contain more information such as images, text, shortcodes, gallery, video, audio, and more. Reveal more information on click/tap or hover.  Create custom shapes for interactive hotspots directly on your original image.
 
