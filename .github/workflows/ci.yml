@@ -1,0 +1,100 @@
+name: Draw Attention CI workflow
+
+on:
+  pull_request:
+
+concurrency:
+  group: da-ci-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  EVENT: ${{ toJSON(github.event) }}
+
+jobs:
+  # =====================================================================================#
+  # Run code through PHPCodeSniffer to conform to standards =============================#
+  # =====================================================================================#
+  # The installed coding standards are Zend, PEAR, PSR2, Squiz, PSR12, MySource, PSR1, PHPCompatibility, PHPCompatibilityParagonieRandomCompat, PHPCompatibilityParagonieSodiumCompat, PHPCompatibilityWP, WordPress, WordPress-Extra, WordPress-Core and WordPress-Docs
+  static-code-analysis:
+    name: Static Code Analysis
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    env:
+      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*min.* --extensions=php --runtime-set testVersion 7.2
+    steps:
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.2
+          coverage: none
+
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+        
+      - name: Set git user information
+        run: |
+          git config --global user.email "otto@nsquared.io"
+          git config --global user.name "otto-bot-git"
+          
+      - name: Prepare environment
+        run: |
+          composer init --name nsquared-team/draw-attention --no-interaction
+          composer config allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer require --with-all-dependencies --dev dealerdirect/phpcodesniffer-composer-installer:"*" phpcompatibility/phpcompatibility-wp:"*"
+          composer require --with-all-dependencies --dev wp-coding-standards/wpcs
+          vendor/bin/phpcs --version
+          vendor/bin/phpcs -i
+          vendor/bin/phpcs --config-set colors 1
+          
+      - name: Install dependencies
+        run: | 
+          npm install
+          npm install -g prettier
+          npm install -g eslint
+
+      # =================================================================================================#
+      # Run code through PHPCodeSniffer to conform to standards ========================================#
+      # =================================================================================================#
+      
+      - name: Fix code with PHP Code Sniffer
+        if: always()
+        continue-on-error: true
+        run: |
+          vendor/bin/phpcbf -p "." ${{ env.phpcs_config_flags }}
+
+      - name: Check any remaining errors with PHP Code Sniffer
+        if: always()
+        continue-on-error: true
+        run: |
+          vendor/bin/phpcs -p "." ${{ env.phpcs_config_flags }}
+        
+        # =================================================================================================#
+        # Run code through Prettier and ESLint to conform to standards ====================================#
+        # =================================================================================================#
+        
+      - name: Format JS files
+        run: prettier --write "**/*.js"
+        
+      # No Vue files in this project at the moment
+      # - name: Format Vue files
+      #   run: prettier --write "**/*.vue"
+        
+      - name: Lint JS files
+        run: eslint --fix "**/*.js" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*" --ignore-pattern "**/*min.*"
+        
+      # No Vue files in this project at the moment
+      # - name: Lint Vue files
+      #   run: eslint --fix "**/*.vue" --ignore-pattern "**/vendor/**/*" --ignore-pattern "**/node_modules/**/*"
+
+      - name: Revert unwanted composer changes
+        run: |
+          git checkout composer.json
+          git checkout composer.lock
+          
+      # The push below will not trigger a new workflow because it uses the default GITHUB_TOKEN
+      - name: Commit and push changes
+        run: |
+          # just a guard, we also should keep on excluding the minified files
+          git restore "*min.*"
+          `git add -A && git commit -m "Automated code formatting on branch done." > /dev/null  && git push` || true

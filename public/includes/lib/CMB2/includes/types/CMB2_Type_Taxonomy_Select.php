@@ -32,9 +32,11 @@ class CMB2_Type_Taxonomy_Select extends CMB2_Type_Taxonomy_Base {
 
 	public function render() {
 		return $this->rendered(
-			$this->types->select( array(
-				'options' => $this->get_term_options(),
-			) )
+			$this->types->select(
+				array(
+					'options' => $this->get_term_options(),
+				)
+			)
 		);
 	}
 
@@ -45,9 +47,9 @@ class CMB2_Type_Taxonomy_Select extends CMB2_Type_Taxonomy_Base {
 			return $this->no_terms_result( $all_terms, 'strong' );
 		}
 
-		$this->saved_term  = $this->get_object_term_or_default();
-		$option_none = $this->field->args( 'show_option_none' );
-		$options     = '';
+		$this->saved_term = $this->get_object_term_or_default();
+		$option_none      = $this->field->args( 'show_option_none' );
+		$options          = '';
 
 		if ( ! empty( $option_none ) ) {
 
@@ -73,11 +75,13 @@ class CMB2_Type_Taxonomy_Select extends CMB2_Type_Taxonomy_Base {
 			 */
 			$option_none_value = apply_filters( "cmb2_taxonomy_select_{$field_id}_default_value", $option_none_value );
 
-			$options .= $this->select_option( array(
-				'label'   => $option_none,
-				'value'   => $option_none_value,
-				'checked' => $this->saved_term == $option_none_value,
-			) );
+			$options .= $this->select_option(
+				array(
+					'label'   => $option_none,
+					'value'   => $option_none_value,
+					'checked' => $this->saved_term == $option_none_value,
+				)
+			);
 		}
 
 		$options .= $this->loop_terms( $all_terms, $this->saved_term );
@@ -90,11 +94,13 @@ class CMB2_Type_Taxonomy_Select extends CMB2_Type_Taxonomy_Base {
 
 		foreach ( $all_terms as $term ) {
 			$this->current_term = $term;
-			$options .= $this->select_option( array(
-				'label'   => $term->name,
-				'value'   => $term->slug,
-				'checked' => $this->saved_term === $term->slug,
-			) );
+			$options           .= $this->select_option(
+				array(
+					'label'   => $term->name,
+					'value'   => $term->slug,
+					'checked' => $this->saved_term === $term->slug,
+				)
+			);
 		}
 
 		return $options;

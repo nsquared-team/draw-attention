@@ -26,6 +26,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 		public $upsell;
 		public $script_handle_whitelist;
+		public $plugin_slug;
 
 		/**
 		 * Instance of this class.

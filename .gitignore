@@ -146,6 +146,7 @@ wp-config.php
 wp-content/plugins/akismet/.htaccess
 public/assets/config.codekit3
 
+vendor/
 # Needed for WP release
 node_modules/
 release/

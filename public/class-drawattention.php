@@ -21,7 +21,7 @@
  * @package DrawAttention
  * @author  Nathan Tyler <support@wpdrawattention.com>
  */
-if ( !class_exists( 'DrawAttention' ) ) {
+if ( ! class_exists( 'DrawAttention' ) ) {
 	class DrawAttention {
 
 		/**
@@ -31,10 +31,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '2.0.11';
-		const file = __FILE__;
-		const name = 'Draw Attention';
-		const slug = 'drawattention';
+		const VERSION = '2.0.21';
+		const file    = __FILE__;
+		const name    = 'Draw Attention';
+		const slug    = 'drawattention';
 		/**
 		 * @TODO - Rename "hotspots" to the name of your plugin
 		 *
@@ -62,6 +62,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 		/**
 		 * Instance of class to register CPT and taxonomies
+		 *
 		 * @var DrawAttention_CPT
 		 */
 		public $cpt;
@@ -70,6 +71,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public $themes;
 		public $block_image;
 		public $photon_excluded_images = array();
+		public $import_export;
 
 		/**
 		 * Initialize the plugin by setting localization and loading public scripts
@@ -99,28 +101,28 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			add_action( 'template_include', array( $this, 'single_template' ) );
 
-			add_filter( 'jetpack_photon_skip_image', array ($this, 'jetpack_photon_skip_image' ), 10, 3 );
+			add_filter( 'jetpack_photon_skip_image', array( $this, 'jetpack_photon_skip_image' ), 10, 3 );
 
 			add_filter( 'cmb2_meta_box_url', array( $this, 'cmb2_meta_box_url' ) );
 
-		/**
-		 * @TODO - Uncomment requried features
-		 *
-		 * Various functionality is separated into external files
-		 */
-			include_once( 'includes/cpt.php' );
+			/**
+			 * @TODO - Uncomment requried features
+			 *
+			 * Various functionality is separated into external files
+			 */
+			include_once __DIR__ . '/includes/cpt.php';
 			$this->cpt = new DrawAttention_CPT( $this );
 
-			include_once( 'includes/custom_fields.php' );
+			include_once __DIR__ . '/includes/custom_fields.php';
 			$this->custom_fields = new DrawAttention_CustomFields( $this );
 
-			include_once( 'includes/themes.php' );
+			include_once __DIR__ . '/includes/themes.php';
 			$this->themes = new DrawAttention_Themes( $this );
 
-			include_once( 'includes/class-block-image.php' );
+			include_once __DIR__ . '/includes/class-block-image.php';
 			$this->block_image = new DrawAttention_Block_Image( $this );
 
-			include_once( 'includes/import-export.php' );
+			include_once __DIR__ . '/includes/import-export.php';
 			$this->import_export = new DrawAttention_ImportExport( $this );
 		}
 
@@ -146,7 +148,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// If the single instance hasn't been set, set it now.
 			if ( null == self::$instance ) {
-				self::$instance = new self;
+				self::$instance = new self();
 			}
 
 			return self::$instance;
@@ -157,16 +159,16 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @since    1.0.0
 		 *
-		 * @param    boolean    $network_wide    True if WPMU superadmin uses
-		 *                                       "Network Activate" action, false if
-		 *                                       WPMU is disabled or plugin is
-		 *                                       activated on an individual blog.
+		 * @param    boolean $network_wide    True if WPMU superadmin uses
+		 *                                    "Network Activate" action, false if
+		 *                                    WPMU is disabled or plugin is
+		 *                                    activated on an individual blog.
 		 */
 		public static function activate( $network_wide ) {
 
 			if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
-				if ( $network_wide  ) {
+				if ( $network_wide ) {
 
 					// Get all blog ids
 					$blog_ids = self::get_blog_ids();
@@ -178,15 +180,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 						restore_current_blog();
 					}
-
 				} else {
 					self::single_activate();
 				}
-
 			} else {
 				self::single_activate();
 			}
-
 		}
 
 		/**
@@ -194,10 +193,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @since    1.0.0
 		 *
-		 * @param    boolean    $network_wide    True if WPMU superadmin uses
-		 *                                       "Network Deactivate" action, false if
-		 *                                       WPMU is disabled or plugin is
-		 *                                       deactivated on an individual blog.
+		 * @param    boolean $network_wide    True if WPMU superadmin uses
+		 *                                    "Network Deactivate" action, false if
+		 *                                    WPMU is disabled or plugin is
+		 *                                    deactivated on an individual blog.
 		 */
 		public static function deactivate( $network_wide ) {
 
@@ -216,15 +215,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 						restore_current_blog();
 
 					}
-
 				} else {
 					self::single_deactivate();
 				}
-
 			} else {
 				self::single_deactivate();
 			}
-
 		}
 
 		/**
@@ -232,7 +228,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @since    1.0.0
 		 *
-		 * @param    int    $blog_id    ID of the new blog.
+		 * @param    int $blog_id    ID of the new blog.
 		 */
 		public function activate_new_site( $blog_id ) {
 
@@ -243,7 +239,6 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			switch_to_blog( $blog_id );
 			self::single_activate();
 			restore_current_blog();
-
 		}
 
 		/**
@@ -266,7 +261,6 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				AND deleted = '0'";
 
 			return $wpdb->get_col( $sql );
-
 		}
 
 		/**
@@ -295,19 +289,17 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		 */
 		public function load_plugin_textdomain() {
 
-
 			$domain = 'drawattention';
 			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 			load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-			load_plugin_textdomain( $domain, FALSE, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/languages/' );
+			load_plugin_textdomain( $domain, false, basename( plugin_dir_path( __DIR__ ) ) . '/languages/' );
 
 			$domain = 'draw-attention';
 			$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 			load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-			load_plugin_textdomain( $domain, FALSE, basename( plugin_dir_path( dirname( __FILE__ ) ) ) . '/languages/' );
-
+			load_plugin_textdomain( $domain, false, basename( plugin_dir_path( __DIR__ ) ) . '/languages/' );
 		}
 
 		/**
@@ -329,25 +321,33 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			wp_register_script( $this->plugin_slug . '-leaflet-responsive-popup', plugins_url( 'assets/js/leaflet.responsive.popup-min.js', __FILE__ ), array( $this->plugin_slug . '-leaflet' ), '0.6.4', $in_footer = true );
 			wp_register_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( $this->plugin_slug . '-leaflet-responsive-popup', 'jquery' ), self::VERSION, true );
 
-			wp_localize_script( $this->plugin_slug . '-plugin-script', 'drawattentionData', array(
-				'isLoggedIn' => is_user_logged_in(),
-				'closeLabel' => __('Close', 'draw-attention'),
-				'isAdmin' => current_user_can( 'administrator' ),
-			) );
+			wp_localize_script(
+				$this->plugin_slug . '-plugin-script',
+				'drawattentionData',
+				array(
+					'isLoggedIn' => is_user_logged_in(),
+					'closeLabel' => __( 'Close', 'draw-attention' ),
+					'isAdmin'    => current_user_can( 'administrator' ),
+				)
+			);
 
 			$enqueue = apply_filters( 'da_enqueue_scripts_everywhere', false );
-			if ( !empty( $enqueue ) ) {
+			if ( ! empty( $enqueue ) ) {
 				wp_enqueue_script( $this->plugin_slug . '-plugin-script' );
 			}
 		}
 
 		function php_52_notice() {
 			global $pagenow;
-			if ( $pagenow != 'post.php' ) return;
-			if ( get_post_type() != 'da_image' ) return;
+			if ( $pagenow != 'post.php' ) {
+				return;
+			}
+			if ( get_post_type() != 'da_image' ) {
+				return;
+			}
 
-			if ( version_compare( phpversion(), '5.2.99') <= 0 ) {
-				$class = "error";
+			if ( version_compare( phpversion(), '5.2.99' ) <= 0 ) {
+				$class   = 'error';
 				$message = "<p>
 				<h3>Your server is out of date</h3>
 				Draw Attention (and many other WP plugins) <strong>requires PHP version 5.3 or higher</strong>. PHP 5.2 was released back in 2006 and support was officially terminated in 2011.
@@ -364,9 +364,9 @@ if ( !class_exists( 'DrawAttention' ) ) {
 					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
 				</ul>
 				</p>";
-				echo"<div class=\"$class\"> <p>$message</p></div>";
-			} else if ( version_compare( phpversion(), '5.5.99' ) <= 0 ) {
-				$class = "error";
+				echo "<div class=\"$class\"> <p>$message</p></div>";
+			} elseif ( version_compare( phpversion(), '5.5.99' ) <= 0 ) {
+				$class   = 'error';
 				$message = "<p>
 				<h3>Your server is out of date</h3>
 				Draw Attention (and many other WP plugins) <strong>requires PHP version 5.6 or higher</strong>. PHP 5.5 support was officially terminated in 2016, and to use Draw Attention you need to at least upgrade to PHP 5.6. We recommend PHP 7.1 or higher for best performance.
@@ -383,7 +383,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 					<li><a href='http://php.net/releases/'>http://php.net/releases/</a></li>
 				</ul>
 				</p>";
-				echo"<div class=\"$class\"> <p>$message</p></div>";
+				echo "<div class=\"$class\"> <p>$message</p></div>";
 			}
 		}
 
@@ -397,12 +397,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 				return $url;
 			}
 
-			$url = self::get_plugin_url().'/public/includes/lib/CMB2/';
+			$url = self::get_plugin_url() . '/public/includes/lib/CMB2/';
 			return $url;
 		}
 
 		public function jetpack_photon_skip_image( $val, $src, $tag ) {
-			foreach ($this->photon_excluded_images as $key => $photon_excluded_image) {
+			foreach ( $this->photon_excluded_images as $key => $photon_excluded_image ) {
 				if ( strpos( $src, $photon_excluded_image ) !== false ) {
 					return true;
 				}
@@ -419,32 +419,31 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		public function shortcode( $atts ) {
 			// Begin settings array
 			$settings = array(
-				'has_photon' => class_exists( 'Jetpack_Photon' ),
+				'has_photon'   => class_exists( 'Jetpack_Photon' ),
 				'url_hotspots' => array(),
-				'urls_only' => false,
-				'urls_class' => '',
+				'urls_only'    => false,
+				'urls_class'   => '',
 			);
 
 			// Get the DA image ID
 			$image_args = array(
-				'post_status' => 'any',
-				'post_type' => $this->cpt->post_type,
+				'post_status'    => 'any',
+				'post_type'      => $this->cpt->post_type,
 				'posts_per_page' => 1,
-				'order' => 'DESC',
-				'orderby' => 'ID',
+				'order'          => 'DESC',
+				'orderby'        => 'ID',
 			);
-			$image = new WP_Query($image_args);
+			$image      = new WP_Query( $image_args );
 			if ( ! empty( $image->post ) ) {
 				$settings['image_id'] = $image->post->ID;
 			} else {
-				$latest_da = get_posts('post_type=' . $this->cpt->post_type . '&numberposts=1');
+				$latest_da            = get_posts( 'post_type=' . $this->cpt->post_type . '&numberposts=1' );
 				$settings['image_id'] = $latest_da[0]->ID;
 			}
 
-
 			// WPML Support
-			if ( function_exists ( 'icl_object_id' ) ) {
-				$settings['image_id'] = icl_object_id($settings['image_id'], 'da_image', true);
+			if ( function_exists( 'icl_object_id' ) ) {
+				$settings['image_id'] = icl_object_id( $settings['image_id'], 'da_image', true );
 			}
 
 			// Get and set DA settings
@@ -456,10 +455,10 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// Add hotspots to settings
 			$settings['hotspots'] = get_post_meta( $settings['image_id'], $this->custom_fields->prefix . 'hotspots', true );
-			if ( ! empty( $settings['hotspots']) ) {				
-				foreach( $settings['hotspots'] as $hotspot_key => $hotspot ) {
-					if ( empty( $settings['hotspots'][$hotspot_key]['shape'] ) ) {
-						$settings['hotspots'][$hotspot_key]['shape'] = 'polygon';
+			if ( ! empty( $settings['hotspots'] ) ) {
+				foreach ( $settings['hotspots'] as $hotspot_key => $hotspot ) {
+					if ( empty( $settings['hotspots'][ $hotspot_key ]['shape'] ) ) {
+						$settings['hotspots'][ $hotspot_key ]['shape'] = 'polygon';
 					}
 				}
 			}
@@ -467,79 +466,82 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			if ( empty( $settings['hotspots'] ) ) {
 				$settings['url_hotspots'] = array();
 			} else {
-				$settings['url_hotspots'] = array_filter($settings['hotspots'], function($var){
-					if ( empty( $var['action'] ) ) {
-						return false;
-					}
+				$settings['url_hotspots'] = array_filter(
+					$settings['hotspots'],
+					function ( $var ) {
+						if ( empty( $var['action'] ) ) {
+							return false;
+						}
 
-					return $var['action'] == 'url';
-				});
+						return $var['action'] == 'url';
+					}
+				);
 				if ( count( $settings['hotspots'] ) == count( $settings['url_hotspots'] ) ) {
-					$settings['urls_only'] = true;
+					$settings['urls_only']  = true;
 					$settings['urls_class'] = 'links-only';
 				}
 			}
 
 			// Set default values for free settings
-			$settings['layout'] = 'left';
-			$settings['event_trigger'] = 'click';
+			$settings['layout']         = 'left';
+			$settings['event_trigger']  = 'click';
 			$settings['always_visible'] = 'false';
 
 			// Add styles to settings
-			$settings['border_width'] = $settings['img_settings'][$this->custom_fields->prefix.'map_border_width'][0];
-			$settings['border_opacity'] = $settings['img_settings'][$this->custom_fields->prefix.'map_border_opacity'][0];
-			$settings['more_info_bg'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_background_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_background_color'][0] : '';
-			$settings['more_info_text'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_text_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_text_color'][0] : '';
-			$settings['more_info_title'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_title_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_title_color'][0] : '';
-			$settings['img_bg'] = ( !empty( $settings['img_settings'][$this->custom_fields->prefix.'image_background_color'][0] ) ) ? $settings['img_settings'][$this->custom_fields->prefix.'image_background_color'][0] : '#efefef';
+			$settings['border_width']    = $settings['img_settings'][ $this->custom_fields->prefix . 'map_border_width' ][0];
+			$settings['border_opacity']  = $settings['img_settings'][ $this->custom_fields->prefix . 'map_border_opacity' ][0];
+			$settings['more_info_bg']    = ( ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_background_color' ][0] ) ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_background_color' ][0] : '';
+			$settings['more_info_text']  = ( ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_text_color' ][0] ) ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_text_color' ][0] : '';
+			$settings['more_info_title'] = ( ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_title_color' ][0] ) ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_title_color' ][0] : '';
+			$settings['img_bg']          = ( ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'image_background_color' ][0] ) ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'image_background_color' ][0] : '#efefef';
 
 			// Create hotspot style
 			if ( empty( $settings['styles'] ) ) {
 				$settings['styles'] = array();
 			}
 			$settings['styles'][] = array(
-				'title' => 'default',
-				'map_highlight_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_color'][0] : '',
-				'map_highlight_opacity' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_highlight_opacity'][0] : '',
-				'map_border_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_border_color'][0] : '',
-				'_da_map_hover_color' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_hover_color'][0] : '',
-				'_da_map_hover_opacity' => !empty( $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0] ) ? $settings['img_settings'][$this->custom_fields->prefix.'map_hover_opacity'][0] : ''
+				'title'                 => 'default',
+				'map_highlight_color'   => ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_highlight_color' ][0] ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_highlight_color' ][0] : '',
+				'map_highlight_opacity' => ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_highlight_opacity' ][0] ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_highlight_opacity' ][0] : '',
+				'map_border_color'      => ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_border_color' ][0] ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_border_color' ][0] : '',
+				'_da_map_hover_color'   => ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_hover_color' ][0] ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_hover_color' ][0] : '',
+				'_da_map_hover_opacity' => ! empty( $settings['img_settings'][ $this->custom_fields->prefix . 'map_hover_opacity' ][0] ) ? $settings['img_settings'][ $this->custom_fields->prefix . 'map_hover_opacity' ][0] : '',
 			);
 
 			// Create formatted array of styles
 			$formatted_styles = array();
-			foreach ($settings['styles'] as $key => $style) {
+			foreach ( $settings['styles'] as $key => $style ) {
 				if ( empty( $style['title'] ) ) {
 					$style['title'] = 'Custom';
 				}
 
 				$new_style = array(
-					'name' => 'default',
+					'name'        => 'default',
 					'borderWidth' => $settings['border_width'],
 				);
 
 				$new_style['display'] = array(
-					'fillColor' => '#ffffff',
-					'fillOpacity' => 0,
-					'borderColor' => '#ffffff',
+					'fillColor'     => '#ffffff',
+					'fillOpacity'   => 0,
+					'borderColor'   => '#ffffff',
 					'borderOpacity' => 0,
 				);
-				$new_style['hover'] = array(
-					'fillColor' => $style['map_highlight_color'],
-					'fillOpacity' => $style['map_highlight_opacity'],
-					'borderColor' => $style['map_border_color'],
+				$new_style['hover']   = array(
+					'fillColor'     => $style['map_highlight_color'],
+					'fillOpacity'   => $style['map_highlight_opacity'],
+					'borderColor'   => $style['map_border_color'],
 					'borderOpacity' => $settings['border_opacity'],
 				);
-				array_push($formatted_styles, $new_style);
+				array_push( $formatted_styles, $new_style );
 			}
 
 			// Get image post, src, and meta
-			$settings['img_post'] = get_post($settings['image_id']);
-			$settings['img_src'] = wp_get_attachment_image_src( get_post_thumbnail_id( $settings['image_id'] ), 'full' );
-			$settings['img_url'] = $settings['img_src'][0];
-			$settings['img_width'] = $settings['img_src'][1];
+			$settings['img_post']   = get_post( $settings['image_id'] );
+			$settings['img_src']    = wp_get_attachment_image_src( get_post_thumbnail_id( $settings['image_id'] ), 'full' );
+			$settings['img_url']    = $settings['img_src'][0];
+			$settings['img_width']  = $settings['img_src'][1];
 			$settings['img_height'] = $settings['img_src'][2];
-			$settings['img_alt'] = get_post_meta( get_post_thumbnail_id( $settings['img_post'] ), '_wp_attachment_image_alt', true );
+			$settings['img_alt']    = get_post_meta( get_post_thumbnail_id( $settings['img_post'] ), '_wp_attachment_image_alt', true );
 			if ( empty( $settings['img_alt'] ) ) {
 				$settings['img_alt'] = get_the_title( $settings['img_post'] );
 			}
@@ -554,13 +556,13 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			ob_start();
 
-			require( $this->get_plugin_dir() . '/public/views/shortcode_template.php' );
+			require $this->get_plugin_dir() . '/public/views/shortcode_template.php';
 
 			return ob_get_clean();
 		}
 
 		function add_shortcode_metabox() {
-			add_meta_box( 'da_shortcode', __('Copy Shortcode', 'draw-attention' ), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low');
+			add_meta_box( 'da_shortcode', __( 'Copy Shortcode', 'draw-attention' ), array( $this, 'display_shortcode_metabox' ), $this->cpt->post_type, 'side', 'low' );
 		}
 
 		function display_shortcode_metabox() {
@@ -588,16 +590,16 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			$template = locate_template(
 				array(
 					trailingslashit( $template_path ) . $template_name,
-					$template_name
-					)
-				);
+					$template_name,
+				)
+			);
 
 			// Get default template
 			if ( ! $template ) {
 				$template = $default_path . $template_name;
 			}
 			// Return what we found
-			return apply_filters( self::slug.'_locate_template', $template, $template_name, $template_path );
+			return apply_filters( self::slug . '_locate_template', $template, $template_name, $template_path );
 		}
 
 		public static function get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
@@ -613,13 +615,13 @@ if ( !class_exists( 'DrawAttention' ) ) {
 			}
 
 			// Allow 3rd party plugin filter template file from their plugin
-			$located = apply_filters( self::slug.'get_template', $located, $template_name, $args, $template_path, $default_path );
+			$located = apply_filters( self::slug . 'get_template', $located, $template_name, $args, $template_path, $default_path );
 
-			do_action( self::slug.'_before_template_part', $template_name, $template_path, $located, $args );
+			do_action( self::slug . '_before_template_part', $template_name, $template_path, $located, $args );
 
-			include( $located );
+			include $located;
 
-			do_action( self::slug.'_after_template_part', $template_name, $template_path, $located, $args );
+			do_action( self::slug . '_after_template_part', $template_name, $template_path, $located, $args );
 		}
 
 		public static function get_template_part( $slug, $name = '' ) {
@@ -642,7 +644,7 @@ if ( !class_exists( 'DrawAttention' ) ) {
 
 			// Allow 3rd party plugin filter template file from their plugin
 			if ( $template ) {
-				$template = apply_filters( self::slug.'_get_template_part', $template, $slug, $name );
+				$template = apply_filters( self::slug . '_get_template_part', $template, $slug, $name );
 			}
 
 			if ( $template ) {
@@ -655,13 +657,12 @@ if ( !class_exists( 'DrawAttention' ) ) {
 		}
 
 		public static function get_plugin_dir() {
-			return dirname( dirname( __FILE__ ) );
+			return dirname( __DIR__ );
 		}
 
 		public static function get_plugin_url() {
 			return dirname( plugin_dir_url( __FILE__ ) );
 		}
-
 	}
 } elseif ( function_exists( 'da_deactivate_free_version' ) ) {
 	add_action( 'init', 'da_deactivate_free_version' );

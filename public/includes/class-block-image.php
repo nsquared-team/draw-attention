@@ -43,7 +43,7 @@ class DrawAttention_Block_Image {
 	}
 
 	function register_image_block() {
-		if( function_exists('register_block_type') ){
+		if ( function_exists( 'register_block_type' ) ) {
 			wp_register_script(
 				'drawattention-image-block-js',
 				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/js/draw-attention-block.js',
@@ -55,19 +55,21 @@ class DrawAttention_Block_Image {
 				trailingslashit( $this->plugin->get_plugin_url() ) . 'admin/assets/css/draw-attention-block.css'
 			);
 
-			register_block_type( 'draw-attention/image', array(
-				'api_version' => 2,
-				'editor_script' => 'drawattention-image-block-js',
-				'editor_style' => 'drawattention-image-block-css',
-				'keywords' => array( 'image', 'hotspot', 'map' ),
+			register_block_type(
+				'draw-attention/image',
+				array(
+					'api_version'     => 2,
+					'editor_script'   => 'drawattention-image-block-js',
+					'editor_style'    => 'drawattention-image-block-css',
+					'keywords'        => array( 'image', 'hotspot', 'map' ),
 
-				'render_callback' => array( $this, 'render' ),
-			) );
+					'render_callback' => array( $this, 'render' ),
+				)
+			);
 		}
 	}
 
 	function render( $atts ) {
 		return $this->plugin->shortcode( $atts );
 	}
-
 }

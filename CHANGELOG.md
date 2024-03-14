@@ -1,5 +1,45 @@
 # Changelog
 
+## 2.0.17 - 2023-11-07
+
+### Features and Improvements
+
+- Tested up to WP 6.4
+
+## 2.0.16 - 2023-10-29
+
+### Features and Improvements
+
+- Add nonce checks for additional security
+
+## 2.0.15 - 2023-10-19
+
+### Fixes
+
+- Fix disclosed vulnerability affecting Contributor-level users
+
+## 2.0.14 - 2023-08-12
+
+### Features and Improvements
+
+- Tested up to WP 6.3
+
+## 2.0.13 - 2023-06-25
+
+### Fixes
+
+- Fix PHP warning in CMB2 library
+
+### Features and Improvements
+
+- Prevent conflicts with other plugins that use the leaflet library
+
+## 2.0.12 - 2023-05-26
+
+### Features and Improvements
+
+- Improved nonce verification and capability checks
+
 ## 2.0.11 - 2023-05-12
 
 ### Fixes

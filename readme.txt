@@ -2,8 +2,8 @@
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
 Requires at least: 3.5.1
-Tested up to: 6.2
-Stable tag: 2.0.11
+Tested up to: 6.4
+Stable tag: 2.0.21
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ Draw Attention makes it easy to create interactive image maps for your website. 
 
 The image map can contain more information such as images, text, shortcodes, gallery, video, audio, and more. Reveal more information on click/tap or hover.  Create custom shapes for interactive hotspots directly on your original image.
 
-Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
+Perfect for sketch maps, interactive floor plans for real estate, clickable infographics, interactive affiliate content, sketch annotations, image tutorials, product feature highlights on WooCommerce, and more.
 
 Image Map Features:
 
@@ -25,7 +25,7 @@ Image Map Features:
 - **Go to a URL**: Optionally send a site visitor to another URL when clicking highlightable hotspots on your image map
 
 ### Responsive Design ###
-Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, too!
+Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, such as tablet and mobile, too!
 
 ### Accessible ###
 Image maps are accessible to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
@@ -37,7 +37,13 @@ Draw Attention is built with the principles of progressive enhancement in mind, 
 Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. Place your interactive image map into any page or post with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
 
 ### New and Improved Drawing Tool ###
-Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button.
+Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button. 
+
+The available drawing tools are:
+
+- **Polygon**: Create a custom polygon shape of your preference
+- **Rectangle**: – Create a rectangle shape of any size
+- **Circle**: Create a perfect circle
 
 [youtube https://youtu.be/NRHspIZjP-Q]
 
@@ -49,8 +55,16 @@ Need more than one interactive image map on your site? The Pro version allows un
 ### Annotation Layout Options (Pro only) ###
 Show more info about highlighted image map areas in a variety of different layouts, including lightbox and tooltip.
 
+### Always Show Hotspots (Pro only) ###
+Allow the image map hotspot areas to stay highlighted so visitors can see where they're located, even when they aren’t clicked yet. The perfect way to show off your hotspots and make it clear that your images are interactive.
+
+### Define Multiple Highlight Styles (Pro only) ###
+Use multiple highlight colors for the interactive image hotspots. If you choose to define multiple highlight styles, another section will pop up called, “Styles” where you can define your own color schemes within your image. Make each hotspot unique with it's own color, border, and opacity settings!
+
 ### 20 Pre-Defined Color Palettes (Pro only) ###
 Choose from one of 20 pre-defined color palettes or use your own custom color scheme on the image maps.
+
+[Upgrade to Draw Attention Pro Today!](https://wpdrawattention.com?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=pro-cta) to get more features and customization options:
 
 ### What could you make with Draw Attention? ###
 
@@ -104,7 +118,7 @@ To contact our support team, submit your message through our [WordPress support 
 
 If you're using our Premium plugin, you can also use the `License & Support` tab within the Draw Attention Pro plugin settings to send us a direct email.
 
- [https://vimeo.com/827031888]
+ [vimeo https://vimeo.com/827031888]
 
 = How do I draw my first image? =
 We have a guide walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/guides/first-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=first-interactive-image).
@@ -117,6 +131,46 @@ We have a guide walkthrough of creating your first image available in [our docum
 5. Add in unlimited hotspot areas to your interactive image
 
 # Changelog
+
+## 2.0.17 - 2023-11-07
+
+### Features and Improvements
+
+- Tested up to WP 6.4
+
+## 2.0.16 - 2023-10-29
+
+### Features and Improvements
+
+- Add nonce checks for additional security
+
+## 2.0.15 - 2023-10-19
+
+### Fixes
+
+- Fix disclosed vulnerability affecting Contributor-level users
+
+## 2.0.14 - 2023-08-12
+
+### Features and Improvements
+
+- Tested up to WP 6.3
+
+## 2.0.13 - 2023-06-25
+
+### Fixes
+
+- Fix PHP warning in CMB2 library
+
+### Features and Improvements
+
+- Prevent conflicts with other plugins that use the leaflet library
+
+## 2.0.12 - 2023-05-26
+
+### Features and Improvements
+
+- Improved nonce verification and capability checks
 
 ## 2.0.11 - 2023-05-12
 
@@ -145,46 +199,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 - no changes
 
 ## 2.0.6 - 2023-03-28
-
-### Fixes
-
-### Features and Improvements
-
-## 2.0.5 - 2023-03-28
-
-### Fixes
-
-### Features and Improvements
-
-## 2.0.4
-
-- Fixed: SVG desc markup
-
-## 2.0.3
-
-- Fixed: PHP Warning in import function
-
-## 2.0.2
-
-- Improved: Accessibility (suppress hidden image from assistive technology)
-
-## 2.0.1
-
-- WP 6.1 Compatibility
-
-## 2.0.0
-
-- Improved: New drawing tool for hotspots
-
-## 1.9.34
-
-- Improved: SEO attribute support for Google Search Console
-
-## 1.9.33
-
-- Fixed: Conflict with MainWP bug
-
-## 1.9.32
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.

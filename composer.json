@@ -1,0 +1,13 @@
+{
+    "name": "nsquared-team/draw-attention",
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "*",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "wp-coding-standards/wpcs": "^3.0"
+    }
+}

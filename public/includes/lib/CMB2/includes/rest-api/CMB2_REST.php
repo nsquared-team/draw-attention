@@ -1,6 +1,6 @@
 <?php
 /**
- * Handles hooking CMB2 objects/fields into the WordPres REST API
+ * Handles hooking CMB2 objects/fields into the WordPress REST API
  * which can allow fields to be read and/or updated.
  *
  * @since  2.2.3
@@ -51,10 +51,10 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @since 2.2.3
 	 */
 	protected static $type_boxes = array(
-		'post' => array(),
-		'user' => array(),
+		'post'    => array(),
+		'user'    => array(),
 		'comment' => array(),
-		'term' => array(),
+		'term'    => array(),
 	);
 
 	/**
@@ -115,7 +115,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @param CMB2 $cmb The CMB2 object to be registered for the API.
 	 */
 	public function __construct( CMB2 $cmb ) {
-		$this->cmb = $cmb;
+		$this->cmb                   = $cmb;
 		self::$boxes[ $cmb->cmb_id ] = $this;
 
 		$show_value = $this->cmb->prop( 'show_in_rest' );
@@ -206,7 +206,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 			}
 
 			if ( ! empty( $types ) ) {
-				$alltypes = array_merge( $alltypes, array_flip( $types ) );
+				$alltypes                            = array_merge( $alltypes, array_flip( $types ) );
 				self::$type_boxes['post'][ $cmb_id ] = $cmb_id;
 			}
 		}
@@ -242,11 +242,15 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @return void
 	 */
 	protected static function register_rest_field( $object_types, $object_type ) {
-		register_rest_field( $object_types, 'cmb2', array(
-			'get_callback'    => array( __CLASS__, "get_{$object_type}_rest_values" ),
-			'update_callback' => array( __CLASS__, "update_{$object_type}_rest_values" ),
-			'schema'          => null, // @todo add schema
-		) );
+		register_rest_field(
+			$object_types,
+			'cmb2',
+			array(
+				'get_callback'    => array( __CLASS__, "get_{$object_type}_rest_values" ),
+				'update_callback' => array( __CLASS__, "update_{$object_type}_rest_values" ),
+				'schema'          => null, // @todo add schema
+			)
+		);
 	}
 
 	/**
@@ -453,7 +457,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 			$values[ $field->id( true ) ] = $field->get_rest_value();
 
 			if ( $field->args( 'has_supporting_data' ) ) {
-				$field = $field->get_supporting_field();
+				$field                        = $field->get_supporting_field();
 				$values[ $field->id( true ) ] = $field->get_rest_value();
 			}
 		}
@@ -761,7 +765,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 *
 	 * @return mixed                            False if field can't be read or edited or true|CMB2_Field object.
 	 */
-	protected function field_can( $type = 'read_fields', $field_id=null, $return_object = false ) {
+	protected function field_can( $type = 'read_fields', $field_id = null, $return_object = false ) {
 		if ( ! in_array( $field_id instanceof CMB2_Field ? $field_id->id() : $field_id, $this->{$type}, true ) ) {
 			return false;
 		}
@@ -817,11 +821,15 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @return boolean       Whether value is considered readable.
 	 */
 	public static function is_readable( $value ) {
-		return ! empty( $value ) && ! in_array( $value, array(
-			WP_REST_Server::CREATABLE,
-			WP_REST_Server::EDITABLE,
-			WP_REST_Server::DELETABLE,
-		), true );
+		return ! empty( $value ) && ! in_array(
+			$value,
+			array(
+				WP_REST_Server::CREATABLE,
+				WP_REST_Server::EDITABLE,
+				WP_REST_Server::DELETABLE,
+			),
+			true
+		);
 	}
 
 	/**
@@ -836,10 +844,14 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @return boolean       Whether value is considered editable.
 	 */
 	public static function is_editable( $value ) {
-		return in_array( $value, array(
-			WP_REST_Server::EDITABLE,
-			WP_REST_Server::ALLMETHODS,
-		), true );
+		return in_array(
+			$value,
+			array(
+				WP_REST_Server::EDITABLE,
+				WP_REST_Server::ALLMETHODS,
+			),
+			true
+		);
 	}
 
 	/**
@@ -861,5 +873,4 @@ class CMB2_REST extends CMB2_Hookup_Base {
 				throw new Exception( 'Invalid ' . __CLASS__ . ' property: ' . $field );
 		}
 	}
-
 }
