@@ -20,11 +20,10 @@
 .news-letter-container {
     font-size: 16px; 
     padding: 1rem 0;
-    font-weight: 600; 
+    font-weight: bold; 
     line-height: 24px; 
     text-align:center; 
     position: relative;
-    font-family: poppins; 
     box-shadow: 0px 4px 4px 0px #00000040;
 }
 
@@ -46,13 +45,18 @@
     top: 6px;
     right: 6px;
     border: none;
-    padding: 6px;
+    padding: 16px;
     display: flex; 
     box-shadow: none;
     position: absolute;
     justify-content: flex-end; 
     cursor: pointer;
     background-color: transparent;
+}
+
+.modal .modal-content .close-button-container img {
+    width: 12px;
+    height: 12px;
 }
 
 .news-letter-container button {
@@ -171,16 +175,11 @@ form .modal-container .error-message-container p {
     border: 1px solid #B7B7B7; 
 }
 
-.news-letter-container .content-container .input-field .input-field-container img {
-    padding-right: 10px; 
-    border-right: 1px solid #92CAA4;
-}
-
 .news-letter-container .content-container .input-field .input-field-container input {
     border: none; 
     height: 100%;
     width: 100%;
-    color: #B7B7B7;
+    color: black;
     font-weight: normal; 
     padding: 11px 8px;
 }
@@ -260,6 +259,10 @@ form .modal-container .error-message-container p {
     font-weight: 300;
     font-size: 16px;
     color: #2C2C29;
+}
+
+.modal-content .inner-modal-image {
+    padding-top: 2.3rem;
 }
 
 .sr-only {

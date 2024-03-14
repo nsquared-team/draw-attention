@@ -62,7 +62,7 @@ class DrawAttention_Newsletter {
                                     <p class='modal-statement'> " . __( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) . "</p>
                                     <label for='email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
                                 </div>
-                                <img src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='Newsletter Image'>
+                                <img class='inner-modal-image' src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='Newsletter Image'>
                             </div>
 
                             <input type='hidden' name='u' value='65E1000B4D683' data-name='u'>
