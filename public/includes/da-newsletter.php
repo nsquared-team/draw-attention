@@ -53,7 +53,7 @@ class DrawAttention_Newsletter {
                             <img src='" . $this->plugin_directory . "/assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
                         </button>
                     </div>
-                    <form method='POST' class='news-letter-container' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
+                    <form method='POST' class='news-letter-container' target='_blank' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
                         <div class='content-container modal-container'>
                             <div class='modal-content'>
                                 <div class='modal-info'>
