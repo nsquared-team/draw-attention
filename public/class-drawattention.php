@@ -69,6 +69,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		public $custom_fields;
 		public $pro;
 		public $themes;
+		public $da_newsletter;
 		public $block_image;
 		public $photon_excluded_images = array();
 		public $import_export;
@@ -115,6 +116,9 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 
 			include_once __DIR__ . '/includes/custom_fields.php';
 			$this->custom_fields = new DrawAttention_CustomFields( $this );
+
+			require_once plugin_dir_path( __FILE__ ) . '/includes/da-newsletter.php';
+			$this->da_newsletter = new DrawAttention_Newsletter( $this );
 
 			include_once __DIR__ . '/includes/themes.php';
 			$this->themes = new DrawAttention_Themes( $this );
