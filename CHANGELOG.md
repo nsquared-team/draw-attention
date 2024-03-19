@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.22 - 2024-03-19
+
+### Features and Improvements
+
+- Adding News Letter Notice to Draw Attention
+
 ## 2.0.17 - 2023-11-07
 
 ### Features and Improvements
