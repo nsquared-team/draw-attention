@@ -1,13 +1,13 @@
 === Interactive Image Map Plugin - Draw Attention ===
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
-Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
+Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
 Tested up to: 6.4
 Stable tag: 2.0.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, sketch annotations, or interactive learning.
+Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, maps, and more.
 
 == Description ==
 Draw Attention® makes it easy to create interactive image maps for your website. Highlight sections of your images with hotspots so that users can click/tap or hover to read more information about each image map area. Show more content or direct the user to another URL upon clicking or hovering your hotspot.
