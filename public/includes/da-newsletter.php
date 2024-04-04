@@ -10,6 +10,8 @@ class DrawAttention_Newsletter {
 
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_meta_box_assets' ) );
 		add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ) );
+        // add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ), 10, 1 );
+
 		add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
 
 		// Order the meta boxes
@@ -45,6 +47,12 @@ class DrawAttention_Newsletter {
 	}
 
 	public function newsletter_modal_dialog() {
+        $current_screen = get_current_screen();
+
+        if ( ! $current_screen || 'post' !== $current_screen->base || 'da_image' !== $current_screen->post_type ) {
+            return;
+        }
+        
 		echo "
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
                 <div class='modal-content modal-content-container'>
