@@ -391,7 +391,7 @@ abstract class CMB2_Base {
 		}
 
 		// Cast to bool.
-		return ! ! $val;
+		return (bool) $val;
 	}
 
 	/**
