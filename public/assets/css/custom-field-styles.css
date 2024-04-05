@@ -1,7 +1,3 @@
-#moreinfo_metabox .inside .cmb-field-list {
-    flex-wrap: wrap;
-}
-
 #moreinfo_metabox .cmb-field-list .cmb-row {
     width: 50%;
 }
