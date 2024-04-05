@@ -91,6 +91,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 
 			// Load public-facing style sheet and JavaScript.
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 			// Shortcode for displaying the image map
@@ -313,6 +314,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		 */
 		public function enqueue_styles() {
 			wp_register_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+			wp_enqueue_style( '-custom-field-styles', plugins_url( 'assets/css/custom-field-styles.css', __FILE__ ), array(), self::VERSION );
 		}
 
 		/**

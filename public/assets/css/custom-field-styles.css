@@ -1,0 +1,18 @@
+#moreinfo_metabox .inside .cmb-field-list {
+    flex-wrap: wrap;
+  }
+  #moreinfo_metabox .cmb-field-list .cmb-row {
+    width: 50%;
+  }
+  #moreinfo_metabox .cmb-field-list .cmb-row:last-child {
+    width: 100%;
+  }
+  @media screen and (max-width: 992px) {
+    #moreinfo_metabox .cmb-field-list {
+      flex-direction: column;
+    }
+    #moreinfo_metabox .cmb-field-list .cmb-row {
+      width: 100%;
+    }
+  }
+  
