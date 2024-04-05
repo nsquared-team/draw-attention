@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.24 - 2024-04-05
+
+### Fixes
+
+- Fixed Newsletter component showing up on different screens.
+
 ## 2.0.22 - 2024-03-19
 
 ### Features and Improvements

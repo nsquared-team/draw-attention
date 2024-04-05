@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
 Tested up to: 6.5
-Stable tag: 2.0.23
+Stable tag: 2.0.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,12 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.24 - 2024-04-05
+
+### Fixes
+
+- Fixed Newsletter component showing up on different screens.
+
 ## 2.0.22 - 2024-03-19
 
 ### Features and Improvements
@@ -189,12 +195,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 - Update gutenberg block to use api version 2
 
 ## 2.0.9 - 2023-04-11
-
-### Fixes
-
-### Features and Improvements
-
-## 2.0.8 - 2023-03-28
 
 ### Fixes
 
