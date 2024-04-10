@@ -1215,3 +1215,23 @@ svg.leaflet-image-layer.leaflet-interactive path {
   position: absolute;
   top: 0;
 }
+
+/* Admin */
+/* Responsive styles for rows of (more info box styling) */
+#moreinfo_metabox .cmb-field-list .cmb-row {
+  width: 50%;
+}
+
+#moreinfo_metabox .cmb-field-list .cmb-row:last-child {
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  #moreinfo_metabox .cmb-field-list {
+      flex-direction: column;
+  }
+
+  #moreinfo_metabox .cmb-field-list .cmb-row {
+      width: 100%;
+  }
+}
