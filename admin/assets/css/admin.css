@@ -63,9 +63,9 @@ input[name$="[coordinates]"] {
 }
 @media screen and (min-width: 600px) {
   #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-highlight-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-highlight-opacity {
     width: 50%;
   }
 }
@@ -80,21 +80,21 @@ input[name$="[coordinates]"] {
 }
 @media screen and (min-width: 600px) {
   #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
     width: 50%;
   }
 }
 @media screen and (min-width: 1100px) {
   #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-border-width,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-opacity,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-border-width {
     width: 33%;
   }
 }
@@ -109,21 +109,21 @@ input[name$="[coordinates]"] {
 }
 @media screen and (min-width: 600px) {
   #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
     width: 50%;
   }
 }
 @media screen and (min-width: 1100px) {
   #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
-#cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-highlight_styling_metabox .cmb2-id--hotspot-map-background-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-title-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-text-color,
+  #cmb2-metabox-moreinfo_metabox .cmb2-id--hotspot-map-background-color {
     width: 33%;
   }
 }
@@ -136,6 +136,24 @@ input[name$="[coordinates]"] {
   white-space: nowrap;
 }
 
+/* Admin */
+/* Responsive styles for rows of (more info box styling) */
+#moreinfo_metabox .cmb-field-list .cmb-row {
+  width: 50%;
+}
+
+#moreinfo_metabox .cmb-field-list .cmb-row:last-child {
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  #moreinfo_metabox .cmb-field-list {
+    flex-direction: column;
+  }
+  #moreinfo_metabox .cmb-field-list .cmb-row {
+    width: 100%;
+  }
+}
 /* required styles */
 .leaflet-pane,
 .leaflet-tile,
@@ -297,8 +315,7 @@ input[name$="[coordinates]"] {
 .leaflet-control {
   position: relative;
   z-index: 800;
-  pointer-events: visiblePainted;
-  /* IE 9-10 doesn't have auto */
+  pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
   pointer-events: auto;
 }
 
@@ -428,8 +445,7 @@ input[name$="[coordinates]"] {
 .leaflet-image-layer.leaflet-interactive,
 .leaflet-pane > svg path.leaflet-interactive,
 svg.leaflet-image-layer.leaflet-interactive path {
-  pointer-events: visiblePainted;
-  /* IE 9-10 doesn't have auto */
+  pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
   pointer-events: auto;
 }
 
@@ -1214,24 +1230,4 @@ svg.leaflet-image-layer.leaflet-interactive path {
   left: 0;
   position: absolute;
   top: 0;
-}
-
-/* Admin */
-/* Responsive styles for rows of (more info box styling) */
-#moreinfo_metabox .cmb-field-list .cmb-row {
-  width: 50%;
-}
-
-#moreinfo_metabox .cmb-field-list .cmb-row:last-child {
-  width: 100%;
-}
-
-@media screen and (max-width: 900px) {
-  #moreinfo_metabox .cmb-field-list {
-      flex-direction: column;
-  }
-
-  #moreinfo_metabox .cmb-field-list .cmb-row {
-      width: 100%;
-  }
 }
