@@ -5,7 +5,7 @@
   "description": "Create interactive image maps for your website",
   "author": {
     "name": "NSquared",
-    "url": "https://nsqua.red"
+    "url": "https://nsquared.io"
   },
   "devDependencies": {
     "eslint": "^8.53.0",
