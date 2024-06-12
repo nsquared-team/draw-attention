@@ -281,3 +281,7 @@ form .modal-container .error-message-container p {
     font-weight: 400;
     display: none;
 }
+
+#delete-action {
+    display: none;
+}
