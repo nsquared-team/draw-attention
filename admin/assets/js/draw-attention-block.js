@@ -9,6 +9,7 @@
     title: "Draw Attention Image",
     icon: "images-alt2",
     category: "widgets",
+    example: {},
 
     edit: function (props) {
       var blockProps = useBlockProps();
