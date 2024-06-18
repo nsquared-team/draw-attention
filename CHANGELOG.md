@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.26 - 2024-06-18
+
+### Features and Improvements
+
+- Hid the move to trash button.
+  
+- Widget live preview
+  
+
 ## 2.0.24 - 2024-04-05
 
 ### Fixes
