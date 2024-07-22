@@ -31,17 +31,17 @@
     width: 100%;
 }
 
-.modal .modal-content-container {
+#_news_letter_modal .modal-content-container {
     display: flex;
     flex-direction: column;
 }
 
-.modal .modal-content .close-button-container {
+#_news_letter_modal .modal-content .close-button-container {
     position: relative;
     z-index: 2;
 }
 
-.modal .modal-content .close-button-container .dismiss-banner {
+#_news_letter_modal .modal-content .close-button-container .dismiss-banner {
     top: 6px;
     right: 6px;
     border: none;
@@ -54,7 +54,7 @@
     background-color: transparent;
 }
 
-.modal .modal-content .close-button-container img {
+#_news_letter_modal .modal-content .close-button-container img {
     width: 12px;
     height: 12px;
 }
@@ -184,7 +184,7 @@ form .modal-container .error-message-container p {
     padding: 11px 8px;
 }
 
-.modal {
+#_news_letter_modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -198,7 +198,7 @@ form .modal-container .error-message-container p {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal .news-letter-container{
+#_news_letter_modal .news-letter-container{
     box-shadow: none;
 }
 
@@ -251,7 +251,7 @@ form .modal-container .error-message-container p {
     letter-spacing: 2px;
     text-transform: uppercase;
     background: linear-gradient(to right, #92CAA4, #1E5263);
-    -webkit-background-clip: text;
+    --webkit-background-clip: text;
     color: transparent;
 }
 
