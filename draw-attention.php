@@ -9,7 +9,7 @@
 Plugin Name:       Draw Attention
 Plugin URI:        https://wpdrawattention.com
 Description:       Create interactive images in WordPress
-Version:           2.0.26
+Version:           2.0.27
 Author:            N Squared
 Author URI:        https://nsquared.io
 Text Domain:       draw-attention
