@@ -19,6 +19,7 @@ Domain Path:       /languages
 GitHub Plugin URI: https://github.com/tylerdigital/draw-attention
 */
 
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
