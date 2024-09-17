@@ -282,6 +282,6 @@ form .modal-container .error-message-container p {
     display: none;
 }
 
-#delete-action {
+.post-type-da_image #delete-action {
     display: none;
 }
