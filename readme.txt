@@ -28,7 +28,7 @@ Perfect for sketch maps, [interactive floor plans for real estate](https://wpdra
 Interactive image maps resize to fit your theme and the available screen size. Draw Attention works on all devices and adjusts your image to screens of any size. Works great on touch screens, such as tablet and mobile, too!
 
 ### Accessible ###
-[Image maps are accessible](https://wpdrawattention.com/guides/interactive-image-faq/#do-draw-attention-interactive-images-support-accessibility-standards?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=accessibility) to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
+[Image maps are accessible](https://wpdrawattention.com/guides/interactive-image-faq/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=accessibility#do-draw-attention-interactive-images-support-accessibility-standards) to everyone who visits your site, regardless of device or capabilities. Your content is accessible to screen readers. All highlightable hotspots can be accessed by keyboard commands. Anyone on any device can use your interactive image map.
 
 ### SEO Friendly Clickable Annotations ###
 Draw Attention is built with the principles of progressive enhancement in mind, so your content is accessible even to users who have JavaScript disabled and is SEO friendly, too! Draw Attention draws SVG shapes in modern browsers and falls back to a standard image map if JavaScript is disabled.
