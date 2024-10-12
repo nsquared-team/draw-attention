@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.0.26 - 2024-06-18
+
+### Features and Improvements
+
+- Hid the move to trash button.
+  
+- Widget live preview
+  
+
+## 2.0.24 - 2024-04-05
+
+### Fixes
+
+- Fixed Newsletter component showing up on different screens.
+
+## 2.0.22 - 2024-03-19
+
+### Features and Improvements
+
+- Adding News Letter Notice to Draw Attention
+
 ## 2.0.17 - 2023-11-07
 
 ### Features and Improvements

@@ -151,3 +151,4 @@ vendor/
 node_modules/
 release/
 package-lock.json
+admin/assets/config.codekit3

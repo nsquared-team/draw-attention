@@ -12,3 +12,9 @@
 .hotspots-container map area {
 	display: none;
 }
+
+.wp-block-draw-attention-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

@@ -51,7 +51,7 @@ jobs:
         run: | 
           npm install
           npm install -g prettier
-          npm install -g eslint
+          npm install -g eslint@7.32.0
 
       # =================================================================================================#
       # Run code through PHPCodeSniffer to conform to standards ========================================#

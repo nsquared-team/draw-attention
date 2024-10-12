@@ -1,13 +1,13 @@
 === Interactive Image Map Plugin - Draw Attention ===
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
-Tags: image maps, image map, floor plan, interactive images, clickable images, hotspots, infographic, highlight, annotation, real estate, interactive floor plan, affiliate
+Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
-Tested up to: 6.4
-Stable tag: 2.0.21
+Tested up to: 6.7
+Stable tag: 2.0.28
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, sketch annotations, or interactive learning.
+Create interactive images with clickable hotspots, using modern image maps for WordPress. Perfect for floor plans, infographics, maps, and more.
 
 == Description ==
 [Draw Attention®](https://wpdrawattention.com?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=draw-attention) makes it easy to create [interactive image maps](https://wpdrawattention.com/guides/first-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=interactive-image-maps) for your website. [Highlight sections](https://wpdrawattention.com/guides/drawing-tool/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=highlight-sections) of your images with hotspots so that users can click/tap or hover to read more information about each image map area. [Show more content](https://wpdrawattention.com/demos/cheese-plate/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=show-more-content) or [direct the user to another URL](https://wpdrawattention.com/demos/apartment-building/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=go-to-url) upon clicking or hovering your hotspot.
@@ -132,6 +132,27 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.26 - 2024-06-18
+
+### Features and Improvements
+
+- Hid the move to trash button.
+  
+- Widget live preview
+  
+
+## 2.0.24 - 2024-04-05
+
+### Fixes
+
+- Fixed Newsletter component showing up on different screens.
+
+## 2.0.22 - 2024-03-19
+
+### Features and Improvements
+
+- Adding News Letter Notice to Draw Attention
+
 ## 2.0.17 - 2023-11-07
 
 ### Features and Improvements
@@ -179,26 +200,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 - Fix Elementor popup duplicating DA images
 
 ### Features and Improvements
-
-- Update gutenberg block to use api version 2
-
-## 2.0.9 - 2023-04-11
-
-### Fixes
-
-### Features and Improvements
-
-## 2.0.8 - 2023-03-28
-
-### Fixes
-
-### Features and Improvements
-
-## 2.0.7 - 2023-03-28
-
-- no changes
-
-## 2.0.6 - 2023-03-28
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
