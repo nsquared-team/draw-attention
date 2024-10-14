@@ -66,7 +66,7 @@ if ( empty( $settings['img_url'] ) ) : ?>
 			stroke-opacity: <?php echo $style['display']['borderOpacity']; ?>;
 		}
 		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:hover,
-		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:focus,
+		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>:focus-visible,
 		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?>.hotspot-active {
 			fill: <?php echo $style['hover']['fillColor']; ?>;
 			fill-opacity: <?php echo $style['hover']['fillOpacity']; ?>;
