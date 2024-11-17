@@ -46,7 +46,7 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v3.3.0
         with:
-          ssh-key: ${{ secrets.GH_ACTIONS_SSH_KEY }}
+          ssh-key: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
           ref: master
 
       - name: "Check defined version type"
