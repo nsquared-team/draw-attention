@@ -29,6 +29,10 @@ jobs:
         with:
           ref: 'release'
       
+      - name: Setup SVN
+        run: |
+          sudo apt-get install subversion -y
+    
       - name: "Dump GitHub Context"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
