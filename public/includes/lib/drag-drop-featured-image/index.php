@@ -442,8 +442,6 @@ class WP_Drag_Drop_Featured_Image_Map {
 										fields.each(function(){
 											$(this).attr('data-image-url', response.image);
 										});
-										hotspotAdmin.reset();
-
 									});
 
 								}
