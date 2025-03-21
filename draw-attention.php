@@ -118,12 +118,12 @@ function da_dequeue_conflicting_mapit_scripts() {
 	if ( get_post_type() != 'da_image' ) {
 		return;
 	}
-	
+
 	if ( ! function_exists( 'wp_mapit_init' ) ) {
 		return;
 	}
-	
-	wp_dequeue_script( 'wp-mapit-leaflet-js');
+
+	wp_dequeue_script( 'wp-mapit-leaflet-js' );
 }
 
 add_action( 'init', 'da_disable_rim_plugin' );
