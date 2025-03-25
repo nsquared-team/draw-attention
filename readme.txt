@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
 Tested up to: 6.7
-Stable tag: 2.0.31
+Stable tag: 2.0.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,12 @@ We have a guide walkthrough of creating your first image available in [our docum
 
 # Changelog
 
+## 2.0.32 - 2025-03-25
+
+### Fixes
+
+- Fix Conflict with WP MapIt not displaying drawing tools
+
 ## 2.0.26 - 2024-06-18
 
 ### Features and Improvements
@@ -194,12 +200,6 @@ We have a guide walkthrough of creating your first image available in [our docum
 - Improved nonce verification and capability checks
 
 ## 2.0.11 - 2023-05-12
-
-### Fixes
-
-- Fix Elementor popup duplicating DA images
-
-### Features and Improvements
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.

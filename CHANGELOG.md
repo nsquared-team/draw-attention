@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.32 - 2025-03-25
+
+### Fixes
+
+- Fix Conflict with WP MapIt not displaying drawing tools
+
 ## 2.0.26 - 2024-06-18
 
 ### Features and Improvements
