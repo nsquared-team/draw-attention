@@ -228,7 +228,7 @@ class WP_Drag_Drop_Featured_Image_Map {
 	 * Byte formatting function:
 	 *
 	 * @param $bytes
-	 * @param int   $precision
+	 * @param int $precision
 	 * @return float
 	 */
 	public function format_bytes( $bytes, $precision = 2 ) {
