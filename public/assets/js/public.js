@@ -711,7 +711,13 @@
       hotspots.infoSpots[key].closeTooltip();
     });
 
-    hotspots.infoSpots[spotName].fire("click");
+    const spot = hotspots.infoSpots[spotName];
+
+    if (!spot._path.classList.contains("hotspot-active")) {
+      spot.fire("click");
+    }
+
+    scrollIntoViewIfNeeded(spot._map?.getContainer());
   };
 
   hotspots.setup = function () {
@@ -891,3 +897,19 @@ jQuery(document).on("elementor/popup/show", () => {
     });
   }, 250);
 });
+
+function scrollIntoViewIfNeeded(el, options = {}) {
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+
+  const fullyVisible =
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+
+  if (!fullyVisible) {
+    el.scrollIntoView(options);
+  }
+}
