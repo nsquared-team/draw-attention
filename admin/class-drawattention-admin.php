@@ -195,9 +195,12 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 		{
 			// MainWP removes the scripts version which breaks our plugin (and many others) when a site has a caching plugin active
 			// MainWP needs to update their code to instead output a hash of the version so it's obfuscated but not removed
-			if (class_exists('\MainWP\Child\MainWP_Security')) {
-				\MainWP\Child\MainWP_Security::update_security_option('scripts_version', false);
-				\MainWP\Child\MainWP_Security::update_security_option('styles_version', false);
+			if ( class_exists( '\MainWP\Child\MainWP_Security' ) ) {
+				$mainwp_security_option_value = get_option( 'mainwp_security' );
+				if( is_array( $mainwp_security_option_value ) ) {
+					\MainWP\Child\MainWP_Security::update_security_option( 'scripts_version', false );
+					\MainWP\Child\MainWP_Security::update_security_option( 'styles_version', false );
+				}
 			}
 		}
 
