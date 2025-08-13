@@ -105,6 +105,8 @@
         markLoaded(img);
         moreInfoSetup(img);
         leafletSetup(img);
+        var container = img.parents('.hotspots-container');
+				observeHotspotContainer(container);
       };
       tester.src = img.attr("src");
     });
