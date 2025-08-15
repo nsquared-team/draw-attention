@@ -74,7 +74,7 @@ jobs:
         # =================================================================================================#
         
       - name: Format JS files
-        run: prettier --write "**/*.js"
+        run: prettier --write "**/*.js" --ignore-pattern "**/admin/assets/js/leaflet.draw.js"
         
       # No Vue files in this project at the moment
       # - name: Format Vue files
