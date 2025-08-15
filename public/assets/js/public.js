@@ -33,7 +33,6 @@
 
   // Intersection Observer to detect when hidden hotspots become visible
   var hotspotVisibilityObserver = null;
-  
 
   var setupHotspotVisibilityObserver = function () {
     if (!window.IntersectionObserver) {
