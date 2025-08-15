@@ -31,9 +31,68 @@
   // Store all the more info area hotspots in an object for access later
   hotspots.infoSpots = {};
 
+  // Intersection Observer to detect when hidden hotspots become visible
+  var hotspotVisibilityObserver = null;
+
+  var setupHotspotVisibilityObserver = function () {
+    if (!window.IntersectionObserver) {
+      return; // Browser doesn't support Intersection Observer
+    }
+
+    hotspotVisibilityObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            // Hotspot container has become visible
+            var container = entry.target;
+            var containerJQuery = $(container);
+
+            // Check if this container was previously hidden
+            if (containerJQuery.data("was-hidden")) {
+              console.log("Hotspot container became visible:", container);
+
+              hotspots.init(); // Reinitialize hotspots
+              containerJQuery.removeData("was-hidden");
+            }
+          } else {
+            // Hotspot container has become hidden
+            var container = entry.target;
+            var containerJQuery = $(container);
+
+            containerJQuery.data("was-hidden", true);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "10px",
+      },
+    );
+  };
+
+  var observeHotspotContainer = function (container) {
+    if (hotspotVisibilityObserver && container.length) {
+      var containerElement = container.get(0);
+      var rect = containerElement.getBoundingClientRect();
+      var isInitiallyHidden =
+        rect.width === 0 ||
+        rect.height === 0 ||
+        window.getComputedStyle(containerElement).display === "none" ||
+        window.getComputedStyle(containerElement).visibility === "hidden";
+
+      if (isInitiallyHidden) {
+        container.data("was-hidden", true);
+      }
+
+      hotspotVisibilityObserver.observe(containerElement);
+    }
+  };
+
   var mapSetup = function () {
     $(".da-error").hide();
     $(".hotspot-info").addClass("da-hidden");
+
+    setupHotspotVisibilityObserver();
 
     var images = $("img.hotspots-image, picture.hotspots-image img"); // Select images as well as images inside picture elements
 
@@ -46,6 +105,8 @@
         markLoaded(img);
         moreInfoSetup(img);
         leafletSetup(img);
+        var container = img.parents(".hotspots-container");
+        observeHotspotContainer(container);
       };
       tester.src = img.attr("src");
     });
