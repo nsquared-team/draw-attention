@@ -12,8 +12,7 @@ class DrawAttention_Newsletter {
 		add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ) );
 		// add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ), 10, 1 );
 
-		// disable until we fix DA email issues
-		// add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
 
 		// Order the meta boxes
 		add_action( 'do_meta_boxes', array( $this, 'set_meta_boxes_position' ) );
