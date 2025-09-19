@@ -34,29 +34,30 @@
 #_news_letter_modal .modal-content-container {
     display: flex;
     flex-direction: column;
+    padding: 36px;
+    position: relative;
 }
 
 #_news_letter_modal .modal-content .close-button-container {
-    position: relative;
-    z-index: 2;
-}
-
-#_news_letter_modal .modal-content .close-button-container .dismiss-banner {
     top: 6px;
     right: 6px;
     border: none;
     padding: 16px;
+    position: absolute;
+}
+
+#_news_letter_modal .modal-content .close-button-container .dismiss-banner {
+    border: none;
     display: flex; 
     box-shadow: none;
-    position: absolute;
     justify-content: flex-end; 
     cursor: pointer;
     background-color: transparent;
 }
 
 #_news_letter_modal .modal-content .close-button-container img {
-    width: 12px;
-    height: 12px;
+    width: 18px;
+    height: 18px;
 }
 
 .news-letter-container button {
@@ -222,11 +223,16 @@ form .modal-container .error-message-container p {
     align-items: start;
 }
 
+.modal-content .modal-info .da-newsletter-modal-upper-container {
+    display: flex;
+    align-items: end;
+}
+
 .modal-content .modal-info .cta {
-    font-size: 14px; 
-    color: black;
+    font-size: 16px; 
+    color: #2C2C29;
     padding: 0;
-    line-height: 19.5px;
+    font-weight: 600;
 }
 
 .modal-content .modal-info p {
@@ -246,23 +252,35 @@ form .modal-container .error-message-container p {
 }
 
 .modal-content .modal-info .headline{
-    font-weight: bold;
+    font-weight: 700;
     font-size: 26px;
-    letter-spacing: 2px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: linear-gradient(to right, #92CAA4, #1E5263);
-    --webkit-background-clip: text;
+    background: linear-gradient(90deg, #92CAA4 0%, #1E5263 101.14%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
     color: transparent;
 }
 
+.modal-content .modal-info .da-newsletter-modal-upper-container-header {
+    letter-spacing: 0.1em;
+    color: #2C2C29;
+    margin: 0;
+    padding: 0;
+}
+
 .modal-content .modal-info .modal-statement{
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     color: #2C2C29;
 }
 
 .modal-content .inner-modal-image {
     padding-top: 2.3rem;
+    width: 233px;
+    height: 174px;
 }
 
 .sr-only {
@@ -285,3 +303,99 @@ form .modal-container .error-message-container p {
 .post-type-da_image #delete-action {
     display: none;
 }
+
+#da-newsletter-modal-input-helptext {
+    margin: 0;
+    font-size: 14px;
+    line-height: 30px;
+    color: red;
+}
+
+/* Control the embeded/generated form from MailerLite */
+.modal-content .modal-info div.ml-form-embedContent {
+    display: none !important;
+}
+
+.modal-content .modal-info form.ml-block-form .ml-field-email > label {
+    display: none !important;
+}
+
+#_news_letter_modal .modal-content .modal-info form.ml-block-form .ml-field-email > input {
+    border-top-left-radius: 2px !important;
+    border-bottom-left-radius: 2px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    letter-spacing: 1px !important;
+}
+
+#_news_letter_modal .modal-content .modal-info form.ml-block-form .ml-field-email > input::placeholder {
+  color: #888;
+  font-size: 14px;
+  opacity: .8;
+  letter-spacing: 2px;
+}
+
+#_news_letter_modal .modal-content .modal-info .ml-form-embedContainer .ml-form-successContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+#_news_letter_modal .modal-content .modal-info .ml-form-embedContainer .ml-form-successContent h4 {
+    font-weight: 700 !important;
+    font-size: 26px !important;
+    line-height: 32px !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    background: linear-gradient(90deg, #92CAA4 0%, #1E5263 101.14%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important; 
+    text-fill-color: transparent;
+    color: transparent !important;
+}
+
+#_news_letter_modal .modal-content .modal-info .ml-form-embedContainer .ml-form-successContent p {
+    font-weight: 400 !important;
+    font-size: 16px !important;
+    color: #2C2C29 !important;
+    text-align: center !important;
+}
+
+#_news_letter_modal .modal-content .modal-info form.ml-block-form .ml-form-embedSubmit {
+    width: 65% !important;
+}
+
+#_news_letter_modal .modal-content .modal-info form.ml-block-form .ml-form-embedSubmit .primary[type="submit"] {
+    border-radius: 0 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    font-weight: 600 !important;
+    height: 42.33px !important;
+    background: linear-gradient(to right, #92CAA4, #1e52639e) !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 2px !important;
+    border-bottom-right-radius: 2px !important;
+}
+
+.modal-content .modal-info form.ml-block-form {
+    display: flex;
+}
+
+.modal-content .modal-info .ml-embedded {
+    width: 100%;
+}
+
+.modal-content .modal-info .embedForm {
+    max-width: unset !important;
+}
+
+.modal-content .modal-info .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody, 
+.modal-content .modal-info .ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+    padding: 0 !important;
+}
+/* END Control the embeded/generated form from MailerLite */
