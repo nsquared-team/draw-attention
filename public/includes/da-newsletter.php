@@ -12,16 +12,52 @@ class DrawAttention_Newsletter {
 		add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ) );
 		// add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ), 10, 1 );
 
-		// disable until we fix DA email issues
-		// add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
+        add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
 
 		// Order the meta boxes
 		add_action( 'do_meta_boxes', array( $this, 'set_meta_boxes_position' ) );
+
+        add_action( 'admin_head', array( $this, 'append_mailerlite_script' ) );
 	}
+
+    public function append_mailerlite_script() {
+        global $pagenow, $post;
+        if ( ! is_admin() ) {
+            return;
+        }
+        if ( $pagenow !== 'post.php') {
+            return;
+        }
+        if ( $post->post_type !== 'da_image' ) {
+            return;
+        }
+        ?>
+            <!-- MailerLite Universal -->
+            <script>
+                (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+                .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+                n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+                (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+                ml('account', '1506301');
+            </script>
+            <!-- End MailerLite Universal -->
+        <?php
+    }
 
 	public function enqueue_meta_box_assets() {
 		wp_enqueue_style( 'da-custom-meta-box-styles', $this->plugin_directory . '/assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
 		wp_enqueue_script( 'da-news-letter-js', $this->plugin_directory . 'assets/js/news-letter.js', array(), DrawAttention::VERSION );
+
+        if ( is_user_logged_in() ) {
+            $current_user = wp_get_current_user();
+            wp_localize_script(
+                'da-news-letter-js',
+                'daUserData',
+                array(
+                    'email' => $current_user->user_email,
+                )
+            );
+        }
 	}
 
 	public function metabox_newsletter_component() {
@@ -37,7 +73,7 @@ class DrawAttention_Newsletter {
                     </div>
                     <div class='outer-content'>
                         <p>Subscribe now! Get 20% Coupon</p>
-                        <button id='openModalButton' onclick='openModal()'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
+                        <button id='openModalButton'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
                     </div>
                     <div class='content-notice'>
                         <span>" . __( "We'll only send you awesome content. Never spam.", 'draw-attention' ) . '</span>
@@ -47,6 +83,11 @@ class DrawAttention_Newsletter {
         ';
 	}
 
+    public function plugin_directory($path) 
+    {
+        return $this->plugin_directory . $path;
+    }
+
 	public function newsletter_modal_dialog() {
 		$current_screen = get_current_screen();
 
@@ -54,56 +95,31 @@ class DrawAttention_Newsletter {
 			return;
 		}
 
-		echo "
+		?>
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
                 <div class='modal-content modal-content-container'>
                     <div class='close-button-container'>
-                        <button id='closeModalButton' class='dismiss-banner' onClick='closeModal()' aria-label='Dismiss Notice'>
-                            <img src='" . $this->plugin_directory . "/assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
+                        <button id='closeModalButton' class='dismiss-banner' aria-label='Dismiss Notice'>
+                            <img src="<?php echo $this->plugin_directory( "assets/images/close-icon.svg" ); ?>" alt='Dismiss Notice Icon'>
                         </button>
                     </div>
-                    <form method='POST' class='news-letter-container' target='_blank' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
-                        <div class='content-container modal-container'>
-                            <div class='modal-content'>
-                                <div class='modal-info'>
-                                    <h2 id='weeklyNewsLetterHeader'> " . __( 'Get our weekly', 'draw-attention' ) . "</span></h2>
-                                    <p class='headline'> " . __( 'newsletter', 'draw-attention' ) . "</p>
-                                    <p class='modal-statement'> " . __( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) . "</p>
-                                    <label for='email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
-                                </div>
-                                <img class='inner-modal-image' src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='Newsletter Image'>
+                    <div class='modal-info'>
+                        <div class="da-newsletter-modal-upper-container">
+                            <div>
+                                <h2 id='weeklyNewsLetterHeader' class="da-newsletter-modal-upper-container-header"><?php _e( 'Get our weekly', 'draw-attention' ) ?></span></h2>
+                                <p class='headline'><?php _e( 'newsletter', 'draw-attention' ) ?></p>
+                                <p class='modal-statement'><?php _e( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) ?></p>
+                                <p id="da-newsletter-modal-email-input-label" class='cta'><?php _e( 'Enter your email to get a 20% Coupon', 'draw-attention' ) ?></p>
                             </div>
-
-                            <input type='hidden' name='u' value='65E1000B4D683' data-name='u'>
-                            <input type='hidden' name='f' value='1' data-name='f'>
-                            <input type='hidden' name='s' data-name='s'>
-                            <input type='hidden' name='c' value='0' data-name='c'>
-                            <input type='hidden' name='m' value='0' data-name='m'>
-                            <input type='hidden' name='act' value='sub' data-name='act'>
-                            <input type='hidden' name='v' value='2' data-name='v'>
-                            <input type='hidden' name='or' value='9f41f9016dc2e4b2b014589da6eb4bad' data-name='or'>
-
-                            <div class='_form_element _x45964534 _full_width input-field'>
-                                <div class='input-field-container'>
-                                    <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'Subscribe', 'draw-attention' ) . "</span> </button></div>
-                                    <input type='text' id='email' name='email' placeholder='Your Email' required='' aria-describedby='error-message' data-name='email'>
-                                </div>
-                            </div>
-                            
-                            <div class='error-message-container'>
-                                <p class='error-message' id='error-message'>Email address is required</p>
-                            </div>
-
-                            <div class='_form-thank-you' style='display:none;'></div>
-                            
-                            <div class='content-notice md-content-notice'>
-                                <span>" . __( "Your email is safe with us, we don't spam.", 'draw-attention' ) . '</span>
+                            <div>
+                                <img class='inner-modal-image' src='<?php echo $this->plugin_directory("assets/images/letter.svg"); ?>' alt='Newsletter Image'>
                             </div>
                         </div>
-                    </form>
+                        <div class='ml-embedded' data-form='s8jMyJ'></div>
+                    </div>
                 </div>
             </div>
-        ';
+        <?php
 	}
 
 	public function add_newsletter_widget() {
