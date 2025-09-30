@@ -48,16 +48,16 @@ class DrawAttention_Newsletter {
 	}
 
 	public function newsletter_modal_dialog() {
-        if ( ! is_admin() ) {
-            return;
-        }
+		if ( ! is_admin() ) {
+			return;
+		}
 
 		$current_screen = get_current_screen();
 		if ( ! $current_screen || 'post' !== $current_screen->base || 'da_image' !== $current_screen->post_type ) {
 			return;
 		}
 
-        $user_email = wp_get_current_user()->user_email ?? "";
+		$user_email = wp_get_current_user()->user_email ?? '';
 
 		echo "
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
@@ -82,7 +82,7 @@ class DrawAttention_Newsletter {
                             <div data-showonreset data-hideonsuccess class='_form_element _x45964534 _full_width input-field'>
                                 <div class='input-field-container'>
                                     <div class='_button-wrapper _full_width'><button id='da_newsletter_form_submit_btn' class='_submit' type='submit'><span>" . __( 'Subscribe', 'draw-attention' ) . "</span> </button></div>
-                                    <input type='text' id='da-newsletter-email' name='email' placeholder='" . __('Your Email', 'draw-attention') . "' required aria-describedby='da_newsletter_msg_error' data-name='email' value='" . esc_attr( $user_email ) . "'>
+                                    <input type='text' id='da-newsletter-email' name='email' placeholder='" . __( 'Your Email', 'draw-attention' ) . "' required aria-describedby='da_newsletter_msg_error' data-name='email' value='" . esc_attr( $user_email ) . "'>
                                 </div>
                             </div>
 
@@ -101,7 +101,7 @@ class DrawAttention_Newsletter {
                             </div>
                             
                             <div data-showonreset data-hideonsuccess class='content-notice md-content-notice'>
-                                <span>" . __( "We keep your email safe and private, without drawing attention.", 'draw-attention' ) . '</span>
+                                <span>" . __( 'We keep your email safe and private, without drawing attention.', 'draw-attention' ) . '</span>
                             </div>
                         </div>
                     </form>
