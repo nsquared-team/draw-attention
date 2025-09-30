@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const SUCCESS_SELECTOR = "[data-nodeonsuccess]";
   const HIDE_ON_RESET_SELECTOR = "[data-hideonreset]";
   const SHOW_ON_RESET_SELECTOR = "[data-showonreset]";
-  const APIURL = "http://daplugin.local/wp-json/da-mailerlite/v1/subscribe";
+  const DOMAIN = "https://wpdrawattention.com";
+  const APIURL = `${DOMAIN}/wp-json/da-mailerlite/v1/subscribe`;
 
   function resetUi() {
     modal
