@@ -13,7 +13,7 @@ class DrawAttention_Newsletter {
 		// add_action( 'admin_footer', array( $this, 'newsletter_modal_dialog' ), 10, 1 );
 
 		// disable until we fix DA email issues
-		// add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_newsletter_widget' ) );
 
 		// Order the meta boxes
 		add_action( 'do_meta_boxes', array( $this, 'set_meta_boxes_position' ) );
@@ -26,7 +26,7 @@ class DrawAttention_Newsletter {
 
 	public function metabox_newsletter_component() {
 		echo "
-            <div class='news-letter-container w-full hndle ui-sortable-handle'> 
+            <div class='news-letter-container news-letter-metabox-container w-full hndle ui-sortable-handle'> 
 
                 <div class='content-container'>
                     <div>
@@ -37,7 +37,7 @@ class DrawAttention_Newsletter {
                     </div>
                     <div class='outer-content'>
                         <p>Subscribe now! Get 20% Coupon</p>
-                        <button id='openModalButton' onclick='openModal()'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
+                        <button id='openModalButton'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
                     </div>
                     <div class='content-notice'>
                         <span>" . __( "We'll only send you awesome content. Never spam.", 'draw-attention' ) . '</span>
@@ -48,56 +48,60 @@ class DrawAttention_Newsletter {
 	}
 
 	public function newsletter_modal_dialog() {
-		$current_screen = get_current_screen();
+		if ( ! is_admin() ) {
+			return;
+		}
 
+		$current_screen = get_current_screen();
 		if ( ! $current_screen || 'post' !== $current_screen->base || 'da_image' !== $current_screen->post_type ) {
 			return;
 		}
+
+		$user_email = wp_get_current_user()->user_email ?? '';
 
 		echo "
             <div id='_news_letter_modal' class='modal' role='dialog' aria-labelledby='weeklyNewsLetterHeader'>
                 <div class='modal-content modal-content-container'>
                     <div class='close-button-container'>
-                        <button id='closeModalButton' class='dismiss-banner' onClick='closeModal()' aria-label='Dismiss Notice'>
+                        <button id='closeModalButton' class='dismiss-banner' aria-label='Dismiss Notice'>
                             <img src='" . $this->plugin_directory . "/assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
                         </button>
                     </div>
-                    <form method='POST' class='news-letter-container' target='_blank' action='https://drawattention.activehosted.com/proc.php' id='_form_65E1000B4D683_' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
+                    <form  method='POST' class='news-letter-container news-letter-form-container' id='da-newsletter-form' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
                         <div class='content-container modal-container'>
                             <div class='modal-content'>
                                 <div class='modal-info'>
                                     <h2 id='weeklyNewsLetterHeader'> " . __( 'Get our weekly', 'draw-attention' ) . "</span></h2>
                                     <p class='headline'> " . __( 'newsletter', 'draw-attention' ) . "</p>
                                     <p class='modal-statement'> " . __( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) . "</p>
-                                    <label for='email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
+                                    <label data-hideonsuccess for='da-newsletter-email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
                                 </div>
                                 <img class='inner-modal-image' src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='Newsletter Image'>
                             </div>
 
-                            <input type='hidden' name='u' value='65E1000B4D683' data-name='u'>
-                            <input type='hidden' name='f' value='1' data-name='f'>
-                            <input type='hidden' name='s' data-name='s'>
-                            <input type='hidden' name='c' value='0' data-name='c'>
-                            <input type='hidden' name='m' value='0' data-name='m'>
-                            <input type='hidden' name='act' value='sub' data-name='act'>
-                            <input type='hidden' name='v' value='2' data-name='v'>
-                            <input type='hidden' name='or' value='9f41f9016dc2e4b2b014589da6eb4bad' data-name='or'>
-
-                            <div class='_form_element _x45964534 _full_width input-field'>
+                            <div data-showonreset data-hideonsuccess class='_form_element _x45964534 _full_width input-field'>
                                 <div class='input-field-container'>
-                                    <div class='_button-wrapper _full_width'><button id='_form_1_submit' class='_submit' type='submit'><span>" . __( 'Subscribe', 'draw-attention' ) . "</span> </button></div>
-                                    <input type='text' id='email' name='email' placeholder='Your Email' required='' aria-describedby='error-message' data-name='email'>
+                                    <div class='_button-wrapper _full_width'><button id='da_newsletter_form_submit_btn' class='_submit' type='submit'><span>" . __( 'Subscribe', 'draw-attention' ) . "</span> </button></div>
+                                    <input type='text' id='da-newsletter-email' name='email' placeholder='" . __( 'Your Email', 'draw-attention' ) . "' required aria-describedby='da_newsletter_msg_error' data-name='email' value='" . esc_attr( $user_email ) . "'>
                                 </div>
                             </div>
-                            
-                            <div class='error-message-container'>
-                                <p class='error-message' id='error-message'>Email address is required</p>
-                            </div>
 
-                            <div class='_form-thank-you' style='display:none;'></div>
+                            <div data-hideonreset id='da_newsletter_msg_success' data-nodeonsuccess class='da-newsletter-message_success da-hidden'>
+                                <span class='da_newsletter_msg_success__title'>" . __( 'Thank You', 'draw-attention' ) . "</span>
+                                <span class='da_newsletter_msg_success__subtitle'>" . __( 'You have successfully joined the Draw Attention subscriber list. Please check your inbox for your new Coupon Code.', 'draw-attention' ) . "</span>
+                            </div>
                             
-                            <div class='content-notice md-content-notice'>
-                                <span>" . __( "Your email is safe with us, we don't spam.", 'draw-attention' ) . '</span>
+                            <div id='da_newsletter_msg_error' class='error-message-container'>
+                                <p data-hideonreset data-hideonsuccess id='da_newsletter_msg_error_invalid_input' class='da-newsletter-message da-error-message da-hidden'>
+                                    " . __( 'Invalid Email address!', 'draw-attention' ) . "
+                                </p>
+                                <p data-hideonreset data-hideonsuccess id='da_newsletter_msg_error_generic' class='da-newsletter-message da-error-message da-hidden'>
+                                    " . __( 'An error occurred. Please try again later.', 'draw-attention' ) . "
+                                </p>
+                            </div>
+                            
+                            <div data-showonreset data-hideonsuccess class='content-notice md-content-notice'>
+                                <span>" . __( 'We keep your email safe and private, without drawing attention.', 'draw-attention' ) . '</span>
                             </div>
                         </div>
                     </form>

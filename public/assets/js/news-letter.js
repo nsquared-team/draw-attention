@@ -3,12 +3,29 @@ document.addEventListener("DOMContentLoaded", function () {
   var closeButton = document.getElementById("closeModalButton");
   var focusedElementBeforeModal;
 
+  const HIDE_ON_SUCCESS_SELECTOR = "[data-hideonsuccess]";
+  const SUCCESS_SELECTOR = "[data-nodeonsuccess]";
+  const HIDE_ON_RESET_SELECTOR = "[data-hideonreset]";
+  const SHOW_ON_RESET_SELECTOR = "[data-showonreset]";
+  const DOMAIN = "https://wpdrawattention.com";
+  const APIURL = `${DOMAIN}/wp-json/da-mailerlite/v1/subscribe`;
+
+  function resetUi() {
+    modal
+      .querySelectorAll(HIDE_ON_RESET_SELECTOR)
+      .forEach((el) => el.classList.add("da-hidden"));
+    modal
+      .querySelectorAll(SHOW_ON_RESET_SELECTOR)
+      .forEach((el) => el.classList.remove("da-hidden"));
+  }
+
   function openModal() {
     focusedElementBeforeModal = document.activeElement;
     modal.style.display = "flex";
-    document.getElementById("email").focus();
+    document.getElementById("da-newsletter-email").focus();
     modal.addEventListener("keydown", trapTabKey);
     closeButton.addEventListener("click", closeModal);
+    resetUi();
   }
 
   function closeModal() {
@@ -73,17 +90,74 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document
-    .getElementById("_form_65E1000B4D683_")
+    .getElementById("da-newsletter-form")
     .addEventListener("submit", function (event) {
-      var email = document.getElementById("email");
-      var errorMessage = document.getElementById("error-message");
+      event.preventDefault();
+      resetUi();
+      var email = document.getElementById("da-newsletter-email");
       var inputValue = email.value;
 
       if (inputValue.trim() === "") {
-        event.preventDefault();
-        errorMessage.style.display = "block";
+        document
+          .getElementById("da_newsletter_msg_error_invalid_input")
+          .classList.remove("da-hidden");
         email.focus();
-        email.style.border = "1px solid red";
+        return;
       }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(inputValue.trim())) {
+        document
+          .getElementById("da_newsletter_msg_error_invalid_input")
+          .classList.remove("da-hidden");
+        email.focus();
+        return;
+      }
+
+      const submitBtn = document.getElementById(
+        "da_newsletter_form_submit_btn",
+      );
+
+      fetch(APIURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: inputValue,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            const elementsToHide = modal.querySelectorAll(
+              HIDE_ON_SUCCESS_SELECTOR,
+            );
+            const elementToShow = modal.querySelectorAll(SUCCESS_SELECTOR);
+            elementsToHide.forEach((el) => el.classList.add("da-hidden"));
+            elementToShow.forEach((el) => el.classList.remove("da-hidden"));
+            document.getElementById("da-newsletter-form").reset();
+            closeButton.focus();
+          } else {
+            if (data && data.code === "rest_invalid_param") {
+              document
+                .getElementById("da_newsletter_msg_error_invalid_input")
+                .classList.remove("da-hidden");
+            } else {
+              document
+                .getElementById("da_newsletter_msg_error_generic")
+                .classList.remove("da-hidden");
+            }
+            email.focus();
+          }
+        })
+        .catch((error) => {
+          document
+            .getElementById("da_newsletter_msg_error_generic")
+            .classList.remove("da-hidden");
+          email.focus();
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+        });
     });
 });
