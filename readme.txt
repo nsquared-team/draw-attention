@@ -2,7 +2,7 @@
 Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
-Tested up to: 6.8
+Tested up to: 6.9
 Stable tag: 2.0.39
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
