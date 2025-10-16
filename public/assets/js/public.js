@@ -584,6 +584,19 @@
     }
   };
 
+  var maybeDisplayPopupOnFocus = function (shape, areaData, nativeEvent) {
+    if (nativeEvent.type !== "focus") return;
+    if (areaData.trigger !== "click") return;
+    if (areaData.layout !== "left") return;
+
+    const target = nativeEvent.target;
+    target.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    target.addEventListener("focusout", function handleFocusOut(e) {
+      target.dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
+      target.removeEventListener("focusout", handleFocusOut);
+    });
+  };
+
   var shapeEvents = function (shape, areaData) {
     // Handle URL spots
     if (areaData.action == "url") {
@@ -695,6 +708,10 @@
         }
       },
     );
+
+    $(shape._path).on("focus", function (nativeEvent) {
+      maybeDisplayPopupOnFocus(shape, areaData, nativeEvent);
+    });
   };
 
   var a11yFixes = function (img, map) {
