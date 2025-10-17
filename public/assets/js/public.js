@@ -34,6 +34,14 @@
   // Intersection Observer to detect when hidden hotspots become visible
   var hotspotVisibilityObserver = null;
 
+  const layoutsThatShowTitleOnFocus = [
+    "left",
+    "right",
+    "bottom",
+    "top",
+    "lightbox",
+  ];
+
   var setupHotspotVisibilityObserver = function () {
     if (!window.IntersectionObserver) {
       return; // Browser doesn't support Intersection Observer
@@ -584,6 +592,66 @@
     }
   };
 
+  /**
+   * Very Custom logic to just handle displaying the popup on focus
+   * Why we had to do it this way:
+   * shape.on('focus') doesn't fire similar to the other events
+   * openPopup() would steal the focus and it's hard to then rely on focusout on shape to remove the popup, cause the focusout would fire right after calling openPopup()
+   * closePopup() would also programmatically control/alter the tab behavior and that is another problem
+   *
+   */
+  var maybeDisplayPopupOnFocus = function (shape, areaData, nativeEvent) {
+    if (areaData.trigger !== "hover") return;
+    if (areaData.layout !== "tooltip") return;
+
+    var $shape = $(nativeEvent.target);
+    if ($shape.hasClass("hotspot-active")) {
+      return;
+    }
+
+    $shape.addClass("hotspot-active");
+    $shape.trigger("over.responsilight");
+    shape.openPopup();
+
+    setTimeout(() => {
+      const activeElement = document.activeElement;
+      if (!activeElement.classList.contains("leaflet-rrose-content")) {
+        return;
+      }
+      $shape.focus();
+
+      const closePopupAfterFocusIsLost = (e) => {
+        shape.closePopup();
+        $shape.removeClass("hotspot-active");
+        $shape.trigger("out.responsilight");
+
+        $shape.off("focusout", closePopupAfterFocusIsLost);
+      };
+      $shape.on("focusout", closePopupAfterFocusIsLost);
+    }, 0);
+  };
+
+  /**
+   * Left, right, top, bottom & lightbox layout + click trigger
+   * Display Title on focus
+   */
+  var maybeDisplayTitleOnFocusForLayout = function (
+    shape,
+    areaData,
+    nativeEvent,
+  ) {
+    if (nativeEvent.type !== "focus") return;
+    if (areaData.trigger !== "click") return;
+    if (!layoutsThatShowTitleOnFocus.includes(areaData.layout)) return;
+
+    const target = nativeEvent.target;
+    target.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+    target.addEventListener("focusout", function handleFocusOut(e) {
+      target.dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
+      target.removeEventListener("focusout", handleFocusOut);
+    });
+  };
+
   var shapeEvents = function (shape, areaData) {
     // Handle URL spots
     if (areaData.action == "url") {
@@ -695,6 +763,11 @@
         }
       },
     );
+
+    $(shape._path).on("focus", function (nativeEvent) {
+      maybeDisplayPopupOnFocus(shape, areaData, nativeEvent);
+      maybeDisplayTitleOnFocusForLayout(shape, areaData, nativeEvent);
+    });
   };
 
   var a11yFixes = function (img, map) {
