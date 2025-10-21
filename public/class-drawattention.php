@@ -31,7 +31,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		 *
 		 * @var     string
 		 */
-		const VERSION = '2.0.39';
+		const VERSION = '2.0.40';
 		const file    = __FILE__;
 		const name    = 'Draw Attention';
 		const slug    = 'drawattention';
