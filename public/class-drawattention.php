@@ -111,6 +111,9 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			 *
 			 * Various functionality is separated into external files
 			 */
+			
+			include_once( __DIR__ . '/includes/bb/bb.php' );
+			
 			include_once __DIR__ . '/includes/cpt.php';
 			$this->cpt = new DrawAttention_CPT( $this );
 
