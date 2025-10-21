@@ -13,18 +13,17 @@ add_action( 'init', 'da_load_module_examples' );
 
 /* Define a custom field for select DA images */
 function da_select_img( $name, $value, $field ) {
-	$args = array(
-		'post_type'	=> 'da_image',
-		'post_status' => 'publish',
-		'posts_per_page' => 1
+	$args   = array(
+		'post_type'      => 'da_image',
+		'post_status'    => 'publish',
+		'posts_per_page' => 1,
 	);
-	$images = new WP_Query($args);
+	$images = new WP_Query( $args );
 
 	if ( $images->have_posts() ) {
-	echo '<select name="' . $name . '">';
+		echo '<select name="' . $name . '">';
 		echo '<option value="' . $images->post->ID . '" selected>' . $images->post->post_title . '</option>';
-	echo '</select>';
+		echo '</select>';
 	}
 }
 add_action( 'fl_builder_control_select-img', 'da_select_img', 1, 3 );
-
