@@ -6,7 +6,7 @@ define( 'FL_MODULE_DA_URL', plugins_url( '/', __FILE__ ) );
 /* Define custom Beaver Builder modules */
 function da_load_module_examples() {
 	if ( class_exists( 'FLBuilder' ) ) {
-		require_once(FL_MODULE_DA_DIR . 'da/da.php');
+		require_once FL_MODULE_DA_DIR . 'da/da.php';
 	}
 }
 add_action( 'init', 'da_load_module_examples' );
