@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.41 - 2025-10-28
+
+### Fixes
+
+- Draw Attention widget doesn't show up in Beaver Builder
+
 ## 2.0.32 - 2025-03-25
 
 ### Fixes
