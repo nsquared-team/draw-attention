@@ -210,10 +210,21 @@
           afterContent: function () {
             var content = $(".featherlight-inner"),
               lb = $(".featherlight-content"),
-              mapNo = img.data("id");
+              mapNo = img.data("id"),
+              lightboxContainer = $(".featherlight");
 
             info.appendTo(content).show();
             lb.addClass("lightbox-" + mapNo);
+
+            // Apply accessibility attributes
+            var hotspotTitle =
+              info.find(".hotspot-title").text() || data.title || "";
+            lightboxContainer.attr({
+              tabindex: "-1",
+              role: "dialog",
+              "aria-modal": "true",
+              "aria-label": hotspotTitle,
+            });
 
             // Fix accessibility issue - links not focusable by keyboard
             var untabbables = info.find("a[tabindex=-1]");
@@ -247,6 +258,7 @@
             }, 100);
 
             lightboxAnchorLinks(content, target);
+            lightboxTrapFocus();
             window.dispatchEvent(new Event("resize")); // Trigger window resize event for [video] shortcode JS
           },
           afterOpen: function () {
@@ -291,6 +303,49 @@
         );
       };
       current.close();
+    });
+  };
+
+  var lightboxTrapFocus = function () {
+    var lightbox = $(".featherlight");
+    var focusableElements = lightbox.find(
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+
+    if (focusableElements.length === 0) {
+      return;
+    }
+
+    var firstFocusable = focusableElements.first();
+    var lastFocusable = focusableElements.last();
+
+    // Set initial focus to the lightbox container
+    lightbox.focus();
+
+    lightbox.on("keydown.focustrap", function (e) {
+      if (e.key !== "Tab" && e.keyCode !== 9) {
+        return;
+      }
+
+      if (e.shiftKey) {
+        if (
+          document.activeElement === firstFocusable.get(0) ||
+          document.activeElement === lightbox.get(0)
+        ) {
+          e.preventDefault();
+          lastFocusable.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable.get(0)) {
+          e.preventDefault();
+          firstFocusable.focus();
+        }
+      }
+    });
+
+    // Clean up when lightbox closes
+    lightbox.on("closed.featherlight", function () {
+      lightbox.off("keydown.focustrap");
     });
   };
 
