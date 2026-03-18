@@ -438,7 +438,10 @@
       [0, 0],
       [natHeight, natWidth],
     ];
-    var imageLayer = Leaflet.imageOverlay(img.attr("src"), bounds).addTo(map);
+    var imageAlt = img.attr("alt") || img.data("image-title") || "";
+    var imageLayer = Leaflet.imageOverlay(img.attr("src"), bounds, {
+      alt: imageAlt,
+    }).addTo(map);
     map.fitBounds(bounds);
 
     leaflets.push({
