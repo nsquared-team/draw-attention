@@ -74,7 +74,7 @@
   margin-top: 3px;
 }
 /* line 85, sass/partials/_main_wrap.scss */
-.cmb2-wrap input:focus,
+.cmb2-wrap input:not([type="checkbox"]):not([type="radio"]):focus,
 .cmb2-wrap textarea:focus {
   background: #fffff8;
 }
