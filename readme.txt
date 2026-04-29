@@ -37,7 +37,7 @@ Draw Attention is built with the principles of progressive enhancement in mind, 
 Easy to draw the highlightable areas of your image map - and easy to edit the shapes later too! Create the image map right from your WordPress dashboard. [Place your interactive image map into any page or post](https://wpdrawattention.com/guides/display-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=display-interactive-images) with a simple shortcode, or use our convenient Beaver Builder module or WordPress Editor Block.
 
 ### New and Improved Drawing Tool ###
-Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button. 
+Draw complex shapes or perfect circles and rectangles. Use the new zoom and pan feature to get extra precise drawings of your clickable hotspots. Easily edit the shapes whenever you'd like or start from scratch at the click of a button.
 
 The available [drawing tools](https://wpdrawattention.com/guides/drawing-tool/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=drawing-tools) are:
 
@@ -123,6 +123,10 @@ If you're using our Premium plugin, you can also use the `License & Support` tab
 = How do I draw my first image? =
 We have a guide walkthrough of creating your first image available in [our documentation](https://wpdrawattention.com/guides/first-interactive-image/?utm_source=website&utm_medium=promo-link&utm_campaign=wordpress-org&utm_content=first-interactive-image).
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Draw Attention plugin through the [Patchstack Vulnerability Disclosure  Program](https://patchstack.com/database/vdp/f6deb457-e81b-4132-825f-5fde0d09d824). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Screenshots ==
 1. Draw your highlightable areas right in the dashboard
 2. Site visitors can click to learn more about your highlighted areas
@@ -149,9 +153,9 @@ We have a guide walkthrough of creating your first image available in [our docum
 ### Features and Improvements
 
 - Hid the move to trash button.
-  
+
 - Widget live preview
-  
+
 
 ## 2.0.24 - 2024-04-05
 
