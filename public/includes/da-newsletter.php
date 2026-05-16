@@ -49,11 +49,11 @@ class DrawAttention_Newsletter {
                         <button id='openModalButton'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
                     </div>
                     <div class='content-notice'>
-                        <span>" . __( "We'll only send you awesome content. Never spam.", 'draw-attention' ) . "</span>
+                        <span>" . __( "We'll only send you awesome content. Never spam.", 'draw-attention' ) . '</span>
                     </div>
                 </div>
             </div>
-        ";
+        ';
 	}
 
 	public function newsletter_modal_dialog() {
@@ -105,13 +105,13 @@ class DrawAttention_Newsletter {
                             </div>
                             
                             <div data-showonreset data-hideonsuccess class='content-notice md-content-notice'>
-                                <span>" . __( 'We keep your email safe and private, without drawing attention.', 'draw-attention' ) . "</span>
+                                <span>" . __( 'We keep your email safe and private, without drawing attention.', 'draw-attention' ) . '</span>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        ";
+        ';
 	}
 
 	public function add_newsletter_widget() {
