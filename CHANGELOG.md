@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.6 - 2026-05-19
+
+### Fixes
+
+- Silence WP 6.9.1 cmb2-scripts dep notice; scope newsletter assets
+
 ## 2.0.41 - 2025-10-28
 
 ### Fixes

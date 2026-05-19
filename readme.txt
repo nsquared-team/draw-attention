@@ -3,7 +3,7 @@ Contributors: tylerdigital, nataliemac, croixhaug, wpdrawattention
 Tags: image map, image maps, floor plan, interactive images, hotspot
 Requires at least: 3.5.1
 Tested up to: 7.0
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,6 +136,12 @@ Please report security bugs found in the source code of the Draw Attention plugi
 
 # Changelog
 
+## 2.1.6 - 2026-05-19
+
+### Fixes
+
+- Silence WP 6.9.1 cmb2-scripts dep notice; scope newsletter assets
+
 ## 2.0.41 - 2025-10-28
 
 ### Fixes
@@ -153,9 +159,9 @@ Please report security bugs found in the source code of the Draw Attention plugi
 ### Features and Improvements
 
 - Hid the move to trash button.
-
+  
 - Widget live preview
-
+  
 
 ## 2.0.24 - 2024-04-05
 
@@ -198,12 +204,6 @@ Please report security bugs found in the source code of the Draw Attention plugi
 ### Fixes
 
 - Fix PHP warning in CMB2 library
-
-### Features and Improvements
-
-- Prevent conflicts with other plugins that use the leaflet library
-
-## 2.0.12 - 2023-05-26
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
