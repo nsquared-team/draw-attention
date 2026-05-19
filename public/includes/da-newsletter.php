@@ -20,8 +20,17 @@ class DrawAttention_Newsletter {
 	}
 
 	public function enqueue_meta_box_assets() {
-		wp_enqueue_style( 'da-custom-meta-box-styles', $this->plugin_directory . '/assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
+		if ( ! $this->is_da_image_edit_screen() ) {
+			return;
+		}
+
+		wp_enqueue_style( 'da-custom-meta-box-styles', $this->plugin_directory . 'assets/css/custom-meta-box-styles.css', array(), DrawAttention::VERSION );
 		wp_enqueue_script( 'da-news-letter-js', $this->plugin_directory . 'assets/js/news-letter.js', array(), DrawAttention::VERSION );
+	}
+
+	private function is_da_image_edit_screen() {
+		$current_screen = get_current_screen();
+		return $current_screen && 'post' === $current_screen->base && 'da_image' === $current_screen->post_type;
 	}
 
 	public function metabox_newsletter_component() {
@@ -30,13 +39,13 @@ class DrawAttention_Newsletter {
 
                 <div class='content-container'>
                     <div>
-                        <img src='" . $this->plugin_directory . "/assets/images/news-letter.svg' alt='Newsletter Image'>
+                        <img src='" . $this->plugin_directory . "assets/images/news-letter.svg' alt='Newsletter Image'>
                     </div>
                     <div>
                         <p> " . __( 'Stay up to date with the latest from Draw Attention', 'draw-attention' ) . "</p>
                     </div>
                     <div class='outer-content'>
-                        <p>Subscribe now! Get 20% Coupon</p>
+                        <p>" . __( 'Subscribe now! Get 20% Coupon', 'draw-attention' ) . "</p>
                         <button id='openModalButton'> <span>" . __( 'SUBSCRIBE', 'draw-attention' ) . "</span> </button>
                     </div>
                     <div class='content-notice'>
@@ -48,12 +57,7 @@ class DrawAttention_Newsletter {
 	}
 
 	public function newsletter_modal_dialog() {
-		if ( ! is_admin() ) {
-			return;
-		}
-
-		$current_screen = get_current_screen();
-		if ( ! $current_screen || 'post' !== $current_screen->base || 'da_image' !== $current_screen->post_type ) {
+		if ( ! $this->is_da_image_edit_screen() ) {
 			return;
 		}
 
@@ -64,19 +68,19 @@ class DrawAttention_Newsletter {
                 <div class='modal-content modal-content-container'>
                     <div class='close-button-container'>
                         <button id='closeModalButton' class='dismiss-banner' aria-label='Dismiss Notice'>
-                            <img src='" . $this->plugin_directory . "/assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
+                            <img src='" . $this->plugin_directory . "assets/images/close-icon.svg' alt='Dismiss Notice Icon'>
                         </button>
                     </div>
-                    <form  method='POST' class='news-letter-container news-letter-form-container' id='da-newsletter-form' class='_form _form_1 _inline-form  _dark' novalidate='' data-styles-version='5'>
+                    <form method='POST' class='news-letter-container news-letter-form-container _form _form_1 _inline-form _dark' id='da-newsletter-form' novalidate='' data-styles-version='5'>
                         <div class='content-container modal-container'>
                             <div class='modal-content'>
                                 <div class='modal-info'>
-                                    <h2 id='weeklyNewsLetterHeader'> " . __( 'Get our weekly', 'draw-attention' ) . "</span></h2>
+                                    <h2 id='weeklyNewsLetterHeader'> " . __( 'Get our weekly', 'draw-attention' ) . "</h2>
                                     <p class='headline'> " . __( 'newsletter', 'draw-attention' ) . "</p>
                                     <p class='modal-statement'> " . __( 'Get weekly updates on the newest Draw Attention updates, case studies and tips right in your mailbox.', 'draw-attention' ) . "</p>
                                     <label data-hideonsuccess for='da-newsletter-email' class='cta'> " . __( 'Enter your email to get a 20% Coupon', 'draw-attention' ) . "</label>
                                 </div>
-                                <img class='inner-modal-image' src='" . $this->plugin_directory . "/assets/images/letter.svg' alt='Newsletter Image'>
+                                <img class='inner-modal-image' src='" . $this->plugin_directory . "assets/images/letter.svg' alt='Newsletter Image'>
                             </div>
 
                             <div data-showonreset data-hideonsuccess class='_form_element _x45964534 _full_width input-field'>

@@ -187,8 +187,24 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 					'ajaxURL' => admin_url( 'admin-ajax.php' ),
 				) );
 				wp_enqueue_script( $this->plugin_slug . '-admin-script', array(),  DrawAttention::VERSION );
+
+				// Silence WP 6.9.1's missing dep notice for our cmb2-scripts dep — CMB2 doesn't always
+				// register that handle by print time. The filter self-removes after firing.
+				add_filter( 'doing_it_wrong_trigger_error', array( $this, 'suppress_cmb2_dep_notice' ), 10, 3 );
 			}
 
+		}
+
+		public function suppress_cmb2_dep_notice( $trigger, $function_name, $message ) {
+			if ( 'WP_Scripts::add' !== $function_name ) {
+				return $trigger;
+			}
+			$pattern = '/\b' . preg_quote( $this->plugin_slug . '-admin-script', '/' ) . '\b.*\bcmb2-scripts\b/s';
+			if ( preg_match( $pattern, (string) $message ) ) {
+				remove_filter( 'doing_it_wrong_trigger_error', array( $this, 'suppress_cmb2_dep_notice' ), 10 );
+				return false;
+			}
+			return $trigger;
 		}
 
 		public function fix_mainwp_conflict()
