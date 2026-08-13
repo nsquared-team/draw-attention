@@ -34,12 +34,12 @@ class DrawAttention_CPT {
 			// let's now add all the options for this post type
 			array(
 				'labels'              => array(
-					'name'               => __( 'Draw Attention', $this->post_type . ' general name', 'draw-attention' ), /* This is the Title of the Group */
-					'singular_name'      => __( 'Image', $this->post_type . ' singular name', 'draw-attention' ), /* This is the individual type */
+					'name'               => __( 'Draw Attention', 'draw-attention' ), /* This is the Title of the Group */
+					'singular_name'      => __( 'Image', 'draw-attention' ), /* This is the individual type */
 					'all_items'          => __( 'All Images', 'draw-attention' ), /* the all items menu item */
-					'add_new'            => __( 'Add New', 'custom ' . $this->post_type . ' item', 'draw-attention' ), /* The add new menu item */
+					'add_new'            => __( 'Add New', 'draw-attention' ), /* The add new menu item */
 					'add_new_item'       => __( 'Add New Image', 'draw-attention' ), /* Add New Display Title */
-					'edit'               => __( 'Edit' ), /* Edit Dialog */
+					'edit'               => __( 'Edit', 'draw-attention' ), /* Edit Dialog */
 					'edit_item'          => __( 'Edit Image', 'draw-attention' ), /* Edit Display Title */
 					'new_item'           => __( 'New Image', 'draw-attention' ), /* New Display Title */
 					'view_item'          => __( 'View Image', 'draw-attention' ), /* View Display Title */
@@ -48,7 +48,7 @@ class DrawAttention_CPT {
 					'not_found_in_trash' => __( 'Nothing found in Trash', 'draw-attention' ), /* This displays if there is nothing in the trash */
 					'parent_item_colon'  => '',
 				), /* end of arrays */
-				'description'         => __( 'Stores ' . $this->post_type . 's in the database', 'draw-attention' ), /* CPT_SINGULAR_NAME Description */
+				'description'         => __( 'Stores Draw Attention images in the database', 'draw-attention' ), /* CPT_SINGULAR_NAME Description */
 				'public'              => true,
 				'publicly_queryable'  => true,
 				'exclude_from_search' => true,
