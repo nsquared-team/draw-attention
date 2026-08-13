@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 class DrawAttention_BigCommerce_Action extends DrawAttention_Action {
 	public static function is_active() {
 		$classes = array(
