@@ -135,6 +135,7 @@ module.exports = function (grunt) {
           "**",
           "!.git",
           "!.github",
+          "!documentation/**",
           "!external",
           "!.gitignore",
           "!CHANGELOG.md",

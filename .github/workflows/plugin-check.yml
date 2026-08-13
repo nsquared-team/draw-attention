@@ -1,0 +1,52 @@
+# Runs WordPress.org Plugin Check (https://github.com/WordPress/plugin-check)
+# on every PR, the same way ssa-plugin and plugin-detective do.
+#
+# Scans the BUILT wp.org file set — the `release/svn` tree that `grunt wporg`
+# produces and the release workflow ships to WordPress.org — so findings
+# reflect what users actually install, never dev-only files (Gruntfile,
+# .github, node_modules, external/) that stay out of the shipped plugin.
+name: Plugin Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: da-plugin-check-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  plugin-check:
+    name: WordPress.org Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build the WordPress.org file set
+        run: |
+          npm install
+          npx grunt wporg
+          echo "----- release/svn top level -----"
+          ls -la release/svn
+
+      - name: Stage the build under the wp.org slug
+        run: |
+          # Plugin Check derives the plugin slug from the folder name, and the
+          # slug-sensitive checks (readme, trademarks, text domain) need it to
+          # match the wp.org slug exactly.
+          mkdir -p build
+          mv release/svn build/draw-attention
+
+      - name: Run Plugin Check
+        uses: WordPress/plugin-check-action@v1
+        with:
+          build-dir: ./build/draw-attention
