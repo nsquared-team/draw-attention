@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
 define( 'FL_MODULE_DA_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FL_MODULE_DA_URL', plugins_url( '/', __FILE__ ) );
