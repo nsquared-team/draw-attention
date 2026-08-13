@@ -17,6 +17,9 @@ concurrency:
 
 permissions:
   contents: read
+  # The action posts its findings summary as a PR comment; without this it
+  # fails with "Resource not accessible by integration".
+  pull-requests: write
 
 jobs:
   plugin-check:
