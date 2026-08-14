@@ -1,0 +1,83 @@
+# Test suite for every PR: packaging + direct-access sweep on the built
+# WordPress.org file set, and an end-to-end boot smoke on a clean WordPress.
+# The scripts under tests/ hold the logic so they can run locally too.
+name: Tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: da-tests-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-contents:
+    name: Packaging + direct-access sweep
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Build the WordPress.org file set
+        run: |
+          npm install
+          npx grunt wporg
+
+      - name: Check build contents and direct-access safety
+        run: bash tests/packaging/check-build.sh release/svn
+
+  e2e-smoke:
+    name: "E2E: activate + render smoke"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build the WordPress.org file set
+        run: |
+          npm install
+          npx grunt wporg
+          mkdir -p build
+          mv release/svn build/draw-attention
+
+      # `core` must stay a wordpress.org ZIP, never a git ref: resolving the
+      # latest release through the GitHub mirror breaks for hours after every
+      # WordPress release until the mirror's tag appears (see ssa-plugin's
+      # plugin-check workflow for the incident history).
+      - name: Configure wp-env
+        run: |
+          echo '{"core":"https://wordpress.org/latest.zip","mappings":{"wp-content/plugins/draw-attention":"./build/draw-attention"}}' > .wp-env.json
+          cat .wp-env.json
+
+      - name: Install wp-env
+        run: npm -g install @wordpress/env
+
+      - name: Start WordPress environment
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: wp-env start --update
+
+      - name: Run smoke test
+        run: bash tests/e2e/smoke.sh http://localhost:8888
