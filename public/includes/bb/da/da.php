@@ -35,12 +35,12 @@ FLBuilder::register_module(
 			'title'    => __( 'General', 'draw-attention' ), // Tab title
 			'sections' => array( // Tab Sections
 				'general' => array( // Section
-					'title'  => __( 'Section Title', 'draw-attention' ), // Section Title
+					'title'  => __( 'Image', 'draw-attention' ), // Section Title
 					'fields' => array( // Section Fields
 						'da_img' => array(
 							'type'    => 'select-img',
 							'label'   => __( 'Draw Attention Image', 'draw-attention' ),
-							'help'    => 'Select a Draw Attention image to be displayed',
+							'help'    => __( 'Select a Draw Attention image to be displayed', 'draw-attention' ),
 							'default' => '',
 						),
 					),
