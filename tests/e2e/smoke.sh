@@ -21,7 +21,7 @@ echo "--- post type registered ---"
 cli post-type list --field=name | grep -qx "da_image"
 
 echo "--- publish an image and render its page ---"
-POST_ID=$(cli post create --post_type=da_image --post_title="CI Smoke Image" --post_status=publish --porcelain | tr -dc '0-9')
+POST_ID=$(cli post create --post_type=da_image --post_title="CI Smoke Image" --post_status=publish --porcelain | tail -1 | tr -dc '0-9')
 [ -n "$POST_ID" ]
 
 BODY=$(curl -sL --fail "$SITE_URL/?post_type=da_image&p=$POST_ID")
