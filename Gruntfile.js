@@ -152,6 +152,7 @@ module.exports = function (grunt) {
           "!**/*.scss",
           "!**/node_modules/**",
           "!release/**",
+          "!build/**",
         ],
         dest: "release/" + pkg.version + "/",
       },
