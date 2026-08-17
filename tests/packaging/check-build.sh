@@ -18,7 +18,7 @@ err() { echo "FAIL: $*" >&2; fail=1; }
 [ -d "$BUILD_DIR" ] || { echo "Build dir '$BUILD_DIR' missing — run 'npx grunt wporg' first" >&2; exit 2; }
 
 # Dev-only paths that must never ship.
-for p in external documentation tests .github node_modules Gruntfile.js package.json package-lock.json CHANGELOG.md CODEOWNERS; do
+for p in external documentation tests .github node_modules Gruntfile.js package.json package-lock.json composer.json composer.lock CHANGELOG.md CODEOWNERS; do
   [ -e "$BUILD_DIR/$p" ] && err "dev-only path shipped: $p"
 done
 

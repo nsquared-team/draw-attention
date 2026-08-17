@@ -144,6 +144,8 @@ module.exports = function (grunt) {
           "!Gruntfile.js",
           "!package.json",
           "!package-lock.json",
+          "!composer.json",
+          "!composer.lock",
 
           "!assets/repo/**",
 
