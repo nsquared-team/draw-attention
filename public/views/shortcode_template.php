@@ -61,6 +61,13 @@ if ( empty( $settings['img_url'] ) ) : ?>
 		color: <?php echo $settings['more_info_title']; ?>;
 	}
 
+	/* Allow long heading words (e.g. long compound words) to wrap instead of being clipped by the info box */
+	#<?php echo $settings['spot_id']; ?> .hotspot-title,
+	.featherlight .featherlight-content.lightbox-<?php echo $settings['image_id']; ?> .hotspot-title {
+		overflow-wrap: break-word;
+		word-break: break-word;
+	}
+
 	<?php foreach ( $formatted_styles as $style ) : ?>
 		#<?php echo $settings['spot_id']; ?> .hotspot-<?php echo $style['name']; ?> {
 			stroke-width: <?php echo $style['borderWidth']; ?>;
