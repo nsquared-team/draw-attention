@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
 // No hotspots are defined
 $has_hotspots = false;

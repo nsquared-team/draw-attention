@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 /**
  * The template for displaying a preview of the interactive image.
  * Copy this file into your theme to customize it for your specific project

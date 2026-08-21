@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 /**
  * Represents the view for the administration dashboard.
  *

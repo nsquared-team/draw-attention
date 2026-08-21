@@ -1,3 +1,9 @@
+<?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+?>
 <?php if ( $settings['layout'] != 'lightbox' && $settings['layout'] != 'tooltip' ) : ?>
 	<div class="hotspots-placeholder" id="content-hotspot-<?php echo $settings['image_id']; ?>">
 		<div class="hotspot-initial">

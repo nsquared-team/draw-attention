@@ -1,4 +1,8 @@
 <?php
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 class DrawAttention_URL_Action extends DrawAttention_Action {
 	function add_action_fields( $group_details ) {
 		if ( ! $this->is_active() ) {

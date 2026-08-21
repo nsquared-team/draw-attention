@@ -150,5 +150,6 @@ vendor/
 # Needed for WP release
 node_modules/
 release/
+build/
 package-lock.json
 admin/assets/config.codekit3
