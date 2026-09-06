@@ -611,14 +611,117 @@
 		$('.da-disable-third-party-js').hide();
 	}
 
+	/* Hotspot rows are drag-sortable by their title bar. On drop, jQuery UI sortable re-inserts
+	   the dragged row's DOM node (`placeholder.before(currentItem)`), which reloads every <iframe>
+	   inside it into a blank document. The Description field is a TinyMCE editor in an iframe, and
+	   TinyMCE keeps pointing at the old document, so after a drag the Visual editor looks empty and
+	   takes no input while the Code tab (the textarea) still has the content. This happens on every
+	   drop, even one dropped back in place, and a 1px move on the title bar already counts as a drag.
+
+	   Fix: tear the editor down before the move (`start` fires before the row's node is moved, and
+	   removing the editor flushes its content into the textarea) and build it again from the same
+	   settings after the move (`stop`). A row that is on the Code tab gets its editor back hidden,
+	   which is exactly how WordPress leaves an editor after a Visual → Code switch; every row must
+	   keep a TinyMCE instance because CMB2's own "Remove Area" handler waits (and retries forever,
+	   blocking every later "Add Another Area") for one to destroy. */
 	var sortHotspots = function() {
 		var hotspots = $('#_da_hotspots_repeat');
-		if (hotspots.length) {
-			hotspots.sortable({
-				items: '.cmb-repeatable-grouping',
-				handle: '.cmbhandle-title'
-			});
+		if (!hotspots.length) {
+			return;
 		}
+
+		// TinyMCE textarea ids inside a row (CMB2 names them _da_hotspots_<iterator>_description).
+		var editorIds = function($row) {
+			return $row.find('textarea.wp-editor-area').map(function() { return this.id; }).get();
+		};
+		// WordPress keeps the active tab on the editor wrap: tmce-active (Visual) / html-active (Code).
+		var inVisualMode = function(id) {
+			return !$('#wp-' + id + '-wrap').hasClass('html-active');
+		};
+		// Hide a freshly built editor without changing the Code tab's text: hide() saves TinyMCE's
+		// normalized copy of the content back into the textarea, so put the user's text back after.
+		// TinyMCE also marked the textarea aria-hidden while building; it is the visible control
+		// again now, as WordPress itself marks it after a Visual → Code switch.
+		var hideEditor = function(editor) {
+			var textarea = document.getElementById(editor.id),
+				value = textarea ? textarea.value : null;
+			editor.hide();
+			if (textarea) {
+				textarea.value = value;
+				textarea.setAttribute('aria-hidden', 'false');
+			}
+		};
+
+		hotspots.sortable({
+			items: '.cmb-repeatable-grouping',
+			handle: '.cmbhandle-title',
+			// jQuery UI's default starts a drag after 1px of movement, so a slightly shaky click on the
+			// title bar became a drag (and the click to open the row was swallowed). Ask for a real move.
+			distance: 5,
+			start: function(event, ui) {
+				if (!window.tinyMCE) {
+					return;
+				}
+				var heights = {};
+				$.each(editorIds(ui.item), function(i, id) {
+					var editor = window.tinyMCE.get(id),
+						textarea = document.getElementById(id),
+						// On the Code tab the textarea is the live copy and TinyMCE's body is stale.
+						// Editor.remove() saves that body over it (WordPress' own TinyMCE plugin hands the
+						// textarea value back while the editor is hidden, but don't depend on it), so put
+						// the user's text back afterwards.
+						codeTabValue = (textarea && !inVisualMode(id)) ? textarea.value : null;
+					if (editor && editor.iframeElement) {
+						heights[id] = parseInt(editor.iframeElement.style.height, 10) || 0;
+					}
+					window.tinyMCE.execCommand('mceRemoveEditor', false, id); // no-op if no live editor
+					if (codeTabValue !== null) {
+						textarea.value = codeTabValue;
+					}
+				});
+				ui.item.data('daEditorHeights', heights);
+			},
+			stop: function(event, ui) {
+				if (!window.tinyMCE || !window.tinyMCEPreInit) {
+					return;
+				}
+				var heights = ui.item.data('daEditorHeights') || {};
+				ui.item.removeData('daEditorHeights');
+				$.each(editorIds(ui.item), function(i, id) {
+					var settings = window.tinyMCEPreInit.mceInit[id],
+						editor;
+					if (!settings || window.tinyMCE.get(id)) {
+						return;
+					}
+					settings = $.extend({}, settings);
+					// Keep the size the editor had. Left to itself TinyMCE measures the textarea, which
+					// is 0 tall inside a collapsed row and taller than the original inside an open one.
+					if (heights[id]) {
+						settings.height = heights[id];
+					}
+					if (!inVisualMode(id)) {
+						var previousCallback = settings.init_instance_callback;
+						settings.init_instance_callback = function(editor) {
+							if (previousCallback) {
+								// Run the configured callback first (a function, or a function name
+								// string as WordPress allows) through TinyMCE's own resolver.
+								editor.settings.init_instance_callback = previousCallback;
+								editor.execCallback('init_instance_callback', editor);
+							}
+							hideEditor(editor);
+						};
+					}
+					window.tinyMCE.init(settings);
+					// The editor is registered synchronously, so for a Code-tab row hide it right away
+					// rather than showing the Visual editor until TinyMCE's stylesheet has loaded; the
+					// callback above covers the case where the container is not built yet.
+					editor = window.tinyMCE.get(id);
+					if (editor && !inVisualMode(id)) {
+						hideEditor(editor);
+					}
+				});
+			}
+		});
 	};
 
 	var removeRowReset = function(){
