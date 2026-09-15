@@ -42,14 +42,26 @@ jobs:
           asana-secret: ${{ secrets.OTTO_ASANA_SECRET_TOKEN }}
           comment-text: "PR #{{PR_ID}} {{PR_NAME}} is {{PR_STATE}} -> {{PR_URL}}"
       - name: Get Output
+        # These outputs are built from the PR comment and review bodies, which anyone
+        # able to comment controls. A `${{ }}` expansion is pasted into the script
+        # before bash parses it, so the text becomes code: a review containing
+        # backticks failed this step outright, and one containing `$(...)` would have
+        # run on the runner with the three tokens above in scope. Passing them through
+        # `env:` and quoting keeps them data.
+        env:
+          OUT_EVENT: ${{ steps.createComment.outputs.event }}
+          OUT_ACTION: ${{ steps.createComment.outputs.action }}
+          OUT_FOLLOWERS_STATUS: ${{ steps.createComment.outputs.followersStatus }}
+          OUT_COMMENT_STATUS: ${{ steps.createComment.outputs.commentStatus }}
+          OUT_COMMENT: ${{ steps.createComment.outputs.comment }}
         run: |
           echo "Event:"
-          echo "${{ steps.createComment.outputs.event }}"
+          echo "$OUT_EVENT"
           echo "Action:"
-          echo "${{ steps.createComment.outputs.action }}"
+          echo "$OUT_ACTION"
           echo "Followers Status:"
-          echo "${{ steps.createComment.outputs.followersStatus }}"
+          echo "$OUT_FOLLOWERS_STATUS"
           echo "Comment Status:"
-          echo "${{ steps.createComment.outputs.commentStatus }}"
+          echo "$OUT_COMMENT_STATUS"
           echo "Comment:"
-          echo "${{ steps.createComment.outputs.comment }}"
+          echo "$OUT_COMMENT"
