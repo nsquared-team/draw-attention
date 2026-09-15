@@ -1,5 +1,12 @@
 name: Sync with Asana
 
+# This workflow fires on comment and review events from any account that can reach
+# the repo, and neither action below uses the ambient GITHUB_TOKEN: the comment
+# action authenticates with its own PAT input, and the attachment action makes no
+# GitHub API calls. An empty block drops the token's default write scopes so the
+# job cannot act on the repo if a step is ever re-shaped.
+permissions: {}
+
 on:
   issue_comment:
     types: [created, edited, deleted]
@@ -26,7 +33,11 @@ jobs:
         with:
           asana-secret: ${{ secrets.OTTO_ASANA_SECRET_TOKEN }}
       - name: Log output status
-        run: echo "Status is ${{ steps.postAttachment.outputs.status }}"
+        # Same rule as the Get Output step below: nothing reaches the script through a
+        # `${{ }}` expansion, so the file holds no template expansion inside any `run:`.
+        env:
+          OUT_STATUS: ${{ steps.postAttachment.outputs.status }}
+        run: echo "Status is $OUT_STATUS"
   
   # Create Comment Always Except On PR edited 
   create-comment-in-asana-task-job:
