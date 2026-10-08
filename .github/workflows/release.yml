@@ -12,10 +12,6 @@
 # the conditionals should preent creating a release unless the version was incremented, otherwise you may face conflicts with duplicate tags
 name: DA GitHub Release
 
-env:
-  OTTO_TOKEN: ${{ secrets.OTTO_GITHUB_PAT }}
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  
 on:
   schedule:
     # release every Tuesday at 5pm UTC, LA time 9am
@@ -48,6 +44,8 @@ jobs:
         with:
           ssh-key: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
           ref: master
+          # The npm installs below must not see the deploy key; only the two push steps get it.
+          persist-credentials: false
 
       - name: "Check defined version type"
         id: version
@@ -152,14 +150,28 @@ jobs:
       # =====================================
       - name: 'Update branch master'
         if:  steps.version.outputs.version != 'current' || ( steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != '' )
+        env:
+          DEPLOY_KEY: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
         run: |
+          key="$RUNNER_TEMP/deploy_key"
+          trap 'rm -f "$key"' EXIT
+          (umask 077; printf '%s\n' "$DEPLOY_KEY" > "$key")
+          printf '%s\n' "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > "$RUNNER_TEMP/github_known_hosts"
+          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/github_known_hosts"
           git add -A .
           git commit -m "Update to ${{ steps.package-version.outputs.current-version }} [version-bump]"
           git push origin master
 
       - name: 'Merge master -> release'
         id: merge-master-release
+        env:
+          DEPLOY_KEY: ${{ secrets.OTTO_ACTIONS_SSH_KEY }}
         run: |
+          key="$RUNNER_TEMP/deploy_key"
+          trap 'rm -f "$key"' EXIT
+          (umask 077; printf '%s\n' "$DEPLOY_KEY" > "$key")
+          printf '%s\n' "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > "$RUNNER_TEMP/github_known_hosts"
+          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$RUNNER_TEMP/github_known_hosts"
           git fetch origin --unshallow
           git checkout -b release origin/release
           git merge master
@@ -208,7 +220,7 @@ jobs:
           ZIP_FILENAME: "${{ github.event.repository.name }}-${{ steps.package-version.outputs.current-version }}-prerelease.zip"
         with:
           prerelease: true
-          token: ${{ env.OTTO_TOKEN }}
+          token: ${{ secrets.OTTO_GITHUB_PAT }}
           body: ${{steps.build_changelog.outputs.changelog}}
           tag_name: "${{ steps.package-version.outputs.current-version }}"
           files: |
@@ -244,6 +256,7 @@ jobs:
         if: failure()
         uses: slackapi/slack-github-action@v1.23.0
         env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           JSON: "{\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\nFailed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\",\"blocks\":[{\"type\":\"divider\"},{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"\\n:red_circle: Draw Attention ${{ steps.package-version.outputs.current-version }}\\n\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failed to Prepare GitHub release.\\n\\nKindly check what went wrong, or try triggering the release workflow again.\\n\"}}]}"
         with:
           payload: ${{ env.JSON }}
@@ -266,9 +279,11 @@ jobs:
   
       - name: "Send Dev Changelog Notification to Slack"
         if: success()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         run: |
           json_content=$(cat "formatted-dev-changelog.json")
-          curl -X POST -H "Content-type: application/json" --data "$json_content" "${{ env.SLACK_WEBHOOK_URL }}"
+          curl -X POST -H "Content-type: application/json" --data "$json_content" "$SLACK_WEBHOOK_URL"
           
       # ===================================================================
       # Trigger deploy workflow only if the workflow was triggered on cron
