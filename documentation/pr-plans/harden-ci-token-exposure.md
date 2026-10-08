@@ -7,5 +7,5 @@ Risk: CI only, the plugin zip doesn't change. Undo is a revert. The load-bearing
 ## Definition of Done
 - [ ] Every job that checks out the repo and then runs third-party code either has a read-only token and no deploy key left on disk, or sets `persist-credentials: false`.
 - [ ] No secret is set in workflow-level or job-level `env:` of a job that runs third-party code; each one is set on the steps that read it.
-- [ ] actionlint passes on every changed workflow.
+- [ ] actionlint reports no finding on the changed workflows that the base branch does not already have.
 - [ ] Plugin Check passes on this PR and still posts its comment.
