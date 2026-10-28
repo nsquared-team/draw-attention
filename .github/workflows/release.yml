@@ -85,7 +85,7 @@ jobs:
         if: ${{ steps.version.outputs.version != 'current' }}
         run: |
           npm install
-          grunt increment-version
+          npx grunt increment-version
 
       # =====================================
       # Build Dev Changelog =================
@@ -171,7 +171,7 @@ jobs:
       - name: "Package the App"
         run: |
           npm install
-          grunt wporg
+          npx grunt wporg
 
       - name: "List Files Included In Release"
         run: |
