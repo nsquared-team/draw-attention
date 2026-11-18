@@ -4,7 +4,8 @@
 #
 # Proves that a visitor who is not logged in:
 #  - sees a published image, and none of a draft, pending or private one;
-#  - gets WordPress's password form for a password-protected one;
+#  - gets WordPress's password form for a password-protected one, and lands back
+#    on the same page once the password is right;
 #  - still sees an unpublished image the site showed before the plugin checked
 #    visibility, until its owner hides it or changes its status.
 # And that an editor still sees a draft.
@@ -63,6 +64,16 @@ set_image --post_status=publish --post_password=secret
 PROTECTED=$(visitor_page)
 if grep -q "$MARKER" <<<"$PROTECTED"; then fail "a password-protected image shows to a visitor"; fi
 grep -q "post-password-form" <<<"$PROTECTED" || fail "a password-protected image shows no password form"
+
+echo "--- and the right password brings the visitor back to that page, with the image ---"
+PAGE_URL=$(curl -sL -o /dev/null -w '%{url_effective}' "$SITE_URL/?page_id=$PAGE_ID")
+# Send what a browser would: the password, plus the form's own redirect field if it has one.
+FORM_FIELDS=(--data-urlencode "post_password=secret")
+REDIRECT_TO=$(grep -o 'name="redirect_to" value="[^"]*"' <<<"$PROTECTED" | sed -e 's/^.*value="//' -e 's/"$//' -e 's/&#038;/\&/g' -e 's/&amp;/\&/g' || true)
+[ -z "$REDIRECT_TO" ] || FORM_FIELDS+=(--data-urlencode "redirect_to=$REDIRECT_TO")
+UNLOCKED=$(curl -sL -b "" -e "$PAGE_URL" -w '\nlanded on %{url_effective}' "${FORM_FIELDS[@]}" "$SITE_URL/wp-login.php?action=postpass")
+grep -qxF "landed on $PAGE_URL" <<<"$UNLOCKED" || fail "the right password did not bring the visitor back to the page"
+grep -q "$MARKER" <<<"$UNLOCKED" || fail "the right password did not show the image"
 
 echo "--- an unpublished image the site already showed keeps showing after the update ---"
 set_image --post_status=draft
