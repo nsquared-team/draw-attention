@@ -17,4 +17,4 @@ Risk: every front-end render of the plugin goes through this handler. An existin
 - [x] No other code path in the plugin prints an image's hotspots to a visitor without going through this check.
 - [x] CI's code sniffer reports on `admin/class-drawattention-admin.php`, and reads no minified file.
 - [x] CI's formatting bot still pushes its fix to the branch, from a checkout that keeps no token.
-- [ ] A password-protected image asks a visitor for its password from the first load after the update, also on a site that showed it before, and its edit screen shows no notice.
+- [x] A password-protected image asks a visitor for its password from the first load after the update, also on a site that showed it before, and its edit screen shows no notice.
