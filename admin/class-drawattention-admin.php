@@ -380,7 +380,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			?>
 			<div class="notice notice-warning">
 				<p><?php esc_html_e( 'Visitors can still see this image through Draw Attention, even though it is not published or is password protected. Draw Attention kept showing it so your pages did not change when the plugin updated.', 'draw-attention' ); ?></p>
-				<p><a class="button" href="<?php echo esc_url( $hide_url ); ?>"><?php esc_html_e( 'Hide it from visitors', 'draw-attention' ); ?></a></p>
+				<p><a class="button" href="<?php echo esc_url( $hide_url ); ?>"><?php esc_html_e( 'Hide this image from visitors', 'draw-attention' ); ?></a></p>
 			</div>
 			<?php
 		}
