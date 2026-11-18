@@ -100,7 +100,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			// Shortcode for displaying the image map
 			add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
 
-			// Images a site already showed before the shortcode checked visibility
+			// Images a site already showed before the shortcode checked visibility.
 			add_action( 'init', array( $this, 'record_legacy_visible_images' ), 11 );
 			add_action( 'post_updated', array( $this, 'end_legacy_visibility_on_change' ), 10, 3 );
 
@@ -617,10 +617,21 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			update_option( 'da_legacy_visible_images', $legacy_ids );
 		}
 
+		/**
+		 * Whether the shortcode keeps showing this image as it did before it checked visibility.
+		 *
+		 * @param int $image_id The image's post ID.
+		 * @return bool
+		 */
 		public function is_legacy_visible_image( $image_id ) {
 			return in_array( (int) $image_id, (array) get_option( 'da_legacy_visible_images' ), true );
 		}
 
+		/**
+		 * From now on, show this image only to visitors WordPress lets read it.
+		 *
+		 * @param int $image_id The image's post ID.
+		 */
 		public function end_legacy_visibility( $image_id ) {
 			if ( $this->is_legacy_visible_image( $image_id ) ) {
 				update_option( 'da_legacy_visible_images', array_values( array_diff( get_option( 'da_legacy_visible_images' ), array( (int) $image_id ) ) ) );
@@ -629,6 +640,10 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 
 		/**
 		 * Once the owner changes such an image's status or password, WordPress's rules apply to it.
+		 *
+		 * @param int     $post_id     The saved post's ID.
+		 * @param WP_Post $post_after  The post as saved.
+		 * @param WP_Post $post_before The post before the save.
 		 */
 		public function end_legacy_visibility_on_change( $post_id, $post_after, $post_before ) {
 			if ( $post_after->post_status !== $post_before->post_status || $post_after->post_password !== $post_before->post_password ) {
