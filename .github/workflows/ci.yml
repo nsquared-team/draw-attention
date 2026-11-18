@@ -21,7 +21,7 @@ jobs:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     env:
-      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*min.* --extensions=php --runtime-set testVersion 7.2
+      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules --extensions=php --runtime-set testVersion 7.2
     steps:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
