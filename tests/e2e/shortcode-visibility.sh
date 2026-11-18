@@ -77,7 +77,7 @@ grep -qxF "landed on $PAGE_URL" <<<"$UNLOCKED" || fail "the right password did n
 grep -q "$MARKER" <<<"$UNLOCKED" || fail "the right password did not show the image"
 
 echo "--- an unpublished image the site already showed keeps showing after the update ---"
-set_image --post_status=draft
+set_image --post_status=draft --post_password=""
 forget_update
 visitor_sees_image || fail "a draft image the site already showed went missing after the update"
 
