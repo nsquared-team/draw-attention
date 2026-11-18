@@ -28,6 +28,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # npm install runs next; keep the PR-write token out of .git/config.
+          persist-credentials: false
 
       - name: Set up Node
         uses: actions/setup-node@v4
