@@ -462,11 +462,12 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				$settings['image_id'] = icl_object_id( $settings['image_id'], 'da_image', true );
 			}
 
-			// Only show the image to visitors WordPress lets read it. An image this site
-			// already showed before this check existed keeps showing.
+			// Only show the image to visitors WordPress lets read it. An unpublished image this
+			// site already showed before this check existed keeps showing. A password is always
+			// asked for: an owner who set one meant to protect the image.
 			$image_post = $settings['image_id'] ? get_post( $settings['image_id'] ) : null;
-			if ( $image_post && ! $this->is_legacy_visible_image( $image_post->ID ) ) {
-				if ( 'publish' !== $image_post->post_status && ! current_user_can( 'read_post', $image_post->ID ) ) {
+			if ( $image_post ) {
+				if ( 'publish' !== $image_post->post_status && ! $this->is_legacy_visible_image( $image_post->ID ) && ! current_user_can( 'read_post', $image_post->ID ) ) {
 					return '';
 				}
 				if ( post_password_required( $image_post ) ) {
@@ -592,9 +593,9 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		}
 
 		/**
-		 * The shortcode used to show the newest image whatever its status or password.
-		 * Remember, once, the images a site may already be showing that way, so the
-		 * visibility check in shortcode() changes no existing page.
+		 * The shortcode used to show the newest image whatever its status. Remember,
+		 * once, the unpublished images a site may already be showing that way, so the
+		 * status check in shortcode() hides none of them.
 		 */
 		public function record_legacy_visible_images() {
 			if ( false !== get_option( 'da_legacy_visible_images' ) ) {
@@ -610,7 +611,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				)
 			);
 			foreach ( $images as $image ) {
-				if ( 'publish' !== $image->post_status || '' !== $image->post_password ) {
+				if ( 'publish' !== $image->post_status ) {
 					$legacy_ids[] = $image->ID;
 				}
 			}
@@ -639,14 +640,14 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		}
 
 		/**
-		 * Once the owner changes such an image's status or password, WordPress's rules apply to it.
+		 * Once the owner changes such an image's status, WordPress's rules apply to it.
 		 *
 		 * @param int     $post_id     The saved post's ID.
 		 * @param WP_Post $post_after  The post as saved.
 		 * @param WP_Post $post_before The post before the save.
 		 */
 		public function end_legacy_visibility_on_change( $post_id, $post_after, $post_before ) {
-			if ( $post_after->post_status !== $post_before->post_status || $post_after->post_password !== $post_before->post_password ) {
+			if ( $post_after->post_status !== $post_before->post_status ) {
 				$this->end_legacy_visibility( $post_id );
 			}
 		}

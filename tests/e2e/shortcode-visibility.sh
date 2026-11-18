@@ -4,11 +4,10 @@
 #
 # Proves that a visitor who is not logged in:
 #  - sees a published image, and none of a draft, pending or private one;
-#  - gets WordPress's password form for a password-protected one, and lands back
-#    on the same page once the password is right;
-#  - still sees an unpublished or password-protected image the site showed before
-#    the plugin checked visibility, until its owner hides it or changes its status
-#    or password.
+#  - gets WordPress's password form for a password-protected one, on every site, and
+#    lands back on the same page once the password is right;
+#  - still sees an unpublished image the site showed before the plugin checked
+#    visibility, until its owner hides it or changes its status.
 # And that an editor still sees a draft.
 #
 # Usage: tests/e2e/shortcode-visibility.sh [site-url]   (default: http://localhost:8888)
@@ -96,11 +95,20 @@ visitor_sees_image || fail "a draft image the site already showed went missing a
 set_image --post_status=private
 if visitor_sees_image; then fail "an image still shows after its status changed to private"; fi
 
-echo "--- a password-protected image the site already showed keeps showing too, until its password changes ---"
+echo "--- a password-protected image the site already showed asks for its password at once ---"
 set_image --post_status=publish --post_password=secret
 forget_update
-visitor_sees_image || fail "a password-protected image the site already showed went missing after the update"
-set_image --post_password=changed
-if visitor_sees_image; then fail "an image still shows after its password changed"; fi
+AFTER_UPDATE=$(visitor_page)
+if grep -q "$MARKER" <<<"$AFTER_UPDATE"; then fail "a password-protected image the site already showed still shows without its password"; fi
+grep -q "post-password-form" <<<"$AFTER_UPDATE" || fail "a password-protected image the site already showed shows no password form"
+EDIT_SCREEN=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen's notice shows for a password-protected image"; fi
+
+echo "--- and so does an unpublished image the site keeps showing, once it has a password ---"
+set_image --post_status=draft --post_password=secret
+forget_update
+AFTER_UPDATE=$(visitor_page)
+if grep -q "$MARKER" <<<"$AFTER_UPDATE"; then fail "an unpublished image the site keeps showing shows without its password"; fi
+grep -q "post-password-form" <<<"$AFTER_UPDATE" || fail "an unpublished image the site keeps showing shows no password form"
 
 echo "OK: shortcode visibility passed (image $IMAGE_ID on page $PAGE_ID)"
