@@ -6,8 +6,9 @@
 #  - sees a published image, and none of a draft, pending or private one;
 #  - gets WordPress's password form for a password-protected one, and lands back
 #    on the same page once the password is right;
-#  - still sees an unpublished image the site showed before the plugin checked
-#    visibility, until its owner hides it or changes its status.
+#  - still sees an unpublished or password-protected image the site showed before
+#    the plugin checked visibility, until its owner hides it or changes its status
+#    or password.
 # And that an editor still sees a draft.
 #
 # Usage: tests/e2e/shortcode-visibility.sh [site-url]   (default: http://localhost:8888)
@@ -94,5 +95,12 @@ forget_update
 visitor_sees_image || fail "a draft image the site already showed went missing after the update"
 set_image --post_status=private
 if visitor_sees_image; then fail "an image still shows after its status changed to private"; fi
+
+echo "--- a password-protected image the site already showed keeps showing too, until its password changes ---"
+set_image --post_status=publish --post_password=secret
+forget_update
+visitor_sees_image || fail "a password-protected image the site already showed went missing after the update"
+set_image --post_password=changed
+if visitor_sees_image; then fail "an image still shows after its password changed"; fi
 
 echo "OK: shortcode visibility passed (image $IMAGE_ID on page $PAGE_ID)"
