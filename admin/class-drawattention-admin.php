@@ -362,7 +362,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 		/**
 		 * On the edit screen of an image the shortcode keeps showing although it is
-		 * unpublished or password protected: say so, and offer to stop.
+		 * unpublished: say so, and offer to stop.
 		 */
 		public function display_legacy_visible_notice() {
 			$screen   = get_current_screen();
@@ -379,7 +379,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			$hide_url = wp_nonce_url( add_query_arg( 'da_hide_legacy_image', 1 ), 'da_hide_legacy_image_' . $image_id );
 			?>
 			<div class="notice notice-warning">
-				<p><?php esc_html_e( 'Visitors can still see this image through Draw Attention, even though it is not published or is password protected. Draw Attention kept showing it so your pages did not change when the plugin updated.', 'draw-attention' ); ?></p>
+				<p><?php esc_html_e( 'Visitors can still see this image, even though it is not published. Draw Attention kept it visible so your site did not change after the update.', 'draw-attention' ); ?></p>
 				<p><a class="button" href="<?php echo esc_url( $hide_url ); ?>"><?php esc_html_e( 'Hide this image from visitors', 'draw-attention' ); ?></a></p>
 			</div>
 			<?php
