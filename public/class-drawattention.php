@@ -100,6 +100,10 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			// Shortcode for displaying the image map
 			add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
 
+			// Images a site already showed before the shortcode checked visibility
+			add_action( 'init', array( $this, 'record_legacy_visible_images' ), 11 );
+			add_action( 'post_updated', array( $this, 'end_legacy_visibility_on_change' ), 10, 3 );
+
 			add_action( 'admin_notices', array( $this, 'php_52_notice' ) );
 
 			add_action( 'add_meta_boxes', array( $this, 'add_shortcode_metabox' ) );
@@ -458,6 +462,18 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				$settings['image_id'] = icl_object_id( $settings['image_id'], 'da_image', true );
 			}
 
+			// Only show the image to visitors WordPress lets read it. An image this site
+			// already showed before this check existed keeps showing.
+			$image_post = $settings['image_id'] ? get_post( $settings['image_id'] ) : null;
+			if ( $image_post && ! $this->is_legacy_visible_image( $image_post->ID ) ) {
+				if ( 'publish' !== $image_post->post_status && ! current_user_can( 'read_post', $image_post->ID ) ) {
+					return '';
+				}
+				if ( post_password_required( $image_post ) ) {
+					return get_the_password_form( $image_post );
+				}
+			}
+
 			// Get and set DA settings
 			$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
 			if ( empty( $settings['img_settings']['_da_map_more_info'] ) ) {
@@ -571,6 +587,51 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			require $this->get_plugin_dir() . '/public/views/shortcode_template.php';
 
 			return ob_get_clean();
+		}
+
+		/**
+		 * The shortcode used to show the newest image whatever its status or password.
+		 * Remember, once, the images a site may already be showing that way, so the
+		 * visibility check in shortcode() changes no existing page.
+		 */
+		public function record_legacy_visible_images() {
+			if ( false !== get_option( 'da_legacy_visible_images' ) ) {
+				return;
+			}
+
+			$legacy_ids = array();
+			$images     = get_posts(
+				array(
+					'post_type'   => $this->cpt->post_type,
+					'post_status' => 'any',
+					'numberposts' => -1,
+				)
+			);
+			foreach ( $images as $image ) {
+				if ( 'publish' !== $image->post_status || '' !== $image->post_password ) {
+					$legacy_ids[] = $image->ID;
+				}
+			}
+			update_option( 'da_legacy_visible_images', $legacy_ids );
+		}
+
+		public function is_legacy_visible_image( $image_id ) {
+			return in_array( (int) $image_id, (array) get_option( 'da_legacy_visible_images' ), true );
+		}
+
+		public function end_legacy_visibility( $image_id ) {
+			if ( $this->is_legacy_visible_image( $image_id ) ) {
+				update_option( 'da_legacy_visible_images', array_values( array_diff( get_option( 'da_legacy_visible_images' ), array( (int) $image_id ) ) ) );
+			}
+		}
+
+		/**
+		 * Once the owner changes such an image's status or password, WordPress's rules apply to it.
+		 */
+		public function end_legacy_visibility_on_change( $post_id, $post_after, $post_before ) {
+			if ( $post_after->post_status !== $post_before->post_status || $post_after->post_password !== $post_before->post_password ) {
+				$this->end_legacy_visibility( $post_id );
+			}
 		}
 
 		function add_shortcode_metabox() {

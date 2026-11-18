@@ -81,3 +81,6 @@ jobs:
 
       - name: Run smoke test
         run: bash tests/e2e/smoke.sh http://localhost:8888
+
+      - name: Run shortcode visibility test
+        run: bash tests/e2e/shortcode-visibility.sh http://localhost:8888
