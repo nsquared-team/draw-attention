@@ -466,7 +466,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			// already showed before this check existed keeps showing.
 			$image_post = $settings['image_id'] ? get_post( $settings['image_id'] ) : null;
 			if ( $image_post && ! $this->is_legacy_visible_image( $image_post->ID ) ) {
-				if ( 'publish' !== $image_post->post_status && ! current_user_can( 'read_post', $image_post->ID ) ) {
+				if ( 'publish' !== $image_post->post_status && ! current_user_can('read_post', $image_post->ID ) ) {
 					return '';
 				}
 				if ( post_password_required( $image_post ) ) {
