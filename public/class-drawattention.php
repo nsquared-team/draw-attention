@@ -472,7 +472,8 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				}
 				if ( post_password_required( $image_post ) ) {
 					// WordPress's form sends the visitor to the image's own page. Without that
-					// field it returns them to the page they typed the password on.
+					// field it returns them to the page their browser names as the referrer,
+					// the one they typed the password on.
 					return preg_replace( '#<input type="hidden" name="redirect_to"[^>]*>#', '', get_the_password_form( $image_post ) );
 				}
 			}
