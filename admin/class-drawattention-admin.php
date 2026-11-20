@@ -88,6 +88,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 			add_action( 'wp_before_admin_bar_render', array( $this, 'remove_add_new_submenu' ) );
 
 			add_action( 'admin_notices', array( $this, 'display_third_party_js_conflict_notice' ) );
+			add_action( 'admin_notices', array( $this, 'display_legacy_visible_notice' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'store_enqueued_scripts' ), 1 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'disable_third_party_js' ), 9999999 );
 
@@ -357,6 +358,31 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 				";
 				echo"<div class=\"$class\">$message</div>";
 			}
+		}
+
+		/**
+		 * On the edit screen of an image the shortcode keeps showing although it is
+		 * unpublished: say so, and offer to stop.
+		 */
+		public function display_legacy_visible_notice() {
+			$screen   = get_current_screen();
+			$image_id = empty( $_GET['post'] ) ? 0 : absint( $_GET['post'] );
+			if ( 'post' !== $screen->base || $screen->post_type !== $this->da->cpt->post_type || ! $this->da->is_legacy_visible_image( $image_id ) ) {
+				return;
+			}
+
+			if ( ! empty( $_GET['da_hide_legacy_image'] ) && check_admin_referer( 'da_hide_legacy_image_' . $image_id ) && current_user_can( 'edit_post', $image_id ) ) {
+				$this->da->end_legacy_visibility( $image_id );
+				return;
+			}
+
+			$hide_url = wp_nonce_url( add_query_arg( 'da_hide_legacy_image', 1 ), 'da_hide_legacy_image_' . $image_id );
+			?>
+			<div class="notice notice-warning">
+				<p><?php esc_html_e( 'Visitors can still see this image, even though it is not published. Draw Attention kept it visible so your site did not change after the update.', 'draw-attention' ); ?></p>
+				<p><a class="button" href="<?php echo esc_url( $hide_url ); ?>"><?php esc_html_e( 'Hide this image from visitors', 'draw-attention' ); ?></a></p>
+			</div>
+			<?php
 		}
 
 		public function store_enqueued_scripts() {
