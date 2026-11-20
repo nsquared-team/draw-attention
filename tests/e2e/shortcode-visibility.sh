@@ -7,7 +7,7 @@
 #  - gets WordPress's password form for a password-protected one, on every site, and
 #    lands back on the same page once the password is right;
 #  - still sees an unpublished image the site showed before the plugin checked
-#    visibility, until its owner hides it or changes its status.
+#    visibility, until its owner hides it or its status changes.
 # And that an editor still sees a draft.
 #
 # Usage: tests/e2e/shortcode-visibility.sh [site-url]   (default: http://localhost:8888)
@@ -129,5 +129,9 @@ forget_update
 AFTER_UPDATE=$(visitor_page)
 if grep -q "$MARKER" <<<"$AFTER_UPDATE"; then fail "an unpublished image the site keeps showing shows without its password"; fi
 grep -q "post-password-form" <<<"$AFTER_UPDATE" || fail "an unpublished image the site keeps showing shows no password form"
+
+echo "--- and it shows again without the password, because that save left its status alone ---"
+set_image --post_password=""
+visitor_sees_image || fail "an unpublished image the site keeps showing went missing after a save that left its status alone"
 
 echo "OK: shortcode visibility passed (image $IMAGE_ID on page $PAGE_ID)"
