@@ -95,6 +95,15 @@ visitor_sees_image || fail "a draft image the site already showed went missing a
 set_image --post_status=private
 if visitor_sees_image; then fail "an image still shows after its status changed to private"; fi
 
+echo "--- or until WordPress changes it, as it does when a scheduled image goes live ---"
+set_image --post_status=draft
+forget_update
+visitor_sees_image || fail "a draft image the site already showed went missing after the update"
+# What WordPress's scheduler calls when a scheduled image's time comes.
+cli eval "wp_publish_post( $IMAGE_ID );"
+EDIT_SCREEN=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen still offers to hide an image after WordPress published it"; fi
+
 echo "--- a password-protected image the site already showed asks for its password at once ---"
 set_image --post_status=publish --post_password=secret
 forget_update

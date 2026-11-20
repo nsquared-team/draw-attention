@@ -102,7 +102,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 
 			// Images a site already showed before the shortcode checked visibility.
 			add_action( 'init', array( $this, 'record_legacy_visible_images' ), 11 );
-			add_action( 'post_updated', array( $this, 'end_legacy_visibility_on_change' ), 10, 3 );
+			add_action( 'transition_post_status', array( $this, 'end_legacy_visibility_on_change' ), 10, 3 );
 
 			add_action( 'admin_notices', array( $this, 'php_52_notice' ) );
 
@@ -640,15 +640,16 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		}
 
 		/**
-		 * Once the owner changes such an image's status, WordPress's rules apply to it.
+		 * Once such an image's status changes, WordPress's rules apply to it. A scheduled
+		 * image going live is such a change, and it fires this hook but not post_updated.
 		 *
-		 * @param int     $post_id     The saved post's ID.
-		 * @param WP_Post $post_after  The post as saved.
-		 * @param WP_Post $post_before The post before the save.
+		 * @param string  $new_status The status after the change.
+		 * @param string  $old_status The status before it.
+		 * @param WP_Post $post       The post whose status is set.
 		 */
-		public function end_legacy_visibility_on_change( $post_id, $post_after, $post_before ) {
-			if ( $post_after->post_status !== $post_before->post_status ) {
-				$this->end_legacy_visibility( $post_id );
+		public function end_legacy_visibility_on_change( $new_status, $old_status, $post ) {
+			if ( $new_status !== $old_status ) {
+				$this->end_legacy_visibility( $post->ID );
 			}
 		}
 
