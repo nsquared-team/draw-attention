@@ -33,6 +33,14 @@ visitor_sees_image() {
 }
 # Start over as a site whose images were stored before the plugin checked visibility.
 forget_update() { cli option delete da_legacy_visible_images >/dev/null; }
+# The image's edit screen, as its logged-in owner gets it.
+edit_screen() {
+  local body
+  body=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+  # A screen that fails to load must never count as "the notice is gone".
+  grep -q "name=.post_ID." <<<"$body" || fail "the image's edit screen did not load"
+  echo "$body"
+}
 
 echo "--- set up: an image with one hotspot, on a page ---"
 cli plugin activate draw-attention
@@ -56,7 +64,9 @@ done
 
 echo "--- an editor still sees a draft ---"
 set_image --post_status=draft
-EDITOR_VIEW=$(cli eval 'wp_set_current_user( 1 ); echo do_shortcode( "[drawattention]" );')
+EDITOR_ID=$(cli user create "da-editor-$IMAGE_ID" "da-editor-$IMAGE_ID@example.com" --role=editor --porcelain | tail -1 | tr -dc '0-9')
+[ -n "$EDITOR_ID" ]
+EDITOR_VIEW=$(cli eval "wp_set_current_user( $EDITOR_ID ); echo do_shortcode( '[drawattention]' );")
 grep -q "$MARKER" <<<"$EDITOR_VIEW" || fail "an editor no longer sees a draft image"
 
 echo "--- a password-protected image shows the password form instead ---"
@@ -83,7 +93,7 @@ visitor_sees_image || fail "a draft image the site already showed went missing a
 echo "--- until its owner follows the edit screen's hide link ---"
 curl -s -o /dev/null -c "$JAR" -b "wordpress_test_cookie=WP+Cookie+check" \
   -d "log=admin" -d "pwd=password" -d "wp-submit=Log+In" -d "testcookie=1" "$SITE_URL/wp-login.php"
-EDIT_SCREEN=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+EDIT_SCREEN=$(edit_screen)
 HIDE_PATH=$(grep -o 'href="[^"]*da_hide_legacy_image[^"]*"' <<<"$EDIT_SCREEN" | sed -n '1p' | sed -e 's/^href="//' -e 's/"$//' -e 's/&#038;/\&/g' -e 's/&amp;/\&/g' || true)
 [ -n "$HIDE_PATH" ] || fail "the edit screen does not offer to hide an image the site keeps showing"
 curl -sL -o /dev/null -b "$JAR" "$SITE_URL$HIDE_PATH"
@@ -101,7 +111,7 @@ forget_update
 visitor_sees_image || fail "a draft image the site already showed went missing after the update"
 # What WordPress's scheduler calls when a scheduled image's time comes.
 cli eval "wp_publish_post( $IMAGE_ID );"
-EDIT_SCREEN=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+EDIT_SCREEN=$(edit_screen)
 if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen still offers to hide an image after WordPress published it"; fi
 
 echo "--- a password-protected image the site already showed asks for its password at once ---"
@@ -110,7 +120,7 @@ forget_update
 AFTER_UPDATE=$(visitor_page)
 if grep -q "$MARKER" <<<"$AFTER_UPDATE"; then fail "a password-protected image the site already showed still shows without its password"; fi
 grep -q "post-password-form" <<<"$AFTER_UPDATE" || fail "a password-protected image the site already showed shows no password form"
-EDIT_SCREEN=$(curl -sL -b "$JAR" "$SITE_URL/wp-admin/post.php?post=$IMAGE_ID&action=edit")
+EDIT_SCREEN=$(edit_screen)
 if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen's notice shows for a password-protected image"; fi
 
 echo "--- and so does an unpublished image the site keeps showing, once it has a password ---"
