@@ -98,6 +98,11 @@ UNLOCKED=$(type_password secret)
 grep -qxF "landed on $PAGE_URL" <<<"$UNLOCKED" || fail "the right password did not bring the visitor back to the page when the browser sends no referrer"
 grep -q "$MARKER" <<<"$UNLOCKED" || fail "the right password did not show the image"
 
+echo "--- and where no single page is being viewed, the form leads to the image's own page ---"
+# WP-CLI views no page, as an archive or a search page views no single one.
+NO_PAGE=$(cli eval "echo do_shortcode( '[drawattention]' );")
+grep -q 'name="redirect_to" value="[^"]*da_image' <<<"$NO_PAGE" || fail "the password form shown where no single page is viewed does not lead to the image's own page"
+
 echo "--- an unpublished image the site already showed keeps showing after the update ---"
 set_image --post_status=draft --post_password=""
 forget_update
