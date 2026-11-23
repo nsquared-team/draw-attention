@@ -84,7 +84,7 @@ jobs:
       - name: "Update version on php and readme files"
         if: ${{ steps.version.outputs.version != 'current' }}
         run: |
-          npm install
+          npm ci
           npx grunt increment-version
 
       # =====================================
@@ -170,7 +170,7 @@ jobs:
       # =====================================
       - name: "Package the App"
         run: |
-          npm install
+          npm ci
           npx grunt wporg
 
       - name: "List Files Included In Release"
