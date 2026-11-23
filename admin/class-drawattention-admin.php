@@ -362,7 +362,7 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 		/**
 		 * On the edit screen of an image the shortcode keeps showing although it is
-		 * unpublished: say so, and offer to stop.
+		 * unpublished: say so, offer to stop, and confirm once it has stopped.
 		 */
 		public function display_legacy_visible_notice() {
 			$screen   = get_current_screen();
@@ -373,6 +373,11 @@ if ( !class_exists( 'DrawAttention_Admin' ) ) {
 
 			if ( ! empty( $_GET['da_hide_legacy_image'] ) && check_admin_referer( 'da_hide_legacy_image_' . $image_id ) && current_user_can( 'edit_post', $image_id ) ) {
 				$this->da->end_legacy_visibility( $image_id );
+				?>
+				<div class="notice notice-success">
+					<p><?php esc_html_e( 'This image is now hidden from visitors. They will see it again once it is published.', 'draw-attention' ); ?></p>
+				</div>
+				<?php
 				return;
 			}
 

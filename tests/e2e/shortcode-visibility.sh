@@ -109,7 +109,8 @@ curl -s -o /dev/null -c "$JAR" -b "wordpress_test_cookie=WP+Cookie+check" \
 EDIT_SCREEN=$(edit_screen)
 HIDE_PATH=$(grep -o 'href="[^"]*da_hide_legacy_image[^"]*"' <<<"$EDIT_SCREEN" | sed -n '1p' | sed -e 's/^href="//' -e 's/"$//' -e 's/&#038;/\&/g' -e 's/&amp;/\&/g' || true)
 [ -n "$HIDE_PATH" ] || fail "the edit screen does not offer to hide an image the site keeps showing"
-curl -sL -o /dev/null -b "$JAR" "$SITE_URL$HIDE_PATH"
+AFTER_HIDE=$(curl -sL -b "$JAR" "$SITE_URL$HIDE_PATH")
+grep -q "This image is now hidden from visitors" <<<"$AFTER_HIDE" || fail "the edit screen does not confirm that the image is now hidden"
 if visitor_sees_image; then fail "a draft image still shows after its owner hid it"; fi
 
 echo "--- or until its status changes ---"
