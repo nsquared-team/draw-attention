@@ -462,9 +462,10 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				$settings['image_id'] = icl_object_id( $settings['image_id'], 'da_image', true );
 			}
 
-			// Only show the image to visitors WordPress lets read it. An unpublished image this
-			// site already showed before this check existed keeps showing. A password is always
-			// asked for: an owner who set one meant to protect the image.
+			// Only show the image to visitors WordPress lets read it. A draft, pending or scheduled
+			// image this site already showed before this check existed keeps showing. A private
+			// image does not, and a password is always asked for: an owner who chose either
+			// meant to protect the image.
 			$image_post = $settings['image_id'] ? get_post( $settings['image_id'] ) : null;
 			if ( $image_post ) {
 				if ( 'publish' !== $image_post->post_status && ! $this->is_legacy_visible_image( $image_post->ID ) && ! current_user_can( 'read_post', $image_post->ID ) ) {
@@ -597,7 +598,8 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 		/**
 		 * The shortcode used to show the newest image whatever its status. Remember,
 		 * once, the unpublished images a site may already be showing that way, so the
-		 * status check in shortcode() hides none of them.
+		 * status check in shortcode() hides none of them. A private image is left out:
+		 * an owner who chose Private meant to hide it.
 		 */
 		public function record_legacy_visible_images() {
 			if ( false !== get_option( 'da_legacy_visible_images' ) ) {
@@ -613,7 +615,7 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				)
 			);
 			foreach ( $images as $image ) {
-				if ( 'publish' !== $image->post_status ) {
+				if ( ! in_array( $image->post_status, array( 'publish', 'private' ), true ) ) {
 					$legacy_ids[] = $image->ID;
 				}
 			}

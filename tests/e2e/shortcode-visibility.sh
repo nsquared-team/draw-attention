@@ -7,8 +7,9 @@
 #  - gets WordPress's password form for a password-protected one, on every site, and
 #    lands back on the same page once the password is right, or with a message when
 #    it is wrong;
-#  - still sees an unpublished image the site showed before the plugin checked
-#    visibility, until its owner hides it or its status changes.
+#  - still sees a draft, pending or scheduled image the site showed before the plugin
+#    checked visibility, until its owner hides it or its status changes;
+#  - sees no private image, also on a site that showed it before.
 # And that an editor still sees a draft.
 #
 # Usage: tests/e2e/shortcode-visibility.sh [site-url]   (default: http://localhost:8888)
@@ -125,6 +126,13 @@ visitor_sees_image || fail "a draft image the site already showed went missing a
 cli eval "wp_publish_post( $IMAGE_ID );"
 EDIT_SCREEN=$(edit_screen)
 if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen still offers to hide an image after WordPress published it"; fi
+
+echo "--- a private image the site already showed is hidden at once ---"
+set_image --post_status=private
+forget_update
+if visitor_sees_image; then fail "a private image the site already showed still shows to a visitor"; fi
+EDIT_SCREEN=$(edit_screen)
+if grep -q "da_hide_legacy_image" <<<"$EDIT_SCREEN"; then fail "the edit screen's notice shows for a private image"; fi
 
 echo "--- a password-protected image the site already showed asks for its password at once ---"
 set_image --post_status=publish --post_password=secret
