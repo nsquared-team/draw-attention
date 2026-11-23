@@ -471,10 +471,11 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 					return '';
 				}
 				if ( post_password_required( $image_post ) ) {
-					// WordPress's form sends the visitor to the image's own page. Without that
-					// field it returns them to the page their browser names as the referrer,
-					// the one they typed the password on.
-					return preg_replace( '#<input type="hidden" name="redirect_to"[^>]*>#', '', get_the_password_form( $image_post ) );
+					// WordPress returns the visitor to the post its form is built for, and tells them
+					// of a wrong password only there. So build it for the page being viewed. A page
+					// that is no single post, such as an archive, gets the image's own form.
+					$viewed = get_queried_object();
+					return get_the_password_form( $viewed instanceof WP_Post ? $viewed : $image_post );
 				}
 			}
 
