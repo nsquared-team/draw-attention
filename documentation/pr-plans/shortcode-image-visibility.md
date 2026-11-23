@@ -19,7 +19,7 @@ Risk: every front-end render of the plugin goes through this handler. An existin
 - [x] CI's formatting bot still pushes its fix to the branch, from a checkout that keeps no token.
 - [x] A password-protected image asks a visitor for its password from the first load after the update, also on a site that showed it before, and its edit screen shows no notice.
 - [x] When WordPress publishes a scheduled image on its own, that image's pass ends too, and its edit screen shows no notice.
-- [ ] A wrong password returns the visitor to the page they typed it on, with WordPress's "Invalid password." message.
-- [ ] The right password returns the visitor to that page when their browser sends no referrer.
-- [ ] A private image shows to no logged-out visitor from the first load after the update, also on a site that showed it before, and its edit screen shows no notice.
-- [ ] After its owner follows the hide link, the edit screen confirms that the image is now hidden.
+- [x] A wrong password returns the visitor to the page they typed it on, with WordPress's "Invalid password." message.
+- [x] The right password returns the visitor to that page when their browser sends no referrer.
+- [x] A private image shows to no logged-out visitor from the first load after the update, also on a site that showed it before, and its edit screen shows no notice.
+- [x] After its owner follows the hide link, the edit screen confirms that the image is now hidden.
