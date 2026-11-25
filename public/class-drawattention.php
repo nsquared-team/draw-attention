@@ -100,6 +100,10 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			// Shortcode for displaying the image map
 			add_shortcode( 'drawattention', array( $this, 'shortcode' ) );
 
+			// Images a site already showed before the shortcode checked visibility.
+			add_action( 'init', array( $this, 'record_legacy_visible_images' ), 11 );
+			add_action( 'transition_post_status', array( $this, 'end_legacy_visibility_on_change' ), 10, 3 );
+
 			add_action( 'admin_notices', array( $this, 'php_52_notice' ) );
 
 			add_action( 'add_meta_boxes', array( $this, 'add_shortcode_metabox' ) );
@@ -458,6 +462,24 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 				$settings['image_id'] = icl_object_id( $settings['image_id'], 'da_image', true );
 			}
 
+			// Only show the image to visitors WordPress lets read it. A draft, pending or scheduled
+			// image this site already showed before this check existed keeps showing. A private
+			// image does not, and a password is always asked for: an owner who chose either
+			// meant to protect the image.
+			$image_post = $settings['image_id'] ? get_post( $settings['image_id'] ) : null;
+			if ( $image_post ) {
+				if ( 'publish' !== $image_post->post_status && ! $this->is_legacy_visible_image( $image_post->ID ) && ! current_user_can( 'read_post', $image_post->ID ) ) {
+					return '';
+				}
+				if ( post_password_required( $image_post ) ) {
+					// WordPress returns the visitor to the post its form is built for, and tells them
+					// of a wrong password only there. So build it for the page being viewed. A page
+					// that is no single post, such as an archive, gets the image's own form.
+					$viewed = get_queried_object();
+					return get_the_password_form( $viewed instanceof WP_Post ? $viewed : $image_post );
+				}
+			}
+
 			// Get and set DA settings
 			$settings['img_settings'] = get_metadata( 'post', $settings['image_id'], '', false );
 			if ( empty( $settings['img_settings']['_da_map_more_info'] ) ) {
@@ -571,6 +593,68 @@ if ( ! class_exists( 'DrawAttention' ) ) {
 			require $this->get_plugin_dir() . '/public/views/shortcode_template.php';
 
 			return ob_get_clean();
+		}
+
+		/**
+		 * The shortcode used to show the newest image whatever its status. Remember,
+		 * once, the unpublished images a site may already be showing that way, so the
+		 * status check in shortcode() hides none of them. A private image is left out:
+		 * an owner who chose Private meant to hide it.
+		 */
+		public function record_legacy_visible_images() {
+			if ( false !== get_option( 'da_legacy_visible_images' ) ) {
+				return;
+			}
+
+			$legacy_ids = array();
+			$images     = get_posts(
+				array(
+					'post_type'   => $this->cpt->post_type,
+					'post_status' => 'any',
+					'numberposts' => -1,
+				)
+			);
+			foreach ( $images as $image ) {
+				if ( ! in_array( $image->post_status, array( 'publish', 'private' ), true ) ) {
+					$legacy_ids[] = $image->ID;
+				}
+			}
+			update_option( 'da_legacy_visible_images', $legacy_ids );
+		}
+
+		/**
+		 * Whether the shortcode keeps showing this image as it did before it checked visibility.
+		 *
+		 * @param int $image_id The image's post ID.
+		 * @return bool
+		 */
+		public function is_legacy_visible_image( $image_id ) {
+			return in_array( (int) $image_id, (array) get_option( 'da_legacy_visible_images' ), true );
+		}
+
+		/**
+		 * From now on, show this image only to visitors WordPress lets read it.
+		 *
+		 * @param int $image_id The image's post ID.
+		 */
+		public function end_legacy_visibility( $image_id ) {
+			if ( $this->is_legacy_visible_image( $image_id ) ) {
+				update_option( 'da_legacy_visible_images', array_values( array_diff( get_option( 'da_legacy_visible_images' ), array( (int) $image_id ) ) ) );
+			}
+		}
+
+		/**
+		 * Once such an image's status changes, WordPress's rules apply to it. A scheduled
+		 * image going live is such a change, and it fires this hook but not post_updated.
+		 *
+		 * @param string  $new_status The status after the change.
+		 * @param string  $old_status The status before it.
+		 * @param WP_Post $post       The post whose status is set.
+		 */
+		public function end_legacy_visibility_on_change( $new_status, $old_status, $post ) {
+			if ( $new_status !== $old_status ) {
+				$this->end_legacy_visibility( $post->ID );
+			}
 		}
 
 		function add_shortcode_metabox() {

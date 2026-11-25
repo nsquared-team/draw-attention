@@ -7,6 +7,8 @@ concurrency:
   group: da-ci-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
+permissions: {}
+
   
 env:
   EVENT: ${{ toJSON(github.event) }}
@@ -20,8 +22,11 @@ jobs:
     name: Static Code Analysis
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
+    # The last step pushes the formatter's fixes to the pull request's branch.
+    permissions:
+      contents: write
     env:
-      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules,*min.* --extensions=php --runtime-set testVersion 7.2
+      phpcs_config_flags: --standard=WordPress --ignore=vendor,node_modules --extensions=php --runtime-set testVersion 7.2
     steps:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -29,9 +34,10 @@ jobs:
           php-version: 7.2
           coverage: none
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: false
         
       - name: Set git user information
         run: |
@@ -95,7 +101,13 @@ jobs:
           
       # The push below will not trigger a new workflow because it uses the default GITHUB_TOKEN
       - name: Commit and push changes
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           # just a guard, we also should keep on excluding the minified files
           git restore "*min.*"
-          `git add -A && git commit -m "Automated code formatting on branch done." > /dev/null  && git push` || true
+          git add -A
+          git commit -m "Automated code formatting on branch done." > /dev/null || exit 0
+          # The checkout keeps no token, so git logs in here, for this one push.
+          gh auth setup-git
+          git push origin "HEAD:refs/heads/${GITHUB_HEAD_REF}" || true

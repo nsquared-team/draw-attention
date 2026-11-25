@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -47,6 +49,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -81,3 +85,6 @@ jobs:
 
       - name: Run smoke test
         run: bash tests/e2e/smoke.sh http://localhost:8888
+
+      - name: Run shortcode visibility test
+        run: bash tests/e2e/shortcode-visibility.sh http://localhost:8888
