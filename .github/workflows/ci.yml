@@ -56,7 +56,7 @@ jobs:
           
       - name: Install dependencies
         run: | 
-          npm install
+          npm ci
           npm install -g prettier
           npm install -g eslint@7.32.0
 

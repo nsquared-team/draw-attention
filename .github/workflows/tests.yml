@@ -37,7 +37,7 @@ jobs:
 
       - name: Build the WordPress.org file set
         run: |
-          npm install
+          npm ci
           npx grunt wporg
 
       - name: Check build contents and direct-access safety
@@ -59,7 +59,7 @@ jobs:
 
       - name: Build the WordPress.org file set
         run: |
-          npm install
+          npm ci
           npx grunt wporg
           mkdir -p build
           mv release/svn build/draw-attention

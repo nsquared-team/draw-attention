@@ -36,7 +36,7 @@ jobs:
 
       - name: Build the WordPress.org file set
         run: |
-          npm install
+          npm ci
           npx grunt wporg
           echo "----- release/svn top level -----"
           ls -la release/svn
