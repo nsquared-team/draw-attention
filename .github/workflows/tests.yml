@@ -88,3 +88,6 @@ jobs:
 
       - name: Run shortcode visibility test
         run: bash tests/e2e/shortcode-visibility.sh http://localhost:8888
+
+      - name: Run uploader access test
+        run: bash tests/e2e/uploader-access.sh http://localhost:8888
