@@ -134,76 +134,48 @@ Please report security bugs found in the source code of the Draw Attention plugi
 4. Customize the colors and appearance of the highlighted areas
 5. Add in unlimited hotspot areas to your interactive image
 
-# Changelog
+== Changelog ==
 
-## 2.1.6 - 2026-05-19
-
-### Fixes
+= 2.1.6 - 2026-05-19 =
 
 - Silence WP 6.9.1 cmb2-scripts dep notice; scope newsletter assets
 
-## 2.0.41 - 2025-10-28
-
-### Fixes
+= 2.0.41 - 2025-10-28 =
 
 - Draw Attention widget doesn't show up in Beaver Builder
 
-## 2.0.32 - 2025-03-25
-
-### Fixes
+= 2.0.32 - 2025-03-25 =
 
 - Fix Conflict with WP MapIt not displaying drawing tools
 
-## 2.0.26 - 2024-06-18
-
-### Features and Improvements
+= 2.0.26 - 2024-06-18 =
 
 - Hid the move to trash button.
-  
 - Widget live preview
-  
 
-## 2.0.24 - 2024-04-05
-
-### Fixes
+= 2.0.24 - 2024-04-05 =
 
 - Fixed Newsletter component showing up on different screens.
 
-## 2.0.22 - 2024-03-19
-
-### Features and Improvements
+= 2.0.22 - 2024-03-19 =
 
 - Adding News Letter Notice to Draw Attention
 
-## 2.0.17 - 2023-11-07
-
-### Features and Improvements
+= 2.0.17 - 2023-11-07 =
 
 - Tested up to WP 6.4
 
-## 2.0.16 - 2023-10-29
-
-### Features and Improvements
+= 2.0.16 - 2023-10-29 =
 
 - Add nonce checks for additional security
 
-## 2.0.15 - 2023-10-19
-
-### Fixes
+= 2.0.15 - 2023-10-19 =
 
 - Fix disclosed vulnerability affecting Contributor-level users
 
-## 2.0.14 - 2023-08-12
-
-### Features and Improvements
+= 2.0.14 - 2023-08-12 =
 
 - Tested up to WP 6.3
-
-## 2.0.13 - 2023-06-25
-
-### Fixes
-
-- Fix PHP warning in CMB2 library
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
