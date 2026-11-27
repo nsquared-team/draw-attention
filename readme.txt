@@ -179,4 +179,4 @@ Please report security bugs found in the source code of the Draw Attention plugi
 - Fix Conflict with WP MapIt not displaying drawing tools
 
 
-For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
+For older changelog entries, please see the [full changelog on GitHub](https://github.com/nsquared-team/draw-attention/blob/master/CHANGELOG.md).
