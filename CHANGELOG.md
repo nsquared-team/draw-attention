@@ -1,10 +1,60 @@
 # Changelog
 
+## 2.1.12 - 2026-11-26
+
+### Fixes
+
+- Show interactive images only to visitors allowed to see them
+
+### Features and Improvements
+
+- Tested up to WordPress 7.2
+
+## 2.1.9 - 2026-09-08
+
+### Fixes
+
+- Fix hotspot description editor going blank after drag-reordering hotspots
+
+## 2.1.8 - 2026-08-25
+
+### Fixes
+
+- Fix info-box heading clipping long words in Left/Right layout
+
+### Features and Improvements
+
+- Tested up to WordPress 7.1
+
 ## 2.1.6 - 2026-05-19
 
 ### Fixes
 
 - Silence WP 6.9.1 cmb2-scripts dep notice; scope newsletter assets
+
+## 2.1.4 - 2026-04-14
+
+### Fixes
+
+- Fix checkbox styling broken by WordPress 7.0
+
+## 2.1.3 - 2026-03-24
+
+### Features and Improvements
+
+- Add alt text support for images to improve accessibility
+
+## 2.1.2 - 2026-02-17
+
+### Features and Improvements
+
+- Improve lightbox accessibility with focus trapping and ARIA attributes
+
+## 2.1.0 - 2026-02-05
+
+### Features and Improvements
+
+- Tested up to WordPress 7.0
 
 ## 2.0.41 - 2025-10-28
 
