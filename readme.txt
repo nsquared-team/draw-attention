@@ -136,9 +136,39 @@ Please report security bugs found in the source code of the Draw Attention plugi
 
 == Changelog ==
 
+= 2.1.12 - 2026-11-26 =
+
+- Show interactive images only to visitors allowed to see them
+- Tested up to WordPress 7.2
+
+= 2.1.9 - 2026-09-08 =
+
+- Fix hotspot description editor going blank after drag-reordering hotspots
+
+= 2.1.8 - 2026-08-25 =
+
+- Fix info-box heading clipping long words in Left/Right layout
+- Tested up to WordPress 7.1
+
 = 2.1.6 - 2026-05-19 =
 
 - Silence WP 6.9.1 cmb2-scripts dep notice; scope newsletter assets
+
+= 2.1.4 - 2026-04-14 =
+
+- Fix checkbox styling broken by WordPress 7.0
+
+= 2.1.3 - 2026-03-24 =
+
+- Add alt text support for images to improve accessibility
+
+= 2.1.2 - 2026-02-17 =
+
+- Improve lightbox accessibility with focus trapping and ARIA attributes
+
+= 2.1.0 - 2026-02-05 =
+
+- Tested up to WordPress 7.0
 
 = 2.0.41 - 2025-10-28 =
 
@@ -147,35 +177,6 @@ Please report security bugs found in the source code of the Draw Attention plugi
 = 2.0.32 - 2025-03-25 =
 
 - Fix Conflict with WP MapIt not displaying drawing tools
-
-= 2.0.26 - 2024-06-18 =
-
-- Hid the move to trash button.
-- Widget live preview
-
-= 2.0.24 - 2024-04-05 =
-
-- Fixed Newsletter component showing up on different screens.
-
-= 2.0.22 - 2024-03-19 =
-
-- Adding News Letter Notice to Draw Attention
-
-= 2.0.17 - 2023-11-07 =
-
-- Tested up to WP 6.4
-
-= 2.0.16 - 2023-10-29 =
-
-- Add nonce checks for additional security
-
-= 2.0.15 - 2023-10-19 =
-
-- Fix disclosed vulnerability affecting Contributor-level users
-
-= 2.0.14 - 2023-08-12 =
-
-- Tested up to WP 6.3
 
 
 For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin.
