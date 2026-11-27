@@ -464,6 +464,13 @@ class WP_Drag_Drop_Featured_Image_Map {
 		// Check referer, die if no ajax:
 		check_ajax_referer( 'photo-upload' );
 
+		// That nonce is tied to no post, so it does not show that this user may edit the
+		// one named. Ask before the file is stored:
+		$post_id = isset( $_POST['postID'] ) ? (int) $_POST['postID'] : 0;
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_die( -1, 403 );
+		}
+
 		// Upload file using WordPress functions:
 		$file   = $_FILES['async-upload'];
 		$status = wp_handle_upload(
@@ -473,9 +480,6 @@ class WP_Drag_Drop_Featured_Image_Map {
 				'action'    => 'dgd_upload_featured_image',
 			)
 		);
-
-		// Fetch post ID:
-		$post_id = $_POST['postID'];
 
 		// Insert uploaded file as attachment:
 		$attach_id = wp_insert_attachment(
@@ -564,7 +568,12 @@ class WP_Drag_Drop_Featured_Image_Map {
 	public function ajax_get_featured_image() {
 
 		$postID = isset( $_POST['post_id'] ) ? (int) $_POST['post_id'] : false;
-		if ( $postID ) {
+		if ( $postID && ! current_user_can( 'edit_post', $postID ) ) {
+			$response = array(
+				'response_code'    => 403,
+				'response_content' => __( 'Drag & Drop Feaured image: You do not have permission to edit this post!', $this->plugin_locale ),
+			);
+		} elseif ( $postID ) {
 			$featured = wp_get_attachment_image_src( get_post_thumbnail_id( $postID ), 'full' );
 			$response = array(
 				'response_code'    => 200,
