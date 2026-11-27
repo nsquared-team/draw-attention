@@ -138,14 +138,24 @@ jobs:
         if: steps.build_changelog.outputs.changelog != '' && steps.build_changelog.outputs.pull_requests != ''
         run: |
           # delete current changelog
-          sed -i '/# Changelog/,${d}' readme.txt
-          # get top N lines from CHANGELOG.md and append in readme.txt
-          echo "$( head -70 CHANGELOG.md )" >> readme.txt
+          sed -i '/^== Changelog ==$/,${d}' readme.txt
+          # Append the latest ten versions from CHANGELOG.md under the headings
+          # WordPress.org's readme parser reads: "== Changelog ==" opens the section
+          # and "= <version> =" each entry. It takes a Markdown "## " line as a new,
+          # unknown section and folds that into the description. The "### " group
+          # lines (Fixes, Features, ...) are dropped, so each version is one flat list
+          # whatever the categories in changelog_configuration.json are.
+          echo "== Changelog ==" >> readme.txt
+          awk '
+            /^## / { if (++n > 10) exit; sub(/^## /, ""); printf "\n= %s =\n\n", $0; next }
+            !n || /^#/ || /^[ \t]*$/ { next }
+            { print }
+          ' CHANGELOG.md >> readme.txt
           # append some empty lines
           echo "" >> readme.txt
           echo "" >> readme.txt
           # append link to the complete changelog
-          echo "For older changelog entries, please see the [additional changelog.txt file](https://plugins.svn.wordpress.org/draw-attention/trunk/CHANGELOG.md) delivered with the plugin." >> readme.txt
+          echo "For older changelog entries, please see the [full changelog on GitHub](https://github.com/nsquared-team/draw-attention/blob/master/CHANGELOG.md)." >> readme.txt
 
       # =====================================
       # Update branches =====================

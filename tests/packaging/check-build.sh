@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # Checks the built WordPress.org file set (release/svn, from `npx grunt wporg`)
-# against two failure classes CI has already caught for real:
+# against three failure classes that have already happened for real:
 #
+#  - a readme changelog WordPress.org cannot read: it shipped under Markdown
+#    headings, which WordPress.org's readme parser folds into the description,
+#    so the plugin's page had no Changelog section at all;
 #  - dev-only paths leaking into the build: the bare "!external" Gruntfile
 #    glob shipped external/ to wp.org until it was tightened, because a bare
 #    directory negation does not exclude the directory's children;
@@ -26,6 +29,14 @@ done
 for p in draw-attention.php readme.txt uninstall.php index.php admin public includes languages LICENSE.txt; do
   [ -e "$BUILD_DIR/$p" ] || err "expected shipped path missing: $p"
 done
+
+# The readme's changelog must sit under the headings WordPress.org's readme
+# parser reads: one "== Changelog ==" line, then "= <version> - <date> =" entries.
+# A line starting with "#" there is a Markdown heading, the shape that hid it.
+changelog=$(sed -n '/^== Changelog ==$/,$p' "$BUILD_DIR/readme.txt" 2>/dev/null)
+[ "$(grep -c '^== Changelog ==$' <<< "$changelog")" = 1 ] || err "readme.txt needs exactly one '== Changelog ==' heading"
+grep -q '^= [0-9][0-9.]* - [0-9-]* =$' <<< "$changelog" || err "readme.txt changelog has no '= <version> - <date> =' entry"
+grep -q '^#' <<< "$changelog" && err "readme.txt changelog has a Markdown heading: $(grep -m1 '^#' <<< "$changelog")"
 
 # Every shipped own-code PHP file must be safe to execute directly: a
 # WPINC-style guard dies before any code runs, so direct php-cli execution

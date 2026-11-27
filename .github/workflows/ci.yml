@@ -2,6 +2,9 @@ name: Draw Attention CI workflow
 
 on:
   pull_request:
+    # labeled and unlabeled are here for the changelog label step: it reads the
+    # pull request's labels, so a label change has to run the job again.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
 
 concurrency:
   group: da-ci-${{ github.head_ref || github.ref_name }}
@@ -39,6 +42,20 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
         
+      # The release job lists a pull request in the public changelog only when it
+      # carries one of the labels in changelog_configuration.json, so an unlabelled
+      # one would merge and never reach the changelog. no-changelog is the way to
+      # leave one out on purpose.
+      - name: Require a changelog label
+        env:
+          PR_LABELS: ${{ toJSON(github.event.pull_request.labels.*.name) }}
+        run: |
+          allowed=$(jq -c '[.categories[].labels[]] + ["no-changelog"]' .github/config/changelog_configuration.json)
+          if ! jq -e --argjson allowed "$allowed" 'any(.[]; IN($allowed[]))' <<< "$PR_LABELS" > /dev/null; then
+            echo "::error::Add one changelog label to this pull request: $(jq -r 'join(", ")' <<< "$allowed"). no-changelog keeps it out of the public changelog."
+            exit 1
+          fi
+
       - name: Set git user information
         run: |
           git config --global user.email "otto@nsquared.io"
