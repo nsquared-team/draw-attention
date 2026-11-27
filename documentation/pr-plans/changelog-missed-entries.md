@@ -12,7 +12,7 @@ Scope: seven versions shipped customer-facing changes with no changelog entry, b
 - 2.1.2 - 2026-02-17. Features and Improvements: Improve lightbox accessibility with focus trapping and ARIA attributes.
 - 2.1.0 - 2026-02-05. Features and Improvements: Tested up to WordPress 7.0.
 
-The info-box fix sits under 2.1.8 because 2.1.7 never reached WordPress.org. ⏩ Out: releases before 2.1.0, and the internal changes in 2.1.5, 2.1.10 and 2.1.11. Shape: about forty lines in `CHANGELOG.md`, the changelog section of `readme.txt`, plus this file.
+The info-box fix sits under 2.1.8 because 2.1.7 never reached WordPress.org. ⏩ Out: releases before 2.1.0, and the internal changes in 2.1.5, 2.1.10 and 2.1.11. Shape: about fifty lines in `CHANGELOG.md`, the changelog section of `readme.txt`, plus this file.
 Risk: text only, in two files; no code runs differently. The readme ships to WordPress.org on the next release. Undo: revert this PR. The 1%: the wording, which customers read as written.
 
 ## Definition of Done
